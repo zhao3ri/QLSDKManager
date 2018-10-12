@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="bBehaviorUser" extends="base" namespace="/bBehaviorUser">
+		<action name="bBehaviorUser_*" method="{1}" class="com.item.web.action.BBehaviorUserAction">
+			<result name="list">/WEB-INF/content/bBehaviorUser/bBehaviorUser_list.jsp</result>
+			<result name="delete" type="redirect">${ctx}/bBehaviorUser/bBehaviorUser_list.shtml</result>
+			<result name="save" type="redirect">${ctx}/bBehaviorUser/bBehaviorUser_list.shtml</result>
+			<result name="handle">/WEB-INF/content/bBehaviorUser/bBehaviorUser_handle.jsp</result>
+			<result name="view">/WEB-INF/content/bBehaviorUser/bBehaviorUser_view.jsp</result>
+		</action>
+	</package>
+</struts>

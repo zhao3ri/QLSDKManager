@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+  <package name="report" extends="base" namespace="/report">
+    <action name="report_*" method="{1}" class="com.item.web.action.ReportAction">
+      <result name="summary">/WEB-INF/content/report/report_summary.jsp</result>
+      <result name="platform">/WEB-INF/content/report/report_platform.jsp</result>
+      <result name="zone">/WEB-INF/content/report/report_zone.jsp</result>
+      <result name="rank">/WEB-INF/content/report/report_rank.jsp</result>
+      <result name="roleRank">/WEB-INF/content/report/report_roleRank.jsp</result>
+      <result name="getChannelZone">/WEB-INF/content/report/report_getChannelZone.jsp</result>
+      <result name="getZone">/WEB-INF/content/report/report_getZone.jsp</result>
+    </action>
+    
+    <action name="reportDaily_*" method="{1}" class="com.item.web.action.ReportDailyAction">
+    	<result name="basic">/WEB-INF/content/report/report_basic.jsp</result>
+    	<result name="newly">/WEB-INF/content/report/report_newly.jsp</result>
+    	<result name="first">/WEB-INF/content/report/report_first.jsp</result>
+    	<result name="keep">/WEB-INF/content/report/report_keep.jsp</result>
+    	<result name="loss">/WEB-INF/content/report/report_loss.jsp</result>
+    	<result name="back">/WEB-INF/content/report/report_back.jsp</result>
+    	<result name="change">/WEB-INF/content/report/report_change.jsp</result>
+    	<result name="operate">/WEB-INF/content/report/report_operate.jsp</result>
+    	<result name="online">/WEB-INF/content/report/report_online.jsp</result>
+        <result name="platform">/WEB-INF/content/report/report_platform.jsp</result>
+    </action>
+      <action name="reportLtv_*" method="{1}" class="com.item.web.action.ReportLTVAction">
+          <result name="basic">/WEB-INF/content/report/report_ltv.jsp</result>
+      </action>
+  </package>
+</struts>

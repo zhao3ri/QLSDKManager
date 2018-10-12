@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SRechargeHourly">
+
+    <typeAlias alias="sRechargeHourly" type="com.item.domain.SRechargeHourly" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SRechargeHourly.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="clientType">
+    			`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			`appId`=#appId#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="zoneId">
+    			`zoneId`=#zoneId#
+    		</isNotEmpty>
+    		<isNotNull prepend="and" property="platformId">
+    			`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statDate">
+    			DATE(`statDate`)=#statDate#
+    		</isNotNull>
+    	</dynamic>
+    </sql>
+
+    <select id="SRechargeHourly.list" resultClass="sRechargeHourly" parameterClass="mb">
+        SELECT
+			SUM(`roles`) AS roles,
+			SUM(`amount`) AS amount,
+			SUM(`payTimes`) AS payTimes,
+			MAX(`maxAmount`) AS maxAmount,
+			SUM(`currentAmount`) AS currentAmount,
+			`statDate`
+		FROM s_recharge_hourly
+        <include refid="SRechargeHourly.Where"/>
+        GROUP BY `statDate`	
+        ORDER BY statDate DESC
+    </select>
+</sqlMap>

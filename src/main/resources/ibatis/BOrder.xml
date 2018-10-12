@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BOrder">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="bOrder" type="com.item.domain.BOrder" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="BOrder.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="appId">
+    			a.`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="platformId">
+    			a.`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="uid">
+    			a.`uid`=#uid#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="roleName">
+    			a.`roleName`=#roleName#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneId">
+    			a.`zoneId`=#zoneId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="orderId">
+    			a.`orderId`=#orderId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="cpOrderId">
+    			a.`cpOrderId`=#cpOrderId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="clientType">
+    			a.`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="status">
+    			a.`status`=#status#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="notifyStatus">
+    			a.`notifyStatus`=#notifyStatus#
+    		</isNotNull>
+    		<isNotEmpty prepend="AND" property="appIds">
+				a.appId IN 
+				<iterate property="appIds" open="(" close=")" conjunction=",">
+			      #appIds[]#
+			    </iterate>
+			</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(a.`createTime`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(a.`createTime`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotNull prepend="and" property="moneyFrom">
+    		    <![CDATA[
+    		     a.amount>=#moneyFrom#
+    		     ]]>
+    		</isNotNull>
+    		<isNotNull prepend="and" property="moneyTo">
+    		     <![CDATA[
+    		     a.amount<=#moneyTo#
+    		     ]]>
+    		</isNotNull>
+    		
+    	</dynamic>
+    </sql>
+
+    <select id="BOrder.page" parameterClass="mb" resultClass="bOrder">
+        SELECT
+	   		a.*,
+	   		b.appName,
+	   		c.platformName,
+	   		d.zoneName
+		FROM b_order AS a 
+		LEFT JOIN b_game AS b ON a.appId = b.id
+		LEFT JOIN b_platform AS c ON a.platformId = c.id
+		LEFT JOIN b_game_zone AS d ON a.appId = d.appId AND a.zoneId = d.zoneId
+        <include refid="BOrder.Where"/>
+        <isNotNull property="orderby">
+        	ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="BOrder.count" resultClass="Long" parameterClass="mb">
+        SELECT COUNT(1)
+		FROM b_order AS a
+		LEFT JOIN b_game AS b ON a.appId = b.id
+		LEFT JOIN b_platform AS c ON a.platformId = c.id
+		LEFT JOIN b_game_zone AS d ON a.appId = d.appId AND a.zoneId = d.zoneId
+        <include refid="BOrder.Where"/>
+    </select>
+
+    <select id="BOrder.list" resultClass="bOrder" parameterClass="mb">
+        SELECT
+	   		a.*,
+	   		b.appName,
+	   		c.platformName,
+	   		d.zoneName
+		FROM b_order AS a 
+		LEFT JOIN b_game AS b ON a.appId = b.id
+		LEFT JOIN b_platform AS c ON a.platformId = c.id
+		LEFT JOIN b_game_zone AS d ON a.appId = d.appId AND a.zoneId = d.zoneId
+        <include refid="BOrder.Where"/>
+        <isNotNull property="orderby">
+             ORDER BY $orderby$
+        </isNotNull>
+        <isNotNull property="pageSize">
+       	     LIMIT 0, #pageSize#
+        </isNotNull>
+    </select>
+
+    <select id="BOrder.get" resultClass="bOrder" parameterClass="Long">
+        SELECT
+	   		a.*,
+	   		b.appName,
+	   		c.platformName,
+	   		d.zoneName
+		FROM b_order AS a 
+		LEFT JOIN b_game AS b ON a.appId = b.id
+		LEFT JOIN b_platform AS c ON a.platformId = c.id
+		LEFT JOIN b_game_zone AS d ON a.appId = d.appId AND a.zoneId = d.zoneId
+		WHERE
+	  		a.`id`=#id# 
+    </select>
+
+	<update id="BOrder.update" parameterClass="bOrder">
+		update b_order set `notifyStatus`=#notifyStatus#
+		WHERE
+	  		`id`=#id# 
+	</update>
+    
+</sqlMap>

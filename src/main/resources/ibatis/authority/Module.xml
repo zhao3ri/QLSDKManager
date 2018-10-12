@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Module">
+
+	<typeAlias alias="Module" type="com.item.domain.authority.Module" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+		
+	<sql id="Module.where">
+	 	 <dynamic prepend="WHERE">
+	 		<isNotNull prepend="and" property="moduleName">
+	 	 		m.moduleName like concat('%',#moduleName#,'%') 
+	 	 	</isNotNull>
+	 	 	<isNotPropertyAvailable prepend="and" property="projectType">
+	 	 		m.projectType != 1
+	 	 	</isNotPropertyAvailable>
+	 	 	<isPropertyAvailable prepend="and" property="projectType">
+	 	 		m.projectType = #projectType#
+	 	 	</isPropertyAvailable>
+	 	 </dynamic>
+ 	</sql>
+ 		
+	<select id="Module.listAll" parameterClass="mb" resultClass="Module">
+		SELECT *
+  		FROM sysModule m
+  		<include refid="Module.where"/>
+  		ORDER BY moduleOrder ASC
+	</select>
+
+	<select id="Module.selectUniqueModuleById" parameterClass="Long" resultClass="Module">
+		SELECT *
+		FROM sysModule
+		WHERE id=#id#
+	</select>
+	
+	<select id="Module.getEntity" parameterClass="Long" resultClass="Module">
+		SELECT *
+		FROM sysModule
+		WHERE id=#id#
+	</select>
+	
+	<select id="Module.page" parameterClass="mb" resultClass="Module">
+		SELECT *
+		FROM sysModule m
+		<include refid="Module.where"/>
+		order by m.id desc
+		LIMIT #firstResult#,#pageSize#
+	</select>
+	
+	<select id="Module.count" parameterClass="mb" resultClass="Long">
+		SELECT COUNT(1)
+		FROM sysModule m
+		<include refid="Module.where"/>
+	</select>
+	
+	<delete id="Module.delete" parameterClass="Long">
+		DELETE FROM sysModule WHERE id=#id#
+	</delete>
+	
+	<insert id="Module.save" parameterClass="Module">
+		INSERT INTO sysModule(
+			moduleName,moduleURL,moduleOrder,projectType
+		)VALUES(
+			#moduleName#,#moduleURL#,#moduleOrder#,2
+		)
+	</insert>
+	
+	<update id="Module.update" parameterClass="Module">
+		UPDATE sysModule
+		<dynamic prepend="set">
+          <isNotNull prepend="," property="moduleName">
+             `moduleName`=#moduleName#
+          </isNotNull>
+          <isNotNull prepend="," property="moduleURL">
+             `moduleURL`=#moduleURL#
+          </isNotNull>
+          <isNotNull prepend="," property="moduleOrder">
+             `moduleOrder`=#moduleOrder#
+          </isNotNull>
+        </dynamic>
+         WHERE 
+          `id`=#id#
+	</update>
+	
+</sqlMap>

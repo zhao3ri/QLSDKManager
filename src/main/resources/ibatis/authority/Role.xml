@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Role">
+
+	<typeAlias alias="Role" type="com.item.domain.authority.Role" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+	
+	<cacheModel id="Role-cache" type="OSCache" readOnly="true" serialize="false">
+		<property name="size" value="100" />
+		<flushInterval hours="24" />
+		<flushOnExecute statement="Role.update"/>
+    	<flushOnExecute statement="Role.save"/>
+    	<flushOnExecute statement="Role.delete"/>
+	</cacheModel>
+	
+	<sql id="Role.where">
+	 	 <dynamic prepend="WHERE">
+	 		<isNotNull prepend="and" property="roleName">
+	 	 		r.roleName like concat('%',#roleName#,'%') 
+	 	 	</isNotNull>
+	 	 	<isNotPropertyAvailable prepend="and" property="projectType">
+	 	 		r.projectType != 1
+	 	 	</isNotPropertyAvailable>
+	 	 	<isPropertyAvailable prepend="and" property="projectType">
+	 	 		r.projectType = #projectType#
+	 	 	</isPropertyAvailable>
+	 	 </dynamic>
+ 	</sql>
+ 	
+	<select id="Role.list" parameterClass="mb" resultClass="Role"  cacheModel="Role-cache">
+		SELECT r.*
+  		FROM sysRole r
+  		<include refid="Role.where"/>
+		LIMIT #firstResult#,#pageSize#
+	</select>
+	
+	<select id="Role.count" parameterClass="mb" resultClass="Long"  cacheModel="Role-cache">
+		SELECT COUNT(r.id)
+  		FROM sysRole r
+  		<include refid="Role.where"/>
+	</select>
+	
+	<select id="Role.listAll" parameterClass="mb" resultClass="Role"  cacheModel="Role-cache">
+		SELECT *
+  		FROM sysRole r
+  		<include refid="Role.where"/>
+	</select>
+	
+	<delete id="Role.delete" parameterClass="Long">
+		DELETE FROM sysRole WHERE id=#id#
+	</delete>
+	
+	<select id="Role.selectUniqueRoleById" parameterClass="Long" resultClass="Role"  cacheModel="Role-cache">
+		SELECT r.*
+		FROM sysRole r
+		WHERE r.id=#id#
+	</select>
+	
+	<select id="Role.getEntity" parameterClass="Long" resultClass="Role"  cacheModel="Role-cache">
+		SELECT r.*
+		FROM sysRole r
+		WHERE r.id=#id#
+	</select>
+	
+	<select id="Role.selectUniqueRoleByName" parameterClass="String" resultClass="Role"  cacheModel="Role-cache">
+		SELECT r.*
+		FROM sysRole r
+		WHERE r.roleName=#roleName#
+	</select>
+	
+	<insert id="Role.save" parameterClass="Role">
+		INSERT INTO sysRole(
+			roleName,description,projectType
+		)VALUES(
+			#roleName#,#description#,2
+		)
+		<selectKey resultClass="Long" keyProperty="id">
+			select @@IDENTITY as id
+		</selectKey> 
+	</insert>
+	
+	<update id="Role.update" parameterClass="Role">
+		UPDATE sysRole 
+		SET roleName=#roleName#,
+		description=#description#
+		WHERE id=#id#
+	</update>
+	
+	
+</sqlMap>

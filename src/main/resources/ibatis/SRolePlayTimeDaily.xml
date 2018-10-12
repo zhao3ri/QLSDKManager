@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SRolePlayTimeDaily">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sRolePlayTimeDaily" type="com.item.domain.SRolePlayTimeDaily" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SRolePlayTimeDaily.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="id">
+    			r.id=#id#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="clientType">
+    			r.clientType=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			r.appId=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="platformId">
+    			r.platformId=#platformId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="uid">
+    			r.uid=#uid#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneId">
+    			r.zoneId=#zoneId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="roleId">
+    			r.roleId=#roleId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="roleName">
+    			r.roleName=#roleName#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="playTime">
+    			r.playTime=#playTime#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statDate">
+    			r.statDate=#statDate#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(r.statDate,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(r.statDate,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+
+    <select id="SRolePlayTimeDaily.pagePlayTime" parameterClass="mb" resultClass="mb">
+    	SELECT b.*,SUM(a.playTime) as countPlayTime FROM s_role_play_time_daily a RIGHT JOIN 
+			(SELECT r.appId,r.platformId,r.uid,r.zoneId,r.roleId,r.roleName,SUM(r.playTime) as playTime,COALESCE(g.zoneName,'未知') as zoneName ,p.platformName 
+			FROM s_role_play_time_daily r LEFT JOIN b_game_zone g ON g.zoneId=r.zoneId  left join b_platform p on r.platformId=p.id <include refid="SRolePlayTimeDaily.Where"/> GROUP BY r.uid,r.roleId,r.zoneId ) b 
+			ON a.uid=b.uid AND a.zoneId=b.zoneId AND a.roleId=b.roleId GROUP BY b.uid,b.roleId,b.zoneId ORDER BY b.playTime DESC 
+			LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="SRolePlayTimeDaily.countPlayTime" resultClass="Long" parameterClass="mb">
+    	SELECT COUNT(1) FROM 
+    	(SELECT r.appId,r.platformId,r.uid,r.zoneId,r.roleId,r.roleName,sum(r.playTime) as playTime FROM s_role_play_time_daily r
+			<include refid="SRolePlayTimeDaily.Where"/> GROUP BY r.uid,r.roleId,r.zoneId) b
+    </select>
+
+
+</sqlMap>

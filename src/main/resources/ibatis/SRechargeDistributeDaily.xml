@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SRechargeDistributeDaily">
+
+    <typeAlias alias="sRechargeDistributeDaily" type="com.item.domain.SRechargeDistributeDaily" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <select id="SRechargeDistributeDaily.list" resultClass="sRechargeDistributeDaily" parameterClass="mb">
+        SELECT
+			SUM(`roleLogins`) AS roleLogins,
+			SUM(`activeRoles3`) AS activeRoles3,
+			SUM(`roles`) AS roles,
+			SUM(`amount`) AS amount,
+			SUM(`payTimes`) AS payTimes,
+			SUM(`s1`) AS s1,
+			SUM(`s2`) AS s2,
+			SUM(`s3`) AS s3,
+			SUM(`s4`) AS s4,
+			SUM(`s5`) AS s5,
+			SUM(`s6`) AS s6,
+			SUM(`s7`) AS s7,
+			SUM(`s8`) AS s8,
+			SUM(`s9`) AS s9,
+			SUM(`s10`) AS s10,
+			`statDate`
+		FROM s_recharge_distribute_daily
+		WHERE appId = #appId#
+		<isNotNull property="platformId">
+   			AND `platformId`=#platformId#
+   		</isNotNull>
+    	<isNotEmpty property="zoneId">
+   			AND `zoneId`=#zoneId#
+   		</isNotEmpty>
+   		<isNotEmpty property="startDate">
+   			<![CDATA[
+			AND `statDate`>=#startDate#
+   			]]>
+   		</isNotEmpty>
+   		<isNotEmpty property="endDate">
+   			<![CDATA[
+   			AND `statDate`<=#endDate#
+   			]]>
+   		</isNotEmpty>
+   		GROUP BY `statDate`	
+        ORDER BY `statDate` ASC
+    </select>
+
+</sqlMap>

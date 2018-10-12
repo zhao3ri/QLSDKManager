@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="history" extends="base" namespace="/history">
+		<action name="history_*" method="{1}" class="com.item.web.action.authority.HistoryAction">
+			<result name="list">/WEB-INF/content/history/history_list.jsp</result>
+			<result name="view">/WEB-INF/content/history/history_view.jsp</result>
+			<result name="list1">/WEB-INF/content/history/history_list_1.jsp</result>
+			<result name="listmain">/WEB-INF/content/history/history_listmain.jsp</result>
+			<result name="delete" type="redirect">${ctx}/history/history_list.shtml</result>
+			<result name="save" type="redirect">${ctx}/history/history_list.shtml</result>
+			<result name="handle">/WEB-INF/content/history/history_handle.jsp</result>
+		</action>
+	</package>
+</struts>

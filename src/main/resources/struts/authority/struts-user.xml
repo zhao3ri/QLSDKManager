@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="user" extends="base" namespace="/user">
+		<action name="*_*" method="{2}" class="com.item.web.action.authority.UserAction">
+			<result name="success">/WEB-INF/content/authority/{1}_{2}.jsp</result>
+			<result name="reload" type="redirect">${ctx}/user/user_list.shtml</result>
+			<result name="myInfo">/WEB-INF/content/authority/user_updateMyInfo.jsp</result>
+			<result name="myPassword">/WEB-INF/content/authority/user_updateMyPassword.jsp</result>
+			<result name="toIndex" type="redirect">${ctx}/indexNew.shtml</result>
+		</action>
+	</package>
+</struts>

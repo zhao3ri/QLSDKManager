@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SRoleRank">
+	<typeAlias alias="SRoleRank" type="com.item.domain.SRoleRank" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+	<!-- 动态条件 -->
+	<sql id="SRoleRank.Where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="appId">
+				a.appid=#appId#
+			</isNotNull>
+			<isNotEmpty prepend="AND" property="platformId">
+				a.platformid=#platformId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="roleName">
+				a.rolename=#roleName#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+
+	<select id="SRoleRank.count" resultClass="Long" parameterClass="mb">
+		SELECT count(*) from  (
+        	SELECT count(1)
+			FROM s_pay_rank AS a
+			<include refid="SRoleRank.Where" />
+			GROUP BY a.appid,a.roleid
+			ORDER BY a.amount DESC) as c
+	</select>
+
+	<!--根据pageSize获取一页的数据量 -->
+	<select id="SRoleRank.page" resultClass="SRoleRank" parameterClass="mb">
+		SELECT 
+			a.roleid,
+			a.clientType,
+			a.uid,
+			a.platformid,
+			a.rolename,
+			a.lastlogin,
+			SUM(a.amount)  AS amount,
+			a.appid,
+			b.appName
+		FROM s_pay_rank AS a
+		JOIN b_game AS b  ON a.appid = b.id
+		<include refid="SRoleRank.Where" /> 
+		GROUP BY a.appid,a.roleid
+		ORDER BY SUM(a.amount) DESC 
+		LIMIT #firstResult#, #pageSize#
+	</select>
+	
+	<select id="SRoleRank.list" resultClass="SRoleRank" parameterClass="mb">
+		SELECT 
+			a.roleid,
+			a.clientType,
+			a.uid,
+			a.platformid,
+			a.rolename,
+			SUM(a.amount)  AS amount,
+			a.appid,
+			b.appName 
+		FROM s_pay_rank AS a
+		JOIN b_game AS b  ON a.appid = b.id
+		<include refid="SRoleRank.Where" /> 
+		GROUP BY a.appid,a.roleid
+		ORDER BY SUM(a.amount) DESC 
+	</select>
+</sqlMap>

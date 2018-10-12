@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="User">
+
+	<typeAlias alias="User" type="com.item.domain.authority.User" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+	
+	<cacheModel id="User-cache" type="OSCache" readOnly="true" serialize="false">
+		<property name="size" value="100" />
+		<flushInterval hours="24" />
+		<flushOnExecute statement="User.update"/>
+    	<flushOnExecute statement="User.save"/>
+    	<flushOnExecute statement="User.updateMyInfo"/>
+    	<flushOnExecute statement="User.updateMyPassword"/>
+    	<flushOnExecute statement="User.disabled"/>
+    	<flushOnExecute statement="User.delete"/>
+	</cacheModel>
+	
+	<sql id="User.where">
+	 	 <dynamic prepend="WHERE">
+	 	    <isNotPropertyAvailable prepend="and" property="projectType">
+	 	 		u.projectType = 1
+	 	 	</isNotPropertyAvailable>
+	 	 	<isPropertyAvailable prepend="and" property="projectType">
+	 	 		u.projectType = #projectType#
+	 	 	</isPropertyAvailable>
+	 	 	<isNotNull prepend="and" property="userName">
+	 	 		u.userName like concat('%',#userName#,'%')
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="did">
+	 	 		u.did = #did#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="gid">
+	 	 		u.gid = #gid#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="realName">
+	 	 		u.realName like concat('%',#realName#,'%')
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="roleID">
+	 	 		u.roleID = #roleID#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="state">
+	 	 		u.state = #state#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="validstate">
+    			u.state!=#validstate#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="UserId">
+	 	 		u.id = #UserId#
+	 	 	</isNotNull> 
+    		<isNotNull prepend="and" property="Did">
+	 	 		u.did = #Did#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="Gid">
+	 	 		u.gid = #Gid#
+	 	 	</isNotNull>
+	 	 </dynamic>
+ 	</sql>
+	
+	<select id="User.list" parameterClass="mb" resultClass="User" cacheModel="User-cache">
+		SELECT u.*,r.roleName roleName
+		FROM sysUser u JOIN sysRole r ON u.roleID=r.id
+		<include refid="User.where"/>
+		ORDER BY u.createTime DESC
+		LIMIT #firstResult#,#pageSize#
+	</select>
+	
+	<select id="User.lists" parameterClass="mb" resultClass="User" cacheModel="User-cache">
+		SELECT u.*
+		FROM sysUser u
+		<include refid="User.where"/>
+		<isNotNull property="orderby">
+             ORDER BY $orderby$
+        </isNotNull>
+        <isNotNull property="pageSize">
+       	     LIMIT 0, #pageSize#
+        </isNotNull>
+	</select>
+	
+	<select id="User.count" parameterClass="mb" resultClass="Long" cacheModel="User-cache">
+		SELECT COUNT(u.id)
+		FROM sysUser u JOIN sysRole r ON u.roleID=r.id
+		<include refid="User.where"/>
+	</select>
+	
+	<select id="User.listByRoleID" parameterClass="Long" resultClass="User" cacheModel="User-cache">
+		SELECT u.*
+		FROM sysUser u
+		WHERE u.roleID=#roleID# and u.projectType =1;
+	</select>
+	
+	<sql id="User.listByReturnIDWhere">
+	 	 <dynamic prepend="WHERE">
+	 	    <isNotPropertyAvailable prepend="and" property="projectType">
+	 	 		u.projectType = 1
+	 	 	</isNotPropertyAvailable>
+	 	 	<isPropertyAvailable prepend="and" property="projectType">
+	 	 		u.projectType = #projectType#
+	 	 	</isPropertyAvailable>
+	 	 	<isNotNull prepend="and" property="UserId">
+	 	 		u.id=#UserId#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="Did">
+	 	 		u.did=#Did#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="Gid">
+	 	 		u.gid=#Gid#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="state">
+	 	 		u.state=#state#
+	 	 	</isNotNull> 
+	 	 </dynamic>
+ 	</sql>
+ 	
+	<select id="User.listByReturnID" parameterClass="mb" resultClass="User" cacheModel="User-cache">
+		SELECT u.*
+		FROM sysUser u
+		<include refid="User.listByReturnIDWhere"/>
+	</select>
+	
+	<sql id="User.UniqueWhere">
+	 	 <dynamic prepend="WHERE">
+	 	 	<isNotPropertyAvailable prepend="and" property="projectType">
+	 	 		u.projectType = 1
+	 	 	</isNotPropertyAvailable>
+	 	 	<isPropertyAvailable prepend="and" property="projectType">
+	 	 		u.projectType = #projectType#
+	 	 	</isPropertyAvailable>
+	 	 	<isNotNull prepend="and" property="userName">
+	 	 		u.userName=#userName#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="state">
+	 	 		u.state=#state#
+	 	 	</isNotNull> 
+	 	 	<isNotNull prepend="and" property="allState">
+	 	 		u.state in (0,1)
+	 	 	</isNotNull>
+	 	 </dynamic>
+ 	</sql>
+	
+	<select id="User.selectUniqueUserByName" parameterClass="mb" resultClass="User" cacheModel="User-cache">
+		SELECT u.*,r.roleName roleName,c.dname as dname
+		FROM sysUser u 
+		LEFT JOIN sysRole r ON u.roleID=r.id left join sysDictionary as c on u.did = c.id
+		<include refid="User.UniqueWhere"/>
+	</select>
+	
+	<select id="User.selectUniqueUserById" parameterClass="Long" resultClass="User" cacheModel="User-cache">
+		SELECT u.* 
+		FROM sysUser u
+		WHERE u.id=#id# 
+	</select>
+	
+	<select id="User.getEntity" parameterClass="Long" resultClass="User" cacheModel="User-cache">
+		SELECT u.* 
+		FROM sysUser u
+		WHERE u.id=#id# 
+	</select>
+	
+	<delete id="User.delete" parameterClass="Long">
+		DELETE FROM sysUser WHERE id=#id#
+	</delete>
+	
+	<insert id="User.save" parameterClass="User">
+		INSERT INTO sysUser(
+			userName,password,realName,did,gid,state,roleID,createTime,updateTime,projectType
+		)VALUES(
+			#userName#,#password#,#realName#,#did#,#gid#,0,#roleID#,now(),now(),1
+		)
+	</insert>
+	
+	<update id="User.update" parameterClass="User">
+		UPDATE sysUser 
+			   SET realName=#realName#, did=#did#, gid=#gid# , roleID=#roleID#,updateTime=now()
+			   <isNotEmpty prepend="," property="password">
+			   		password=#password#
+			   </isNotEmpty> 			   
+			   WHERE id=#id#
+	</update>
+	<update id="User.updateMyInfo" parameterClass="User">
+		UPDATE sysUser 
+			   SET realName=#realName#,updateTime=#updateTime#		   
+			   WHERE id=#id#
+	</update>
+	<update id="User.updateMyPassword" parameterClass="User">
+		UPDATE sysUser 
+			   SET password=#password#,updateTime=#updateTime#		   
+			   WHERE id=#id#
+	</update>
+	<update id="User.disabled" parameterClass="mb">
+		update sysUser
+			<dynamic prepend="set">
+				<isNotNull property="state" prepend=",">
+					state=#state#
+				</isNotNull>
+			</dynamic>
+		where id=#id#
+	</update>
+</sqlMap>

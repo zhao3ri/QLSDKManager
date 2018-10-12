@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BPlatform">
+	<typeAlias alias="BPlatform" type="com.item.domain.BPlatform" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+ 
+	<!-- 动态条件 -->
+	<sql id="BPlatform.Where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				id=#id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="platformName">
+				platformName=#platformName#
+			</isNotNull>
+			<isNotNull prepend="AND" property="createTime">
+				createTime=#createTime#
+			</isNotNull>
+			<isNotNull prepend="AND" property="version">
+				version=#version#
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!--根据pageSize获取一页的数据量 -->
+	<select id="BPlatform.page" parameterClass="mb" resultClass="BPlatform">
+		SELECT id,platformName,createTime,platformCallbackUrl,balance FROM b_platform
+		<include refid="BPlatform.Where" />
+		<isNotNull property="orderby">
+			ORDER BY $orderby$
+		</isNotNull>
+		LIMIT #firstResult#, #pageSize#
+	</select>
+
+    <select id="BPlatform.get" parameterClass="mb" resultClass="BPlatform">
+		SELECT 
+		   	id,
+		   	platformName,
+		   	createTime,
+		   	platformCallbackUrl,
+			balance,
+			version,
+			business,
+			phone
+		FROM 
+		   b_platform
+    <include refid="BPlatform.Where" />
+    </select>
+    
+	<!-- 增加联运平台 -->
+	<insert id="BPlatform.save" parameterClass="BPlatform">
+		INSERT INTO b_platform(platformName,createTime,platformCallbackUrl,business,phone)
+		VALUES(#platformName#,#createTime#,#platformCallbackUrl#,#business#,#phone#)
+		<selectKey resultClass="Long" keyProperty="id">
+			select @@IDENTITY
+			as `id`
+		</selectKey>
+	</insert>
+
+	<!-- 删除联运平台 -->
+	<delete id="BPlatform.delete" parameterClass="Long">
+		DELETE FROM
+		b_platform WHERE id=#id#
+	</delete>
+
+	<!-- 更新联运平台 -->
+	<update id="BPlatform.update" parameterClass="BPlatform">
+		UPDATE b_platform
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="platformName">
+				platformName=#platformName#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime">
+				createTime=#createTime#
+			</isNotNull>
+			<isNotNull prepend="," property="platformCallbackUrl">
+				platformCallbackUrl=#platformCallbackUrl#
+			</isNotNull>
+			<isNotNull prepend="," property="balance">
+				balance=#balance#
+			</isNotNull>
+			<isNotNull prepend="," property="newversion">
+				version=#newversion#
+			</isNotNull>
+			<isNotNull prepend="," property="business">
+				business=#business#
+			</isNotNull>
+			<isNotNull prepend="," property="phone">
+				phone=#phone#
+			</isNotNull>
+		</dynamic>
+		<include refid="BPlatform.Where" />
+	</update>
+
+	<!-- 获取联运平台总数 -->
+	<select id="BPlatform.count" resultClass="Long" parameterClass="mb">
+		SELECT COUNT(*) FROM b_platform
+		<include refid="BPlatform.Where" />
+	</select>
+
+	<!-- 获取指定id对应的联运平台 -->
+	<select id="BPlatform.getPlatformById" parameterClass="Long" resultClass="BPlatform">
+		SELECT * FROM b_platform WHERE id=#id#
+	</select>
+	
+	<select id="BPlatform.getByIds" parameterClass="String" resultClass="BPlatform">
+		SELECT 
+			* 
+		FROM b_platform WHERE id IN ($channelIds$)
+	</select>
+	
+	<select id="BPlatform.getPlatformByName" resultClass="Long" parameterClass="mb">
+	SELECT COUNT(*) FROM b_platform WHERE platformName=#platformName#
+	</select>
+</sqlMap>

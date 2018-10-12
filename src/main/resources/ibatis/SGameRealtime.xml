@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SGameRealtime">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sGameRealtime" type="com.item.domain.SGameRealtime" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SGameRealtime.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="clientType">
+    			`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')=date_format(#statDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+
+    <select id="SGameRealtime.listGroupBy" resultClass="sGameRealtime" parameterClass="mb">
+        SELECT
+			`statDate`,
+			SUM(`onlineUsers`) AS onlineUsers,
+			SUM(`roleUsers`) AS roleUsers,
+			SUM(`newDevices`) AS newDevices,
+			SUM(`payAmount`) AS payAmount,
+			SUM(`activeUsers`) AS activeUsers
+		FROM s_game_realtime
+        <include refid="SGameRealtime.Where"/>
+         GROUP BY 
+         <isEmpty property="groupType">
+         	date_format(`statDate`,'%H:%i:00')
+         </isEmpty>
+         <isEqual property="groupType" compareValue="statDate">
+         	statDate
+         </isEqual>
+         ORDER BY statDate ASC
+    </select>
+</sqlMap>

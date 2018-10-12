@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SRechargeRank">
+	<typeAlias alias="SRechargeRank" type="com.item.domain.SRechargeRank" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+	<!-- 动态条件 -->
+	<sql id="SRechargeRank.Where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="uid">
+				a.uid=#uid#
+			</isNotNull>
+			<isNotNull prepend="AND" property="appId">
+				a.appid=#appId#
+			</isNotNull>
+			<isNotEmpty prepend="AND" property="platformId">
+				a.platformid=#platformId#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+
+	<select id="SRechargeRank.count" resultClass="Long" parameterClass="mb">
+		SELECT COUNT(*) FROM (
+			SELECT 1 FROM s_pay_rank AS a
+			<include refid="SRechargeRank.Where" />
+			GROUP BY uid, platformid
+			ORDER BY SUM(amount) DESC 
+			 ) AS c
+	</select>
+
+	<!--根据pageSize获取一页的数据量 -->
+	<select id="SRechargeRank.page" resultClass="SRechargeRank" parameterClass="mb">
+		SELECT 
+			uid,
+			platformid,
+			lastlogin,
+			SUM(amount) AS amount 
+		FROM s_pay_rank AS a
+		<include refid="SRechargeRank.Where" /> 
+		GROUP BY uid, platformid
+		ORDER BY SUM(amount) DESC
+		LIMIT #firstResult#, #pageSize#
+	</select>
+	
+	<select id="SRechargeRank.list" resultClass="SRechargeRank" parameterClass="mb">
+		SELECT 
+			uid,
+			platformid,
+			SUM(amount) AS amount 
+		FROM s_pay_rank AS a
+		<include refid="SRechargeRank.Where" /> 
+		GROUP BY uid, platformid
+		ORDER BY SUM(amount) DESC
+	</select>
+</sqlMap>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BPlatformApp">
+	<typeAlias alias="BPlatformApp" type="com.item.domain.BPlatformApp" />
+	<typeAlias alias="BPlatform" type="com.item.domain.BPlatform" />
+	<typeAlias alias="Game" type="com.item.domain.Game" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+	<sql id="BPlatformApp.Where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				bpg.id=#id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="platformId">
+				bpg.platformId=#platformId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="appId">
+				bpg.appId=#appId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="configParams">
+				bpg.configParams=#configParams#
+			</isNotNull>
+			<isNotNull prepend="AND" property="createTime">
+				bpg.createTime=#createTime#
+			</isNotNull>
+			<isNotEmpty prepend="AND" property="appIds">
+				bpg.appId IN 
+				<iterate property="appIds" open="(" close=")" conjunction=",">
+			      #appIds[]#
+			    </iterate>
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+
+	<select id="BPlatformApp.count" resultClass="Long"
+		parameterClass="mb">
+		SELECT COUNT(*) FROM b_platform_game bpg 
+		JOIN b_platform bp ON bpg.platformId=bp.id
+		JOIN b_game bg ON bpg.appId=bg.id
+		<include refid="BPlatformApp.Where" />
+	</select>
+
+	<select id="BPlatformApp.page" resultClass="BPlatformApp"
+		parameterClass="mb">
+		SELECT
+		bpg.id,bp.platformName,bg.appName,bpg.configParams,bpg.createTime,bpg.appId,bpg.platformId,bpg.discount
+		FROM b_platform_game bpg
+		JOIN b_platform bp ON bpg.platformId=bp.id
+		JOIN b_game bg ON bpg.appId=bg.id
+		<include refid="BPlatformApp.Where" />
+		<isNotNull property="orderby">
+			ORDER BY $orderby$
+		</isNotNull>
+		LIMIT #firstResult#, #pageSize#
+	</select>
+	
+	<select id="BPlatformApp.list" resultClass="BPlatformApp" parameterClass="mb">
+		SELECT
+		bpg.id,bp.platformName,bg.appName,bpg.configParams,bpg.createTime,bpg.appId,bpg.platformId
+		FROM b_platform_game bpg
+		JOIN b_platform bp ON bpg.platformId=bp.id
+		JOIN b_game bg ON bpg.appId=bg.id
+		<include refid="BPlatformApp.Where"/>
+	</select>
+
+	<delete id="BPlatformApp.delete" parameterClass="Long">
+		DELETE FROM b_platform_game WHERE id=#id#
+	</delete>
+	
+	<select id="BPlatformApp.GetByAppId" resultClass="BPlatformApp" parameterClass="Long">
+		SELECT 
+			a.platformId,
+			b.platformName
+		FROM b_platform_game AS a 
+		JOIN b_platform AS b ON a.platformId = b.id
+		WHERE a.appId = #appId#
+	</select>
+	
+	<select id="BPlatformApp.getPlatformAppById" parameterClass="Long"
+		resultClass="BPlatformApp">
+		SELECT bp.platformName,bp.id as platformId,bg.appName,bg.id as appId,bpg.*
+		FROM b_platform_game bpg
+		JOIN b_platform bp ON bpg.platformId=bp.id
+		JOIN b_game bg ON bpg.appId=bg.id
+		WHERE bpg.id=#id#
+	</select>
+
+	<select id="BPlatformApp.getAllPlatform" resultClass="BPlatform">
+		SELECT * FROM b_platform
+	</select>
+
+	<select id="BPlatformApp.getAllApp" resultClass="Game">
+		SELECT * FROM b_game
+	</select>
+
+	<update id="BPlatformApp.update" parameterClass="BPlatformApp">
+		UPDATE b_platform_game
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="platformId">
+				platformId=#platformId#
+			</isNotNull>
+			<isNotNull prepend="," property="appId">
+				appId=#appId#
+			</isNotNull>
+			<isNotNull prepend="," property="configParams">
+				configParams=#configParams#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				status=#status#
+			</isNotNull>
+			<isNotNull prepend="," property="registStatus">
+				registStatus=#registStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="discount">
+				discount=#discount#
+			</isNotNull>
+		</dynamic>
+		WHERE id=#id#
+	</update>
+
+	<insert id="BPlatformApp.save" parameterClass="BPlatformApp">
+		INSERT INTO b_platform_game(platformId,appId,configParams,createTime,status,registStatus,discount)
+		VALUES(#platformId#,#appId#,#configParams#,#createTime#,#status#,#registStatus#,#discount#)
+		<selectKey resultClass="Long" keyProperty="id">
+			select @@IDENTITY as `id`
+		</selectKey>
+	</insert>
+
+</sqlMap>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="systool" extends="base" namespace="/systool">
+		<action name="systool_*" method="{1}" class="com.item.web.action.authority.SystoolAction">
+			<result name="success">/WEB-INF/content/sys/systool_{1}.jsp</result>
+			<result name="reload" type="redirect">${ctx}/systool/systool_cleanCache.shtml</result>
+		</action>
+	</package>
+</struts>

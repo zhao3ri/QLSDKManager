@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="dictionary" extends="base" namespace="/dictionary">
+		<action name="dictionary_*" method="{1}" class="com.item.web.action.authority.DictionaryAction">
+			<result name="list">/WEB-INF/content/sys/dictionary_list.jsp</result>
+			<result name="reload" type="redirect">${ctx}/dictionary/dictionary_list.shtml?dictionary.dtype=${dictionary.dtype }</result>
+			<result name="handle">/WEB-INF/content/sys/dictionary_handle.jsp</result>
+		</action>
+	</package>
+</struts>

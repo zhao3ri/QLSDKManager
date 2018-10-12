@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+.helpToolTip+.popover .popover-content{ font-weight:normal!important; font-size:12px!important;}
+dd{
+	word-wrap:break-word;
+}
+
+
+pre{font-family: "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    margin: 0;}

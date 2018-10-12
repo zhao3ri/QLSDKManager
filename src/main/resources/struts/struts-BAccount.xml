@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="bAccount" extends="base" namespace="/bAccount">
+		<action name="bAccount_*" method="{1}"
+			class="com.item.web.action.BAccountAction">
+			<result name="list">/WEB-INF/content/bAccount/bAccount_list.jsp
+			</result>
+		</action>
+	</package>
+</struts>

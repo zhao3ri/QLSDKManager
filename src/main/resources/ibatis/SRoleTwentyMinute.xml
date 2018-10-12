@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SRoleTwentyMinute">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sRoleTwentyMinute" type="com.item.domain.SRoleTwentyMinute" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SRoleTwentyMinute.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="clientType">
+    			`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneId">
+    			`zoneId`=#zoneId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="platformId">
+    			`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statDate">
+    			date_format(`statDate`,'%Y-%m-%d') = date_format(#statDate#,'%Y-%m-%d') 
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+    
+    <select id="SRoleTwentyMinute.listRealTimeLogin" resultClass="sRoleTwentyMinute" parameterClass="mb">
+    	SELECT 
+    		`clientType`,
+    		`appId`,
+    		`zoneId`,
+    		`platformId`,
+    		`statDate`,
+    		sum(`roleEstablishs`) as roleEstablishs,
+    		sum(`roleLogins`) as roleLogins,
+			sum(`roleFirstLogins`) as roleFirstLogins,
+			sum(`loginTimes`) as loginTimes,
+			sum(`roleOnlines`) as roleOnlines
+		FROM s_role_twenty_minute
+        <include refid="SRoleTwentyMinute.Where"/>
+         GROUP BY date_format(`statDate`,'%H:%i') ORDER BY statDate DESC
+    </select>
+    
+    <select id="SRoleTwentyMinute.historyTopOnlines" resultClass="sRoleTwentyMinute" parameterClass="mb">
+    	SELECT SUM(r.roleOnlines) as roleOnlines,r.statDate FROM s_role_twenty_minute r <include refid="SRoleTwentyMinute.Where"/>
+		GROUP BY date_format(r.statDate,'%Y-%m-%d %H:%i') ORDER BY roleOnlines DESC limit 1
+    </select>
+    
+    <select id="SRoleTwentyMinute.newRoleOnlines" resultClass="Long" parameterClass="mb">
+    	SELECT SUM(r.roleOnlines) FROM s_role_twenty_minute r <include refid="SRoleTwentyMinute.Where"/>
+		GROUP BY date_format(r.statDate,'%Y-%m-%d %H:%i') ORDER BY statDate DESC limit 1
+    </select>
+    
+    <select id="SRoleTwentyMinute.maxRoleOnlines" resultClass="Long" parameterClass="mb">
+        SELECT MAX(b.roleOnlines) FROM 
+			(SELECT SUM(r.roleOnlines) AS roleOnlines,r.statDate  FROM s_role_twenty_minute r <include refid="SRoleTwentyMinute.Where"/>
+			GROUP BY date_format(r.statDate,'%Y-%m-%d %H:%i')  ORDER BY statDate DESC)
+		 b GROUP BY date_format(b.statDate,'%Y-%m-%d')
+    </select>
+    
+    <select id="SRoleTwentyMinute.minRoleOnlines" resultClass="Long" parameterClass="mb">
+        SELECT MIN(b.roleOnlines) FROM 
+			(SELECT SUM(r.roleOnlines) AS roleOnlines,r.statDate  FROM s_role_twenty_minute r <include refid="SRoleTwentyMinute.Where"/>
+			GROUP BY date_format(r.statDate,'%Y-%m-%d %H:%i')  ORDER BY statDate DESC)
+		 b GROUP BY date_format(b.statDate,'%Y-%m-%d')
+    </select>
+    
+    <select id="SRoleTwentyMinute.avgRoleOnlines" resultClass="Long" parameterClass="mb">
+        SELECT AVG(b.roleOnlines) FROM 
+			(SELECT SUM(r.roleOnlines) AS roleOnlines,r.statDate  FROM s_role_twenty_minute r <include refid="SRoleTwentyMinute.Where"/>
+			GROUP BY date_format(r.statDate,'%Y-%m-%d %H:%i')  ORDER BY statDate DESC)
+		 b GROUP BY date_format(b.statDate,'%Y-%m-%d')
+    </select>
+    
+    <select id="SRoleTwentyMinute.onlineDaily" resultClass="mb" parameterClass="mb">
+    	SELECT 
+    		MAX(b.roleOnlines) as maxRoleOnlines,
+			MIN(b.roleOnlines) as minRoleOnlines,
+			AVG(b.roleOnlines) as avgRoleOnlines,b.statDate FROM 
+			(SELECT sum(r.roleOnlines) as roleOnlines,r.statDate  FROM s_role_twenty_minute r <include refid="SRoleTwentyMinute.Where"/>
+				GROUP BY date_format(r.statDate,'%Y-%m-%d %H:%i')  ORDER BY statDate DESC) 
+		b GROUP BY date_format(b.statDate,'%Y-%m-%d')
+    </select>
+</sqlMap>

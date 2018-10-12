@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BAccount">
+
+	<typeAlias alias="bAccount" type="com.item.domain.BAccount" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+	<sql id="BAccount.Where">
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="platformId">
+				a.`platformId`=#platformId#
+			</isNotNull>
+			<isNotNull prepend="and" property="uid">
+				a.`uid`=#uid#
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<select id="BAccount.page" parameterClass="mb" resultClass="bAccount">
+		SELECT a.id,a.platformId,a.uid,a.createTime,b.platformName FROM
+		b_account AS a join b_platform AS b on a.platformId = b.id
+		<include refid="BAccount.Where" />
+		<isNotNull property="orderby">
+			ORDER BY $orderby$
+		</isNotNull>
+		LIMIT #firstResult#, #pageSize#
+	</select>
+
+	<select id="BAccount.count" resultClass="Long" parameterClass="mb">
+		SELECT COUNT(*) FROM b_account AS a join b_platform AS b on
+		a.platformId = b.id
+		<include refid="BAccount.Where" />
+	</select>
+
+	<select id="BAccount.list" resultClass="bAccount"
+		parameterClass="mb">
+		SELECT a.id,a.platformId,a.uid,a.createTime,b.platformName FROM
+		b_account AS a join b_platform AS b on a.platformId = b.id
+		<include refid="BAccount.Where" />
+		<isNotNull property="orderby">
+			ORDER BY $orderby$
+		</isNotNull>
+		<isNotNull property="pageSize">
+			LIMIT 0, #pageSize#
+		</isNotNull>
+	</select>
+</sqlMap>

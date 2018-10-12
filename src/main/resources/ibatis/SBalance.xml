@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SBalance">
+	<typeAlias alias="SBalance" type="com.item.domain.SBalance" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+ 
+	<!-- 动态条件 -->
+	<sql id="SBalance.Where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				id=#id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="platformid">
+				platformid=#platformid#
+			</isNotNull>
+			<isNotNull prepend="AND" property="createTime">
+				createTime=#createTime#
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+
+    <select id="SBalance.get" parameterClass="mb" resultClass="SBalance">
+		SELECT 
+		   id,
+		   platformid,
+		   createTime,
+		   platformCallbackUrl,
+			balance
+		FROM 
+		   b_platform
+    <include refid="SBalance.Where" />
+    </select>
+    
+	<!-- 增加联运平台 -->
+	<insert id="SBalance.save" parameterClass="SBalance">
+		INSERT INTO s_balance(platformid,type,amount,user,balance,createTime)
+		VALUES(#platformid#,#type#,#amount#,#user#,#balance#,#createTime#)
+		<selectKey resultClass="Long" keyProperty="id">
+			select @@IDENTITY
+			as `id`
+		</selectKey>
+	</insert>
+
+	<!-- 删除联运平台 -->
+	<delete id="SBalance.delete" parameterClass="Long">
+		DELETE FROM
+		b_platform WHERE id=#id#
+	</delete>
+
+	<!-- 更新联运平台 -->
+	<update id="SBalance.update" parameterClass="SBalance">
+		UPDATE b_platform
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="platformid">
+				platformid=#platformid#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime">
+				createTime=#createTime#
+			</isNotNull>
+			<isNotNull prepend="," property="platformCallbackUrl">
+				platformCallbackUrl=#platformCallbackUrl#
+			</isNotNull>
+			<isNotNull prepend="," property="balance">
+				balance=#balance#
+			</isNotNull>
+		</dynamic>
+		WHERE id=#id#
+	</update>
+
+	<!-- 获取加币记录总数 -->
+	<select id="SBalance.count" resultClass="Long" parameterClass="mb">
+		SELECT COUNT(1) FROM s_balance
+		<include refid="SBalance.Where" />
+	</select>
+    <!--根据pageSize获取一页的数据量 -->
+    <select id="SBalance.page" parameterClass="mb" resultClass="SBalance">
+        SELECT id,platformid,type,amount,user,balance,createTime FROM s_balance
+        <include refid="SBalance.Where" />
+        <isNotNull property="orderby">
+            ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+	<!-- 获取指定id对应的联运平台 -->
+	<select id="SBalance.getPlatformById" parameterClass="Long" resultClass="SBalance">
+		SELECT * FROM b_platform WHERE id=#id#
+	</select>
+	
+	<select id="SBalance.getByIds" parameterClass="String" resultClass="SBalance">
+		SELECT 
+			* 
+		FROM b_platform WHERE id IN ($channelIds$)
+	</select>
+	<select id="SBalance.getAllBalance"  resultClass="SBalance">
+		SELECT
+		*
+		FROM s_balance
+	</select>
+
+	<select id="SBalance.getPlatformByName" resultClass="Long" parameterClass="mb">
+	SELECT COUNT(*) FROM b_platform WHERE platformid=#platformid#
+	</select>
+</sqlMap>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BPlatform">
+	<typeAlias alias="Gamezone" type="com.item.domain.Gamezone" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+	
+	<!-- 动态条件 -->
+	<sql id="BGamezone.Where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				a.id = #id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="exceptId">
+				a.id != #exceptId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="zoneId">
+				a.zoneId = #zoneId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="zoneName" open="">
+				a.zoneName like  '%$zoneName$%'
+			</isNotNull>
+			<isNotNull prepend="AND" property="appId">
+				a.appId = #appId#
+			</isNotNull>
+			<isNotEmpty prepend="AND" property="appIds">
+				a.appId IN 
+				<iterate property="appIds" open="(" close=")" conjunction=",">
+			      #appIds[]#
+			    </iterate>
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!--根据pageSize获取一页的数据量 -->
+	<select id="BGamezone.page" parameterClass="mb" resultClass="Gamezone">
+		SELECT 
+			a.id,
+			a.zoneId,
+			a.zoneName,
+			a.appId,
+			b.appName
+		FROM b_game_zone AS a
+		JOIN b_game AS b ON a.appId = b.id
+		<include refid="BGamezone.Where" />
+		<isNotNull property="orderby">
+			ORDER BY $orderby$
+		</isNotNull>
+		LIMIT #firstResult#, #pageSize#
+	</select>
+	
+	<select id="BGamezone.get" parameterClass="mb" resultClass="Gamezone">
+		SELECT 
+			a.id,
+			a.zoneId,
+			a.zoneName,
+			a.appId,
+			b.appName
+		FROM b_game_zone AS a
+		JOIN b_game AS b ON a.appId = b.id
+		<include refid="BGamezone.Where" />
+		</select>
+	
+	<select id="BGamezone.list" parameterClass="mb" resultClass="Gamezone">
+		SELECT id,zoneId,zoneName,appId FROM b_game_zone AS a
+		<include refid="BGamezone.Where"/>
+	</select>
+	
+	<!-- 增加游戏分区 -->
+	<insert id="BGamezone.save" parameterClass="Gamezone">
+		INSERT INTO 
+		b_game_zone(zoneId,zoneName,appId)
+		VALUES(#zoneId#,#zoneName#,#appId#)
+		<selectKey resultClass="Long" keyProperty="id">
+			select @@IDENTITY
+			as `id`
+		</selectKey>
+	</insert>	
+	
+		<!-- 删除游戏 -->
+	<delete id="BGamezone.delete" parameterClass="Long">
+		DELETE FROM
+		b_game_zone WHERE id=#id#
+	</delete>
+	
+	<!-- 批量删除 -->
+	    <delete id="BGamezone.batchDelete" parameterClass="mb">
+    	DELETE FROM
+		b_game_zone WHERE 
+    	WHERE
+    		`id` IN
+    	<iterate property="checkedIds" open="(" close=")" conjunction=",">
+	      #checkedIds[]#
+	    </iterate>
+    </delete>
+	
+	
+	<!-- 更新游戏分区 -->
+	<update id="BGamezone.update" parameterClass="Gamezone">
+		UPDATE b_game_zone
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="zoneId">
+				zoneId=#zoneId#
+			</isNotNull>
+			<isNotNull prepend="," property="zoneName">
+				zoneName=#zoneName#
+			</isNotNull>
+			<isNotNull prepend="," property="appId">
+				appId=#appId#
+			</isNotNull>
+		</dynamic>
+		WHERE id=#id#
+	</update>
+	
+	<!-- 获取游戏分区 总数 -->
+	<select id="BGamezone.count" resultClass="Long" parameterClass="mb">
+		SELECT 
+			COUNT(*) 
+		FROM b_game_zone AS a  
+		JOIN b_game b ON a.appId=b.id
+		<include refid="BGamezone.Where" />
+	</select>
+	
+	<!-- 获取指定id对应的游戏分区  -->
+	<select id="BGamezone.getGamezoneById" parameterClass="Long" resultClass="Gamezone">
+		SELECT * FROM b_game_zone WHERE id=#id#
+	</select>
+	
+	<!-- 获取指定zoneName对应的游戏分区  -->
+	<select id="BGamezone.getGamezoneByzoneName" parameterClass="String" resultClass="Gamezone">
+		SELECT * FROM b_game_zone WHERE zoneName=#zoneName#
+	</select>
+	
+	<!-- 获取指定appId对应的游戏分区  -->
+	<select id="BGamezone.getGamezoneByappId" parameterClass="Long" resultClass="Gamezone">
+		SELECT * FROM b_game_zone WHERE appId=#appId#
+	</select>
+	
+	<select id="BGamezone.getByIds" parameterClass="mb" resultClass="Gamezone">
+		SELECT 
+			* 
+		FROM b_game_zone 
+		WHERE 
+			appId=#appId# 
+			AND zoneId IN ($zoneIds$)
+	</select>
+	
+	<select id="BGamezone.getGamezoneByName" resultClass="Long" parameterClass="mb">
+	SELECT COUNT(*) FROM b_game_zone WHERE zoneName=#zoneName#
+	</select>
+
+</sqlMap>

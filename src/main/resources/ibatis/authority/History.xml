@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="History">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="history" type="com.item.domain.authority.History" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+    
+    <cacheModel id="History-cache" type="OSCache" readOnly="true" serialize="false">
+		<property name="size" value="100" />
+		<flushInterval hours="24" />
+    	<flushOnExecute statement="History.save"/>
+	</cacheModel>
+
+    <sql id="History.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="id">
+    			`id`=#id#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="oid">
+    			`oid`=#oid#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="rid">
+    			`rid`=#rid#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="uniteRid">
+    			`rid` in ($uniteRid$)
+    		</isNotNull>
+    		<isNotNull prepend="and" property="omkey">
+    			`omkey`=#omkey#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="uniteOmkey">
+    			`omkey` in ($uniteOmkey$)
+    		</isNotNull>
+    		<isNotNull prepend="and" property="omname">
+    			`omname` like concat('%',#omname#,'%')
+    		</isNotNull>
+    		<isNotNull prepend="and" property="oaction">
+    			`oaction`=#oaction#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="opkey">
+    			`opkey`=#opkey#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="opname">
+    			`opname`=#opname#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="ovalue">
+    			`ovalue`=#ovalue#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="pvalue">
+    			`pvalue`=#pvalue#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="inserttime">
+    			`inserttime`=#inserttime#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statStartDate">
+	 	 	 <![CDATA[
+	 	 	  	date_format(`inserttime`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+	 	 	</isNotNull>
+	 	 	<isNotNull prepend="and" property="statEndDate">
+	 	 	 <![CDATA[
+	 	 	  	date_format(`inserttime`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d')
+	 	 		]]>
+	 	 	</isNotNull>
+    	</dynamic>
+    </sql>
+    
+    <resultMap id="HistoryResult" class="history">
+   		<result property="id" column="id"/>
+		<result property="oid" column="oid"/>
+		<result property="rid" column="rid"/>
+		<result property="omkey" column="omkey"/>
+		<result property="omname" column="omname"/>
+		<result property="oaction" column="oaction"/>
+		<result property="opkey" column="opkey"/>
+		<result property="opname" column="opname"/>
+		<result property="ovalue" column="ovalue"/>
+		<result property="pvalue" column="pvalue"/>
+		<result property="inserttime" column="inserttime"/>	
+		
+		<result property="user" column="oid" select="User.selectUniqueUserById"/>
+	</resultMap>
+
+    <select id="History.page" parameterClass="mb" resultMap="HistoryResult" cacheModel="History-cache">
+        SELECT
+	  		`id`,
+			`oid`,
+			`rid`,
+			`omkey`,
+			`omname`,
+			`oaction`,
+			`opkey`,
+			`opname`,
+			`ovalue`,
+			`pvalue`,
+			`inserttime`
+		FROM sysHistory
+        <include refid="History.Where"/>
+        <isNotNull property="orderby">
+        	ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="History.count" resultClass="Long" parameterClass="mb" cacheModel="History-cache">
+        SELECT COUNT(1)
+		FROM sysHistory
+        <include refid="History.Where"/>
+    </select>
+
+    <select id="History.list" resultClass="history" parameterClass="mb" cacheModel="History-cache">
+        SELECT
+	 		`id`,
+			`oid`,
+			`rid`,
+			`omkey`,
+			`omname`,
+			`oaction`,
+			`opkey`,
+			`opname`,
+			`ovalue`,
+			`pvalue`,
+			`inserttime`
+		FROM sysHistory
+        <include refid="History.Where"/>
+        <isNotNull property="orderby">
+             ORDER BY $orderby$
+        </isNotNull>
+        <isNotNull property="pageSize">
+       	     LIMIT 0, #pageSize#
+        </isNotNull>
+    </select>
+
+    <select id="History.get" resultMap="HistoryResult" parameterClass="Long">
+        SELECT
+	   		`id`,
+			`oid`,
+			`rid`,
+			`omkey`,
+			`omname`,
+			`oaction`,
+			`opkey`,
+			`opname`,
+			`ovalue`,
+			`pvalue`,
+			`inserttime`
+		FROM sysHistory
+		WHERE
+	  		`id`=#id# 
+    </select>
+    
+    <insert id="History.save" parameterClass="history">
+        INSERT INTO sysHistory(
+        	`oid`,
+        	`rid`,
+			`omkey`,
+			`omname`,
+			`oaction`,
+			`opkey`,
+			`opname`,
+			`ovalue`,
+			`pvalue`,
+			`inserttime`
+        )VALUES(
+        	#oid#,
+        	#rid#,
+			#omkey#,
+			#omname#,
+			#oaction#,
+			#opkey#,
+			#opname#,
+			#ovalue#,
+			#pvalue#,
+			#inserttime#
+        )
+        <selectKey resultClass="Long" keyProperty="id">
+	       select @@IDENTITY as `id`
+        </selectKey> 
+    </insert>
+
+    <update id="History.update" parameterClass="history">
+    	UPDATE sysHistory
+	    	<dynamic prepend="set">
+	    		<isNotNull prepend="," property="oid">
+					`oid`=#oid#
+				</isNotNull>
+	    		<isNotNull prepend="," property="rid">
+					`rid`=#rid#
+				</isNotNull>
+	    		<isNotNull prepend="," property="omkey">
+					`omkey`=#omkey#
+				</isNotNull>
+	    		<isNotNull prepend="," property="omname">
+					`omname`=#omname#
+				</isNotNull>
+	    		<isNotNull prepend="," property="oaction">
+					`oaction`=#oaction#
+				</isNotNull>
+	    		<isNotNull prepend="," property="opkey">
+					`opkey`=#opkey#
+				</isNotNull>
+	    		<isNotNull prepend="," property="opname">
+					`opname`=#opname#
+				</isNotNull>
+	    		<isNotNull prepend="," property="ovalue">
+					`ovalue`=#ovalue#
+				</isNotNull>
+	    		<isNotNull prepend="," property="pvalue">
+					`pvalue`=#pvalue#
+				</isNotNull>
+	    		<isNotNull prepend="," property="inserttime">
+					`inserttime`=#inserttime#
+				</isNotNull>
+	    	</dynamic>
+    	WHERE
+    		`id`=#id# 
+    </update>
+
+    <delete id="History.delete" parameterClass="Long">
+		DELETE FROM sysHistory
+		WHERE
+			`id`=#id# 
+    </delete>
+</sqlMap>

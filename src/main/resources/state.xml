@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<states>
+	<!-- 颜色说明 default(灰色)，danger(红色)，primary(蓝色)，success(绿色)，info(浅蓝)，warning(橘黄)，-->
+
+	<!-- 是否状态 -->
+	<state name="yesNo" state='[{"id":"0","name":"否","color":"danger","isshow":"true"},
+									{"id":"1","name":"是","color":"success","isshow":"true"}]' />
+									
+	<!-- 用户的操作状态 -->
+	<state name="userState" state='[{"id":"-1","name":"删除","color":"danger","isshow":"false"},
+									{"id":"0","name":"正常","color":"info","isshow":"true"},
+									{"id":"1","name":"禁用","color":"warning","isshow":"true"}]' />
+									
+	<!-- 订单状态 -->
+	<state name="orderStatus" state='[{"id":"0","name":"提交成功","color":"info","isshow":"true"},
+									{"id":"1","name":"提交失败","color":"danger","isshow":"true"},
+									{"id":"2","name":"支付成功","color":"success","isshow":"true"},
+									{"id":"3","name":"支付失败","color":"danger","isshow":"true"}]' />
+									
+	<!-- 订单通知状态 -->
+	<state name="orderNotifyStatus" state='[{"id":"0","name":"未通知","color":"info","isshow":"true"},
+									{"id":"1","name":"等待通知","color":"success","isshow":"true"},
+									{"id":"2","name":"通知成功","color":"success","isshow":"true"},
+									{"id":"3","name":"通知失败","color":"danger","isshow":"true"},
+									{"id":"4","name":"等待重发","color":"warning","isshow":"true"}]' />
+									
+	<!-- 客户端类型 -->
+	<state name="clientType" state='[{"id":"2","name":"IOS","color":"info","isshow":"true"},
+									{"id":"1","name":"ANDROID","color":"info","isshow":"true"}]' />
+	
+	<!-- 通用的操作状态 -->
+	<state name="operState" state='[{"id":"0","name":"删除","color":"danger","isshow":"false"},
+									{"id":"1","name":"正常","color":"info","isshow":"true"},
+									{"id":"2","name":"锁定","color":"primary","isshow":"true"},
+									{"id":"3","name":"取消","color":"warning","isshow":"false"}]' />
+									
+	<!-- 是否定额支付 -->
+	<state name="fixed" state='[{"id":"0","name":"否","color":"danger","isshow":"false"},
+									{"id":"1","name":"是","color":"info","isshow":"true"}]' />
+
+	<state name="amountType" state='[{"id":"0","name":"加币","color":"info","isshow":"true"},
+									{"id":"1","name":"扣币","color":"info","isshow":"true"}]' />
+</states>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Dictionary">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="dictionary" type="com.item.domain.authority.Dictionary" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+    
+    <cacheModel id="Dictionary-cache" type="OSCache" readOnly="true" serialize="false">
+		<property name="size" value="100" />
+		<flushInterval hours="24" />
+		<flushOnExecute statement="Dictionary.update"/>
+    	<flushOnExecute statement="Dictionary.save"/>
+	</cacheModel>
+
+    <sql id="Dictionary.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="validstate">
+    			`state`!=0
+    		</isNotNull>
+    		<isNotNull prepend="and" property="id">
+    			`id`=#id#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="dtype">
+    			`dtype`=#dtype#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="dname">
+    			`dname` like concat('%',#dname#,'%')
+    		</isNotNull>
+    		<isNotNull prepend="and" property="depict">
+    			`depict` like concat('%',#depict#,'%')
+    		</isNotNull>
+    		<isNotNull prepend="and" property="dvalue">
+    			`dvalue`=#dvalue#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="state">
+    			`state`=#state#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="dsort">
+    			`dsort`=#dsort#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="inserttime">
+    			`inserttime`=#inserttime#
+    		</isNotNull>
+    	</dynamic>
+    </sql>
+    
+    <resultMap id="dictionaryResult" class="dictionary">
+		<result property="id" column="id"/>
+		<result property="dtype" column="dtype"/>
+		<result property="dname" column="dname"/>
+		<result property="depict" column="depict"/>
+		<result property="dvalue" column="dvalue"/>
+		<result property="state" column="state"/>
+		<result property="dsort" column="dsort"/>
+		<result property="inserttime" column="inserttime"/>
+		<result property="dictionaryObj" column="dvalue" select="Dictionary.list"/>
+	</resultMap>
+
+    <select id="Dictionary.page" parameterClass="mb" resultClass="dictionary" cacheModel="Dictionary-cache">
+        SELECT
+	  		`id`,
+			`dtype`,
+			`dname`,
+			`depict`,
+			`dvalue`,
+			`state`,
+			`dsort`,
+			`inserttime`
+		FROM sysDictionary
+        <include refid="Dictionary.Where"/>
+        <isNotNull property="orderby">
+        	ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="Dictionary.count" resultClass="Long" parameterClass="mb" cacheModel="Dictionary-cache">
+        SELECT COUNT(1)
+		FROM sysDictionary
+        <include refid="Dictionary.Where"/>
+    </select>
+
+    <select id="Dictionary.list" resultClass="dictionary" parameterClass="mb" cacheModel="Dictionary-cache">
+        SELECT
+	 		`id`,
+			`dtype`,
+			`dname`,
+			`depict`,
+			`dvalue`,
+			`state`,
+			`dsort`,
+			`inserttime`
+		FROM sysDictionary
+        <include refid="Dictionary.Where"/>
+        <isNotNull property="orderby">
+             ORDER BY $orderby$
+        </isNotNull>
+        <isNotNull property="pageSize">
+       	     LIMIT 0, #pageSize#
+        </isNotNull>
+    </select>
+
+    <select id="Dictionary.get" resultClass="dictionary" parameterClass="Long" cacheModel="Dictionary-cache">
+        SELECT
+	   		`id`,
+			`dtype`,
+			`dname`,
+			`depict`,
+			`dvalue`,
+			`state`,
+			`dsort`,
+			`inserttime`
+		FROM sysDictionary
+		WHERE
+	  		`id`=#id# 
+    </select>
+    
+    <select id="Dictionary.getforupdate" resultClass="dictionary" parameterClass="mb" cacheModel="Dictionary-cache">
+        SELECT
+	   		`id`,
+			`dtype`,
+			`dname`,
+			`depict`,
+			`dvalue`,
+			`state`,
+			`dsort`,
+			`inserttime`
+		FROM sysDictionary
+		WHERE
+	  		`dtype`=#dtype#  and `dname`=#dname#
+    </select>
+    
+    <select id="Dictionary.getEntity" resultClass="dictionary" parameterClass="Long" cacheModel="Dictionary-cache">
+        SELECT
+	   		`id`,
+			`dtype`,
+			`dname`,
+			`depict`,
+			`dvalue`,
+			`state`,
+			`dsort`,
+			`inserttime`
+		FROM sysDictionary
+		WHERE
+	  		`id`=#id# 
+    </select>
+
+    <insert id="Dictionary.save" parameterClass="dictionary">
+        INSERT INTO sysDictionary(
+        	`dtype`,
+			`dname`,
+			`depict`,
+			`dvalue`,
+			`state`,
+			`dsort`,
+			`inserttime`
+        )VALUES(
+        	#dtype#,
+			#dname#,
+			#depict#,
+			#dvalue#,
+			#state#,
+			#dsort#,
+			#inserttime#
+        )
+        <selectKey resultClass="Long" keyProperty="id">
+	       select @@IDENTITY as `id`
+        </selectKey> 
+    </insert>
+
+    <update id="Dictionary.update" parameterClass="dictionary">
+    	UPDATE sysDictionary
+	    	<dynamic prepend="set">
+	    		<isNotNull prepend="," property="dtype">
+					`dtype`=#dtype#
+				</isNotNull>
+	    		<isNotNull prepend="," property="dname">
+					`dname`=#dname#
+				</isNotNull>
+	    		<isNotNull prepend="," property="depict">
+					`depict`=#depict#
+				</isNotNull>
+	    		<isNotNull prepend="," property="dvalue">
+					`dvalue`=#dvalue#
+				</isNotNull>
+	    		<isNotNull prepend="," property="state">
+					`state`=#state#
+				</isNotNull>
+	    		<isNotNull prepend="," property="dsort">
+					`dsort`=#dsort#
+				</isNotNull>
+	    		<isNotNull prepend="," property="inserttime">
+					`inserttime`=#inserttime#
+				</isNotNull>
+	    	</dynamic>
+    	WHERE
+    		`id`=#id# 
+    </update>
+
+    <delete id="Dictionary.delete" parameterClass="Long">
+		DELETE FROM sysDictionary
+		WHERE
+			`id`=#id# 
+    </delete>
+</sqlMap>

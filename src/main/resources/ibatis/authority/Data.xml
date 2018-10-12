@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Data">
+
+	<typeAlias alias="Data" type="com.item.domain.authority.Data" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+	
+	<select id="Data.listAll" parameterClass="mb" resultClass="Data">
+		SELECT *
+  		FROM sysData 
+	</select>
+		
+	<select id="Data.listByModuleID" parameterClass="Long" resultClass="Data">
+		SELECT *
+  		FROM sysData 
+  		WHERE moduleID=#moduleID#
+	</select>	
+	
+	<select id="Data.selectUniqueDataById" parameterClass="Long" resultClass="Data">
+		SELECT *
+		FROM sysData
+		WHERE id=#id#
+	</select>
+	
+</sqlMap>

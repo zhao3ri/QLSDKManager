@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ReportHistoryDaily">
+
+    <typeAlias alias="reportHistoryDaily" type="com.item.domain.report.ReportHistoryDaily" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="ReportHistoryDaily.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="clientType">
+    			a.`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			a.`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneIds">
+    			a.`zoneId` IN ($zoneIds$)
+    		</isNotNull>
+    		<isNotNull prepend="and" property="channelIds">
+    			a.`platformId` IN ($channelIds$)
+    		</isNotNull>
+    		<isEmpty property="statStartDate">
+    			<isEmpty prepend="and" property="statEndDate">
+		 	 	  	 a.statDate = date_format(now(),'%Y-%m-%d') 
+	 	 		</isEmpty>
+    		</isEmpty>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(a.`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(a.`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+
+    <select id="ReportHistoryDaily.listGame" resultClass="reportHistoryDaily" parameterClass="mb">
+        SELECT * FROM (SELECT
+			a.`appId`,
+			a.`statDate`,
+			SUM(a.`roleUsers`) AS roleUsers,
+			SUM(a.`regUsers`) AS regUsers,
+			SUM(a.`newDevices`) AS newDevices,
+			SUM(a.`newActiveDevices`) AS newActiveDevices,
+			SUM(a.`activeUsers`) AS activeUsers,
+			SUM(a.`payAmount`) AS payAmount,
+			SUM(a.`payUsers`) AS payUsers,
+			SUM(a.`payTimes`) AS payTimes,
+			AVG(a.`avgOnlineTime`) AS avgOnlineTime,
+			SUM(a.`startTimes`) AS startTimes,
+			SUM(a.`newUserPayAmount`) AS newUserPayAmount,
+			SUM(a.`newUserPayTimes`) AS newUserPayTimes,
+			SUM(a.`newUserPays`) AS newUserPays,
+			SUM(a.`firstPayAmount`) AS firstPayAmount,
+			SUM(a.`firstPayUsers`) AS firstPayUsers,
+			SUM(a.`keepUser1`) AS keepUser1,
+			SUM(a.`keepUser3`) AS keepUser3,
+			SUM(a.`keepUser4`) AS keepUser4,
+			SUM(a.`keepUser5`) AS keepUser5,
+			SUM(a.`keepUser6`) AS keepUser6,
+			SUM(a.`keepUser7`) AS keepUser7,
+			SUM(a.`keepUser14`) AS keepUser14,
+			SUM(a.`keepUser30`) AS keepUser30,
+			AVG(a.`keepRate1`) AS keepRate1,
+			AVG(a.`keepRate3`) AS keepRate3,
+			AVG(a.`keepRate7`) AS keepRate7,
+			AVG(a.`keepRate14`) AS keepRate14,
+			AVG(a.`keepRate30`) AS keepRate30,
+			SUM(a.`lossUsers`) AS lossUsers,
+			SUM(a.`lossPayUsers`) AS lossPayUsers,
+			SUM(a.`backUsers`) AS backUsers,
+			SUM(a.`backPayUsers`) AS backPayUsers,
+			SUM(a.`regDevices`) AS regDevices,
+			SUM(a.`roleDevices`) AS roleDevices,
+			b.totalRoleUser AS totalRoleUser,
+			b.totalRegUser AS totalRegUser,
+			b.devices AS totaldevices,
+			b.payAmount AS totalPayAmount,
+			b.payTimes AS totalPayTimes,
+			b.payUsers AS totalPayUsers,
+			b.activeUsers AS totalActiveUsers
+		FROM 
+			s_game_daily AS a 
+			JOIN s_game_history AS b ON a.appId = b.appId 
+			AND a.clientType = b.clientType 
+			AND a.statDate = b.statDate
+        <include refid="ReportHistoryDaily.Where"/>
+        <isNotEmpty property="groupby">
+        	GROUP BY $groupby$
+        </isNotEmpty>
+        ORDER BY a.statDate ASC) AS c WHERE c.appId > 0
+    </select>
+    
+     <select id="ReportHistoryDaily.listPlatform" resultClass="reportHistoryDaily" parameterClass="mb">
+         SELECT * FROM (SELECT
+			a.`appId`,
+			a.`platformId`,
+			a.`statDate`,
+			SUM(a.`roleUsers`) AS roleUsers,
+			SUM(a.`regUsers`) AS regUsers,
+			SUM(a.`newDevices`) AS newDevices,
+			SUM(a.`newActiveDevices`) AS newActiveDevices,
+			SUM(a.`activeUsers`) AS activeUsers,
+			SUM(a.`payAmount`) AS payAmount,
+			SUM(a.`payUsers`) AS payUsers,
+			SUM(a.`payTimes`) AS payTimes,
+			AVG(a.`avgOnlineTime`) AS avgOnlineTime,
+			SUM(a.`newUserPayAmount`) AS newUserPayAmount,
+			SUM(a.`newUserPayTimes`) AS newUserPayTimes,
+			SUM(a.`newUserPays`) AS newUserPays,
+			SUM(a.`firstPayAmount`) AS firstPayAmount,
+			SUM(a.`firstPayUsers`) AS firstPayUsers,
+			SUM(a.`keepUser1`) AS keepUser1,
+			SUM(a.`keepUser3`) AS keepUser3,
+			SUM(a.`keepUser4`) AS keepUser4,
+			SUM(a.`keepUser5`) AS keepUser5,
+			SUM(a.`keepUser6`) AS keepUser6,
+			SUM(a.`keepUser7`) AS keepUser7,
+			SUM(a.`keepUser14`) AS keepUser14,
+			SUM(a.`keepUser30`) AS keepUser30,
+			AVG(a.`keepRate1`) AS keepRate1,
+			AVG(a.`keepRate3`) AS keepRate3,
+			AVG(a.`keepRate7`) AS keepRate7,
+			AVG(a.`keepRate14`) AS keepRate14,
+			AVG(a.`keepRate30`) AS keepRate30,
+			SUM(a.`lossUsers`) AS lossUsers,
+			SUM(a.`lossPayUsers`) AS lossPayUsers,
+			SUM(a.`backUsers`) AS backUsers,
+			SUM(a.`backPayUsers`) AS backPayUsers,
+			SUM(a.`regDevices`) AS regDevices,
+			SUM(a.`roleDevices`) AS roleDevices,
+			b.totalRoleUser AS totalRoleUser,
+			b.totalRegUser AS totalRegUser,
+			b.devices AS totaldevices,
+			b.payAmount AS totalPayAmount,
+			b.payTimes AS totalPayTimes,
+			b.payUsers AS totalPayUsers,
+			b.activeUsers AS totalActiveUsers
+		FROM 
+			s_platform_daily AS a JOIN s_platform_history AS b 
+			ON a.clientType = b.clientType 
+			AND a.appId = b.appId 
+			AND a.platformId = b.platformId 
+			AND a.statDate = b.statDate
+        <include refid="ReportHistoryDaily.Where"/>
+        <isNotEmpty property="groupby">
+        	GROUP BY $groupby$
+        </isNotEmpty>
+        ORDER BY statDate ASC) AS c WHERE c.appId > 0
+    </select>
+    
+    <select id="ReportHistoryDaily.listZone" resultClass="reportHistoryDaily" parameterClass="mb">
+         SELECT * FROM (SELECT
+			a.`appId`,
+			a.`platformId`,
+			a.`zoneId`,
+			a.`statDate`,
+			SUM(a.`roleUsers`) AS roleUsers,
+			SUM(a.`regUsers`) AS regUsers,
+			SUM(a.`newDevices`) AS newDevices,
+			SUM(a.`newActiveDevices`) AS newActiveDevices,
+			SUM(a.`activeUsers`) AS activeUsers,
+			SUM(a.`payAmount`) AS payAmount,
+			SUM(a.`payUsers`) AS payUsers,
+			SUM(a.`payTimes`) AS payTimes,
+			AVG(a.`avgOnlineTime`) AS avgOnlineTime,
+			SUM(a.`newUserPayAmount`) AS newUserPayAmount,
+			SUM(a.`newUserPayTimes`) AS newUserPayTimes,
+			SUM(a.`newUserPays`) AS newUserPays,
+			SUM(a.`firstPayAmount`) AS firstPayAmount,
+			SUM(a.`firstPayUsers`) AS firstPayUsers,
+			SUM(a.`keepUser1`) AS keepUser1,
+			SUM(a.`keepUser3`) AS keepUser3,
+			SUM(a.`keepUser4`) AS keepUser4,
+			SUM(a.`keepUser5`) AS keepUser5,
+			SUM(a.`keepUser6`) AS keepUser6,
+			SUM(a.`keepUser7`) AS keepUser7,
+			SUM(a.`keepUser14`) AS keepUser14,
+			SUM(a.`keepUser30`) AS keepUser30,
+			AVG(a.`keepRate1`) AS keepRate1,
+			AVG(a.`keepRate3`) AS keepRate3,
+			AVG(a.`keepRate7`) AS keepRate7,
+			AVG(a.`keepRate14`) AS keepRate14,
+			AVG(a.`keepRate30`) AS keepRate30,
+			SUM(a.`lossUsers`) AS lossUsers,
+			SUM(a.`lossPayUsers`) AS lossPayUsers,
+			SUM(a.`backUsers`) AS backUsers,
+			SUM(a.`backPayUsers`) AS backPayUsers,
+			SUM(a.`regDevices`) AS regDevices,
+			SUM(a.`roleDevices`) AS roleDevices,
+			b.totalRoleUser AS totalRoleUser,
+			b.totalRegUser AS totalRegUser,
+			b.devices AS totaldevices,
+			b.payAmount AS totalPayAmount,
+			b.payTimes AS totalPayTimes,
+			b.payUsers AS totalPayUsers,
+			b.activeUsers AS totalActiveUsers
+		FROM 
+			s_zone_platform_daily AS a JOIN s_zone_platform_history AS b
+			ON a.clientType = b.clientType 
+			AND a.appId = b.appId 
+			AND a.platformId = b.platformId 
+			AND a.statDate = b.statDate
+			AND a.zoneId = b.zoneId
+        <include refid="ReportHistoryDaily.Where"/>
+        <isNotEmpty property="groupby">
+        	GROUP BY $groupby$
+        </isNotEmpty>
+        ORDER BY statDate ASC) AS c WHERE c.appId > 0
+    </select>
+	<select id="ReportHistoryDaily.listPlatformSummary" resultClass="reportHistoryDaily" parameterClass="mb">
+		SELECT * FROM (SELECT
+		a.`appId`,
+		a.`platformId`,
+		c.`platformName`,
+		a.`statDate`,
+		SUM(a.`roleUsers`) AS roleUsers,
+		SUM(a.`regUsers`) AS regUsers,
+		SUM(a.`newDevices`) AS newDevices,
+		SUM(a.`newActiveDevices`) AS newActiveDevices,
+		SUM(a.`activeUsers`) AS activeUsers,
+		SUM(a.`payAmount`) AS payAmount,
+		SUM(a.`payUsers`) AS payUsers,
+		SUM(a.`payTimes`) AS payTimes,
+		AVG(a.`avgOnlineTime`) AS avgOnlineTime,
+		SUM(a.`newUserPayAmount`) AS newUserPayAmount,
+		SUM(a.`newUserPayTimes`) AS newUserPayTimes,
+		SUM(a.`newUserPays`) AS newUserPays,
+		SUM(a.`firstPayAmount`) AS firstPayAmount,
+		SUM(a.`firstPayUsers`) AS firstPayUsers,
+		SUM(a.`keepUser1`) AS keepUser1,
+		SUM(a.`keepUser3`) AS keepUser3,
+		SUM(a.`keepUser4`) AS keepUser4,
+		SUM(a.`keepUser5`) AS keepUser5,
+		SUM(a.`keepUser6`) AS keepUser6,
+		SUM(a.`keepUser7`) AS keepUser7,
+		SUM(a.`keepUser14`) AS keepUser14,
+		SUM(a.`keepUser30`) AS keepUser30,
+		AVG(a.`keepRate1`) AS keepRate1,
+		AVG(a.`keepRate3`) AS keepRate3,
+		AVG(a.`keepRate7`) AS keepRate7,
+		AVG(a.`keepRate14`) AS keepRate14,
+		AVG(a.`keepRate30`) AS keepRate30,
+		SUM(a.`lossUsers`) AS lossUsers,
+		SUM(a.`lossPayUsers`) AS lossPayUsers,
+		SUM(a.`backUsers`) AS backUsers,
+		SUM(a.`backPayUsers`) AS backPayUsers,
+		SUM(a.`regDevices`) AS regDevices,
+		SUM(a.`roleDevices`) AS roleDevices,
+		b.totalRoleUser AS totalRoleUser,
+		b.totalRegUser AS totalRegUser,
+		b.devices AS totaldevices,
+		b.payAmount AS totalPayAmount,
+		b.payTimes AS totalPayTimes,
+		b.payUsers AS totalPayUsers,
+		b.activeUsers AS totalActiveUsers
+		FROM
+		b_platform AS c, s_platform_daily AS a JOIN s_platform_history AS b
+		ON a.clientType = b.clientType
+		AND a.appId = b.appId
+		AND a.platformId = b.platformId
+		AND a.statDate = b.statDate
+        AND a.platformId=c.id
+		<include refid="ReportHistoryDaily.Where"/>
+		<isNotEmpty property="groupby">
+			GROUP BY $groupby$
+		</isNotEmpty>
+		ORDER BY statDate ASC) AS c WHERE c.appId > 0
+	</select>
+</sqlMap>

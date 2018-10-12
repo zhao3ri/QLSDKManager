@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SDataDaily">
+
+    <typeAlias alias="SDataDaily" type="com.item.domain.SDataDaily" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SDataDaily.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="appId">
+    			a.`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="clientType">
+    			a.`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="zoneId">
+    			a.`zoneId`=#zoneId#
+    		</isNotEmpty>
+    		<isNotNull prepend="and" property="platformId">
+    			a.`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statDate">
+    			a.statDate=#statDate#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(a.`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(a.`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+
+    <select id="SDataDaily.list" resultClass="sDataDaily" parameterClass="mb">
+        SELECT
+            a.`id` AS id,
+            a.`clientType` AS clientType,
+            a.`appId` AS appId,
+            bg.`appName` AS appName,
+            a.`zoneId` AS zoneId,
+            a.`platformId` AS platformId,
+			SUM(a.regUsers) AS regUsers,
+			SUM(a.roleDevices)/SUM(a.regDevices) AS conversionRate,
+			SUM(b.roleLogins) AS activeUsers,
+			SUM(IF(b.keepRole1=-1, 0, b.keepRole1)) AS keepRole1,
+			SUM(IF(b.keepRole3=-1, 0, b.keepRole3)) AS keepRole3,
+			SUM(IF(b.keepRole7=-1, 0, b.keepRole7)) AS keepRole7,
+			SUM(IF(b.keepRole15=-1, 0, b.keepRole15)) AS keepRole15,
+			SUM(IF(b.keepRole30=-1, 0, b.keepRole30)) AS keepRole30,
+			SUM(b.roleEstablishs) AS roleEstablishs,
+			SUM(a.payAmount) AS payAmount,
+			SUM(a.newUserPayAmount) AS incPayAmount,
+			SUM(a.newUserPays) AS incPayUsers,
+			SUM(a.payUsers) AS payUsers,
+			a.`statDate`
+		FROM s_zone_platform_daily a
+		JOIN 
+		b_game bg
+		ON 
+		bg.id=a.appId
+		JOIN 
+		s_role_daily b 
+		ON
+		 a.appId=b.appId AND a.zoneId=b.zoneId AND a.platformId=b.platformId AND a.clientType=b.clientType AND a.statDate=b.statDate
+        <include refid="SDataDaily.Where"/>
+         GROUP BY 
+         	a.`statDate`
+         ORDER BY a.statDate ASC
+    </select>
+</sqlMap>

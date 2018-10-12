@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ReportLTV">
+
+    <typeAlias alias="reportLtv" type="com.item.domain.report.LTVGamePlatform" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="ReportLtv.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="clientType">
+    			`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="channelIds">
+    			platformId IN
+	    		<iterate property="channelIds" open="(" close=")" conjunction=",">
+			      #channelIds[]#
+			    </iterate>
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneIds">
+    			zoneId IN
+	    		<iterate property="zoneIds" open="(" close=")" conjunction=",">
+			      #zoneIds[]#
+			    </iterate>
+    		</isNotNull>
+    		<isEmpty property="statStartDate">
+    			<isEmpty prepend="and" property="statEndDate">
+		 	 	  	 statDate = date_format(now(),'%Y-%m-%d') 
+	 	 		</isEmpty>
+    		</isEmpty>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+
+
+     <select id="ReportLtv.list" resultClass="reportLtv" parameterClass="mb">
+        SELECT
+			`appId`,
+			`platformId`,
+			`statDate`,
+		 SUM(`ltv1`) AS ltv1,
+		 SUM(`ltv2`) AS ltv2,
+		 SUM(`ltv3`) AS ltv3,
+		 SUM(`ltv4`) AS ltv4,
+		 SUM(`ltv5`) AS ltv5,
+		 SUM(`ltv6`) AS ltv6,
+		 SUM(`ltv7`) AS ltv7,
+		 SUM(`ltv14`) AS ltv14,
+		 SUM(`ltv30`) AS ltv30,
+		 SUM(`ltv60`) AS ltv60,
+		 SUM(`ltv90`) AS ltv90
+		FROM
+			s_ltv_game
+        <include refid="ReportLtv.Where"/>
+        <isNotEmpty property="groupby">
+        	GROUP BY $groupby$
+        </isNotEmpty>
+        ORDER BY statDate ASC
+    </select>
+    
+    <select id="ReportLtv.listZone" resultClass="reportDaily" parameterClass="mb">
+        SELECT
+			`appId`,
+			`platformId`,
+			`zoneId`,
+			`statDate`,
+			SUM(`roleUsers`) AS roleUsers,
+			SUM(`regUsers`) AS regUsers,
+			SUM(`newDevices`) AS newDevices,
+			SUM(`newActiveDevices`) AS newActiveDevices,
+			SUM(`activeUsers`) AS activeUsers,
+			SUM(`payAmount`) AS payAmount,
+			SUM(`payUsers`) AS payUsers,
+			SUM(`payTimes`) AS payTimes,
+			AVG(`avgOnlineTime`) AS avgOnlineTime,
+			SUM(`newUserPayAmount`) AS newUserPayAmount,
+			SUM(`newUserPayTimes`) AS newUserPayTimes,
+			SUM(`newUserPays`) AS newUserPays,
+			SUM(`firstPayAmount`) AS firstPayAmount,
+			SUM(`firstPayUsers`) AS firstPayUsers,
+			SUM(`keepUser1`) AS keepUser1,
+			SUM(`keepUser3`) AS keepUser3,
+			SUM(`keepUser4`) AS keepUser4,
+			SUM(`keepUser5`) AS keepUser5,
+			SUM(`keepUser6`) AS keepUser6,
+			SUM(`keepUser7`) AS keepUser7,
+			SUM(`keepUser14`) AS keepUser14,
+			SUM(`keepUser30`) AS keepUser30,
+			SUM(`lossUsers`) AS lossUsers,
+			SUM(`lossPayUsers`) AS lossPayUsers,
+			SUM(`backUsers`) AS backUsers,
+			SUM(`backPayUsers`) AS backPayUsers,
+			SUM(`regDevices`) AS regDevices,
+			SUM(`roleDevices`) AS roleDevices
+		FROM 
+			s_zone_platform_daily
+        <include refid="ReportLtv.Where"/>
+        <isNotEmpty property="groupby">
+        	GROUP BY $groupby$
+        </isNotEmpty>
+        ORDER BY statDate ASC
+    </select>
+</sqlMap>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SGame">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sGameMonthly" type="com.item.domain.SGameMonthly" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="sGameMonthly.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="id">
+    			sg.`id`=#id#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="clientType">
+    			sg.`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			sg.`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statDate">
+    			sg.`statDate`=#statDate#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="yearMonth">
+    		    sg.`yearMonth`=#yearMonth#          
+    		</isNotNull>
+    	</dynamic>
+    </sql>
+    
+    <select id="sGameMonthly.summary" resultClass="sGameMonthly" parameterClass="mb">
+        SELECT
+            appId AS appId,
+			clientType AS clientType,
+			totalRoleUser AS totalRoleUser,
+			totalRegUser AS totalRegUser,
+			devices AS devices,
+			activeUsers AS activeUsers,
+			payAmount AS payAmount,
+			payTimes AS payTimes,
+			payUsers AS payUsers
+		FROM s_game_monthly sg 
+		<include refid="sGameMonthly.Where"/>
+    </select>
+</sqlMap>

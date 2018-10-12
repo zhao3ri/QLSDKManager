@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+  <package name="dataReport" extends="base" namespace="/dataReport">
+    <action name="dataReport_*" method="{1}" class="com.item.web.action.DataReportAction">
+      <result name="daily">/WEB-INF/content/dataReport/dataReport_daily.jsp</result>
+      <result name="monthly">/WEB-INF/content/dataReport/dataReport_monthly.jsp</result>
+      
+      <result name="XXX">/WEB-INF/content/dataReport/dataReport_XXX.jsp</result>
+    </action>
+  </package>
+</struts>

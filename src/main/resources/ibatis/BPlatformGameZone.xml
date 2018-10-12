@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BPlatformGameZone">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="bPlatformGameZone" type="com.item.domain.BPlatformGameZone" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="BPlatformGameZone.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="id">
+    			a.`id`=#id#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="platformId">
+    			a.`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			a.`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneId">
+    			a.`zoneId`=#zoneId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="platformIds">
+    			a.platformId IN
+	    		<iterate property="platformIds" open="(" close=")" conjunction=",">
+			      #platformIds[]#
+			    </iterate>
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneIds">
+    			a.zoneId IN
+	    		<iterate property="zoneIds" open="(" close=")" conjunction=",">
+			      #zoneIds[]#
+			    </iterate>
+    		</isNotNull>
+    	</dynamic>
+    </sql>
+
+    <select id="BPlatformGameZone.page" parameterClass="mb" resultClass="bPlatformGameZone">
+        SELECT
+	  		a.`id`,
+			a.`platformId`,
+			a.`appId`,
+			a.`zoneId`,
+			b.platformName AS platformName,
+			c.zoneName AS zoneName,
+			d.appName AS appName
+		FROM b_platform_game_zone AS a
+		JOIN b_game AS d ON d.id=a.appId  
+		JOIN b_platform AS b ON a.platformId = b.id
+		JOIN b_game_zone AS c ON a.appId = c.appId AND a.zoneId = c.zoneId
+        <include refid="BPlatformGameZone.Where"/>
+        <isNotNull property="orderby">
+        	ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="BPlatformGameZone.count" resultClass="Long" parameterClass="mb">
+        SELECT COUNT(1)
+		FROM b_platform_game_zone AS a
+		JOIN b_game AS d ON d.id=a.appId  
+		JOIN b_platform AS b ON a.platformId = b.id
+		JOIN b_game_zone AS c ON a.appId = c.appId AND a.zoneId = c.zoneId
+        <include refid="BPlatformGameZone.Where"/>
+    </select>
+
+    <select id="BPlatformGameZone.list" resultClass="bPlatformGameZone" parameterClass="mb">
+        SELECT
+	  		a.`id`,
+			a.`platformId`,
+			a.`appId`,
+			a.`zoneId`,
+			b.platformName,
+			c.zoneName
+		FROM b_platform_game_zone AS a 
+		JOIN b_platform AS b ON a.platformId = b.id
+		JOIN b_game_zone AS c ON a.appId = c.appId AND a.zoneId = c.zoneId
+        <include refid="BPlatformGameZone.Where"/>
+        <isNotNull property="orderby">
+             ORDER BY $orderby$
+        </isNotNull>
+        <isNotNull property="pageSize">
+       	     LIMIT 0, #pageSize#
+        </isNotNull>
+    </select>
+    
+    <select id="BPlatformGameZone.getPlatformZones" resultClass="bPlatformGameZone" parameterClass="mb">
+        SELECT 
+        	a.zoneId,
+        	b.zoneName 
+        FROM b_platform_game_zone AS a 
+        JOIN b_game_zone AS b ON a.appId = b.appId AND a.zoneId = b.zoneId 
+        <include refid="BPlatformGameZone.Where"/> 
+        GROUP BY a.zoneId;
+    </select>
+    
+    <select id="BPlatformGameZone.getZonePlatforms" resultClass="bPlatformGameZone" parameterClass="mb">
+        SELECT 
+        	a.platformId,
+        	b.platformName 
+        FROM b_platform_game_zone AS a 
+        JOIN b_platform AS b ON a.platformId = b.id 
+        <include refid="BPlatformGameZone.Where"/> 
+        GROUP BY a.platformId;
+    </select>
+
+    <select id="BPlatformGameZone.get" resultClass="bPlatformGameZone" parameterClass="Long">
+        SELECT
+	   		`id`,
+			`platformId`,
+			`appId`,
+			`zoneId`
+		FROM b_platform_game_zone
+		WHERE
+	  		`id`=#id# 
+    </select>
+
+    <insert id="BPlatformGameZone.save" parameterClass="bPlatformGameZone">
+        INSERT INTO b_platform_game_zone(
+        	`platformId`,
+			`appId`,
+			`zoneId`
+        )VALUES(
+        	#platformId#,
+			#appId#,
+			#zoneId#
+        )
+        <selectKey resultClass="Long" keyProperty="id">
+	       select @@IDENTITY as `id`
+        </selectKey> 
+    </insert>
+
+    <update id="BPlatformGameZone.update" parameterClass="bPlatformGameZone">
+    	UPDATE b_platform_game_zone
+	    	<dynamic prepend="set">
+	    		<isNotNull prepend="," property="platformId">
+					`platformId`=#platformId#
+				</isNotNull>
+	    		<isNotNull prepend="," property="appId">
+					`appId`=#appId#
+				</isNotNull>
+	    		<isNotNull prepend="," property="zoneId">
+					`zoneId`=#zoneId#
+				</isNotNull>
+	    	</dynamic>
+    	WHERE
+    		`id`=#id# 
+    </update>
+
+    <delete id="BPlatformGameZone.delete" parameterClass="Long">
+		DELETE FROM b_platform_game_zone
+		WHERE
+			`id`=#id# 
+    </delete>
+    
+    <delete id="BPlatformGameZone.deleteAll" parameterClass="mb">
+		DELETE FROM b_platform_game_zone
+		WHERE
+			`appId`=#appId# AND `platformId`=#platformId#
+    </delete>
+    
+    	<!-- 获取指定id对应的数据  -->
+	<select id="BPlatformGameZone.getPlatformGamezoneById" parameterClass="Long" resultClass="Gamezone">
+		SELECT * FROM b_game_zone WHERE id=#id# AND platformId=#platformId#"
+	</select>
+    
+</sqlMap>

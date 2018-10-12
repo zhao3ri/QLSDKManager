@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SRoleDaily">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sRoleDaily" type="com.item.domain.SRoleDaily" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SRoleDaily.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="clientType">
+    			`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="platformId">
+    			`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="zoneId">
+    			`zoneId`=#zoneId#
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+    
+    <select id="SRoleDaily.listDailyLogin" resultClass="sRoleDaily" parameterClass="mb">
+        SELECT
+			SUM(`roleEstablishs`) AS roleEstablishs,
+			SUM(`roleLogins`) AS roleLogins,
+			SUM(`roleFirstLogins`) AS roleFirstLogins,
+			SUM(`loginTimes`) AS loginTimes,
+			SUM(`lossRoleByDay`) AS lossRoleByDay,
+			SUM(`lossRoleByWeek`) AS lossRoleByWeek,
+			SUM(`lossRoleByMonth`) AS lossRoleByMonth,
+			SUM(`pre7dayLogins`) AS pre7dayLogins,
+			SUM(`preWeekLogins`) AS preWeekLogins,
+			SUM(`preMonthLogins`) AS preMonthLogins,
+			SUM(`activeRoles3`) AS activeRoles3,
+			SUM(`activeByWeek`) AS activeByWeek,
+			SUM(`activeByMonth`) AS activeByMonth,
+			SUM(`keepRole1`) AS keepRole1,
+			SUM(`keepRole2`) AS keepRole2,
+			SUM(`keepRole3`) AS keepRole3,
+			SUM(`keepRole4`) AS keepRole4,
+			SUM(`keepRole5`) AS keepRole5,
+			SUM(`keepRole6`) AS keepRole6,
+			SUM(`keepRole7`) AS keepRole7,
+			SUM(`keepRole15`) AS keepRole15,
+			SUM(`keepRole30`) AS keepRole30,
+			SUM(`currentRoles`) AS currentRoles,
+			SUM(`roles`) AS roles,
+			SUM(`amount`) AS amount,
+			SUM(`payTimes`) AS payTimes,
+			MAX(`maxAmount`) AS maxAmount,
+			SUM(`currentAmount`) AS currentAmount,
+			SUM(`activePayByDay`) AS activePayByDay,
+			SUM(`activePayByWeek`) AS activePayByWeek,
+			SUM(`activePayByMonth`) AS activePayByMonth,
+			SUM(`lossPayRoles`) AS lossPayRoles,
+			SUM(`firstPayRoles`) AS firstPayRoles,
+			SUM(`amountByWeek`) AS amountByWeek,
+			SUM(`payRolesByWeek`) AS payRolesByWeek,
+			SUM(`roleEstablishsByWeek`) AS roleEstablishsByWeek,
+			`statDate`
+		FROM s_role_daily
+        <include refid="SRoleDaily.Where"/>
+        GROUP BY `statDate`	
+        ORDER BY `statDate` ASC
+    </select>
+    
+	<select id="SRoleDaily.getCurrentMaxAmount" resultClass="Long" parameterClass="mb">
+		SELECT 
+			MAX(`maxAmount`)
+		FROM s_role_daily
+		<include refid="SRoleDaily.Where"/>
+	</select>
+</sqlMap>

@@ -1,0 +1,84 @@
+2016-07-26 18:19:15,859 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-26 18:19:15,862 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://rsadmin.zhidian3g.cn
+2016-07-26 18:19:16,206 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-26 18:19:16,206 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-26 18:19:16,207 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-26 18:19:16,208 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-26 18:19:17,980 [main] DEBUG [java.sql.Connection] - {conn-100000} Connection
+2016-07-26 18:19:17,996 [main] DEBUG [java.sql.Connection] - {conn-100000} Preparing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-07-26 18:19:18,049 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Executing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-07-26 18:19:18,050 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Parameters: []
+2016-07-26 18:19:18,051 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Types: []
+2016-07-26 18:19:18,120 [main] DEBUG [java.sql.Connection] - {conn-100003} Connection
+2016-07-26 18:19:18,122 [main] DEBUG [java.sql.Connection] - {conn-100003} Preparing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-07-26 18:19:18,124 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Executing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-07-26 18:19:18,139 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Parameters: []
+2016-07-26 18:19:18,141 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Types: []
+2016-07-26 18:19:18,194 [main] DEBUG [java.sql.Connection] - {conn-100006} Connection
+2016-07-26 18:19:18,196 [main] DEBUG [java.sql.Connection] - {conn-100006} Preparing Statement:    SELECT *     FROM sysAuth   
+2016-07-26 18:19:18,197 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Executing Statement:    SELECT *     FROM sysAuth   
+2016-07-26 18:19:18,198 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Parameters: []
+2016-07-26 18:19:18,199 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Types: []
+2016-07-26 18:19:18,253 [main] DEBUG [java.sql.Connection] - {conn-100009} Connection
+2016-07-26 18:19:18,256 [main] DEBUG [java.sql.Connection] - {conn-100009} Preparing Statement:    SELECT *     FROM sysRoleAuth   
+2016-07-26 18:19:18,258 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Executing Statement:    SELECT *     FROM sysRoleAuth   
+2016-07-26 18:19:18,258 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Parameters: []
+2016-07-26 18:19:18,259 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Types: []
+2016-07-26 18:19:18,335 [main] DEBUG [java.sql.Connection] - {conn-100012} Connection
+2016-07-26 18:19:18,335 [main] DEBUG [java.sql.Connection] - {conn-100012} Preparing Statement:    SELECT *     FROM sysData   
+2016-07-26 18:19:18,336 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Executing Statement:    SELECT *     FROM sysData   
+2016-07-26 18:19:18,337 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Parameters: []
+2016-07-26 18:19:18,337 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Types: []
+2016-07-26 18:19:18,357 [main] DEBUG [java.sql.Connection] - {conn-100015} Connection
+2016-07-26 18:19:18,357 [main] DEBUG [java.sql.Connection] - {conn-100015} Preparing Statement:    SELECT *     FROM sysRoleData  
+2016-07-26 18:19:18,358 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Executing Statement:    SELECT *     FROM sysRoleData  
+2016-07-26 18:19:18,358 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Parameters: []
+2016-07-26 18:19:18,359 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Types: []
+2016-07-26 18:19:18,406 [main] DEBUG [java.sql.Connection] - {conn-100018} Connection
+2016-07-26 18:19:18,408 [main] DEBUG [java.sql.Connection] - {conn-100018} Preparing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-07-26 18:19:18,409 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Executing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-07-26 18:19:18,410 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Parameters: []
+2016-07-26 18:19:18,411 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Types: []
+2016-07-26 18:19:18,436 [main] INFO  [com.item.application.ApplicationListener] - =============== 加载平台系统应用完毕 ===============
+2016-07-26 18:28:29,342 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-26 18:28:29,346 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://rsadmin.zhidian3g.cn
+2016-07-26 18:28:29,946 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-26 18:28:29,947 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-26 18:28:29,949 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-26 18:28:29,950 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-26 18:28:33,758 [main] DEBUG [java.sql.Connection] - {conn-100000} Connection
+2016-07-26 18:28:33,766 [main] DEBUG [java.sql.Connection] - {conn-100000} Preparing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-07-26 18:28:33,804 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Executing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-07-26 18:28:33,805 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Parameters: []
+2016-07-26 18:28:33,805 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Types: []
+2016-07-26 18:28:33,865 [main] DEBUG [java.sql.Connection] - {conn-100003} Connection
+2016-07-26 18:28:33,865 [main] DEBUG [java.sql.Connection] - {conn-100003} Preparing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-07-26 18:28:33,866 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Executing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-07-26 18:28:33,867 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Parameters: []
+2016-07-26 18:28:33,868 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Types: []
+2016-07-26 18:28:33,894 [main] DEBUG [java.sql.Connection] - {conn-100006} Connection
+2016-07-26 18:28:33,895 [main] DEBUG [java.sql.Connection] - {conn-100006} Preparing Statement:    SELECT *     FROM sysAuth   
+2016-07-26 18:28:33,896 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Executing Statement:    SELECT *     FROM sysAuth   
+2016-07-26 18:28:33,897 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Parameters: []
+2016-07-26 18:28:33,897 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Types: []
+2016-07-26 18:28:33,929 [main] DEBUG [java.sql.Connection] - {conn-100009} Connection
+2016-07-26 18:28:33,943 [main] DEBUG [java.sql.Connection] - {conn-100009} Preparing Statement:    SELECT *     FROM sysRoleAuth   
+2016-07-26 18:28:33,945 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Executing Statement:    SELECT *     FROM sysRoleAuth   
+2016-07-26 18:28:33,946 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Parameters: []
+2016-07-26 18:28:33,947 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Types: []
+2016-07-26 18:28:33,986 [main] DEBUG [java.sql.Connection] - {conn-100012} Connection
+2016-07-26 18:28:33,986 [main] DEBUG [java.sql.Connection] - {conn-100012} Preparing Statement:    SELECT *     FROM sysData   
+2016-07-26 18:28:33,987 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Executing Statement:    SELECT *     FROM sysData   
+2016-07-26 18:28:33,988 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Parameters: []
+2016-07-26 18:28:33,988 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Types: []
+2016-07-26 18:28:34,006 [main] DEBUG [java.sql.Connection] - {conn-100015} Connection
+2016-07-26 18:28:34,007 [main] DEBUG [java.sql.Connection] - {conn-100015} Preparing Statement:    SELECT *     FROM sysRoleData  
+2016-07-26 18:28:34,007 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Executing Statement:    SELECT *     FROM sysRoleData  
+2016-07-26 18:28:34,007 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Parameters: []
+2016-07-26 18:28:34,008 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Types: []
+2016-07-26 18:28:34,032 [main] DEBUG [java.sql.Connection] - {conn-100018} Connection
+2016-07-26 18:28:34,032 [main] DEBUG [java.sql.Connection] - {conn-100018} Preparing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-07-26 18:28:34,033 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Executing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-07-26 18:28:34,033 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Parameters: []
+2016-07-26 18:28:34,034 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Types: []
+2016-07-26 18:28:34,056 [main] INFO  [com.item.application.ApplicationListener] - =============== 加载平台系统应用完毕 ===============

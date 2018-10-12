@@ -1,0 +1,250 @@
+/*解决Windows Phone 8 和 Internet Explorer 10兼容问题*/
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+
+/*主要CSS开始*/
+body { background:url(../images/login_bg.png) #fcfcfc;}
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -40px;
+  /* Pad bottom by footer height */
+  padding: 0 0 40px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 40px;
+  background-color: #f5f5f5;
+}
+.container{ max-width:100%!important;}/*100%满屏宽度*/
+.fix_top_nav_padding{padding-top:0px;}/*顶部导航固定时需为页面添加的padding值*/
+
+.popover-show{}/*浮动弹出层*/
+.tooltip-show{}/*浮动提示层*/
+
+/*全局颜色*/
+.color_red{ color:#f00!important;}
+.color_red a{ color:#f00!important;}
+.color_green{ color:#419641;}
+.color_green a{ color:#419641;}
+.color_blue{ color:#2AABD2!important;}
+.color_blue a{ color:#2AABD2!important;}
+/*全局背景颜色*/
+.bg_color_white{ background-color:#fff;}
+/*全局修饰*/
+
+/*登录页*/
+.login_page{ background:url(../images/login_bg.png) #fcfcfc;}
+.login_logo{ text-align:center; margin:30px auto 30px;}
+.login_logo h1{text-shadow:0px 2px 1px #ccc; color:#444; font-weight:bold;}
+.login_logo h1 small{ display:block; line-height:160%;}
+.login_content{ margin:30px auto 30px; background-color:#fefefe; max-width:460px;
+	border:1px solid #c4c4c4;
+	/*height:232px;*/
+	height: auto;
+    border-radius: 5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-webkit-box-shadow:  0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow:  0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+    padding:0px 20px 0 20px;
+	}
+.login_content .form-title{ padding-bottom:10px; color:#666; font-weight:bold;}
+
+/*首页模块*/
+
+
+
+
+/*主框架*/
+.nav-searchbar{width:240px !important;}
+@media (max-width: 767px) {
+  .nav-searchbar{ width:auto!important;}
+}
+.top_nav_logo{text-shadow:0px 2px 1px #ccc; color:#06C; font-size:24px; font-weight:bold;}
+
+.footer_bar{ overflow:hidden; text-align:center; vertical-align:middle;}
+.footer_bar .con{ padding-top:5px; line-height:32px; border-top:1px solid #ddd; color:#666;  vertical-align:middle;}
+
+/*列表页*/
+/*列表工具条*/
+.list_toolbar{ margin-bottom:0px; padding-bottom:0px;}
+
+
+@media (min-width: 470px) {
+  .list_toolbar .form-group {
+    display: inline-block;
+    margin-bottom: 5px;
+    vertical-align: middle;
+  }
+  .list_toolbar .form-control {
+    display: inline-block;
+  }
+  .list_toolbar .radio,
+  .list_toolbar .checkbox {
+    display: inline-block;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .list_toolbar .radio input[type="radio"],
+  .list_toolbar .checkbox input[type="checkbox"] {
+    float: none;
+    margin-left: 0;
+  }
+  .list_toolbar .width_input{ width:207px;}
+}
+
+
+/*分页样式*/
+.table_page { text-align:center; vertical-align:middle; }
+.table_page .pagination{ margin-top:0px; margin-bottom:0px;}
+.table_page .page_num_info{ vertical-align:middle;}
+.table_select_all{position:relative; overflow:hidden; min-width:30px;}
+.table_select_all input[type="checkbox"]{position:absolute; left:8px;}
+/*跳转按钮*/
+.page_goto{overflow:hidden; margin-left:10px; text-align:left; display:inline-block;}
+.page_goto .input-group{width:76px!important; overflow:hidden;}
+.page_goto .input-group .form-control{width:40px!important; float:left; overflow:hidden; padding-left:3px; padding-right:3px;}
+.page_onepage_num{ margin-left:10px;text-align:left; display:inline-block; background-color:#CCC}
+
+
+/*详情查看页*/
+.form_show_table th,.form_show_table td{ padding:15px 10px!important;}
+.form_show_table th{ color:#333;}
+.form_show_table td{ color:#666; }
+.form_show_table th strong{ display:block; white-space:nowrap; text-align:right;}
+
+
+.form_show_style1 dt{ border-left:2px dotted #eee; border-bottom:1px  dotted #e5e5e5;border-top:1px  dotted #eee; border-right:4px solid #e1e1e1; background-color:#f9f9f9; border-radius:15px 0px 0px 15px; padding:3px; color:#333; }
+.form_show_style1 dd{ padding:3px; border:1px  dotted #eee; border-left:4px solid #f2f2f2;border-bottom:1px  dotted #e5e5e5; border-radius:0px 15px 0px 15px; background-color:#fdfdfd; }
+.form_show_style1 .no{ border-color:#fff; background-color:#fff;}
+
+
+
+.form_show_style2 dt{border:1px  dotted #e5e5e5; border-right:4px solid #e1e1e1; padding:3px; color:#333; }
+.form_show_style2 dd{ padding:3px 5px 3px 5px; border:1px  dotted #eee; border-left:4px solid #f2f2f2;border-bottom:1px  dotted #e5e5e5;   }
+.form_show_style2 .no{ border-color:#fff; background-color:#fff;}
+
+
+/*插件CSS开始---------------------------------------------------------------------------------------------------------------*/
+/*日期选择插件*/
+.datetimepicker { min-width:240px;}
+.datetimepicker table { width:100%;}
+
+/*select2表单插件*/
+.select2-container{ width:100%;}/*选择框宽度*/
+.select2-container .select2-choice { height:34px; line-height:20px; padding:6px 12px;}/*选择框宽高度*/
+.select2-container-multi .select2-choices{ padding:3px 12px;}
+
+
+/*Messenger弹出消息插件*/
+
+ul.messenger.messenger-fixed.messenger-on-top, ul.messenger.messenger-fixed.messenger-on-bottom {
+   max-width: 600px;
+  margin-left: -300px;
+}
+ul.messenger-theme-flat  .messenger-actions a {color: #fff!important; background: #0e67b3!important; } /*按钮颜色*/
+ul.messenger-theme-flat  .messenger-actions a:hover { color: #fff!important; background: #0a4b83!important;}
+
+
+ul.messenger-theme-flat .messenger-close{ color:#e47777!important;}/*关闭按钮*/
+ul.messenger-theme-flat .messenger-close:hover{ color:#F00!important; font-weight:bold;}
+
+
+ul.messenger-theme-flat { background:#66b9ff!important; border-radius:5px!important; overflow:hidden;  }/*背景颜色*/
+
+.messenger-message {border-top:1px solid #fff!important; border-bottom:1px solid #999!important;}
+
+
+
+
+ul.messenger-theme-flat .alert-success .messenger-message-inner:before { background: #5fca4a!important; }
+ul.messenger-theme-flat .alert-success .messenger-message-inner{ color:#32710f!important; font-weight:bold }
+/* line 98, */
+ul.messenger-theme-flat .alert-info .messenger-message-inner:before { background: #eee!important; }
+ul.messenger-theme-flat .alert-info .messenger-message-inner { color:#fff!important;font-weight:bold;  }
+/* line 103, */
+
+ul.messenger-theme-flat .alert-error .messenger-message-inner:before { background: #d61515!important; }
+ul.messenger-theme-flat .alert-error .messenger-message-inner { color:#d61515!important;font-weight:bold;  }
+
+
+span.image-handle {position:relative; width:150px;display:inline-block; height:250px; vertical-align:top;}
+.input-image-delete {position:absolute; bottom:5px; right:5px;}
+
+/*插件CSS结束---------------------------------------------------------------------------------------------------------------*/
+
+.statistics_button, .statistics_button1{
+  width:400px;
+  margin-top:10px;
+  float:left;
+}
+
+.statistics_button a, .statistics_button1 a{
+  margin-top:10px;
+  color:#000000;
+  background-color:#f9f9f9;
+  border-radius:3px;
+  border:1px solid #dddddd;
+  margin-right:15px;
+  padding:5px 6px 5px 6px;
+  text-decoration:none; 
+}
+.statistics_button .bt_on{
+  color:#357cba;
+  background-color:#ebe9e9;
+}
+/*
+.statistics_button a:visited{
+  color:#357cba;
+  background-color:#ebe9e9;
+    }*/
+.statistics_button a:hover,.statistics_button1 a:hover{
+  color:#357cba;
+  background-color:#ebe9e9;
+    }
+    .statistics_button a:active{
+  color:#357cba;
+  background-color:#ebe9e9;
+    }
+
+.record{
+  width:470px;
+  float:left;
+    }
+.msg{
+  display:block;
+  margin-left:30px;
+  float:left;
+    }
+.msg p{
+}
+#online_table,#daily_chart{
+display:none;
+}
+
+
+
+
+
+
+
+
+
+

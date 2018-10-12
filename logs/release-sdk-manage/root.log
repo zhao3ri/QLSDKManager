@@ -1,0 +1,74 @@
+2016-08-10 10:36:28,053 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-08-10 10:36:28,083 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://rsadmin.zhidian3g.cn
+2016-08-10 10:36:28,491 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-08-10 10:36:28,492 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-08-10 10:36:28,493 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-08-10 10:36:28,494 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-08-10 10:36:30,456 [main] DEBUG [java.sql.Connection] - {conn-100000} Connection
+2016-08-10 10:36:30,480 [main] DEBUG [java.sql.Connection] - {conn-100000} Preparing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-08-10 10:36:30,506 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Executing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-08-10 10:36:30,507 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Parameters: []
+2016-08-10 10:36:30,508 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Types: []
+2016-08-10 10:36:30,571 [main] DEBUG [java.sql.Connection] - {conn-100003} Connection
+2016-08-10 10:36:30,571 [main] DEBUG [java.sql.Connection] - {conn-100003} Preparing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-08-10 10:36:30,572 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Executing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-08-10 10:36:30,573 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Parameters: []
+2016-08-10 10:36:30,574 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Types: []
+2016-08-10 10:36:30,598 [main] DEBUG [java.sql.Connection] - {conn-100006} Connection
+2016-08-10 10:36:30,599 [main] DEBUG [java.sql.Connection] - {conn-100006} Preparing Statement:    SELECT *     FROM sysAuth   
+2016-08-10 10:36:30,599 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Executing Statement:    SELECT *     FROM sysAuth   
+2016-08-10 10:36:30,600 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Parameters: []
+2016-08-10 10:36:30,600 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Types: []
+2016-08-10 10:36:30,624 [main] DEBUG [java.sql.Connection] - {conn-100009} Connection
+2016-08-10 10:36:30,627 [main] DEBUG [java.sql.Connection] - {conn-100009} Preparing Statement:    SELECT *     FROM sysRoleAuth   
+2016-08-10 10:36:30,628 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Executing Statement:    SELECT *     FROM sysRoleAuth   
+2016-08-10 10:36:30,629 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Parameters: []
+2016-08-10 10:36:30,630 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Types: []
+2016-08-10 10:36:30,673 [main] DEBUG [java.sql.Connection] - {conn-100012} Connection
+2016-08-10 10:36:30,674 [main] DEBUG [java.sql.Connection] - {conn-100012} Preparing Statement:    SELECT *     FROM sysData   
+2016-08-10 10:36:30,674 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Executing Statement:    SELECT *     FROM sysData   
+2016-08-10 10:36:30,675 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Parameters: []
+2016-08-10 10:36:30,675 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Types: []
+2016-08-10 10:36:30,693 [main] DEBUG [java.sql.Connection] - {conn-100015} Connection
+2016-08-10 10:36:30,693 [main] DEBUG [java.sql.Connection] - {conn-100015} Preparing Statement:    SELECT *     FROM sysRoleData  
+2016-08-10 10:36:30,694 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Executing Statement:    SELECT *     FROM sysRoleData  
+2016-08-10 10:36:30,694 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Parameters: []
+2016-08-10 10:36:30,695 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Types: []
+2016-08-10 10:36:30,718 [main] DEBUG [java.sql.Connection] - {conn-100018} Connection
+2016-08-10 10:36:30,719 [main] DEBUG [java.sql.Connection] - {conn-100018} Preparing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-08-10 10:36:30,720 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Executing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-08-10 10:36:30,720 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Parameters: []
+2016-08-10 10:36:30,721 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Types: []
+2016-08-10 10:36:30,744 [main] INFO  [com.item.application.ApplicationListener] - =============== 加载平台系统应用完毕 ===============
+2016-08-10 10:37:04,688 [419870438@qtp-31303892-0] ERROR [500.jsp] - 
+java.lang.NullPointerException
+	at org.apache.jsp.common._403_jsp._jspService(org.apache.jsp.common._403_jsp:28)
+	at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:109)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:389)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:486)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:380)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)
+	at org.mortbay.jetty.servlet.ServletHolder.handle(ServletHolder.java:511)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:76)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1157)
+	at com.item.web.filter.LoginFilter.doFilter(LoginFilter.java:96)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1157)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:388)
+	at org.mortbay.jetty.security.SecurityHandler.handle(SecurityHandler.java:216)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:182)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:765)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:440)
+	at org.mortbay.jetty.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:230)
+	at org.mortbay.jetty.handler.HandlerCollection.handle(HandlerCollection.java:114)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:152)
+	at org.mortbay.jetty.Server.handle(Server.java:326)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:542)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:926)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:549)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:212)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:404)
+	at org.mortbay.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:410)
+	at org.mortbay.thread.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:582)

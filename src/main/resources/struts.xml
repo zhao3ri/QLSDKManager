@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.action.extension" value="action,shtml,jsp" /><!-- 接收的action后缀 -->
+	<constant name="struts.custom.i18n.resources" value="struts" /><!-- 设置国际化文件 -->
+	<constant name="struts.devMode" value="false"/>	<!-- 设置开发模式，开启有详细错误提示 -->
+	<constant name="struts.multipart.maxSize" value="307200000"/><!-- 设置上传文件大小，默认是2M -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" /><!-- 设置开启访问静态方法 -->
+	<package name="base" extends="convention-default">
+		<!-- 管理员登录日志拦截器 -->
+		<interceptors>
+			<!-- 关键字、特殊字符、前后空格过滤 -->
+			<interceptor name="KeywordInterceptor" class="com.item.web.interceptor.KeywordInterceptor"/>
+			<interceptor name="AdminLogInterceptor" class="com.item.web.interceptor.AdminLogInterceptor"/>
+			<interceptor-stack name="baseItemStack">
+				<!-- 设置addActionMessage的提示信息的有效范围，默认只是page有效，这里设置为session有效 -->
+				<interceptor-ref name="store">
+					<param name="operationMode">AUTOMATIC</param>
+				</interceptor-ref>
+				<interceptor-ref name="paramsPrepareParamsStack" />
+				<interceptor-ref name="AdminLogInterceptor"/>
+				<interceptor-ref name="KeywordInterceptor"/>
+				<interceptor-ref name="defaultStack"> 
+				 	<param name="exception.logEnabled">true</param>
+				 	<param name="exception.logLevel">error</param> 
+				</interceptor-ref>
+			</interceptor-stack>			
+		</interceptors>
+		<!-- 默认拦截器 -->
+		<default-interceptor-ref name="baseItemStack" />
+		
+		<global-results> 
+	        <result name="sql">/common/500.jsp</result> 
+	        <result name="invalidinput">/common/500.jsp</result> 
+	        <result name="naming">/common/404.jsp</result> 
+	        <result name="error">/common/500.jsp</result>
+	    </global-results> 
+	    <global-exception-mappings> 
+	        <exception-mapping result="sql" exception="java.sql.SQLException"></exception-mapping> 
+	        <exception-mapping result="invalidinput" exception="cn.codeplus.exception.InvalidInputException"></exception-mapping> 
+	        <exception-mapping result="naming" exception="javax.naming.NamingException"></exception-mapping> 
+	        <exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>  
+	    </global-exception-mappings> 
+	</package>
+	<include file="struts/*/*.xml"/>
+	<include file="struts/*.xml"/>
+</struts>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SPlatformMonthly">
+
+	<!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+	<typeAlias alias="sPlatformMonthly" type="com.item.domain.SPlatformMonthly" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+	<sql id="SPlatformMonthly.where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				spm.id=#id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="clientType">
+				spm.clientType=#clientType#
+			</isNotNull>
+			<isNotNull prepend="AND" property="appId">
+				spm.appId=#appId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="yearMonth">
+				spm.yearMonth=#yearMonth#
+			</isNotNull>
+			<isNotEmpty prepend="AND" property="appIds">
+		          <![CDATA[ spm.appId in ]]>
+		          <iterate property="appIds" conjunction="," open="(" close=")">
+		              #appIds[]#
+		          </iterate>
+		    </isNotEmpty>
+
+			<isNotNull prepend="AND" property="platformId">
+				spm.platformId=#platformId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="totalRoledUser">
+				spm.totalRoledUser=#totalRoledUser#
+			</isNotNull>
+			<isNotNull prepend="AND" property="totalRegUser">
+				spm.totalRegUser=#totalRegUser#
+			</isNotNull>
+			<isNotNull prepend="AND" property="devices">
+				spm.devices=#devices#
+			</isNotNull>
+			<isNotNull prepend="AND" property="payAmount">
+				spm.payAmount=#payAmount#
+			</isNotNull>
+			<isNotNull prepend="AND" property="payTimes">
+				spm.payTimes=#payTimes#
+			</isNotNull>
+			<isNotNull prepend="AND" property="payUsers">
+				spm.payUsers=#payUsers#
+			</isNotNull>
+			<isNotNull prepend="AND" property="appName">
+				bg.appName=#appName#
+			</isNotNull>
+			<isNotNull prepend="AND" property="activeUsers">
+				spm.activeUsers=#activeUsers#
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<select id="SPlatformMonthly.listApp" resultClass="sPlatformMonthly" parameterClass="mb">
+		SELECT
+		SUM(spm.devices) as devices,
+		SUM(spm.payAmount) as payAmount,
+		SUM(spm.payTimes) as payTimes,
+		SUM(spm.payUsers) as payUsers,
+		SUM(spm.totalRegUser) as totalRegUser,
+		SUM(spm.totalRoleUser) as totalRoleUser,
+		SUM(spm.activeUsers) as activeUsers,
+		bp.platformName as platformName,
+		bg.appName as appName
+		FROM s_platform_monthly spm
+		JOIN b_platform bp ON spm.platformId=bp.id
+		JOIN b_game bg ON spm.appId=bg.id
+		<include refid="SPlatformMonthly.where" />
+		GROUP BY bp.platformName,bg.appName
+		ORDER BY bg.appName,bp.platformName,spm.clientType
+	</select>
+
+   
+	<select id="SPlatformMonthly.listPlatform" resultClass="sPlatformMonthly" parameterClass="mb">
+		SELECT
+			bp.platformName as platformName,
+			SUM(spm.activeUsers) as activeUsers,
+			SUM(spm.devices) as devices,
+			SUM(spm.payAmount) as payAmount,
+			SUM(spm.payTimes) as payTimes,
+			SUM(spm.payUsers) as payUsers,
+			SUM(spm.totalRegUser) as totalRegUser,
+			SUM(spm.totalRoleUser) as totalRoleUser
+			FROM s_platform_monthly spm
+			JOIN b_platform bp ON spm.platformId=bp.id
+			JOIN b_game bg ON spm.appId=bg.id
+		<include refid="SPlatformMonthly.where" />
+		GROUP BY bp.platformName
+		ORDER BY bp.platformName
+	</select>
+	
+	<select id="SPlatformMonthly.getByMap" resultClass="sPlatformMonthly" parameterClass="mb">
+	     SELECT
+            appId AS appId,
+			clientType AS clientType,
+			totalRoleUser AS totalRoleUser,
+			totalRegUser AS totalRegUser,
+			devices AS devices,
+			activeUsers AS activeUsers,
+			payAmount AS payAmount,
+			payTimes AS payTimes,
+			payUsers AS payUsers
+		FROM s_platform_monthly spm 
+	<include refid="SPlatformMonthly.where" />
+	</select>
+	
+	
+
+</sqlMap>

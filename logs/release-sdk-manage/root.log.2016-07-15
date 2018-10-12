@@ -1,0 +1,126 @@
+2016-07-15 14:26:16,008 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 14:26:16,013 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://local.y6test.cn:8043
+2016-07-15 14:26:16,490 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 14:26:16,491 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 14:26:16,491 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 14:26:16,492 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 14:28:46,946 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 14:28:46,948 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://local.y6test.cn:8043
+2016-07-15 14:28:47,247 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 14:28:47,248 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 14:28:47,249 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 14:28:47,249 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 14:30:45,293 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 14:30:45,296 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://local.y6test.cn:8043
+2016-07-15 14:30:45,604 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 14:30:45,605 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 14:30:45,606 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 14:30:45,606 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 14:32:17,060 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 14:32:17,062 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://local.y6test.cn:8043
+2016-07-15 14:32:17,355 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 14:32:17,356 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 14:32:17,357 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 14:32:17,357 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 14:34:17,899 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 14:34:17,902 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://local.y6test.cn:8043
+2016-07-15 14:34:18,253 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 14:34:18,254 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 14:34:18,255 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 14:34:18,256 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 14:39:39,815 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 14:39:39,817 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://local.y6test.cn:8043
+2016-07-15 14:39:40,119 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 14:39:40,119 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 14:39:40,120 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 14:39:40,121 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 15:45:37,893 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 15:45:37,922 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: http://local.y6test.cn:8043
+2016-07-15 15:45:38,448 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 15:45:38,451 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 15:45:38,452 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 15:45:38,452 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 15:57:54,706 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 15:57:54,709 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: WebRoot
+2016-07-15 15:57:55,095 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 15:57:55,096 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 15:57:55,097 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 15:57:55,098 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 15:57:57,635 [main] DEBUG [java.sql.Connection] - {conn-100000} Connection
+2016-07-15 15:57:57,643 [main] DEBUG [java.sql.Connection] - {conn-100000} Preparing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-07-15 15:57:57,684 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Executing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-07-15 15:57:57,685 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Parameters: []
+2016-07-15 15:57:57,686 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Types: []
+2016-07-15 15:57:57,748 [main] DEBUG [java.sql.Connection] - {conn-100003} Connection
+2016-07-15 15:57:57,749 [main] DEBUG [java.sql.Connection] - {conn-100003} Preparing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-07-15 15:57:57,750 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Executing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-07-15 15:57:57,750 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Parameters: []
+2016-07-15 15:57:57,751 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Types: []
+2016-07-15 15:57:57,774 [main] DEBUG [java.sql.Connection] - {conn-100006} Connection
+2016-07-15 15:57:57,775 [main] DEBUG [java.sql.Connection] - {conn-100006} Preparing Statement:    SELECT *     FROM sysAuth   
+2016-07-15 15:57:57,775 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Executing Statement:    SELECT *     FROM sysAuth   
+2016-07-15 15:57:57,776 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Parameters: []
+2016-07-15 15:57:57,777 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Types: []
+2016-07-15 15:57:57,812 [main] DEBUG [java.sql.Connection] - {conn-100009} Connection
+2016-07-15 15:57:57,816 [main] DEBUG [java.sql.Connection] - {conn-100009} Preparing Statement:    SELECT *     FROM sysRoleAuth   
+2016-07-15 15:57:57,817 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Executing Statement:    SELECT *     FROM sysRoleAuth   
+2016-07-15 15:57:57,818 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Parameters: []
+2016-07-15 15:57:57,818 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Types: []
+2016-07-15 15:57:57,868 [main] DEBUG [java.sql.Connection] - {conn-100012} Connection
+2016-07-15 15:57:57,869 [main] DEBUG [java.sql.Connection] - {conn-100012} Preparing Statement:    SELECT *     FROM sysData   
+2016-07-15 15:57:57,870 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Executing Statement:    SELECT *     FROM sysData   
+2016-07-15 15:57:57,872 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Parameters: []
+2016-07-15 15:57:57,872 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Types: []
+2016-07-15 15:57:57,898 [main] DEBUG [java.sql.Connection] - {conn-100015} Connection
+2016-07-15 15:57:57,899 [main] DEBUG [java.sql.Connection] - {conn-100015} Preparing Statement:    SELECT *     FROM sysRoleData  
+2016-07-15 15:57:57,900 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Executing Statement:    SELECT *     FROM sysRoleData  
+2016-07-15 15:57:57,901 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Parameters: []
+2016-07-15 15:57:57,901 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Types: []
+2016-07-15 15:57:57,931 [main] DEBUG [java.sql.Connection] - {conn-100018} Connection
+2016-07-15 15:57:57,932 [main] DEBUG [java.sql.Connection] - {conn-100018} Preparing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-07-15 15:57:57,933 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Executing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-07-15 15:57:57,934 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Parameters: []
+2016-07-15 15:57:57,935 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Types: []
+2016-07-15 15:57:57,956 [main] INFO  [com.item.application.ApplicationListener] - =============== 加载平台系统应用完毕 ===============
+2016-07-15 16:03:28,088 [main] INFO  [com.item.application.ApplicationListener] - =============== 开始加载平台系统应用 ===============
+2016-07-15 16:03:28,091 [main] INFO  [com.item.application.ApplicationListener] - 平台 context_path: WebRoot
+2016-07-15 16:03:28,486 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Getting properties from URL file:/Users/engine/work/SDKServer/release-sdk-manage-g/build/tmp/jettyRunWar/webapp/WEB-INF/classes/oscache.properties for the default configuration
+2016-07-15 16:03:28,487 [main] INFO  [com.opensymphony.oscache.base.Config] - OSCache: Properties read {cache.capacity=1000, cache.key=_oscache_cache, cache.memory=true, cache.event.listeners=com.opensymphony.oscache.extra.ScopeEventListenerImpl}
+2016-07-15 16:03:28,488 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Constructed GeneralCacheAdministrator()
+2016-07-15 16:03:28,488 [main] INFO  [com.opensymphony.oscache.general.GeneralCacheAdministrator] - Creating new cache
+2016-07-15 16:03:31,010 [main] DEBUG [java.sql.Connection] - {conn-100000} Connection
+2016-07-15 16:03:31,024 [main] DEBUG [java.sql.Connection] - {conn-100000} Preparing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-07-15 16:03:31,061 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Executing Statement:    SELECT *     FROM sysFunction f          WHERE                       f.projectType != 1                      
+2016-07-15 16:03:31,062 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Parameters: []
+2016-07-15 16:03:31,063 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100001} Types: []
+2016-07-15 16:03:31,126 [main] DEBUG [java.sql.Connection] - {conn-100003} Connection
+2016-07-15 16:03:31,127 [main] DEBUG [java.sql.Connection] - {conn-100003} Preparing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-07-15 16:03:31,127 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Executing Statement:    SELECT *     FROM sysModule m          WHERE                  m.projectType != 1                         ORDER BY moduleOrder ASC  
+2016-07-15 16:03:31,128 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Parameters: []
+2016-07-15 16:03:31,129 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100004} Types: []
+2016-07-15 16:03:31,149 [main] DEBUG [java.sql.Connection] - {conn-100006} Connection
+2016-07-15 16:03:31,150 [main] DEBUG [java.sql.Connection] - {conn-100006} Preparing Statement:    SELECT *     FROM sysAuth   
+2016-07-15 16:03:31,151 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Executing Statement:    SELECT *     FROM sysAuth   
+2016-07-15 16:03:31,151 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Parameters: []
+2016-07-15 16:03:31,152 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100007} Types: []
+2016-07-15 16:03:31,175 [main] DEBUG [java.sql.Connection] - {conn-100009} Connection
+2016-07-15 16:03:31,179 [main] DEBUG [java.sql.Connection] - {conn-100009} Preparing Statement:    SELECT *     FROM sysRoleAuth   
+2016-07-15 16:03:31,180 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Executing Statement:    SELECT *     FROM sysRoleAuth   
+2016-07-15 16:03:31,181 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Parameters: []
+2016-07-15 16:03:31,181 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100010} Types: []
+2016-07-15 16:03:31,209 [main] DEBUG [java.sql.Connection] - {conn-100012} Connection
+2016-07-15 16:03:31,209 [main] DEBUG [java.sql.Connection] - {conn-100012} Preparing Statement:    SELECT *     FROM sysData   
+2016-07-15 16:03:31,214 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Executing Statement:    SELECT *     FROM sysData   
+2016-07-15 16:03:31,214 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Parameters: []
+2016-07-15 16:03:31,215 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100013} Types: []
+2016-07-15 16:03:31,232 [main] DEBUG [java.sql.Connection] - {conn-100015} Connection
+2016-07-15 16:03:31,233 [main] DEBUG [java.sql.Connection] - {conn-100015} Preparing Statement:    SELECT *     FROM sysRoleData  
+2016-07-15 16:03:31,233 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Executing Statement:    SELECT *     FROM sysRoleData  
+2016-07-15 16:03:31,234 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Parameters: []
+2016-07-15 16:03:31,235 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100016} Types: []
+2016-07-15 16:03:31,250 [main] DEBUG [java.sql.Connection] - {conn-100018} Connection
+2016-07-15 16:03:31,251 [main] DEBUG [java.sql.Connection] - {conn-100018} Preparing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-07-15 16:03:31,252 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Executing Statement:    SELECT *     FROM sysRole r          WHERE                  r.projectType != 1                      
+2016-07-15 16:03:31,252 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Parameters: []
+2016-07-15 16:03:31,253 [main] DEBUG [java.sql.PreparedStatement] - {pstm-100019} Types: []
+2016-07-15 16:03:31,270 [main] INFO  [com.item.application.ApplicationListener] - =============== 加载平台系统应用完毕 ===============

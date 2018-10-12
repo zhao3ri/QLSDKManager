@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BGame">
+	<typeAlias alias="Game" type="com.item.domain.Game" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+	
+<!-- 动态条件 -->
+	<sql id="BGame.Where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				id=#id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="exceptId">
+				id != #exceptId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="appName">
+				appName like  concat('%', #appName#, '%')
+			</isNotNull>
+			<isNotNull prepend="AND" property="secretKey">
+				secretKey=#secretKey#
+			</isNotNull>
+			<isNotNull prepend="AND" property="createTime">
+				createTime=#createTime#
+			</isNotNull>
+			<isNotNull prepend="AND" property="serviceTime">
+				serviceTime=#serviceTime#
+			</isNotNull>
+			<isNotEmpty prepend="AND" property="appIds">
+				id IN
+				<iterate property="appIds" open="(" close=")" conjunction=",">
+			      #appIds[]#
+			    </iterate>
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!--根据pageSize获取一页的数据量 -->
+	<select id="BGame.page" parameterClass="mb" resultClass="Game">
+		SELECT 
+			id,
+			appName,
+			secretKey,
+			createTime,
+			serviceTime 
+		FROM b_game
+		<include refid="BGame.Where" />
+		<isNotNull property="orderby">
+			ORDER BY $orderby$
+		</isNotNull>
+		LIMIT #firstResult#, #pageSize#
+	</select>
+
+	<!--根据pageSize获取一页的数据量 -->
+	<select id="BGame.getGameByWhere" parameterClass="mb" resultClass="Game">
+		SELECT
+		id,
+		appName,
+		secretKey,
+		createTime,
+		serviceTime
+		FROM b_game
+		<include refid="BGame.Where" />
+		<isNotNull property="orderby">
+			ORDER BY $orderby$
+		</isNotNull>
+	</select>
+
+	<select id="BGame.list" parameterClass="mb" resultClass="Game">
+		SELECT 
+			id,
+			appName,
+			secretKey,
+			createTime,
+			serviceTime 
+		FROM b_game
+		<isNotEmpty property="appIds">
+			WHERE id IN
+			<iterate property="appIds" open="(" close=")" conjunction=",">
+		      #appIds[]#
+		    </iterate>
+		</isNotEmpty>
+	</select>
+	
+	<!-- 增加游戏 -->
+	<insert id="BGame.save" parameterClass="Game">
+		INSERT INTO b_game(id,appName,secretKey,createTime,serviceTime)
+		VALUES(#id#,#appName#,#secretKey#,#createTime#,#serviceTime#)
+		<selectKey resultClass="Long" keyProperty="id">
+			select @@IDENTITY
+			as `id`
+		</selectKey>
+	</insert>
+	
+	<!-- 删除游戏 -->
+	<delete id="BGame.delete" parameterClass="Long">
+		DELETE FROM
+		b_game WHERE id=#id#
+	</delete>
+	
+	<!-- 批量删除 -->
+    <delete id="BGame.batchDelete" parameterClass="mb">
+    	DELETE FROM
+		b_game WHERE 
+    	WHERE
+    		`id` IN
+    	<iterate property="checkedIds" open="(" close=")" conjunction=",">
+	      #checkedIds[]#
+	    </iterate>
+    </delete>
+	
+	<!-- 更新游戏 -->
+	<update id="BGame.update" parameterClass="Game">
+		UPDATE b_game
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="appName">appName=#appName#
+			</isNotNull>
+			<isNotNull prepend="," property="secretKey">secretKey=#secretKey#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime">createTime=#createTime#
+			</isNotNull>
+			<isNotNull prepend="," property="serviceTime">serviceTime=#serviceTime#
+			</isNotNull>
+		</dynamic>
+		WHERE id=#id#
+	</update>
+	
+	<!-- 获取游戏总数 -->
+	<select id="BGame.count" resultClass="Long" parameterClass="mb">
+		SELECT COUNT(*) FROM b_game
+		<include refid="BGame.Where" />
+	</select>
+	
+	<!-- 获取指定id对应的游戏 -->
+	<select id="BGame.getGameById" parameterClass="Long" resultClass="Game">
+		SELECT * FROM b_game WHERE id=#id#
+	</select>
+	
+	<!-- 获取指定appName对应的游戏 -->
+	<select id="BGame.getGameByappName" parameterClass="String" resultClass="Game">
+		SELECT * FROM b_game WHERE appName=#appName#
+	</select>
+	
+</sqlMap>

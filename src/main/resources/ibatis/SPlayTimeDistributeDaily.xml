@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SPlayTimeDistributeDaily">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sPlayTimeDistributeDaily" type="com.item.domain.SPlayTimeDistributeDaily" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SPlayTimeDistributeDaily.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="clientType">
+    			`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="platformId">
+    			`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneId">
+    			`zoneId`=#zoneId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statDate">
+    			DATE_FORMAT(`statDate`,'%Y-%m-%d') = DATE_FORMAT(#statDate#,'%Y-%m-%d')
+    		</isNotNull>
+    	</dynamic>
+    </sql>
+
+
+
+    <select id="SPlayTimeDistributeDaily.playTime" resultClass="mb" parameterClass="mb">
+        SELECT
+			SUM(su1) as su1,
+			SUM(su2) as su2,
+			SUM(su3) as su3,
+			SUM(su4) as su4,
+			SUM(su5) as su5,
+			SUM(su6) as su6,
+			SUM(su7) as su7,
+			SUM(su8) as su8,
+			SUM(su1 + su2 + su3 + su4 + su5 + su6 + su7 + su8) as sumSu,
+			SUM(st1) as st1,
+			SUM(st2) as st2,
+			SUM(st3) as st3,
+			SUM(st4) as st4,
+			SUM(st5) as st5,
+			SUM(st6) as st6,
+			SUM(st7) as st7,
+			SUM(st8) as st8,
+			SUM(st1 + st2 + st3 + st4 + st5 + st6 + st7 + st8) as sumSt,
+			statDate
+		FROM s_play_time_distribute_daily
+        <include refid="SPlayTimeDistributeDaily.Where"/>
+         group by statDate
+    </select>
+
+</sqlMap>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SDataMonthly">
+
+    <typeAlias alias="SDataMonthly" type="com.item.domain.SDataMonthly" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SDataMonthly.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="appId">
+    			a.`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="clientType">
+    			a.`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="zoneId">
+    			a.`zoneId`=#zoneId#
+    		</isNotEmpty>
+    		<isNotNull prepend="and" property="platformId">
+    			a.`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="statDate">
+    			a.`yearMonth`=#statDate#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	a.`yearMonth`>=#statStartDate#
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 a.`yearMonth`<=#statEndDate#
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+
+    <select id="SDataMonthly.list" resultClass="sDataMonthly" parameterClass="mb">
+        SELECT
+            a.`id` AS id,
+            a.`clientType` AS clientType,
+            a.`appId` AS appId,
+            bg.`appName` AS appName,
+            a.`zoneId` AS zoneId,
+            a.`platformId` AS platformId,
+			SUM(a.totalRegUser) AS regUsers,
+			SUM(a.totalRoleUser)/SUM(a.totalRegUser) AS conversionRate,
+			SUM(a.monthLoginRoles) AS monthLoginRoles,
+			SUM(a.payAmount) AS payAmount,
+			SUM(a.newUserPayAmount) AS incPayAmount,
+			SUM(a.newUserPays) AS incPayUsers,
+			SUM(a.payUsers) AS payUsers,
+			`yearMonth`
+		FROM s_zone_platform_monthly a
+		JOIN 
+		b_game bg
+		ON 
+		bg.id=a.appId
+        <include refid="SDataMonthly.Where"/>
+                 GROUP BY 
+         	a.`yearMonth`
+         ORDER BY a.yearMonth ASC
+    </select>
+</sqlMap>

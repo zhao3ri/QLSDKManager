@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+  <package name="roleReport" extends="base" namespace="/roleReport">
+    <action name="roleReport_*" method="{1}" class="com.item.web.action.RoleReportAction">
+      <result name="realTimeLogin">/WEB-INF/content/roleReport/roleReport_realTimeLogin.jsp</result>
+      <result name="dailyLogin">/WEB-INF/content/roleReport/roleReport_dailyLogin.jsp</result>
+      <result name="online">/WEB-INF/content/roleReport/roleReport_online.jsp</result>
+      <result name="onlineDaily">/WEB-INF/content/roleReport/roleReport_onlineDaily.jsp</result>
+      <result name="daily">/WEB-INF/content/roleReport/roleReport_daily.jsp</result>
+      <result name="playTime">/WEB-INF/content/roleReport/roleReport_playTime.jsp</result>
+      <result name="totalPlayTime">/WEB-INF/content/roleReport/roleReport_totalPlayTime.jsp</result>
+      
+      <result name="XXX">/WEB-INF/content/roleReport/roleReport_XXX.jsp</result>
+    </action>
+  </package>
+</struts>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SZonePlatformRealtime">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sZonePlatformRealtime" type="com.item.domain.SZonePlatformRealtime" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SZonePlatformRealtime.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="id">
+    			`id`=#id#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="clientType">
+    			`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			`appId`=#appId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="zoneId">
+    			`zoneId`=#zoneId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="platformId">
+    			`platformId`=#platformId#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="statDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')=date_format(#statDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="channelIds">
+    			`platformId` IN ($channelIds$)
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="zoneIds">
+    			`zoneId` IN ($zoneIds$)
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+
+    <select id="SZonePlatformRealtime.page" parameterClass="mb" resultClass="sZonePlatformRealtime">
+        SELECT
+	  		`id`,
+			`clientType`,
+			`appId`,
+			`zoneId`,
+			`platformId`,
+			`statDate`,
+			`onlineUsers`,
+			`roleUsers`,
+			`newDevices`,
+			`payAmount`,
+			`activeUsers`
+		FROM s_zone_platform_realtime
+        <include refid="SZonePlatformRealtime.Where"/>
+        <isNotNull property="orderby">
+        	ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="SZonePlatformRealtime.count" resultClass="Long" parameterClass="mb">
+        SELECT COUNT(1)
+		FROM s_zone_platform_realtime
+        <include refid="SZonePlatformRealtime.Where"/>
+    </select>
+
+    <select id="SZonePlatformRealtime.list" resultClass="sZonePlatformRealtime" parameterClass="mb">
+        SELECT
+	 		`id`,
+			`clientType`,
+			`appId`,
+			`zoneId`,
+			`platformId`,
+			`statDate`,
+			`onlineUsers`,
+			`roleUsers`,
+			`newDevices`,
+			`payAmount`,
+			`activeUsers`
+		FROM s_zone_platform_realtime
+        <include refid="SZonePlatformRealtime.Where"/>
+        <isNotNull property="orderby">
+             ORDER BY $orderby$
+        </isNotNull>
+        <isNotNull property="pageSize">
+       	     LIMIT 0, #pageSize#
+        </isNotNull>
+    </select>
+    
+    <select id="SZonePlatformRealtime.listGroupBy" resultClass="sZonePlatformRealtime" parameterClass="mb">
+        SELECT
+			`statDate`,
+			appId,
+			zoneId,
+	        platformId,
+			SUM(`onlineUsers`) AS onlineUsers,
+			SUM(`roleUsers`) AS roleUsers,
+			SUM(`newDevices`) AS newDevices,
+			SUM(`payAmount`) AS payAmount,
+			SUM(`activeUsers`) AS activeUsers
+		FROM s_zone_platform_realtime
+        <include refid="SZonePlatformRealtime.Where"/>
+        GROUP BY 
+        <isEmpty property="groupDateType">
+       	 	date_format(`statDate`,'%H:%i:00')
+       	</isEmpty>
+       	<isEqual property="groupDateType" compareValue="1">
+       	 	statDate
+       	</isEqual>
+        <isEqual property="groupType" compareValue="1">
+         	,zoneId
+        </isEqual>
+        <isEqual property="groupType" compareValue="2">
+         	,platformId
+        </isEqual>
+        ORDER BY statDate ASC
+    </select>
+
+    <select id="SZonePlatformRealtime.get" resultClass="sZonePlatformRealtime" parameterClass="Long">
+        SELECT
+	   		`id`,
+			`clientType`,
+			`appId`,
+			`zoneId`,
+			`platformId`,
+			`statDate`,
+			`onlineUsers`,
+			`roleUsers`,
+			`newDevices`,
+			`payAmount`,
+			`activeUsers`
+		FROM s_zone_platform_realtime
+		WHERE
+	  		`id`=#id# 
+    </select>
+
+    <insert id="SZonePlatformRealtime.save" parameterClass="sZonePlatformRealtime">
+        INSERT INTO s_zone_platform_realtime(
+        	`clientType`,
+			`appId`,
+			`zoneId`,
+			`platformId`,
+			`statDate`,
+			`onlineUsers`,
+			`roleUsers`,
+			`newDevices`,
+			`payAmount`,
+			`activeUsers`
+        )VALUES(
+        	#clientType#,
+			#appId#,
+			#zoneId#,
+			#platformId#,
+			#statDate#,
+			#onlineUsers#,
+			#roleUsers#,
+			#newDevices#,
+			#payAmount#,
+			#activeUsers#
+        )
+        <selectKey resultClass="Long" keyProperty="id">
+	       select @@IDENTITY as `id`
+        </selectKey> 
+    </insert>
+
+    <update id="SZonePlatformRealtime.update" parameterClass="sZonePlatformRealtime">
+    	UPDATE s_zone_platform_realtime
+	    	<dynamic prepend="set">
+	    		<isNotNull prepend="," property="clientType">
+					`clientType`=#clientType#
+				</isNotNull>
+	    		<isNotNull prepend="," property="appId">
+					`appId`=#appId#
+				</isNotNull>
+	    		<isNotNull prepend="," property="zoneId">
+					`zoneId`=#zoneId#
+				</isNotNull>
+	    		<isNotNull prepend="," property="platformId">
+					`platformId`=#platformId#
+				</isNotNull>
+	    		<isNotNull prepend="," property="statDate">
+					`statDate`=#statDate#
+				</isNotNull>
+	    		<isNotNull prepend="," property="onlineUsers">
+					`onlineUsers`=#onlineUsers#
+				</isNotNull>
+	    		<isNotNull prepend="," property="roleUsers">
+					`roleUsers`=#roleUsers#
+				</isNotNull>
+	    		<isNotNull prepend="," property="newDevices">
+					`newDevices`=#newDevices#
+				</isNotNull>
+	    		<isNotNull prepend="," property="payAmount">
+					`payAmount`=#payAmount#
+				</isNotNull>
+				<isNotNull prepend="," property="activeUsers">
+					`activeUsers`=#activeUsers#
+				</isNotNull>
+	    	</dynamic>
+    	WHERE
+    		`id`=#id# 
+    </update>
+
+    <delete id="SZonePlatformRealtime.delete" parameterClass="Long">
+		DELETE FROM s_zone_platform_realtime
+		WHERE
+			`id`=#id# 
+    </delete>
+</sqlMap>

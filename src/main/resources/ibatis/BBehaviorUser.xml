@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BBehaviorUser">
+
+    <typeAlias alias="bBehaviorUser" type="com.item.domain.BBehaviorUser" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <select id="BBehaviorUser.list" resultClass="bBehaviorUser" parameterClass="mb">
+        SELECT
+			*
+		FROM b_behavior_user
+        WHERE 
+        uid = #uid#
+        AND platformId = #platformId#
+        <isNotNull property="appId">
+			AND appId=#appId#
+		</isNotNull>
+		<isNotNull property="clientType">
+			AND clientType=#clientType#
+		</isNotNull>
+		<isNotEmpty property="checkedIds">
+			AND zoneId IN
+			<iterate property="checkedIds" conjunction="," open="(" close=")">
+	      		#checkedIds[]#
+	    	</iterate>
+		</isNotEmpty>
+        
+    </select>
+</sqlMap>
