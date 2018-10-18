@@ -10,40 +10,50 @@ import com.item.exception.ApplicationException;
 
 /**
  * Properties查询器.
- * 
+ *
  * @author liuxh
  * @since 2011-07-08
  */
 public class PropertyUtils {
 
-	private static Properties properties = new Properties();
+    private static Properties properties = new Properties();
 
-	private PropertyUtils() {
-	}
+    private PropertyUtils() {
+    }
 
-	public static void loadFile(String file) {
-		FileInputStream fis = null;
-		try {
-			fis = new FileInputStream(file);
-			properties.load(fis);
-		} catch (IOException e) {
-			throw new ApplicationException(e);
-		} finally {
-			if (fis != null) {
-				try {
-					fis.close();
-				} catch (Exception e) {
-				}
-			}
-		}
-	}
+    public static void loadFile(String file) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+            properties.load(fis);
+        } catch (IOException e) {
+            throw new ApplicationException(e);
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+    }
 
-	public static String get(String sql) {
-		return properties.getProperty(sql);
-	}
-	
-	public static Set<Object> getKeys(){
-		return properties.keySet();
-	}
+    public static String get(String sql) {
+        return properties.getProperty(sql);
+    }
 
+    public static Set<Object> getKeys() {
+        return properties.keySet();
+    }
+
+    public static String getPath() {
+        String host = get("server.host");
+        String port = get("server.port");
+        String absPath = get("server.abs_path");
+        String url = String.format("%s:%s", host, port);
+        if (!StringUtil.isEmpty(absPath)) {
+            url = String.format("%s/%s", url, absPath);
+        }
+        return url;
+    }
 }

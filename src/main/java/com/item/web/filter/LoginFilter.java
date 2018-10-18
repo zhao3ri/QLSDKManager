@@ -79,10 +79,8 @@ public class LoginFilter implements Filter {
             if (!StringUtils.isEmpty(userName) && !StringUtils.isEmpty(md5_password)) {
                 String refererUrl = req.getContextPath() + req.getRequestURI();
                 res.sendRedirect(req.getContextPath() + "/login.shtml?refererUrl=" + refererUrl);
-                System.out.println(req.getContextPath() + "/login.shtml?refererUrl=" + refererUrl);
             } else {
                 res.sendRedirect(req.getContextPath() + "/logview.shtml");
-                System.out.println(req.getContextPath() + "/logview.shtml");
             }
 
         } else {

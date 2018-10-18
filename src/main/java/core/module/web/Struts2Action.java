@@ -33,7 +33,8 @@ public class Struts2Action extends ActionSupport {
 	 * @return
 	 */
 	public String getCtx(){
-		return PropertyUtils.get("base.url");
+//		return PropertyUtils.get("base.url");
+		return PropertyUtils.getPath();
 	}
 	
 	/**
