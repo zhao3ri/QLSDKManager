@@ -25,7 +25,7 @@ import core.module.orm.Page;
 import core.module.web.Struts2Action;
 
 /**
- * æ•°æ®å­—å…¸è¡¨ Actionç±».
+ * Êı¾İ×Öµä±í ActionÀà.
  * <br/>
  *
  * @author liuxh
@@ -37,11 +37,11 @@ public class DictionaryAction extends Struts2Action {
 
     private static final long serialVersionUID = 197266703365933779L;
 
-    private static final String SUCCESS_MSG_FORMAT = "%sè®¾ç½®ä¸º/\"%s/\"çŠ¶æ€æˆåŠŸ!<br/>";
-    private static final String UPDATE_ERROR_MSG_FORMAT = "å·²ç»æœ‰%såœ¨ä½¿ç”¨'%s',å¦‚è¦åˆ é™¤,è¯·æŠŠ%sæ‰€åœ¨%sæ”¹ä¸ºå…¶å®ƒ%sã€‚<br/>";
-    private static final String UPDATE_USER = "ç”¨æˆ·";
-    private static final String UPDATE_GROUP = "å°ç»„";
-    private static final String UPDATE_DEPARTMENT = "éƒ¨é—¨";
+    private static final String SUCCESS_MSG_FORMAT = "%sÉèÖÃÎª\"%s\"×´Ì¬³É¹¦!<br/>";
+    private static final String UPDATE_ERROR_MSG_FORMAT = "ÒÑ¾­ÓĞ%sÔÚÊ¹ÓÃ'%s',ÈçÒªÉ¾³ı,Çë°Ñ%sËùÔÚ%s¸ÄÎªÆäËü%s¡£<br/>";
+    private static final String UPDATE_USER = "ÓÃ»§";
+    private static final String UPDATE_GROUP = "Ğ¡×é";
+    private static final String UPDATE_DEPARTMENT = "²¿ÃÅ";
 
     @Autowired
     private DictionaryService dictionaryService;
@@ -54,12 +54,12 @@ public class DictionaryAction extends Struts2Action {
     private Long id;
     private int flag;
     /**
-     * ç±»å‹MAP
+     * ÀàĞÍMAP
      */
     private Map<String, String> dTypeMap = EnumUtil.getDTypeMap();
 
     /**
-     * åˆ—è¡¨
+     * ÁĞ±í
      *
      * @return
      */
@@ -68,14 +68,14 @@ public class DictionaryAction extends Struts2Action {
         try {
             dictionaryPage = dictionaryService.page(dictionaryPage, mb);
         } catch (Exception e) {
-            addActionMessage("è·å–åˆ—è¡¨å‡ºé”™ï¼š" + e);
-            logger.error("è·å–åˆ—è¡¨å‡ºé”™ï¼š" + e);
+            addActionMessage("»ñÈ¡ÁĞ±í³ö´í£º" + e);
+            logger.error("»ñÈ¡ÁĞ±í³ö´í£º" + e);
         }
         return "list";
     }
 
     /**
-     * ä¿®æ”¹/ä¿å­˜
+     * ĞŞ¸Ä/±£´æ
      *
      * @return
      */
@@ -88,14 +88,14 @@ public class DictionaryAction extends Struts2Action {
             mBean.put("dname", dictionary.getDname());
             Dictionary dt = dictionaryService.getforupdate(mBean);
 
-            if (dt != null) {//è¡¨ç¤ºå·²ç»å­˜åœ¨ç›¸åŒç±»å‹ä¸‹çš„æŸä¸ªåç§°
-                if (dictionary.getId() != null) {//ä¿®æ”¹
-                    if (dictionary.getId().longValue() != dt.getId().longValue()) {//åç§°ç›¸åŒçš„ä¸ä¸ºè¦ä¿®æ”¹çš„
-                        addActionMessage("åç§°å·²ç»å­˜åœ¨ï¼Œä¸èƒ½ä¿®æ”¹");
+            if (dt != null) {//±íÊ¾ÒÑ¾­´æÔÚÏàÍ¬ÀàĞÍÏÂµÄÄ³¸öÃû³Æ
+                if (dictionary.getId() != null) {//ĞŞ¸Ä
+                    if (dictionary.getId().longValue() != dt.getId().longValue()) {//Ãû³ÆÏàÍ¬µÄ²»ÎªÒªĞŞ¸ÄµÄ
+                        addActionMessage("Ãû³ÆÒÑ¾­´æÔÚ£¬²»ÄÜĞŞ¸Ä");
                         return "reload";
                     }
-                } else {//æ·»åŠ 
-                    addActionMessage("åç§°å·²ç»å­˜åœ¨ï¼Œä¸èƒ½æ·»åŠ ");
+                } else {//Ìí¼Ó
+                    addActionMessage("Ãû³ÆÒÑ¾­´æÔÚ£¬²»ÄÜÌí¼Ó");
                     return "reload";
                 }
             }
@@ -103,10 +103,10 @@ public class DictionaryAction extends Struts2Action {
             if (dictionary.getId() != null) {
                 try {
                     dictionaryService.update(dictionary);
-                    addActionMessage("ä¿®æ”¹ä¿¡æ¯æˆåŠŸ");
+                    addActionMessage("ĞŞ¸ÄĞÅÏ¢³É¹¦");
                 } catch (Exception e) {
-                    addActionMessage("ä¿®æ”¹ä¿¡æ¯å‡ºé”™ï¼š" + e);
-                    logger.error("ä¿®æ”¹ä¿¡æ¯å‡ºé”™ï¼š" + e);
+                    addActionMessage("ĞŞ¸ÄĞÅÏ¢³ö´í£º" + e);
+                    logger.error("ĞŞ¸ÄĞÅÏ¢³ö´í£º" + e);
                 }
             } else {
                 try {
@@ -115,10 +115,10 @@ public class DictionaryAction extends Struts2Action {
                         dictionary.setDvalue("");
                     }
                     dictionaryService.save(dictionary);
-                    addActionMessage("ä¿å­˜ä¿¡æ¯æˆåŠŸ");
+                    addActionMessage("±£´æĞÅÏ¢³É¹¦");
                 } catch (Exception e) {
-                    addActionMessage("ä¿å­˜ä¿¡æ¯å‡ºé”™ï¼š" + e);
-                    logger.error("ä¿å­˜ä¿¡æ¯å‡ºé”™ï¼š" + e);
+                    addActionMessage("±£´æĞÅÏ¢³ö´í£º" + e);
+                    logger.error("±£´æĞÅÏ¢³ö´í£º" + e);
                 }
             }
         }
@@ -126,7 +126,7 @@ public class DictionaryAction extends Struts2Action {
     }
 
     /**
-     * åˆå§‹åŒ–é¡µé¢
+     * ³õÊ¼»¯Ò³Ãæ
      *
      * @return
      */
@@ -138,7 +138,7 @@ public class DictionaryAction extends Struts2Action {
     }
 
     /**
-     * åˆ é™¤
+     * É¾³ı
      *
      * @return
      */
@@ -146,19 +146,19 @@ public class DictionaryAction extends Struts2Action {
         if (checkedIds != null) {
             try {
                 dictionaryService.delete(checkedIds);
-                addActionMessage("åˆ é™¤æ•°æ®æˆåŠŸ");
+                addActionMessage("É¾³ıÊı¾İ³É¹¦");
             } catch (Exception e) {
-                addActionMessage("åˆ é™¤æ•°æ®å‡ºé”™ï¼š" + e);
-                logger.error("åˆ é™¤æ•°æ®å‡ºé”™ï¼š" + e);
+                addActionMessage("É¾³ıÊı¾İ³ö´í£º" + e);
+                logger.error("É¾³ıÊı¾İ³ö´í£º" + e);
             }
         } else {
-            addActionMessage("è¯·é€‰æ‹©è¦åˆ é™¤çš„æ•°æ®");
+            addActionMessage("ÇëÑ¡ÔñÒªÉ¾³ıµÄÊı¾İ");
         }
         return "reload";
     }
 
     /**
-     * ä¿®æ”¹çŠ¶æ€
+     * ĞŞ¸Ä×´Ì¬
      *
      * @return
      */
@@ -170,7 +170,7 @@ public class DictionaryAction extends Struts2Action {
 //	        	dictionaryService.updateState(checkedIds,flag);
                 for (String checkedId : StringUtils.split(checkedIds, ",")) {
                     Dictionary d = dictionaryService.get(Long.parseLong(checkedId));
-                    if (flag == 0 && "department".equals(dictionary.getDtype())) { // åˆ é™¤éƒ¨é—¨
+                    if (flag == 0 && "department".equals(dictionary.getDtype())) { // É¾³ı²¿ÃÅ
                         boolean judge = false;
                         MapBean mb = new MapBean();
                         mb.put("did", Long.parseLong(checkedId));
@@ -178,7 +178,7 @@ public class DictionaryAction extends Struts2Action {
                         List<User> tempUserList = us.list(mb);
                         if (tempUserList != null && tempUserList.size() > 0) {
                             sb.append(String.format(UPDATE_ERROR_MSG_FORMAT, UPDATE_USER, d.getDname(), UPDATE_USER, UPDATE_DEPARTMENT, UPDATE_DEPARTMENT));
-//                            sb.append("å·²ç»æœ‰ç”¨æˆ·åœ¨ä½¿ç”¨'" + d.getDname() + "',å¦‚è¦åˆ é™¤,è¯·æŠŠç”¨æˆ·æ‰€åœ¨éƒ¨é—¨æ”¹ä¸ºå…¶å®ƒéƒ¨é—¨ã€‚<br/>");
+//                            sb.append("ÒÑ¾­ÓĞÓÃ»§ÔÚÊ¹ÓÃ'" + d.getDname() + "',ÈçÒªÉ¾³ı,Çë°ÑÓÃ»§ËùÔÚ²¿ÃÅ¸ÄÎªÆäËü²¿ÃÅ¡£<br/>");
                             judge = true;
                         }
 
@@ -188,7 +188,7 @@ public class DictionaryAction extends Struts2Action {
                         List<Dictionary> tempDictionaryList = dictionaryService.list(dmb);
                         if (tempDictionaryList != null && tempDictionaryList.size() > 0) {
                             sb.append(String.format(UPDATE_ERROR_MSG_FORMAT, UPDATE_GROUP, d.getDname(), UPDATE_GROUP, UPDATE_DEPARTMENT, UPDATE_DEPARTMENT));
-//                            sb.append("å·²ç»æœ‰å°ç»„åœ¨ä½¿ç”¨'" + d.getDname() + "',å¦‚è¦åˆ é™¤,è¯·æŠŠå°ç»„æ‰€åœ¨éƒ¨é—¨æ”¹ä¸ºå…¶å®ƒéƒ¨é—¨ã€‚<br/>");
+//                            sb.append("ÒÑ¾­ÓĞĞ¡×éÔÚÊ¹ÓÃ'" + d.getDname() + "',ÈçÒªÉ¾³ı,Çë°ÑĞ¡×éËùÔÚ²¿ÃÅ¸ÄÎªÆäËü²¿ÃÅ¡£<br/>");
                             judge = true;
                         }
 
@@ -197,20 +197,20 @@ public class DictionaryAction extends Struts2Action {
                             dictionaryService.update(d);
                             sb.append(String.format(SUCCESS_MSG_FORMAT, d.getDname(), StateContext.getStateConfigs().get("operState").get(flag + "").getName()));
                         }
-                    } else if (flag == 0 && "group".equals(dictionary.getDtype())) {// åˆ é™¤å°ç»„
+                    } else if (flag == 0 && "group".equals(dictionary.getDtype())) {// É¾³ıĞ¡×é
                         MapBean mb = new MapBean();
                         mb.put("gid", Long.parseLong(checkedId));
                         mb.put("validstate", "-1");
                         List<User> tempUserList = us.list(mb);
                         if (tempUserList != null && tempUserList.size() > 0) {
                             sb.append(String.format(UPDATE_ERROR_MSG_FORMAT, UPDATE_USER, d.getDname(), UPDATE_USER, UPDATE_GROUP, UPDATE_GROUP));
-//                            sb.append("å·²ç»æœ‰ç”¨æˆ·åœ¨ä½¿ç”¨'" + d.getDname() + "',å¦‚è¦åˆ é™¤,è¯·æŠŠç”¨æˆ·æ‰€åœ¨å°ç»„æ”¹ä¸ºå…¶å®ƒå°ç»„ã€‚<br/>");
+//                            sb.append("ÒÑ¾­ÓĞÓÃ»§ÔÚÊ¹ÓÃ'" + d.getDname() + "',ÈçÒªÉ¾³ı,Çë°ÑÓÃ»§ËùÔÚĞ¡×é¸ÄÎªÆäËüĞ¡×é¡£<br/>");
                         } else {
                             d.setState(flag);
                             dictionaryService.update(d);
                             sb.append(String.format(SUCCESS_MSG_FORMAT, d.getDname(), StateContext.getStateConfigs().get("operState").get(flag + "").getName()));
                         }
-                    } else {// å…¶å®ƒ
+                    } else {// ÆäËü
                         d.setState(flag);
                         dictionaryService.update(d);
                         sb.append(String.format(SUCCESS_MSG_FORMAT, d.getDname(), StateContext.getStateConfigs().get("operState").get(flag + "").getName()));
@@ -218,17 +218,17 @@ public class DictionaryAction extends Struts2Action {
                 }
                 addActionMessage(sb.toString());
             } catch (Exception e) {
-                addActionMessage("ä¿®æ”¹çŠ¶æ€å‡ºé”™ï¼š" + e);
-                logger.error("ä¿®æ”¹çŠ¶æ€å‡ºé”™ï¼š" + e);
+                addActionMessage("ĞŞ¸Ä×´Ì¬³ö´í£º" + e);
+                logger.error("ĞŞ¸Ä×´Ì¬³ö´í£º" + e);
             }
         } else {
-            addActionMessage("è¯·é€‰æ‹©è¦ä¿®æ”¹çŠ¶æ€çš„æ•°æ®");
+            addActionMessage("ÇëÑ¡ÔñÒªĞŞ¸Ä×´Ì¬µÄÊı¾İ");
         }
         return "reload";
     }
 
     /**
-     * è·å–æŸ¥è¯¢æ¡ä»¶
+     * »ñÈ¡²éÑ¯Ìõ¼ş
      *
      * @return
      */
@@ -239,7 +239,7 @@ public class DictionaryAction extends Struts2Action {
                 mb.put("id", dictionary.getId());
             }
             if (dictionary.getDtype() != null && !"".equals(dictionary.getDtype())) {
-                // å¦‚æœä¸æ˜¯æšä¸¾çš„å…ƒç´ ï¼Œè®¾ç½®é»˜è®¤æ˜¯ç¬¬ä¸€ä¸ª
+                // Èç¹û²»ÊÇÃ¶¾ÙµÄÔªËØ£¬ÉèÖÃÄ¬ÈÏÊÇµÚÒ»¸ö
                 if (!EnumUtil.checkDType(dictionary.getDtype())) {
                     dictionary.setDtype(TypeConstant.department.name());
                 }
@@ -264,7 +264,7 @@ public class DictionaryAction extends Struts2Action {
                 mb.put("inserttime", dictionary.getInserttime());
             }
         } else {
-            // è®¾ç½®é»˜è®¤æ˜¯ç¬¬ä¸€ä¸ª
+            // ÉèÖÃÄ¬ÈÏÊÇµÚÒ»¸ö
             dictionary = new Dictionary();
             dictionary.setDtype(TypeConstant.department.name());
             mb.put("dtype", dictionary.getDtype());

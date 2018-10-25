@@ -32,7 +32,7 @@ import core.module.utils.Struts2Utils;
 import core.module.web.Struts2Action;
 
 /**
- * ç®¡ç†å‘˜è´¦å·æ§åˆ¶ç±»
+ * ¹ÜÀíÔ±ÕËºÅ¿ØÖÆÀà
  *
  * @author guojt
  * @since 2010-02-14
@@ -41,7 +41,7 @@ import core.module.web.Struts2Action;
 public class UserAction extends Struts2Action {
 
 	private static final long serialVersionUID = -4714087534313256399L;
-	private static final String SUCCESS_MSG_FORMAT = "è®¾ç½®ä¸º/\"%s/\"çŠ¶æ€æˆåŠŸ!";
+	private static final String SUCCESS_MSG_FORMAT = "ÉèÖÃÎª\"%s\"×´Ì¬³É¹¦!";
 
 	@Autowired
 	private UserService us;
@@ -51,12 +51,12 @@ public class UserAction extends Struts2Action {
 	private DictionaryService ds;
 
 	private User user;
-	private User searchUser;    //ç”¨äºä¿å­˜æœç´¢æ¡ä»¶çš„Userå¯¹è±¡
+	private User searchUser;    //ÓÃÓÚ±£´æËÑË÷Ìõ¼şµÄUser¶ÔÏó
 	private Page<User> page = new Page<User>(10);
 	private String checkedIds;
 	private List<Role> roleList;
 	private String audit;
-	private Set<String> viewRechargeSet = new HashSet<String>();    //è¯¥ç®¡ç†å‘˜èƒ½æŸ¥çœ‹å“ªå‡ æ¬¾æ¸¸æˆçš„å……å€¼
+	private Set<String> viewRechargeSet = new HashSet<String>();    //¸Ã¹ÜÀíÔ±ÄÜ²é¿´ÄÄ¼¸¿îÓÎÏ·µÄ³äÖµ
 	private String[] games = null;
 	private List<Dictionary> departmentList = new ArrayList<Dictionary>();
 	private List<Dictionary> groupList = new ArrayList<Dictionary>();
@@ -67,7 +67,7 @@ public class UserAction extends Struts2Action {
 	private HttpServletResponse response = ServletActionContext.getResponse();
 
 	/**
-	 * è·å–ç®¡ç†å‘˜åˆ—è¡¨
+	 * »ñÈ¡¹ÜÀíÔ±ÁĞ±í
 	 *
 	 * @return
 	 */
@@ -91,20 +91,20 @@ public class UserAction extends Struts2Action {
 			roleList = rs.getRoleList(null);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("è·å–ç®¡ç†å‘˜åˆ—è¡¨å‡ºé”™ï¼š", e.getMessage());
+			logger.error("»ñÈ¡¹ÜÀíÔ±ÁĞ±í³ö´í£º", e.getMessage());
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * è·å–æŸ¥è¯¢æ¡ä»¶
+	 * »ñÈ¡²éÑ¯Ìõ¼ş
 	 *
 	 * @return
 	 */
 	private MapBean search() {
 		MapBean mb = new MapBean();
 		if (searchUser != null) {
-			//æ·»åŠ æœç´¢æ¡ä»¶
+			//Ìí¼ÓËÑË÷Ìõ¼ş
 			if (searchUser.getUserName() != null && !"".equals(searchUser.getUserName())) {
 				mb.put("userName", searchUser.getUserName());
 			}
@@ -130,7 +130,7 @@ public class UserAction extends Struts2Action {
 	}
 
 	/**
-	 * ç¦æ­¢/å¯ç”¨ç®¡ç†å‘˜
+	 * ½ûÖ¹/ÆôÓÃ¹ÜÀíÔ±
 	 *
 	 * @return
 	 */
@@ -140,21 +140,21 @@ public class UserAction extends Struts2Action {
 				MapBean mb = new MapBean();
 				mb.put("state", audit);
 				addActionMessage(String.format(SUCCESS_MSG_FORMAT,StateContext.getStateConfigs().get("userState").get(audit + "").getName()));
-//                addActionMessage("è®¾ç½®ä¸º\"" + StateContext.getStateConfigs().get("userState").get(audit + "").getName() + "\"çŠ¶æ€æˆåŠŸ");
+//                addActionMessage("ÉèÖÃÎª\"" + StateContext.getStateConfigs().get("userState").get(audit + "").getName() + "\"×´Ì¬³É¹¦");
 				for (String checkedId : StringUtils.split(checkedIds, ",")) {
 					mb.put("id", Long.valueOf(checkedId));
 					us.disabled(mb);
 				}
 			}
 		} catch (Exception e) {
-			logger.error("ä¿®æ”¹ç®¡ç†å‘˜çŠ¶æ€å‘ç”Ÿå¼‚å¸¸ï¼š" + e);
-			addActionMessage("ä¿®æ”¹ç®¡ç†å‘˜çŠ¶æ€å‘ç”Ÿå¼‚å¸¸ï¼š" + e);
+			logger.error("ĞŞ¸Ä¹ÜÀíÔ±×´Ì¬·¢ÉúÒì³££º" + e);
+			addActionMessage("ĞŞ¸Ä¹ÜÀíÔ±×´Ì¬·¢ÉúÒì³££º" + e);
 		}
 		return RELOAD;
 	}
 
 	/**
-	 * åˆå§‹åŒ–æ·»åŠ ç®¡ç†å‘˜
+	 * ³õÊ¼»¯Ìí¼Ó¹ÜÀíÔ±
 	 *
 	 * @return
 	 */
@@ -170,7 +170,7 @@ public class UserAction extends Struts2Action {
 	}
 
 	/**
-	 * Ajax æŸ¥è¯¢æŸä¸ªå¤§ç±»çš„å°ç±»
+	 * Ajax ²éÑ¯Ä³¸ö´óÀàµÄĞ¡Àà
 	 *
 	 * @return
 	 */
@@ -203,7 +203,7 @@ public class UserAction extends Struts2Action {
 	}
 
 	/**
-	 * åˆå§‹åŒ–ä¿®æ”¹ç®¡ç†å‘˜
+	 * ³õÊ¼»¯ĞŞ¸Ä¹ÜÀíÔ±
 	 *
 	 * @return
 	 */
@@ -231,7 +231,7 @@ public class UserAction extends Struts2Action {
 
 
 	/**
-	 * ä¿®æ”¹ä¸ªäººèµ„æ–™-é¡µé¢
+	 * ĞŞ¸Ä¸öÈË×ÊÁÏ-Ò³Ãæ
 	 *
 	 * @return
 	 */
@@ -258,7 +258,7 @@ public class UserAction extends Struts2Action {
 	}
 
 	/**
-	 * ä¿å­˜ä¿®æ”¹ä¸ªäººèµ„æ–™
+	 * ±£´æĞŞ¸Ä¸öÈË×ÊÁÏ
 	 *
 	 * @return
 	 */
@@ -266,16 +266,16 @@ public class UserAction extends Struts2Action {
 		try {
 			user.setUpdateTime(new Date());
 			us.updateMyInfo(user);
-			addActionMessage("ä¿®æ”¹ä¸ªäººèµ„æ–™æˆåŠŸ!");
+			addActionMessage("ĞŞ¸Ä¸öÈË×ÊÁÏ³É¹¦!");
 		} catch (Exception e) {
-			addActionMessage("ä¿®æ”¹ä¸ªäººèµ„æ–™å‡ºé”™ï¼š" + e);
-			logger.error("ä¿®æ”¹ä¸ªäººèµ„æ–™å‡ºé”™ï¼š" + e);
+			addActionMessage("ĞŞ¸Ä¸öÈË×ÊÁÏ³ö´í£º" + e);
+			logger.error("ĞŞ¸Ä¸öÈË×ÊÁÏ³ö´í£º" + e);
 		}
 		return "myInfo";
 	}
 
 	/**
-	 * ä¿®æ”¹å¯†ç -é¡µé¢
+	 * ĞŞ¸ÄÃÜÂë-Ò³Ãæ
 	 *
 	 * @return
 	 */
@@ -285,7 +285,7 @@ public class UserAction extends Struts2Action {
 	}
 
 	/**
-	 * ä¿å­˜ä¿®æ”¹å¯†ç 
+	 * ±£´æĞŞ¸ÄÃÜÂë
 	 *
 	 * @return
 	 */
@@ -295,32 +295,32 @@ public class UserAction extends Struts2Action {
 			Md5PwdEncoder encoder = new Md5PwdEncoder();
 			String md5_oldPassword = encoder.encodePassword(oldPassword);
 			if (md5_oldPassword.equals(u.getPassword())) {
-				//å¦‚æœç”¨æˆ·æäº¤äº†æ–°å¯†ç ï¼Œåˆ™åŠ å¯†åä¸€åŒæ›´æ–°
+				//Èç¹ûÓÃ»§Ìá½»ÁËĞÂÃÜÂë£¬Ôò¼ÓÃÜºóÒ»Í¬¸üĞÂ
 				if (user.getPassword() != null && !"".equals(user.getPassword())) {
 					String md5_password = encoder.encodePassword(user.getPassword());
 					user.setPassword(md5_password);
 					try {
 						user.setUpdateTime(new Date());
 						us.updateMyPassword(user);
-						addActionMessage("ä¿®æ”¹å¯†ç æˆåŠŸ!");
+						addActionMessage("ĞŞ¸ÄÃÜÂë³É¹¦!");
 					} catch (Exception e) {
-						addActionMessage("ä¿®æ”¹å¯†ç å‡ºé”™ï¼š" + e);
-						logger.error("ä¿®æ”¹å¯†ç å‡ºé”™ï¼š" + e);
+						addActionMessage("ĞŞ¸ÄÃÜÂë³ö´í£º" + e);
+						logger.error("ĞŞ¸ÄÃÜÂë³ö´í£º" + e);
 					}
 				} else {
-					addActionMessage("ä¿®æ”¹å¯†ç å¤±è´¥ï¼Œæ–°å¯†ç ä¸èƒ½ä¸ºç©º!");
+					addActionMessage("ĞŞ¸ÄÃÜÂëÊ§°Ü£¬ĞÂÃÜÂë²»ÄÜÎª¿Õ!");
 				}
 			} else {
-				addActionMessage("ä¿®æ”¹å¯†ç å¤±è´¥ï¼Œæ—§å¯†ç ä¸æ­£ç¡®!");
+				addActionMessage("ĞŞ¸ÄÃÜÂëÊ§°Ü£¬¾ÉÃÜÂë²»ÕıÈ·!");
 			}
 		} else {
-			addActionMessage("ä¿®æ”¹å¯†ç å¤±è´¥ï¼Œæ—§å¯†ç ä¸èƒ½ä¸ºç©º!");
+			addActionMessage("ĞŞ¸ÄÃÜÂëÊ§°Ü£¬¾ÉÃÜÂë²»ÄÜÎª¿Õ!");
 		}
 		return "myPassword";
 	}
 
 	/**
-	 * æ¸…é™¤å¯†ç 
+	 * Çå³ıÃÜÂë
 	 *
 	 * @return
 	 */
@@ -333,19 +333,19 @@ public class UserAction extends Struts2Action {
 	}
 
 	/**
-	 * æ·»åŠ /æ›´æ–°ç”¨æˆ·
+	 * Ìí¼Ó/¸üĞÂÓÃ»§
 	 *
 	 * @return
 	 */
 	public String save() {
-		//ç”¨æˆ·idä¸ºç©ºï¼Œåˆ™è¡¨ç¤ºæ·»åŠ ,å¦åˆ™ä¸ºä¿®æ”¹
+		//ÓÃ»§idÎª¿Õ£¬Ôò±íÊ¾Ìí¼Ó,·ñÔòÎªĞŞ¸Ä
 		if (user.getId() == null) {
-			//æ£€æµ‹ç”¨æˆ·åæ˜¯å¦å·²ç»å­˜åœ¨
+			//¼ì²âÓÃ»§ÃûÊÇ·ñÒÑ¾­´æÔÚ
 			MapBean mb = new MapBean();
 			mb.put("userName", user.getUserName());
 			mb.put("allState", "all");
 			if (us.isUserNameExist(mb)) {
-				addActionMessage("è´¦å·å·²ç»å­˜åœ¨!");
+				addActionMessage("ÕËºÅÒÑ¾­´æÔÚ!");
 			} else {
 				try {
 					Md5PwdEncoder encoder = new Md5PwdEncoder();
@@ -353,15 +353,15 @@ public class UserAction extends Struts2Action {
 					user.setPassword(md5_password);
 					user.setViewRecharge("");
 					us.saveUser(user);
-					addActionMessage("æ–°å¢ç®¡ç†å‘˜æˆåŠŸ!");
+					addActionMessage("ĞÂÔö¹ÜÀíÔ±³É¹¦!");
 				} catch (Exception e) {
-					addActionMessage("æ–°å¢ç®¡ç†å‘˜å‡ºé”™ï¼š" + e);
-					logger.error("æ–°å¢ç®¡ç†å‘˜å‡ºé”™ï¼š" + e);
+					addActionMessage("ĞÂÔö¹ÜÀíÔ±³ö´í£º" + e);
+					logger.error("ĞÂÔö¹ÜÀíÔ±³ö´í£º" + e);
 				}
 			}
 
 		} else {
-			//å¦‚æœç”¨æˆ·æäº¤äº†æ–°å¯†ç ï¼Œåˆ™åŠ å¯†åä¸€åŒæ›´æ–°
+			//Èç¹ûÓÃ»§Ìá½»ÁËĞÂÃÜÂë£¬Ôò¼ÓÃÜºóÒ»Í¬¸üĞÂ
 			if (user.getPassword() != null && !"".equals(user.getPassword())) {
 				Md5PwdEncoder encoder = new Md5PwdEncoder();
 				String md5_password = encoder.encodePassword(user.getPassword());
@@ -378,10 +378,10 @@ public class UserAction extends Struts2Action {
 					user.setViewRecharge("");
 				}
 				us.updateUser(user);
-				addActionMessage("ä¿®æ”¹ç®¡ç†å‘˜æˆåŠŸ!");
+				addActionMessage("ĞŞ¸Ä¹ÜÀíÔ±³É¹¦!");
 			} catch (Exception e) {
-				addActionMessage("ä¿®æ”¹ç®¡ç†å‘˜å‡ºé”™ï¼š" + e);
-				logger.error("ä¿®æ”¹ç®¡ç†å‘˜å‡ºé”™ï¼š" + e);
+				addActionMessage("ĞŞ¸Ä¹ÜÀíÔ±³ö´í£º" + e);
+				logger.error("ĞŞ¸Ä¹ÜÀíÔ±³ö´í£º" + e);
 			}
 		}
 		return RELOAD;
@@ -389,7 +389,7 @@ public class UserAction extends Struts2Action {
 	}
 
 	/**
-	 * æ£€æŸ¥å¸å·æ˜¯å¦å·²ç»å­˜åœ¨
+	 * ¼ì²éÕÊºÅÊÇ·ñÒÑ¾­´æÔÚ
 	 *
 	 * @return
 	 */
@@ -401,7 +401,7 @@ public class UserAction extends Struts2Action {
 			boolean isUnique = us.isUserNameExist(mb);
 			Struts2Utils.renderText(isUnique + "");
 		} catch (Exception e) {
-			logger.error("æ£€æŸ¥å¸å·æ˜¯å¦å·²ç»å­˜åœ¨å‡ºé”™ï¼š" + e.getMessage(), e);
+			logger.error("¼ì²éÕÊºÅÊÇ·ñÒÑ¾­´æÔÚ³ö´í£º" + e.getMessage(), e);
 		}
 		return null;
 	}
