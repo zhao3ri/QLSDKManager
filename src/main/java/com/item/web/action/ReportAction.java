@@ -145,7 +145,6 @@ public class ReportAction extends Struts2Action {
         if (StringUtils.isNotBlank(yearMonthStr)) {
             mb.put("month", yearMonthStr);
             mb.put("yearMonth", yearMonthStr.replace("-", ""));
-            System.out.println(mb.getString("yearMonth"));
             return true;
         } else {
             Calendar calendar = Calendar.getInstance();
@@ -304,9 +303,9 @@ public class ReportAction extends Struts2Action {
         }
 
         MapBean mb = new MapBean();
-        if (StringUtils.isNotBlank(yearMonthStr)) {
-            mb.put("yearMonth", yearMonthStr.replace("-", ""));
-            mb.put("appIds", appIds);
+        boolean isMonStat = setDate(mb);
+        mb.put("appIds", appIds);
+        if (isMonStat) {
             sPlatformMonthliesApp = sPlatformMonthlyService.listApp(mb);
             sPlatformMonthliesPlatform = sPlatformMonthlyService.listPlatform(mb);
 
@@ -322,12 +321,9 @@ public class ReportAction extends Struts2Action {
                 }
             }
         } else {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DATE, -1);
-            mb.put("statDate", DateUtils.format(calendar.getTime(), "yyyy-MM-dd"));
-            mb.put("appIds", appIds);
-            sPlatformsApp = sPlatformService.getMaxDateDataApp(mb);
-            sPlatformsPlatform = sPlatformService.getMaxDateDataPlatform(mb);
+            mb.put("statDate", String.format("'%s'", mb.getString("statDate")));
+            sPlatformsApp = sPlatformService.getLastDayAppData(mb);
+            sPlatformsPlatform = sPlatformService.getLastDayPlatformData(mb);
             for (SPlatform sPlatform : sPlatformsApp) {
                 if (iteratePlatformsMap.get(sPlatform.getAppName()) == null) {
                     List<SPlatform> thisSPlatformsList = new ArrayList<SPlatform>();

@@ -56,6 +56,7 @@ public class SGame {
 
     private Integer activeUsers;
 
+    private Integer totalNewPayUser;
 
     public Integer getActiveUsers() {
         return activeUsers == null ? 0 : activeUsers;
@@ -223,5 +224,13 @@ public class SGame {
      */
     public void setPayUsers(Integer payUsers) {
         this.payUsers = payUsers;
+    }
+
+    public Integer getTotalNewPayUser() {
+        return totalNewPayUser == null ? 0 : totalNewPayUser;
+    }
+
+    public void setTotalNewPayUser(Integer totalNewPayUser) {
+        this.totalNewPayUser = totalNewPayUser;
     }
 }

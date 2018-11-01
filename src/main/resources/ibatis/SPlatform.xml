@@ -89,4 +89,90 @@
 		<include refid="SPlatform.where" />
 		GROUP BY bp.platformName
 	</select>
+
+	<select id="SPlatform.getLastDayAppData" resultClass="sPlatform"
+			parameterClass="mb">
+		SELECT
+		SUM(sp.payAmount) as payAmount,
+		SUM(sp.payTimes) as payTimes,
+		SUM(sp.payUsers) as payUsers,
+		SUM(sd.newUserPays) as totalNewPayUser,
+		SUM(sp.totalRegUser) as totalRegUser,
+		SUM(sp.totalRoleUser) as totalRoleUser,
+		SUM(sp.devices) as devices,
+		SUM(sp.activeUsers) as activeUsers,
+		bp.platformName as platformName,
+		bg.appName as appName
+		FROM s_platform_history sp
+		JOIN s_platform_daily sd ON sp.platformId=sd.platformId
+		JOIN b_platform bp ON sp.platformId=bp.id
+		JOIN b_game bg ON sp.appId=bg.id
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				sp.id=#id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="clientType">
+				sp.clientType=#clientType#
+			</isNotNull>
+			<isNotNull prepend="AND" property="appId">
+				sp.appId=#appId#
+			</isNotNull>
+			<isNotEmpty prepend="AND" property="appIds">
+				<![CDATA[ sp.appId in ]]>
+				<iterate property="appIds" conjunction="," open="(" close=")">
+					#appIds[]#
+				</iterate>
+			</isNotEmpty>
+			<isNotNull prepend="AND" property="statDate">
+				sp.statDate=$statDate$
+			</isNotNull>
+			<isNotNull prepend="AND" property="platformId">
+				sp.platformId=#platformId#
+			</isNotNull>
+		</dynamic>
+		GROUP BY bp.platformName,bg.appName
+		ORDER BY bg.appName,bp.platformName,sp.clientType
+	</select>
+
+	<select id="SPlatform.getLastDayPlatformData" resultClass="sPlatform"
+			parameterClass="mb">
+		SELECT
+		bp.platformName as platformName,
+		SUM(sp.payAmount) as payAmount,
+		SUM(sp.payTimes) as payTimes,
+		SUM(sp.payUsers) as payUsers,
+		SUM(sd.newUserPays) as totalNewPayUser,
+		SUM(sp.totalRegUser) as totalRegUser,
+		SUM(sp.totalRoleUser) as totalRoleUser,
+		SUM(sp.devices) as devices,
+		SUM(sp.activeUsers) as activeUsers
+		FROM s_platform_history sp
+		JOIN s_platform_daily sd ON sp.platformId=sd.platformId
+		JOIN b_platform bp ON sp.platformId=bp.id
+		JOIN b_game bg ON sp.appId=bg.id
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				sp.id=#id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="clientType">
+				sp.clientType=#clientType#
+			</isNotNull>
+			<isNotNull prepend="AND" property="appId">
+				sp.appId=#appId#
+			</isNotNull>
+			<isNotEmpty prepend="AND" property="appIds">
+				<![CDATA[ sp.appId in ]]>
+				<iterate property="appIds" conjunction="," open="(" close=")">
+					#appIds[]#
+				</iterate>
+			</isNotEmpty>
+			<isNotNull prepend="AND" property="statDate">
+				sp.statDate=$statDate$
+			</isNotNull>
+			<isNotNull prepend="AND" property="platformId">
+				sp.platformId=#platformId#
+			</isNotNull>
+		</dynamic>
+		GROUP BY bp.platformName
+	</select>
 </sqlMap>

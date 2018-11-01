@@ -31,4 +31,8 @@ public class SGameService {
 	public SGame summary(MapBean mb) {
 		return sGameDao.get("SGame.summary",mb);
 	}
+
+	public SGame stat(MapBean mb) {
+		return sGameDao.get("SGame.stat",mb);
+	}
 }

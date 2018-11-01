@@ -70,6 +70,8 @@ public class SPlatform {
      */
     private Integer payUsers;
 
+    private Integer totalNewPayUser;
+
     /**
      * @return
      */
@@ -254,5 +256,11 @@ public class SPlatform {
         this.activeUsers = activeUsers;
     }
 
+    public Integer getTotalNewPayUser() {
+        return totalNewPayUser == null ? 0 : totalNewPayUser;
+    }
 
+    public void setTotalNewPayUser(Integer totalNewPayUser) {
+        this.totalNewPayUser = totalNewPayUser;
+    }
 }

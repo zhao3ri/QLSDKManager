@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li id="os" style="float: right;right: 20px">
+                                <li id="os" style="float: right;right: 10px">
                                     <div class="form-group width_input" data-toggle="popover" data-placement="top"
                                          data-content="请选择平台">
                                         <select class="form-control" name="clientType" id="clientType"
@@ -360,7 +360,7 @@
                                 </s:if>
                                 <s:else>
                                     <tr>
-                                        <td colspan="12" style="text-align: center;">当前列表没有数据！</td>
+                                        <td colspan="15" style="text-align: center;">当前列表没有数据！</td>
                                     </tr>
                                 </s:else>
                                 </tbody>

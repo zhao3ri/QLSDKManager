@@ -4,9 +4,9 @@
 <sqlMap namespace="SGame">
 
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
-    
-    <typeAlias alias="sGame" type="com.item.domain.SGame" />
-    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <typeAlias alias="sGame" type="com.item.domain.SGame"/>
+    <typeAlias alias="mb" type="core.module.orm.MapBean"/>
 
     <select id="SGame.summary" resultClass="sGame" parameterClass="mb">
         SELECT
@@ -21,5 +21,37 @@
 		FROM s_game_history sg 
 		WHERE statDate=#statDate#
 		AND  appId=#appId# AND clientType=#clientType#
+    </select>
+
+    <select id="SGame.stat" resultClass="sGame" parameterClass="mb">
+        SELECT
+        sg.clientType as clientType,
+        sg.totalRoleUser as totalRoleUser,
+        sg.totalRegUser as totalRegUser,
+        sg.devices as devices,
+        sg.activeUsers as activeUsers,
+        sg.payAmount as payAmount,
+        sg.payTimes as payTimes,
+        sg.payUsers as payUsers,
+        SUM(sd.newUserPays) AS totalNewPayUser
+        FROM
+        s_game_history sg JOIN s_game_daily sd ON (sg.appId=sd.appId AND sg.clientType=sd.clientType)
+        <dynamic prepend="where">
+            <isNotNull prepend="and" property="clientType">
+                sg.clientType=#clientType#
+            </isNotNull>
+            <isNotNull prepend="and" property="appId">
+                sg.appId=#appId#
+            </isNotNull>
+            <isNotEmpty prepend="and" property="statDate">
+                sd.statDate=#statDate#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="like">
+                sd.statDate LIKE '$like$%'
+            </isNotEmpty>
+        </dynamic>
+        <isNotEmpty property="groupby">
+            GROUP BY $groupby$
+        </isNotEmpty>
     </select>
 </sqlMap>

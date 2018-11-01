@@ -175,8 +175,6 @@
         SELECT
         s.appId,
         s.clientType,
-        SUM(s.newUserPayAmount) AS newUserPayAmount,
-        SUM(s.newUserPayTimes) AS newUserPayTimes,
         SUM(s.newUserPays) AS newUserPays
         FROM
         s_game_daily s
@@ -204,8 +202,6 @@
         s.appId,
         s.clientType,
         s.platformId,
-        SUM(s.newUserPayAmount) AS newUserPayAmount,
-        SUM(s.newUserPayTimes) AS newUserPayTimes,
         SUM(s.newUserPays) AS newUserPays
         FROM
         s_platform_daily s
