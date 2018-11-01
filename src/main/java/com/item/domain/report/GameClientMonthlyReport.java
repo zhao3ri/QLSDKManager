@@ -1,70 +1,70 @@
 package com.item.domain.report;
 
+import com.item.domain.SGame;
 import com.item.domain.SGameMonthly;
+import com.item.domain.SPlatform;
 import com.item.domain.SPlatformMonthly;
 
-public class GameClientMonthlyReport {
-	
-	private Long appId;
-	
-	private String appName;
-	
-	private SGameMonthly iosCps;
-	
-	private SPlatformMonthly iosCpa;
-	
-	private SGameMonthly androidCps;
-	
-	private SPlatformMonthly androidCpa;
+public class GameClientMonthlyReport extends GameClientReport {
 
-	public Long getAppId() {
-		return appId;
-	}
+    private SGameMonthly iosCps;
 
-	public void setAppId(Long appId) {
-		this.appId = appId;
-	}
+    private SPlatformMonthly iosCpa;
 
-	public String getAppName() {
-		return appName;
-	}
+    private SGameMonthly androidCps;
 
-	public void setAppName(String appName) {
-		this.appName = appName;
-	}
+    private SPlatformMonthly androidCpa;
 
-	public SGameMonthly getIosCps() {
-		return iosCps;
-	}
+    @Override
+    public SGameMonthly getIosCps() {
+        return iosCps;
+    }
 
-	public void setIosCps(SGameMonthly iosCps) {
-		this.iosCps = iosCps;
-	}
+    @Override
+    public void setIosCps(SGame iosCps) {
+        if (iosCps instanceof SGame)
+            this.iosCps = (SGameMonthly) iosCps;
+        else
+            super.setIosCps(iosCps);
+    }
 
-	public SPlatformMonthly getIosCpa() {
-		return iosCpa;
-	}
+    @Override
+    public SPlatformMonthly getIosCpa() {
+        return iosCpa;
+    }
 
-	public void setIosCpa(SPlatformMonthly iosCpa) {
-		this.iosCpa = iosCpa;
-	}
+    @Override
+    public void setIosCpa(SPlatform iosCpa) {
+        if (iosCpa instanceof SPlatformMonthly)
+            this.iosCpa = (SPlatformMonthly) iosCpa;
+        else
+            super.setIosCpa(iosCpa);
+    }
 
-	public SGameMonthly getAndroidCps() {
-		return androidCps;
-	}
+    @Override
+    public SGameMonthly getAndroidCps() {
+        return androidCps;
+    }
 
-	public void setAndroidCps(SGameMonthly androidCps) {
-		this.androidCps = androidCps;
-	}
+    @Override
+    public void setAndroidCps(SGame androidCps) {
+        if (androidCps instanceof SGameMonthly)
+            this.androidCps = (SGameMonthly) androidCps;
+        else
+            super.setAndroidCps(androidCps);
+    }
 
-	public SPlatformMonthly getAndroidCpa() {
-		return androidCpa;
-	}
+    @Override
+    public SPlatformMonthly getAndroidCpa() {
+        return androidCpa;
+    }
 
-	public void setAndroidCpa(SPlatformMonthly androidCpa) {
-		this.androidCpa = androidCpa;
-	}
-
-
+    @Override
+    public void setAndroidCpa(SPlatform androidCpa) {
+        if (androidCpa instanceof SPlatformMonthly)
+            this.androidCpa = (SPlatformMonthly) androidCpa;
+        else
+            super.setAndroidCpa(androidCpa);
+    }
 
 }

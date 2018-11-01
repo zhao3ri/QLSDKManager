@@ -4,65 +4,104 @@ import com.item.domain.SGame;
 import com.item.domain.SPlatform;
 
 public class GameClientReport {
-	
-	private Long appId;
-	
-	private String appName;
-	
-	private SGame iosCps;
-	
-	private SPlatform iosCpa;
-	
-	private SGame androidCps;
-	
-	private SPlatform androidCpa;
 
-	public Long getAppId() {
-		return appId;
-	}
+    private Long appId;
 
-	public void setAppId(Long appId) {
-		this.appId = appId;
-	}
+    private String appName;
 
-	public String getAppName() {
-		return appName;
-	}
+    private SGame iosCps;
 
-	public void setAppName(String appName) {
-		this.appName = appName;
-	}
+    private SPlatform iosCpa;
 
-	public SGame getIosCps() {
-		return iosCps;
-	}
+    private SGame androidCps;
 
-	public void setIosCps(SGame iosCps) {
-		this.iosCps = iosCps;
-	}
+    private SPlatform androidCpa;
 
-	public SPlatform getIosCpa() {
-		return iosCpa;
-	}
+    private Integer totalIOSPremiumUserCPA;
 
-	public void setIosCpa(SPlatform iosCpa) {
-		this.iosCpa = iosCpa;
-	}
+    private Integer totalIOSPremiumUserCPS;
 
-	public SGame getAndroidCps() {
-		return androidCps;
-	}
+    private Integer totalAndroidPremiumUserCPA;
 
-	public void setAndroidCps(SGame androidCps) {
-		this.androidCps = androidCps;
-	}
+    private Integer totalAndroidPremiumUserCPS;
 
-	public SPlatform getAndroidCpa() {
-		return androidCpa;
-	}
+    public Long getAppId() {
+        return appId;
+    }
 
-	public void setAndroidCpa(SPlatform androidCpa) {
-		this.androidCpa = androidCpa;
-	}
+    public void setAppId(Long appId) {
+        this.appId = appId;
+    }
 
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public SGame getIosCps() {
+        return iosCps;
+    }
+
+    public void setIosCps(SGame iosCps) {
+        this.iosCps = iosCps;
+    }
+
+    public SPlatform getIosCpa() {
+        return iosCpa;
+    }
+
+    public void setIosCpa(SPlatform iosCpa) {
+        this.iosCpa = iosCpa;
+    }
+
+    public SGame getAndroidCps() {
+        return androidCps;
+    }
+
+    public void setAndroidCps(SGame androidCps) {
+        this.androidCps = androidCps;
+    }
+
+    public SPlatform getAndroidCpa() {
+        return androidCpa;
+    }
+
+    public void setAndroidCpa(SPlatform androidCpa) {
+        this.androidCpa = androidCpa;
+    }
+
+    public Integer getTotalIOSPremiumUserCPA() {
+        return totalIOSPremiumUserCPA == null ? 0 : totalIOSPremiumUserCPA;
+    }
+
+    public void setTotalIOSPremiumUserCPA(Integer totalIOSPremiumUserCPA) {
+        this.totalIOSPremiumUserCPA = totalIOSPremiumUserCPA;
+    }
+
+    public Integer getTotalIOSPremiumUserCPS() {
+        return totalIOSPremiumUserCPS == null ? 0 : totalIOSPremiumUserCPS;
+    }
+
+    public void setTotalIOSPremiumUserCPS(Integer totalIOSPremiumUserCPS) {
+        this.totalIOSPremiumUserCPS = totalIOSPremiumUserCPS;
+    }
+
+    public Integer getTotalAndroidPremiumUserCPA() {
+        return totalAndroidPremiumUserCPA == null ? 0 : totalAndroidPremiumUserCPA;
+    }
+
+    public void setTotalAndroidPremiumUserCPA(Integer totalAndroidPremiumUserCPA) {
+        this.totalAndroidPremiumUserCPA = totalAndroidPremiumUserCPA;
+    }
+
+    public Integer getTotalAndroidPremiumUserCPS() {
+        return totalAndroidPremiumUserCPS == null ? 0 : totalAndroidPremiumUserCPS;
+    }
+
+    public void setTotalAndroidPremiumUserCPS(Integer totalAndroidPremiumUserCPS) {
+        this.totalAndroidPremiumUserCPS = totalAndroidPremiumUserCPS;
+    }
 }
