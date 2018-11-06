@@ -16,8 +16,20 @@
         <div class="row">
             <table class="table table-bordered">
                 <tr>
-                    <td>今天充值总额:</td>
+                    <td>今日充值总额:</td>
                     <td>${dashbord.totalPay/100}</td>
+                </tr>
+                <tr>
+                    <td>今日总新增用户:</td>
+                    <td>${dashbord.currentNewUser}</td>
+                </tr>
+                <tr>
+                    <td>本月充值总额:</td>
+                    <td>${dashbord.totalMonthlyPay/100}</td>
+                </tr>
+                <tr>
+                    <td>本月总新增用户:</td>
+                    <td>${dashbord.totalMonthlyNewUser}</td>
                 </tr>
             </table>
         </div>

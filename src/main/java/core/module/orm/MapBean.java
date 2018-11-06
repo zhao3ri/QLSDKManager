@@ -12,6 +12,7 @@ public class MapBean extends HashMap<String, Object> {
     public static final String APP_ID = "appId";
     public static final String CLIENT_TYPE = "clientType";
     public static final String PLATFORM_Id = "platformId";
+    public static final String STAT_DATE = "statDate";
 
     private static final long serialVersionUID = 1775432731349180989L;
 
@@ -22,4 +23,14 @@ public class MapBean extends HashMap<String, Object> {
         return String.valueOf(get(key));
     }
 
+    public static MapBean getBean() {
+        return new MapBean();
+    }
+
+    public static void cleanUp(MapBean bean) {
+        if (bean != null) {
+            bean.clear();
+            bean = null;
+        }
+    }
 }

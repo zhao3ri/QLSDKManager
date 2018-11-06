@@ -3,19 +3,19 @@ package com.item.domain;
 import java.util.Date;
 
 public class Game {
-	/** 
+	/**
 	 * 自增
 	 * */
 	private Long id;
-	 /** 
+	 /**
 	  * 游戏名称
 	 */
 	private String appName;
-	/** 
+	/**
 	 * 密钥
 	 * */
 	private String secretKey;
-	/** 
+	/**
 	 * 创建时间
 	 * */
 	private Date createTime;
@@ -23,12 +23,12 @@ public class Game {
 	 * 游戏开服时间
 	 **/
 	private java.util.Date serviceTime;
-	
+
 	/**
 	 * 是否有权限 0：无 1：有
 	 **/
 	private Integer isAuth;
-	
+
 	public Long getId() {
 		return id;
 	}

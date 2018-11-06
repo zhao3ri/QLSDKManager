@@ -142,7 +142,7 @@ package com.item.domain;
 	 * @return 
 	 */
 	public Integer getOnlineUsers(){
-		return onlineUsers;
+		return onlineUsers== null ? 0 :onlineUsers;
 	}
 	/**
 	 * 设置 [onlineUsers]
@@ -155,7 +155,7 @@ package com.item.domain;
 	 * @return 
 	 */
 	public Integer getRoleUsers(){
-		return roleUsers;
+		return roleUsers== null ? 0 :roleUsers;
 	}
 	/**
 	 * 设置 [roleUsers]
@@ -168,7 +168,7 @@ package com.item.domain;
 	 * @return 
 	 */
 	public Integer getNewDevices(){
-		return newDevices;
+		return newDevices== null ? 0 :newDevices;
 	}
 	/**
 	 * 设置 [newDevices]
@@ -181,7 +181,7 @@ package com.item.domain;
 	 * @return 
 	 */
 	public Integer getPayAmount(){
-		return payAmount;
+		return payAmount== null ? 0 :payAmount;
 	}
 	/**
 	 * 设置 [payAmount]

@@ -53,4 +53,17 @@
          </isEqual>
          ORDER BY statDate ASC
     </select>
+
+	<select id="SGameRealtime.getCurrentNewUsers"  resultClass="Long" parameterClass="mb">
+		SELECT COUNT(*)
+		FROM s_game_realtime
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="like">
+				statDate LIKE '$like$%'
+			</isNotEmpty>
+			<isNotNull prepend="and" property="appId">
+				`appId`=#appId#
+			</isNotNull>
+		</dynamic>
+	</select>
 </sqlMap>

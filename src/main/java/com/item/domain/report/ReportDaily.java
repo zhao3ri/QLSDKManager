@@ -111,7 +111,7 @@ public class ReportDaily {
     }
 
     public Integer getRoleUsers() {
-        return roleUsers;
+        return roleUsers == null ? 0 :roleUsers;
     }
 
     public void setRoleUsers(Integer roleUsers) {
@@ -127,7 +127,7 @@ public class ReportDaily {
     }
 
     public Integer getNewDevices() {
-        return newDevices;
+        return newDevices == null ? 0 :newDevices;
     }
 
     public void setNewDevices(Integer newDevices) {
@@ -135,7 +135,7 @@ public class ReportDaily {
     }
 
     public Integer getActiveUsers() {
-        return activeUsers;
+        return activeUsers == null ? 0 :activeUsers;
     }
 
     public void setActiveUsers(Integer activeUsers) {
@@ -143,7 +143,7 @@ public class ReportDaily {
     }
 
     public Integer getPayAmount() {
-        return payAmount;
+        return payAmount== null ? 0 :payAmount;
     }
 
     public void setPayAmount(Integer payAmount) {
@@ -151,7 +151,7 @@ public class ReportDaily {
     }
 
     public Integer getPayUsers() {
-        return payUsers;
+        return payUsers== null ? 0 :payUsers;
     }
 
     public void setPayUsers(Integer payUsers) {

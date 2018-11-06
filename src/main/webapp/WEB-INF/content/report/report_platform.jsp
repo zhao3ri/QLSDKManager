@@ -78,7 +78,7 @@
                                     <s:iterator value="valueMap" var="item" >
                                         <s:iterator value="#item.value" var="itemVal" status="st">
                                             <tr>
-                                                <c:if test="${st.index == 0 }"><td rowspan=<s:property value="#item.value.size"/>><s:property value="#item.key"/></td></c:if>
+                                                <c:if test="${st.index == 0 }"><td rowspan=<s:property value="#item.value.size"/>><s:property value="#item.key.appName"/></td></c:if>
                                                 <td><s:property value="#itemVal.platformName"/></td>
                                                 <td><s:property value="#itemVal.totalRoleUser"/></td>
                                                 <td><s:property value="#itemVal.totalRegUser"/></td>
@@ -138,7 +138,7 @@
                                 </s:if>
                                 <s:else>
                                     <tr>
-                                        <td colspan="12" style="text-align: center">当前列表没有数据！</td>
+                                        <td colspan="15" style="text-align: center">当前列表没有数据！</td>
                                     </tr>
                                 </s:else>
 
@@ -146,100 +146,100 @@
                             </table>
                         </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-hover table-striped table-bordered table-condensed table-big">
-                                <thead>
-                                <tr>
-                                    <th>渠道</th>
-                                    <th>总创角用户<i class="helpToolTip" data-content="平台所有游戏创角用户（游戏统计维度）数的累加"></i></th>
-                                    <th>总注册用户<i class="helpToolTip" data-content="平台所有游戏注册用户（游戏统计维度）数的累加"></i></th>
-                                    <th>注册设备<i class="helpToolTip" data-content="平台所有游戏注册设备（游戏统计维度）的累加"></i></th>
-                                    <th>活跃用户<i class="helpToolTip" data-content="平台所有游戏活跃用户（游戏统计维度）的累加"></i></th>
-                                    <th>充值金额<i class="helpToolTip" data-content="平台所有游戏充值总额（游戏统计维度）的累加"></i></th>
-                                    <th>充值总次数<i class="helpToolTip" data-content="平台所有游戏充值次数（游戏统计维度）的累加"></i></th>
-                                    <th>付费总人数<i class="helpToolTip" data-content="平台所有游戏充值人数（游戏统计维度）的累加"></i></th>
+                        <%--<div class="table-responsive">--%>
+                            <%--<table class="table table-hover table-striped table-bordered table-condensed table-big">--%>
+                                <%--<thead>--%>
+                                <%--<tr>--%>
+                                    <%--<th>渠道</th>--%>
+                                    <%--<th>总创角用户<i class="helpToolTip" data-content="平台所有游戏创角用户（游戏统计维度）数的累加"></i></th>--%>
+                                    <%--<th>总注册用户<i class="helpToolTip" data-content="平台所有游戏注册用户（游戏统计维度）数的累加"></i></th>--%>
+                                    <%--<th>注册设备<i class="helpToolTip" data-content="平台所有游戏注册设备（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>活跃用户<i class="helpToolTip" data-content="平台所有游戏活跃用户（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>充值金额<i class="helpToolTip" data-content="平台所有游戏充值总额（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>充值总次数<i class="helpToolTip" data-content="平台所有游戏充值次数（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>付费总人数<i class="helpToolTip" data-content="平台所有游戏充值人数（游戏统计维度）的累加"></i></th>--%>
 
-                                    <th>新用户充值人数<i class="helpToolTip" data-content="所选日期内，当天新用户付费总人数"></i></th>
-                                    <th>总付费ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的付费总人数"></i></th>
+                                    <%--<th>新用户充值人数<i class="helpToolTip" data-content="所选日期内，当天新用户付费总人数"></i></th>--%>
+                                    <%--<th>总付费ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的付费总人数"></i></th>--%>
 
-                                    <th>登录ARPU<i class="helpToolTip" data-content="游戏充值总额/活跃用户"></i></th>
-                                    <th>注册ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的总注册用户"></i></th>
+                                    <%--<th>登录ARPU<i class="helpToolTip" data-content="游戏充值总额/活跃用户"></i></th>--%>
+                                    <%--<th>注册ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的总注册用户"></i></th>--%>
 
-                                    <th>登录付费率<i class="helpToolTip" data-content="当日总充值人数/活跃用户"></i></th>
-                                    <th>新用户付费率<i class="helpToolTip" data-content="新用户充值人数/创角用户数"></i></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <s:if test="sPlatformsPlatform.size>0  || sPlatformMonthliesPlatform.size>0">
-                                    <s:if test="sPlatformsPlatform.size>0  &&  sPlatformMonthliesPlatform.size==0">
-                                        <s:set value="sPlatformsPlatform" var="valueList"></s:set>
-                                    </s:if>
-                                    <s:if test="sPlatformMonthliesPlatform.size>0  &&  sPlatformsPlatform.size==0">
-                                        <s:set value="sPlatformMonthliesPlatform" var="valueList"></s:set>
-                                    </s:if>
-                                    <s:iterator value="valueList" var="itemVal">
-                                        <tr>
-                                            <td><s:property value="#itemVal.platformName"/></td>
-                                            <td><s:property value="#itemVal.totalRoleUser"/></td>
-                                            <td><s:property value="#itemVal.totalRegUser"/></td>
-                                            <td><s:property value="#itemVal.devices"/></td>
-                                            <td><s:property value="#itemVal.activeUsers"/></td>
-                                            <td><fmt:formatNumber value="${itemVal.payAmount/100 }"
-                                                                  pattern="0.00"/></td>
-                                            <td><s:property value="#itemVal.payTimes"/></td>
-                                            <td><s:property value="#itemVal.payUsers"/></td>
-                                            <!---->
-                                            <td><s:property value="#itemVal.totalNewPayUser"/></td>
+                                    <%--<th>登录付费率<i class="helpToolTip" data-content="当日总充值人数/活跃用户"></i></th>--%>
+                                    <%--<th>新用户付费率<i class="helpToolTip" data-content="新用户充值人数/创角用户数"></i></th>--%>
+                                <%--</tr>--%>
+                                <%--</thead>--%>
+                                <%--<tbody>--%>
+                                <%--<s:if test="sPlatformsPlatform.size>0  || sPlatformMonthliesPlatform.size>0">--%>
+                                    <%--<s:if test="sPlatformsPlatform.size>0  &&  sPlatformMonthliesPlatform.size==0">--%>
+                                        <%--<s:set value="sPlatformsPlatform" var="valueList"></s:set>--%>
+                                    <%--</s:if>--%>
+                                    <%--<s:if test="sPlatformMonthliesPlatform.size>0  &&  sPlatformsPlatform.size==0">--%>
+                                        <%--<s:set value="sPlatformMonthliesPlatform" var="valueList"></s:set>--%>
+                                    <%--</s:if>--%>
+                                    <%--<s:iterator value="valueList" var="itemVal">--%>
+                                        <%--<tr>--%>
+                                            <%--<td><s:property value="#itemVal.platformName"/></td>--%>
+                                            <%--<td><s:property value="#itemVal.totalRoleUser"/></td>--%>
+                                            <%--<td><s:property value="#itemVal.totalRegUser"/></td>--%>
+                                            <%--<td><s:property value="#itemVal.devices"/></td>--%>
+                                            <%--<td><s:property value="#itemVal.activeUsers"/></td>--%>
+                                            <%--<td><fmt:formatNumber value="${itemVal.payAmount/100 }"--%>
+                                                                  <%--pattern="0.00"/></td>--%>
+                                            <%--<td><s:property value="#itemVal.payTimes"/></td>--%>
+                                            <%--<td><s:property value="#itemVal.payUsers"/></td>--%>
+                                            <%--<!---->--%>
+                                            <%--<td><s:property value="#itemVal.totalNewPayUser"/></td>--%>
 
-                                            <td>
-                                                <c:if test="${itemVal.payUsers==0}">0.00</c:if>
-                                                <c:if test="${itemVal.payUsers>0}">
-                                                    <fmt:formatNumber value="${itemVal.payAmount/100/itemVal.payUsers }"
-                                                                      pattern="0.00"/>
-                                                </c:if>
-                                            </td>
+                                            <%--<td>--%>
+                                                <%--<c:if test="${itemVal.payUsers==0}">0.00</c:if>--%>
+                                                <%--<c:if test="${itemVal.payUsers>0}">--%>
+                                                    <%--<fmt:formatNumber value="${itemVal.payAmount/100/itemVal.payUsers }"--%>
+                                                                      <%--pattern="0.00"/>--%>
+                                                <%--</c:if>--%>
+                                            <%--</td>--%>
 
-                                            <!---->
-                                            <td>
-                                                <c:if test="${itemVal.activeUsers==0}">0.00</c:if>
-                                                <c:if test="${itemVal.activeUsers>0}">
-                                                    <fmt:formatNumber value="${itemVal.payAmount/100/itemVal.activeUsers }"
-                                                                      pattern="0.00"/>
-                                                </c:if>
-                                            </td>
+                                            <%--<!---->--%>
+                                            <%--<td>--%>
+                                                <%--<c:if test="${itemVal.activeUsers==0}">0.00</c:if>--%>
+                                                <%--<c:if test="${itemVal.activeUsers>0}">--%>
+                                                    <%--<fmt:formatNumber value="${itemVal.payAmount/100/itemVal.activeUsers }"--%>
+                                                                      <%--pattern="0.00"/>--%>
+                                                <%--</c:if>--%>
+                                            <%--</td>--%>
 
-                                            <td>
-                                                <c:if test="${itemVal.totalRegUser==0}">0.00</c:if>
-                                                <c:if test="${itemVal.totalRegUser>0}">
-                                                    <fmt:formatNumber
-                                                            value="${itemVal.payAmount/100/itemVal.totalRegUser }"
-                                                            pattern="0.00"/>
-                                                </c:if>
-                                            </td>
-                                            <!---->
-                                            <td>
-                                                <c:if test="${itemVal.totalRegUser==0}">0.00</c:if>
-                                                <c:if test="${itemVal.totalRegUser>0}">
-                                                    <fmt:formatNumber value="${itemVal.payUsers/100/itemVal.totalRegUser }"
-                                                                      pattern="0.00"/>
-                                                </c:if>
-                                            </td>
-                                            <!---->
-                                            <td>
-                                                <c:if test="${itemVal.payUsers==0}">0.00</c:if>
-                                                <c:if test="${itemVal.payUsers>0}">
-                                                    <fmt:formatNumber value="${itemVal.totalNewPayUser/100/itemVal.payUsers }"
-                                                                      pattern="0.00"/>
-                                                </c:if>
-                                            </td>
-                                        </tr>
-                                    </s:iterator>
-                                </s:if>
-                                <s:else>
-                                    <tr>
-                                        <td colspan="15" style="text-align: center;">当前列表没有数据！</td>
-                                    </tr>
-                                </s:else>
+                                            <%--<td>--%>
+                                                <%--<c:if test="${itemVal.totalRegUser==0}">0.00</c:if>--%>
+                                                <%--<c:if test="${itemVal.totalRegUser>0}">--%>
+                                                    <%--<fmt:formatNumber--%>
+                                                            <%--value="${itemVal.payAmount/100/itemVal.totalRegUser }"--%>
+                                                            <%--pattern="0.00"/>--%>
+                                                <%--</c:if>--%>
+                                            <%--</td>--%>
+                                            <%--<!---->--%>
+                                            <%--<td>--%>
+                                                <%--<c:if test="${itemVal.totalRegUser==0}">0.00</c:if>--%>
+                                                <%--<c:if test="${itemVal.totalRegUser>0}">--%>
+                                                    <%--<fmt:formatNumber value="${itemVal.payUsers/100/itemVal.totalRegUser }"--%>
+                                                                      <%--pattern="0.00"/>--%>
+                                                <%--</c:if>--%>
+                                            <%--</td>--%>
+                                            <%--<!---->--%>
+                                            <%--<td>--%>
+                                                <%--<c:if test="${itemVal.payUsers==0}">0.00</c:if>--%>
+                                                <%--<c:if test="${itemVal.payUsers>0}">--%>
+                                                    <%--<fmt:formatNumber value="${itemVal.totalNewPayUser/100/itemVal.payUsers }"--%>
+                                                                      <%--pattern="0.00"/>--%>
+                                                <%--</c:if>--%>
+                                            <%--</td>--%>
+                                        <%--</tr>--%>
+                                    <%--</s:iterator>--%>
+                                <%--</s:if>--%>
+                                <%--<s:else>--%>
+                                    <%--<tr>--%>
+                                        <%--<td colspan="15" style="text-align: center;">当前列表没有数据！</td>--%>
+                                    <%--</tr>--%>
+                                <%--</s:else>--%>
                                 </tbody>
                             </table>
                         </div>

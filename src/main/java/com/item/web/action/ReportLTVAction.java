@@ -23,183 +23,224 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class ReportLTVAction extends Struts2Action{
-	private static final long serialVersionUID = 5645405406052360424L;
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ReportLTVAction.class);
-	
-	private List<Game> allGames;
-	private Long appId;
-	private Integer clientType;
-	private Integer groupType;
-	private Integer compareGroupType;
-	private String channelIds;
-	private String compareChannelIds;
-	private String zoneIds;
-	private String compareZoneIds;
-	private String selectRange;
-	private String compareSelectRange;
-	private String optionJson;
-	private Map<String, Object> result;
-	private String channelName;
-	private String zoneName;	
-	
-	@Autowired 
-	private ReportDailyService reportDailyService;
-	@Autowired
-	private ReportLTVService reportLtvService;
-	@Autowired
-	private BGameService bGameService;
-	@Autowired
-	private ReportService reportService;
-	@Autowired
-	private BGamezoneService gamezoneService;
-	@Autowired
-	private BPlatformService platformService;
-	@Resource
-	private SysroleappauthService roleAppAuthService;
-	
-	public String ltv(){
-		MapBean mb=new MapBean();
-		if (StringUtils.isNotBlank(channelName) ) {
-			mb.put("platformName", channelName);
-			BPlatform platform= platformService.get(mb);
-			channelIds= platform.getId().toString();
-		}
-        if (StringUtils.isNotBlank(zoneName) ) {
-			mb.put("zoneName", zoneName);
-			mb.put("appId", appId);
-			zoneIds=gamezoneService.get(mb).getZoneId();
-		}
+public class ReportLTVAction extends Struts2Action {
+    private static final long serialVersionUID = 5645405406052360424L;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReportLTVAction.class);
+
+    private List<Game> allGames;
+    private Long appId;
+    private Integer clientType;
+    private Integer groupType;
+    private Integer compareGroupType;
+    private String channelIds;
+    private String compareChannelIds;
+    private String zoneIds;
+    private String compareZoneIds;
+    private String selectRange;
+    private String compareSelectRange;
+    private String optionJson;
+    private Map<String, Object> result;
+    private String channelName;
+    private String zoneName;
+
+    @Autowired
+    private ReportDailyService reportDailyService;
+    @Autowired
+    private ReportLTVService reportLtvService;
+    @Autowired
+    private BGameService bGameService;
+    @Autowired
+    private ReportService reportService;
+    @Autowired
+    private BGamezoneService gamezoneService;
+    @Autowired
+    private BPlatformService platformService;
+    @Resource
+    private SysroleappauthService roleAppAuthService;
+
+    public String ltv() {
+        MapBean mb = new MapBean();
+        if (StringUtils.isNotBlank(channelName)) {
+            mb.put("platformName", channelName);
+            BPlatform platform = platformService.get(mb);
+            channelIds = platform.getId().toString();
+        }
+        if (StringUtils.isNotBlank(zoneName)) {
+            mb.put("zoneName", zoneName);
+            mb.put("appId", appId);
+            zoneIds = gamezoneService.get(mb).getZoneId();
+        }
 
         if (!initSearch())
-			return null;
-        logger.info("chanelid="+channelIds);
+            return null;
+        logger.info("chanelid=" + channelIds);
 //		result = reportLtvService.basic(appId,clientType,groupType,channelIds,compareChannelIds,zoneIds,compareZoneIds,selectRange,compareSelectRange,1);
-        result = reportLtvService.listLtv(appId,clientType,channelIds,zoneIds,selectRange,1);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString();
-		}
-		logger.debug(result.toString());
-		return "basic";
-	}
-	
-	public String newly(){
-		if (!initSearch())
-			return null;
-		result = reportDailyService.basic(appId,clientType,groupType,channelIds,compareChannelIds,zoneIds,compareZoneIds,selectRange,compareSelectRange,2);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString();
-		}
-		return "newly";
-	}
-	
-	public String first(){
-		if (!initSearch())
-			return null;
-		result = reportDailyService.basic(appId,clientType,groupType,channelIds,compareChannelIds,zoneIds,compareZoneIds,selectRange,compareSelectRange,3);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString();
-		}
-		return "first";
-	}
-	
-	public String keep(){
-		if (!initSearch())
-			return null;
-		result = reportDailyService.basic(appId,clientType,groupType,channelIds,compareChannelIds,zoneIds,compareZoneIds,selectRange,null,4);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString();
-		}
-		return "keep";
-	}
-	
-	public String loss(){
-		if (!initSearch())
-			return null;
-		result = reportDailyService.basic(appId,clientType,null,channelIds,null,zoneIds,null,null,null,6);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString();
-		}
-		return "loss";
-	}
-	
-	public String back(){
-		if (!initSearch())
-			return null;
-		result = reportDailyService.basic(appId,clientType,groupType,channelIds,compareChannelIds,zoneIds,compareZoneIds,selectRange,compareSelectRange,5);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString();
-		}
-		return "back";
-	}
-	
-	public String change(){
-		if (!initSearch())
-			return null;
-		result = reportDailyService.basic(appId,clientType,groupType,channelIds,compareChannelIds,zoneIds,compareZoneIds,selectRange,compareSelectRange,7);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString();
-		}
-		return "change";
-	}
-	
-	public String operate(){
-		if (!initSearch())
-			return null;
-		
-		result = reportDailyService.operate(appId,clientType,channelIds,zoneIds,selectRange);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString();
-		}
-		return "operate";
-	}
-	
-	@SuppressWarnings("unchecked")
-	public void operateExport(){
-		if (!initSearch())
-			return;
-		//result = reportDailyService.operate(appId,clientType,channelIds,zoneIds,selectRange);
-		result = reportLtvService.listLtv(appId,clientType,channelIds,zoneIds,selectRange,1);
-//		List<ReportHistoryDaily> dailies = (List<ReportHistoryDaily>)result.get("data");
-		List<LTVGamePlatform> ltvDetail = (List<LTVGamePlatform>) result.get("data");
+        result = reportLtvService.listLtv(appId, clientType, channelIds, zoneIds, selectRange, 1);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString();
+        }
+        logger.debug(result.toString());
+        return "basic";
+    }
 
-		ExcelExport ee=new ExcelExport();
-        ee.setHead("LTV报统计报表_"+DateUtils.format(new Date(),"yyyyMMddHHmmss"));
+    public String newly() {
+        if (!initSearch())
+            return null;
+        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 2);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString();
+        }
+        return "newly";
+    }
+
+    public String first() {
+        if (!initSearch())
+            return null;
+        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 3);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString();
+        }
+        return "first";
+    }
+
+    public String keep() {
+        if (!initSearch())
+            return null;
+        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, null, 4);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString();
+        }
+        return "keep";
+    }
+
+    public String loss() {
+        if (!initSearch())
+            return null;
+        result = reportDailyService.basic(appId, clientType, null, channelIds, null, zoneIds, null, null, null, 6);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString();
+        }
+        return "loss";
+    }
+
+    public String back() {
+        if (!initSearch())
+            return null;
+        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 5);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString();
+        }
+        return "back";
+    }
+
+    public String change() {
+        if (!initSearch())
+            return null;
+        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 7);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString();
+        }
+        return "change";
+    }
+
+    public String operate() {
+        if (!initSearch())
+            return null;
+
+        result = reportDailyService.operate(appId, clientType, channelIds, zoneIds, selectRange);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString();
+        }
+        return "operate";
+    }
+
+    @SuppressWarnings("unchecked")
+    public void operateExport() {
+        if (!initSearch())
+            return;
+        //result = reportDailyService.operate(appId,clientType,channelIds,zoneIds,selectRange);
+        result = reportLtvService.listLtv(appId, clientType, channelIds, zoneIds, selectRange, 1);
+//		List<ReportHistoryDaily> dailies = (List<ReportHistoryDaily>)result.get("data");
+        List<LTVGamePlatform> ltvDetail = (List<LTVGamePlatform>) result.get("data");
+
+        ExcelExport ee = new ExcelExport();
+        ee.setHead("LTV报统计报表_" + DateUtils.format(new Date(), "yyyyMMddHHmmss"));
         ee.getEl().add("时间");
         ee.getEl().add("ltv1");
-		ee.getEl().add("ltv2");
-		ee.getEl().add("ltv3");
-		ee.getEl().add("ltv4");
-		ee.getEl().add("ltv5");
-		ee.getEl().add("ltv6");
-		ee.getEl().add("ltv7");
-		ee.getEl().add("ltv14");
-		ee.getEl().add("ltv30");
-		ee.getEl().add("ltv60");
-		ee.getEl().add("ltv90");
-        for(int i=0;i<ltvDetail.size();i++){
-        	List<Excel> e=new ArrayList<Excel>();
-			int ltv2=ltvDetail.get(i).getLtv1()+ltvDetail.get(i).getLtv2();
-			int ltv3 = ltv2+ltvDetail.get(i).getLtv3();
-			int ltv4 = ltv3+ltvDetail.get(i).getLtv4();
-			int ltv5 = ltv4+ltvDetail.get(i).getLtv5();
-			int ltv6 = ltv5+ltvDetail.get(i).getLtv6();
-			int ltv7 = ltv6+ltvDetail.get(i).getLtv7();
-			int ltv14 = ltv7+ltvDetail.get(i).getLtv14();
-			int ltv30 = ltv14+ltvDetail.get(i).getLtv30();
-          	e.add(new Excel(DateUtils.format(ltvDetail.get(i).getStatDate(),"yyyy-MM-dd"),20));
-            e.add(new Excel(ltvDetail.get(i).getLtv1()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv2()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv3()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv4()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv5()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv6()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv7()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv14()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv30()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv60()/100,20));
-			e.add(new Excel(ltvDetail.get(i).getLtv90()/100,20));
+        ee.getEl().add("ltv2");
+        ee.getEl().add("ltv3");
+        ee.getEl().add("ltv4");
+        ee.getEl().add("ltv5");
+        ee.getEl().add("ltv6");
+        ee.getEl().add("ltv7");
+        ee.getEl().add("ltv8");
+        ee.getEl().add("ltv9");
+        ee.getEl().add("ltv10");
+        ee.getEl().add("ltv11");
+        ee.getEl().add("ltv12");
+        ee.getEl().add("ltv13");
+        ee.getEl().add("ltv14");
+        ee.getEl().add("ltv15");
+        ee.getEl().add("ltv16");
+        ee.getEl().add("ltv17");
+        ee.getEl().add("ltv18");
+        ee.getEl().add("ltv19");
+        ee.getEl().add("ltv20");
+        ee.getEl().add("ltv21");
+        ee.getEl().add("ltv22");
+        ee.getEl().add("ltv23");
+        ee.getEl().add("ltv24");
+        ee.getEl().add("ltv25");
+        ee.getEl().add("ltv26");
+        ee.getEl().add("ltv27");
+        ee.getEl().add("ltv28");
+        ee.getEl().add("ltv29");
+        ee.getEl().add("ltv30");
+        ee.getEl().add("ltv60");
+        ee.getEl().add("ltv90");
+        for (int i = 0; i < ltvDetail.size(); i++) {
+            List<Excel> e = new ArrayList<Excel>();
+            int ltv2 = ltvDetail.get(i).getLtv1() + ltvDetail.get(i).getLtv2();
+            int ltv3 = ltv2 + ltvDetail.get(i).getLtv3();
+            int ltv4 = ltv3 + ltvDetail.get(i).getLtv4();
+            int ltv5 = ltv4 + ltvDetail.get(i).getLtv5();
+            int ltv6 = ltv5 + ltvDetail.get(i).getLtv6();
+            int ltv7 = ltv6 + ltvDetail.get(i).getLtv7();
+            int ltv14 = ltv7 + ltvDetail.get(i).getLtv14();
+            int ltv30 = ltv14 + ltvDetail.get(i).getLtv30();
+            e.add(new Excel(DateUtils.format(ltvDetail.get(i).getStatDate(), "yyyy-MM-dd"), 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv1() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv2() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv3() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv4() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv5() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv6() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv7() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv8() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv9() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv10() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv11() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv12() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv13() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv14() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv15() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv16() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv17() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv18() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv20() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv21() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv22() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv23() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv24() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv25() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv26() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv27() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv28() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv29() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv30() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv60() / 100, 20));
+            e.add(new Excel(ltvDetail.get(i).getLtv90() / 100, 20));
 //            e.add(new Excel(dailies.get(i).getRegUsers(),20));
 //            e.add(new Excel(dailies.get(i).getRegDevices(),20));
 //            e.add(new Excel(dailies.get(i).getStartTimes(),20));
@@ -345,168 +386,169 @@ public class ReportLTVAction extends Struts2Action{
 //			}else {
 //				e.add(new Excel("0.00",20));
 //			}
-            
+
             ee.getEll().add(e);
         }
-		ee.setFoot("总共：" + ltvDetail.size()+"条记录");
+        ee.setFoot("总共：" + ltvDetail.size() + "条记录");
         ee.excelExport();
-	}
-	
-	public String online(){
-		if (!initSearch())
-			return null;
-		result = reportService.online(appId, clientType, channelIds
-				, compareChannelIds, zoneIds, compareZoneIds,groupType
-				,compareGroupType,selectRange,compareSelectRange);
-		if (result.containsKey("selectRange")) {
-			selectRange=result.get("selectRange").toString()+" 至 "+result.get("selectRange").toString();
-		}
-		return "online";
-	}
-	
-	private Boolean initSearch(){
-		User userInfo = (User)Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
-		List<Long> appIds = roleAppAuthService.getAuthAppIdsByRoleId(userInfo.getRoleID());
-		if (CollectionUtils.isEmpty(appIds)){
-			try {
-				Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath()+"/common/403.jsp");
-				return false;
-			} catch (IOException e) {
-				LOGGER.error("rechargeRegion error", e);
-				e.printStackTrace();
-				return false;
-			}
-		}
-		allGames = bGameService.list(null);
-		
-		if (null == appId){
-			appId = allGames.get(0).getId();
-			String cookieAppId = CookieUtils.getCookieValue(Struts2Utils.getRequest(), "cookie_appId");
-			if (StringUtils.isNotBlank(cookieAppId) && appIds.contains(Long.valueOf(cookieAppId))) {
-				appId = Long.valueOf(cookieAppId);
-			}
-		}
-		CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_appId", String.valueOf(appId));
-		
-		return true;
-	}
+    }
 
-	public List<Game> getAllGames() {
-		return allGames;
-	}
+    public String online() {
+        if (!initSearch())
+            return null;
+        result = reportService.online(appId, clientType, channelIds
+                , compareChannelIds, zoneIds, compareZoneIds, groupType
+                , compareGroupType, selectRange, compareSelectRange);
+        if (result.containsKey("selectRange")) {
+            selectRange = result.get("selectRange").toString() + " 至 " + result.get("selectRange").toString();
+        }
+        return "online";
+    }
 
-	public void setAllGames(List<Game> allGames) {
-		this.allGames = allGames;
-	}
+    private Boolean initSearch() {
+        User userInfo = (User) Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
+        List<Long> appIds = roleAppAuthService.getAuthAppIdsByRoleId(userInfo.getRoleID());
+        if (CollectionUtils.isEmpty(appIds)) {
+            try {
+                Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath() + "/common/403.jsp");
+                return false;
+            } catch (IOException e) {
+                LOGGER.error("rechargeRegion error", e);
+                e.printStackTrace();
+                return false;
+            }
+        }
+        allGames = bGameService.list(null);
 
-	public Long getAppId() {
-		return appId;
-	}
+        if (null == appId) {
+            appId = allGames.get(0).getId();
+            String cookieAppId = CookieUtils.getCookieValue(Struts2Utils.getRequest(), "cookie_appId");
+            if (StringUtils.isNotBlank(cookieAppId) && appIds.contains(Long.valueOf(cookieAppId))) {
+                appId = Long.valueOf(cookieAppId);
+            }
+        }
+        CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_appId", String.valueOf(appId));
 
-	public void setAppId(Long appId) {
-		this.appId = appId;
-	}
+        return true;
+    }
 
-	public Integer getClientType() {
-		return clientType;
-	}
+    public List<Game> getAllGames() {
+        return allGames;
+    }
 
-	public void setClientType(Integer clientType) {
-		this.clientType = clientType;
-	}
+    public void setAllGames(List<Game> allGames) {
+        this.allGames = allGames;
+    }
 
-	public Integer getGroupType() {
-		return groupType;
-	}
+    public Long getAppId() {
+        return appId;
+    }
 
-	public void setGroupType(Integer groupType) {
-		this.groupType = groupType;
-	}
+    public void setAppId(Long appId) {
+        this.appId = appId;
+    }
 
-	public Integer getCompareGroupType() {
-		return compareGroupType;
-	}
+    public Integer getClientType() {
+        return clientType;
+    }
 
-	public void setCompareGroupType(Integer compareGroupType) {
-		this.compareGroupType = compareGroupType;
-	}
+    public void setClientType(Integer clientType) {
+        this.clientType = clientType;
+    }
 
-	public String getChannelIds() {
-		return channelIds;
-	}
+    public Integer getGroupType() {
+        return groupType;
+    }
 
-	public void setChannelIds(String channelIds) {
-		this.channelIds = channelIds;
-	}
+    public void setGroupType(Integer groupType) {
+        this.groupType = groupType;
+    }
 
-	public String getCompareChannelIds() {
-		return compareChannelIds;
-	}
+    public Integer getCompareGroupType() {
+        return compareGroupType;
+    }
 
-	public void setCompareChannelIds(String compareChannelIds) {
-		this.compareChannelIds = compareChannelIds;
-	}
+    public void setCompareGroupType(Integer compareGroupType) {
+        this.compareGroupType = compareGroupType;
+    }
 
-	public String getZoneIds() {
-		return zoneIds;
-	}
+    public String getChannelIds() {
+        return channelIds;
+    }
 
-	public void setZoneIds(String zoneIds) {
-		this.zoneIds = zoneIds;
-	}
+    public void setChannelIds(String channelIds) {
+        this.channelIds = channelIds;
+    }
 
-	public String getCompareZoneIds() {
-		return compareZoneIds;
-	}
+    public String getCompareChannelIds() {
+        return compareChannelIds;
+    }
 
-	public void setCompareZoneIds(String compareZoneIds) {
-		this.compareZoneIds = compareZoneIds;
-	}
+    public void setCompareChannelIds(String compareChannelIds) {
+        this.compareChannelIds = compareChannelIds;
+    }
 
-	public String getSelectRange() {
-		return selectRange;
-	}
+    public String getZoneIds() {
+        return zoneIds;
+    }
 
-	public void setSelectRange(String selectRange) {
-		this.selectRange = selectRange;
-	}
+    public void setZoneIds(String zoneIds) {
+        this.zoneIds = zoneIds;
+    }
 
-	public String getCompareSelectRange() {
-		return compareSelectRange;
-	}
+    public String getCompareZoneIds() {
+        return compareZoneIds;
+    }
 
-	public void setCompareSelectRange(String compareSelectRange) {
-		this.compareSelectRange = compareSelectRange;
-	}
+    public void setCompareZoneIds(String compareZoneIds) {
+        this.compareZoneIds = compareZoneIds;
+    }
 
-	public String getOptionJson() {
-		return optionJson;
-	}
+    public String getSelectRange() {
+        return selectRange;
+    }
 
-	public void setOptionJson(String optionJson) {
-		this.optionJson = optionJson;
-	}
+    public void setSelectRange(String selectRange) {
+        this.selectRange = selectRange;
+    }
 
-	public Map<String, Object> getResult() {
-		return result;
-	}
-	public void setResult(Map<String, Object> result) {
-		this.result = result;
-	}
+    public String getCompareSelectRange() {
+        return compareSelectRange;
+    }
 
-	public String getChannelName() {
-		return channelName;
-	}
+    public void setCompareSelectRange(String compareSelectRange) {
+        this.compareSelectRange = compareSelectRange;
+    }
 
-	public void setChannelName(String channelName) {
-		this.channelName = channelName;
-	}
+    public String getOptionJson() {
+        return optionJson;
+    }
 
-	public String getZoneName() {
-		return zoneName;
-	}
+    public void setOptionJson(String optionJson) {
+        this.optionJson = optionJson;
+    }
 
-	public void setZoneName(String zoneName) {
-		this.zoneName = zoneName;
-	}
+    public Map<String, Object> getResult() {
+        return result;
+    }
+
+    public void setResult(Map<String, Object> result) {
+        this.result = result;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
+    }
+
+    public String getZoneName() {
+        return zoneName;
+    }
+
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
+    }
 }

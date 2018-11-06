@@ -108,6 +108,7 @@ body {
     margin-left: 0;
   }
   .list_toolbar .width_input{ width:207px;}
+  .list_toolbar .width_input_min{ width:104px;}
 }
 
 

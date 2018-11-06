@@ -93,6 +93,8 @@
 	<select id="SPlatform.getLastDayAppData" resultClass="sPlatform"
 			parameterClass="mb">
 		SELECT
+		sp.appId as appId,
+		sp.platformId as platformId,
 		SUM(sp.payAmount) as payAmount,
 		SUM(sp.payTimes) as payTimes,
 		SUM(sp.payUsers) as payUsers,

@@ -4,7 +4,7 @@
 <sqlMap namespace="SPlatformRealtime">
 
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
-    
+
     <typeAlias alias="sPlatformRealtime" type="com.item.domain.SPlatformRealtime" />
     <typeAlias alias="mb" type="core.module.orm.MapBean" />
 
@@ -54,7 +54,8 @@
 			`roleUsers`,
 			`newDevices`,
 			`payAmount`,
-			`activeUsers`
+			`activeUsers`,
+			`newUsers`
 		FROM s_platform_realtime
         <include refid="SPlatformRealtime.Where"/>
         <isNotNull property="orderby">
@@ -80,7 +81,8 @@
 			`roleUsers`,
 			`newDevices`,
 			`payAmount`,
-			`activeUsers`
+			`activeUsers`,
+		    `newUsers`
 		FROM s_platform_realtime
         <include refid="SPlatformRealtime.Where"/>
         <isNotNull property="orderby">
@@ -90,7 +92,7 @@
        	     LIMIT 0, #pageSize#
         </isNotNull>
     </select>
-    
+
     <select id="SPlatformRealtime.listGroupBy" resultClass="sPlatformRealtime" parameterClass="mb">
         SELECT
 			`statDate`,
@@ -103,7 +105,7 @@
 			SUM(`activeUsers`) AS activeUsers
 		FROM s_platform_realtime
         <include refid="SPlatformRealtime.Where"/>
-        GROUP BY 
+        GROUP BY
         <isEmpty property="groupDateType">
        	 	date_format(`statDate`,'%H:%i:00')
        	</isEmpty>
@@ -127,7 +129,8 @@
 			`roleUsers`,
 			`newDevices`,
 			`payAmount`,
-			`activeUsers`
+			`activeUsers`,
+			`newUsers`
 		FROM s_platform_realtime
 		WHERE
 	  		`id`=#id# 
@@ -143,7 +146,8 @@
 			`roleUsers`,
 			`newDevices`,
 			`payAmount`,
-			`activeUsers`
+			`activeUsers`,
+		    `newUsers`
         )VALUES(
         	#clientType#,
 			#appId#,
@@ -153,11 +157,12 @@
 			#roleUsers#,
 			#newDevices#,
 			#payAmount#,
-			#activeUsers#
+			#activeUsers#,
+			#newUsers#
         )
         <selectKey resultClass="Long" keyProperty="id">
 	       select @@IDENTITY as `id`
-        </selectKey> 
+        </selectKey>
     </insert>
 
     <update id="SPlatformRealtime.update" parameterClass="sPlatformRealtime">
@@ -190,9 +195,12 @@
 				<isNotNull prepend="," property="activeUsers">
 					`activeUsers`=#activeUsers#
 				</isNotNull>
+                <isNotNull prepend="," property="activeUsers">
+                    `newUsers`=#newUsers#
+                </isNotNull>
 	    	</dynamic>
     	WHERE
-    		`id`=#id# 
+    		`id`=#id#
     </update>
 
     <delete id="SPlatformRealtime.delete" parameterClass="Long">

@@ -33,6 +33,7 @@ import core.module.orm.MapBean;
 @Service
 @Transactional
 public class ReportDailyService {
+    private final Logger logger = Logger.getLogger(ReportDailyService.class);
     @Autowired
     private ReportDailyDao reportDailyDao;
     @Autowired
@@ -43,7 +44,6 @@ public class ReportDailyService {
     private BPlatformService bPlatformService;
     @Autowired
     private BGameService bGameService;
-    private final Logger logger = Logger.getLogger(ReportDailyService.class);
 
     public List<ReportDaily> list(MapBean mb) {
         if ("game".equals(mb.get("dimension"))) {

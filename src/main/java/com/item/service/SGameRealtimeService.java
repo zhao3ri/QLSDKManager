@@ -32,4 +32,6 @@ public class SGameRealtimeService {
 	public List<SGameRealtime> listGroupBy(MapBean mb) {
 		return sGameRealtimeDao.find("SGameRealtime.listGroupBy",mb);
 	}
+
+	public long getCurrentNewUsers(MapBean mb) {return sGameRealtimeDao.countResult("SGameRealtime.getCurrentNewUsers",mb); }
 }

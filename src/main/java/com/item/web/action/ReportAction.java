@@ -82,9 +82,10 @@ public class ReportAction extends Struts2Action {
     private List<BPlatform> platforms;
     private List<Long> appIds;
     // 渠道分析总数Map
-    private Map<String, List<SPlatform>> iteratePlatformsMap = new HashMap<String, List<SPlatform>>();
+    private Map<Game, List<SPlatform>> iteratePlatformsMap = new HashMap<>();
     // 渠道分析月份Map
     private Map<String, List<SPlatformMonthly>> iteratePlatformsMonthlyMap = new HashMap<String, List<SPlatformMonthly>>();
+
     // 渠道分析报表--游戏数据汇总
     private List<SPlatform> sPlatformsApp;
     // 渠道分析报表--渠道数据汇总
@@ -322,21 +323,33 @@ public class ReportAction extends Struts2Action {
             }
         } else {
             mb.put("statDate", String.format("'%s'", mb.getString("statDate")));
+//            mb.put("statDate", String.format("'%s'", "2018-10-30"));
             sPlatformsApp = sPlatformService.getLastDayAppData(mb);
-            sPlatformsPlatform = sPlatformService.getLastDayPlatformData(mb);
-            for (SPlatform sPlatform : sPlatformsApp) {
-                if (iteratePlatformsMap.get(sPlatform.getAppName()) == null) {
-                    List<SPlatform> thisSPlatformsList = new ArrayList<SPlatform>();
-                    thisSPlatformsList.add(sPlatform);
-                    iteratePlatformsMap.put(sPlatform.getAppName(), thisSPlatformsList);
-                } else {
-                    List<SPlatform> thisSPlatformsList = iteratePlatformsMap.get(sPlatform.getAppName());
-                    thisSPlatformsList.add(sPlatform);
-                    iteratePlatformsMap.put(sPlatform.getAppName(), thisSPlatformsList);
-                }
-            }
+//            sPlatformsPlatform = sPlatformService.getLastDayPlatformData(mb);
+            updatePlatformStat();
         }
         return "platform";
+    }
+
+    private void updatePlatformStat() {
+        //初始化页面游戏数据
+        for (Game game : allGames) {
+            for (SPlatform sPlatform : sPlatformsApp) {
+                if (game.getAppName().equals(sPlatform.getAppName())) {
+                    List<SPlatform> list;
+                    if (iteratePlatformsMap.get(game) == null) {
+                        list = new ArrayList<>();
+                    } else {
+                        list = iteratePlatformsMap.get(game);
+                    }
+                    list.add(sPlatform);
+                    iteratePlatformsMap.put(game, list);
+                    continue;
+                }
+            }
+
+        }
+
     }
 
     /*
@@ -621,12 +634,12 @@ public class ReportAction extends Struts2Action {
         this.yearMonthStr = yearMonthStr;
     }
 
-    public Map<String, List<SPlatform>> getIteratePlatformsMap() {
+    public Map<Game, List<SPlatform>> getIteratePlatformsMap() {
         return iteratePlatformsMap;
     }
 
     public void setIteratePlatformsMap(
-            Map<String, List<SPlatform>> iteratePlatformsMap) {
+            Map<Game, List<SPlatform>> iteratePlatformsMap) {
         this.iteratePlatformsMap = iteratePlatformsMap;
     }
 

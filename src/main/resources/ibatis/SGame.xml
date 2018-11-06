@@ -26,13 +26,13 @@
     <select id="SGame.stat" resultClass="sGame" parameterClass="mb">
         SELECT
         sg.clientType as clientType,
-        sg.totalRoleUser as totalRoleUser,
-        sg.totalRegUser as totalRegUser,
-        sg.devices as devices,
-        sg.activeUsers as activeUsers,
-        sg.payAmount as payAmount,
-        sg.payTimes as payTimes,
-        sg.payUsers as payUsers,
+        SUM(sg.totalRoleUser) as totalRoleUser,
+        SUM(sg.totalRegUser) as totalRegUser,
+        SUM(sg.devices) as devices,
+        SUM(sg.activeUsers) as activeUsers,
+        SUM(sg.payAmount) as payAmount,
+        SUM(sg.payTimes) as payTimes,
+        SUM(sg.payUsers) as payUsers,
         SUM(sd.newUserPays) AS totalNewPayUser
         FROM
         s_game_history sg JOIN s_game_daily sd ON (sg.appId=sd.appId AND sg.clientType=sd.clientType)
