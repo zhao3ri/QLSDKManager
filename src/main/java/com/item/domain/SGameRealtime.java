@@ -88,8 +88,8 @@ public class SGameRealtime {
     /**
      * @return
      */
-    public Long getAppId() {
-        return appId;
+    public long getAppId() {
+        return appId == null ? 0 : appId;
     }
 
     /**

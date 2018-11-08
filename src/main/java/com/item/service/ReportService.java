@@ -3,6 +3,8 @@ package com.item.service;
 import java.util.*;
 
 import com.item.domain.*;
+import com.item.domain.report.GameStats;
+import com.item.utils.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,21 +53,25 @@ public class ReportService {
             mb.put("statEndDate", selectRange.split("至")[1]);
 
         if (StringUtils.isBlank(selectRange)) {
-//            Calendar calendar = Calendar.getInstance();
-//            calendar.add(Calendar.DATE, -1);
-//            String startDate = DateUtils.format(calendar.getTime(), "yyyy-MM-dd");
-//            String endDate = DateUtils.format(new Date(), "yyyy-MM-dd");
-//            mb.put("statStartDate", startDate);
-//            mb.put("statEndDate", endDate);
-            mb.put("statDate", DateUtils.format(new Date()));
-            result.put("selectRange", DateUtils.format(new Date(), "yyyy-MM-dd"));
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, -1);
+            String startDate = DateUtils.format(calendar.getTime(), "yyyy-MM-dd");
+            String endDate = DateUtils.format(new Date(), "yyyy-MM-dd");
+//            String startDate = "2018-10-30";
+//            String endDate = "2018-10-31";
+            mb.put("statStartDate", startDate);
+            mb.put("statEndDate", endDate);
+            result.put("startDate", startDate);
+            result.put("endDate", endDate);
+//            mb.put("statDate", DateUtils.format(new Date()));
+//            result.put("selectRange", DateUtils.format(new Date(), "yyyy-MM-dd"));
         }
 
         if (statDate != null && statDate.length > 0) {
             if (statDate.length == 1) {
                 mb.put("statDate", statDate[0]);
             }
-            if (statDate.length==2){
+            if (statDate.length == 2) {
                 mb.put("statStartDate", statDate[0]);
                 mb.put("statEndDate", statDate[1]);
             }
@@ -95,11 +101,27 @@ public class ReportService {
                     result.put("data", dataMap);
                     result.put("groupType", "statDate");
                 } else {                                                                                //没选时间段
-                    List<SGameRealtime> sGameRealtimes = sGameRealtimeService.listGroupBy(mb);
-                    String optionJson = getOnlineOptionJson(sGameRealtimes, null);
-                    result.put("data", sGameRealtimes);
-                    result.put("optionJson", optionJson);
-                    result.put("isCompare", 0);
+                    if (!StringUtil.isEmpty(result.get("startDate").toString()) && !StringUtil.isEmpty(result.get("endDate").toString())) {
+                        //页面加载初始化时，默认显示当天和前一天的趋势图
+                        List<SGameRealtime> sGameRealtimes = sGameRealtimeService.listGroupBy(mb);
+                        String optionJson = getDefaultJson(sGameRealtimes);
+                        Iterator<SGameRealtime> it = sGameRealtimes.iterator();
+                        while (it.hasNext()) {
+                            SGameRealtime s = it.next();
+                            if (!DateUtils.format(s.getStatDate()).startsWith(DateUtils.format2yyMMdd(new Date()))) {
+                                it.remove();
+                            }
+                        }
+                        result.put("data", sGameRealtimes);
+                        result.put("optionJson", optionJson);
+                        result.put("isCompare", 0);
+                    } else {
+                        List<SGameRealtime> sGameRealtimes = sGameRealtimeService.listGroupBy(mb);
+                        String optionJson = getOnlineOptionJson(sGameRealtimes, null);
+                        result.put("data", sGameRealtimes);
+                        result.put("optionJson", optionJson);
+                        result.put("isCompare", 0);
+                    }
                 }
             } else {                                                                                //有时间对比
                 List<SGameRealtime> sGameRealtimes = sGameRealtimeService.listGroupBy(mb);
@@ -198,12 +220,11 @@ public class ReportService {
         return result;
     }
 
-    private <T, K> String getOnlineOptionJson(List<T> sRealtimes, List<K> sCompareRealtimes) {
+    private <T extends SGameRealtime, K> String getOnlineOptionJson(List<T> sRealtimes, List<K> sCompareRealtimes) {
         if (CollectionUtils.isEmpty(sRealtimes)) {
             return "";
         }
         Map<String, K> compareData = new HashMap<String, K>();
-
         EChartUtil eChartUtil = new EChartUtil("", null);
         List<Object> xValue = new ArrayList<Object>();
         Map<String, List<Object>> map = new LinkedHashMap<String, List<Object>>();
@@ -282,6 +303,36 @@ public class ReportService {
             hiddenData.add("【活跃用户】");
         }
         eChartUtil.setHiddenData(hiddenData);
+        System.err.println(eChartUtil.getLineOrBarOption(map, xValue, false, false, false, EChartUtil.TYPE_LINE));
         return eChartUtil.getLineOrBarOption(map, xValue, false, false, false, EChartUtil.TYPE_LINE);
+    }
+
+    public <T extends SGameRealtime> String getDefaultJson(List<T> sRealtimes) {
+        if (sRealtimes==null ||sRealtimes.isEmpty()){
+            return null;
+        }
+        List<GameStats> gameStats = GameStats.gameRealTime2GameStats((List<SGameRealtime>) sRealtimes);
+        List<String> keys = GameStats.getAllKeys(gameStats);
+        Map<String, List<Object>> data = GameStats.getData(keys, gameStats, "实时在线", "新增设备", "新增创角", "活跃用户", "充值金额");
+        List<Object> xValue = new ArrayList<Object>(keys);
+        EChartUtil eChartUtil = new EChartUtil("", null);
+        String formatter = "function(params){var tip = \"\";\n" +
+                "\t\t\tfor (var i = 0; i < params.length; i++) {\n" +
+                "\t\t\t\tvar seriesName = params[i].seriesName;\n" +
+                "\t\t\t\tvar type = seriesName.substring(seriesName.indexOf(\"-\") + 3);\n" +
+                "\t\t\t\tvar day = seriesName.substring(0, seriesName.indexOf(\"-\") + 3);\n" +
+                "\t\t\t\tvar time = params[i].name;\n" +
+                "\t\t\t\tvar date = day + \" \" + time\n" +
+                "\t\t\t\tif (i > 0 && params[i - 1].seriesName.substring(0, params[i - 1].seriesName.indexOf(\"-\") + 3) == day) {\n" +
+                "\t\t\t\t    date = \"\"+params[i].marker;\n" +
+                "\t\t\t\t} else {\n" +
+                "\t\t\t\t    if(i!==0){date=\"<br/>\"+date;}\n" +
+                "\t\t\t\t    date = date + \"<br/> \"+params[i].marker;\n" +
+                "\t\t\t\t} \n" +
+                "\t\t\t\ttip = tip + date + type + \":&nbsp;\" + params[i].data + \"<br/>\";\n" +
+                "\t\t\t}return tip;}";
+        String json = eChartUtil.getLineOrBarOption(data, xValue, false, false, false, EChartUtil.TYPE_LINE, formatter);
+        System.err.println(json);
+        return json;
     }
 }

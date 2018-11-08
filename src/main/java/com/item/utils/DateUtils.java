@@ -21,6 +21,15 @@ public class DateUtils {
 			return null;
 		}
 	}
+
+	public static String format2yyMMdd(Date date) {
+		try {
+			return DateFormatUtils.format(date, "yyyy-MM-dd");
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
 	
 	public static String format(Date date,String pattern) {
 		try {

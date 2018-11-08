@@ -603,26 +603,34 @@
     $(document).ready(function () {
         $("#reportLeft_2").addClass("active");
         $("#zone").addClass("active");
-    });
-
-    require(
-        [
-            'echarts',
-            'echarts/chart/line',
-            'echarts/chart/bar',
-            'echarts/chart/pie',
-            'echarts/chart/funnel'
-        ],
-        function (ec) {
-            if ('${result["optionJson"]}' == "") {
-                $("#chartData").html("<div align='center'>没有数据！</div>");
-                return;
-            }
-            var myChart = ec.init(document.getElementById('chartData'));
+        if ('${result["optionJson"]}' == "") {
+            $("#chartData").html("<div align='center'>没有数据！</div>");
+        }else{
+            var myChart = echarts.init(document.getElementById('chartData'),'shine');
             var option = eval('(${result["optionJson"]})');
             myChart.setOption(option);
         }
-    );
+    });
+
+    <%--require(--%>
+        <%--[--%>
+            <%--'echarts',--%>
+            <%--'echarts/chart/line',--%>
+            <%--'echarts/chart/bar',--%>
+            <%--'echarts/chart/pie',--%>
+            <%--'echarts/chart/funnel'--%>
+
+        <%--],--%>
+        <%--function (ec) {--%>
+            <%--if ('${result["optionJson"]}' == "") {--%>
+                <%--$("#chartData").html("<div align='center'>没有数据！</div>");--%>
+                <%--return;--%>
+            <%--}--%>
+            <%--var myChart = ec.init(document.getElementById('chartData'),'shine');--%>
+            <%--var option = eval('(${result["optionJson"]})');--%>
+            <%--myChart.setOption(option);--%>
+        <%--}--%>
+    <%--);--%>
 
     function selectChannelZone() {
         var appId = $("#appId").val();

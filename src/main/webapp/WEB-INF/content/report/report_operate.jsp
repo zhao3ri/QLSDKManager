@@ -2,14 +2,14 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ include file="/common/jquerylibs.jsp" %>
 <body class="fix_top_nav_padding">
-<div id="wrap" > 
+<div id="wrap" >
   <%@ include file="/common/header.jsp" %>
   <div class="container">
-   <div class="row"> 
+   <div class="row">
    	<div class="col-md-1 ">
    		<%@ include file="/common/reportLeft.jsp" %>
 	</div>
-    
+
     <div class=" col-md-11 ">
         <div class="panel panel-default">
         	<form action="reportDaily_operate.shtml" method="post" id="mainForm">
@@ -34,7 +34,7 @@
 		          <div class="form-group    width_input"  data-toggle="popover"  data-placement="top" data-content="时间">
 		            <input  class="form-control daterange" type="text" readonly name="selectRange" value="${selectRange }"  placeholder="时间选择"  sType="search" />
 		          </div>
-		      		
+
  		      		<div class="form-group width_btn">
  		          		<button  type="button" class="btn  btn-primary " onclick="search();"><i class="icon-search"></i> 搜索</button>
  		        	</div>
@@ -44,7 +44,7 @@
         </div>
         <div class="panel panel-default">
           <div class="panel-heading ">
-            <h3 class="panel-title"> 
+            <h3 class="panel-title">
             	详细信息
             </h3>
           </div>
@@ -53,7 +53,7 @@
       			<s:set var="itemSize" value="#result['data'].size"></s:set>
       			<s:if test="result['data'].size > 0">
       			<div class="table-responsive" style="margin-bottom: 10px; overflow-x: scroll; overflow-y: hidden; width: 100%;">
-      				
+
 		      		 <table style="white-space: nowrap;" class="table table-hover table-striped table-bordered table-condensed">
 	            			<tr>
 	            				<th rowspan='<s:property value="result['data'].size + 1"/>' style="background-color: #f2f2f2;"><span style="margin:5px 10px; display:block;">基<br/>本<br/>数<br/>据</span></th>
@@ -135,7 +135,7 @@
 	          				<s:set value="#item.newDevices+#newDevicesTotal" var="newDevicesTotal"></s:set>
 	          				<s:set value="#item.roleDevices+#roleDevicesTotal" var="roleDevicesTotal"></s:set>
 	          				<s:set value="#item.activeUsers+#activeUsersTotal" var="activeUsersTotal"></s:set>
-	          				
+
 	          				<!-- 第二个模块 -->
 	          				<s:set value="#item.payAmount+#payAmountTotal" var="payAmountTotal"></s:set>
 	          				<s:set value="#item.payTimes+#payTimesTotal" var="payTimesTotal"></s:set>
@@ -145,7 +145,7 @@
 	          				<s:set value="#item.newUserPayTimes+#newUserPayTimesTotal" var="newUserPayTimesTotal"></s:set>
 	          				<s:set value="#item.firstPayAmount+#firstPayAmountTotal" var="firstPayAmountTotal"></s:set>
 	          				<s:set value="#item.firstPayUsers+#firstPayUsersTotal" var="firstPayUsersTotal"></s:set>
-	          				
+
 	          				<!-- 第三个模块 -->
 	          				<s:set value="#item.totaldevices" var="totaldevicesTotal"></s:set>
 	          				<s:set value="#item.totalRoleUser" var="totalRoleUserTotal"></s:set>
@@ -154,7 +154,7 @@
 	          				<s:set value="#item.totalPayAmount" var="totalPayAmountTotal"></s:set>
 	          				<s:set value="#item.totalPayTimes" var="totalPayTimesTotal"></s:set>
 	          				<s:set value="#item.totalPayUsers" var="totalPayUsersTotal"></s:set>
-	          				
+
 	          				<tr>
 	          					<!-- 第一个模块 -->
 	          					<td><s:date name="statDate" format="yyyy-MM-dd"/></td>
@@ -179,35 +179,53 @@
           						</c:if>
           						<td>${activeUsers }</td>
           						<td>
-          							<c:if test="${delDay >= 1 }"><fmt:formatNumber  value="${keepUser1/roleUsers * 100 }" pattern="0.00" />%</c:if>
+          							<c:if test="${delDay >= 1 }">
+                                        <c:if test="${roleUsers==0}">0.00%</c:if>
+                                        <c:if test="${roleUsers>0}"><fmt:formatNumber  value="${keepUser1/roleUsers * 100 }" pattern="0.00" />%</c:if></c:if>
           							<c:if test="${delDay < 1 }">--</c:if>
           						</td>
           						<td>
-          							<c:if test="${delDay >= 2 }"><fmt:formatNumber  value="${keepUser3/roleUsers * 100 }" pattern="0.00" />%</c:if>
+          							<c:if test="${delDay >= 2 }">
+                                        <c:if test="${roleUsers==0}">0.00%</c:if>
+                                        <c:if test="${roleUsers>0}"><fmt:formatNumber  value="${keepUser3/roleUsers * 100 }" pattern="0.00" />%</c:if></c:if>
           							<c:if test="${delDay < 2 }">--</c:if>
           						</td>
           						<td>
-          							<c:if test="${delDay >= 3 }"><fmt:formatNumber  value="${keepUser4/roleUsers * 100 }" pattern="0.00" />%</c:if>
+          							<c:if test="${delDay >= 3 }">
+                                        <c:if test="${roleUsers==0}">0.00%</c:if>
+                                        <c:if test="${roleUsers>0}"><fmt:formatNumber  value="${keepUser4/roleUsers * 100 }" pattern="0.00" />%</c:if></c:if>
           							<c:if test="${delDay < 3 }">--</c:if>
           						</td>
           						<td>
-          							<c:if test="${delDay >= 4 }"><fmt:formatNumber  value="${keepUser5/roleUsers * 100 }" pattern="0.00" />%</c:if>
+          							<c:if test="${delDay >= 4 }">
+                                        <c:if test="${roleUsers==0}">0.00%</c:if>
+                                        <c:if test="${roleUsers>0}"><fmt:formatNumber  value="${keepUser5/roleUsers * 100 }" pattern="0.00" />%</c:if></c:if>
           							<c:if test="${delDay < 4 }">--</c:if>
           						</td>
           						<td>
-          							<c:if test="${delDay >= 5 }"><fmt:formatNumber  value="${keepUser6/roleUsers * 100 }" pattern="0.00" />%</c:if>
+          							<c:if test="${delDay >= 5 }">
+                                        <c:if test="${roleUsers==0}">0.00%</c:if>
+                                        <c:if test="${roleUsers>0}"><fmt:formatNumber  value="${keepUser6/roleUsers * 100 }" pattern="0.00" />%</c:if></c:if>
           							<c:if test="${delDay < 5 }">--</c:if>
           						</td>
           						<td>
-          							<c:if test="${delDay >= 6 }"><fmt:formatNumber  value="${keepUser7/roleUsers * 100 }" pattern="0.00" />%</c:if>
+          							<c:if test="${delDay >= 6 }">
+                                        <c:if test="${roleUsers==0}">0.00%</c:if>
+                                        <c:if test="${roleUsers>0}"><fmt:formatNumber  value="${keepUser7/roleUsers * 100 }" pattern="0.00" />%</c:if></c:if>
           							<c:if test="${delDay < 6 }">--</c:if>
           						</td>
           						<td>
-          							<c:if test="${delDay >= 13 }"><fmt:formatNumber  value="${keepUser14/roleUsers * 100 }" pattern="0.00" />%</c:if>
+          							<c:if test="${delDay >= 13 }">
+                                        <c:if test="${roleUsers==0}">0.00%</c:if>
+                                        <c:if test="${roleUsers>0}"><fmt:formatNumber  value="${keepUser14/roleUsers * 100 }" pattern="0.00" />%</c:if>
+                                    </c:if>
           							<c:if test="${delDay < 13 }">--</c:if>
           						</td>
           						<td>
-          							<c:if test="${delDay >= 29 }"><fmt:formatNumber  value="${keepUser30/roleUsers * 100 }" pattern="0.00" />%</c:if>
+          							<c:if test="${delDay >= 29 }">
+                                        <c:if test="${roleUsers==0}">0.00%</c:if>
+                                        <c:if test="${roleUsers>0}"><fmt:formatNumber  value="${keepUser30/roleUsers * 100 }" pattern="0.00" />%</c:if>
+                                    </c:if>
           							<c:if test="${delDay < 29 }">--</c:if>
           						</td>
           						<!-- 第二个模块 -->
@@ -321,7 +339,7 @@
           						<c:if test="${newUserPaysTotal == 0 }">
           							<td>0.00</td>
           						</c:if>
-          						
+
           						<td><fmt:formatNumber  value="${firstPayAmountTotal/100 }" pattern="0.00" /></td>
           						<td>${firstPayUsersTotal }</td>
           						<c:if test="${firstPayUsersTotal > 0 }">
@@ -391,11 +409,11 @@
 	          				<tr>
 	          					<td>玩家平均在线时长(小时)</td>
 	          					<s:iterator value="result['data']" var="item" status="st">
-	          					
+
 	          						<fmt:formatNumber  value="${avgOnlineTime}" pattern="0"  var="total"/>
 				          				<td>
 				          					<fmt:formatNumber  value="${avgOnlineTime/3600 }" pattern="0.00" />
-				          				</td>		
+				          				</td>
 	          						<td>${avgOnlineTime }</td>
 	          					</s:iterator>
 	          				</tr>
@@ -641,20 +659,20 @@
     </div>
   </div>
 </div>
-    <%@ include file="/common/footer.jsp" %>      
+    <%@ include file="/common/footer.jsp" %>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#reportLeft_3").addClass("active");
 			$("#zone").addClass("active");
 		});
-		
+
 		function selectChannelZone(){
 			var appId = $("#appId").val();
 			if($.trim(appId) == ""){
 				errorTip("请先选择游戏！");
 				return;
 			}
-			art.dialog.open("${ctx}/report/report_getChannelZone.shtml?appId="+appId+"&isCompare=0", 
+			art.dialog.open("${ctx}/report/report_getChannelZone.shtml?appId="+appId+"&isCompare=0",
 					{
 						title:'筛选',
 					    id:'addBox',
@@ -664,17 +682,17 @@
 					    opacity:0,
 					    height:'60%',
 					    width:'60%',
-					    fited:true				
+					    fited:true
 					});
 		}
-		
+
 		function selectCompareChannelZone(){
 			var appId = $("#appId").val();
 			if($.trim(appId) == ""){
 				errorTip("请先选择游戏！");
 				return;
 			}
-			art.dialog.open("${ctx}/report/report_getChannelZone.shtml?appId="+appId+"&isCompare=1", 
+			art.dialog.open("${ctx}/report/report_getChannelZone.shtml?appId="+appId+"&isCompare=1",
 				{
 					title:'筛选',
 					id:'addBox',
@@ -688,7 +706,7 @@
 				}
 			);
 		}
-		
+
 		function excelExportData(){
 			if(confirm("您确认导出Excel？")){
 				$("#mainForm").attr("action","reportDaily_operateExport.shtml");

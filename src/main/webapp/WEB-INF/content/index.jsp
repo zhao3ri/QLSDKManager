@@ -12,26 +12,29 @@
 <!-- 页面代码开始 -->
 <div id="wrap">
     <%@ include file="/common/header.jsp" %>
-    <div class="container">
+    <div class="container" style="margin-top: 10px">
         <div class="row">
-            <table class="table table-bordered">
-                <tr>
-                    <td>今日充值总额:</td>
-                    <td>${dashbord.totalPay/100}</td>
-                </tr>
-                <tr>
-                    <td>今日总新增用户:</td>
-                    <td>${dashbord.currentNewUser}</td>
-                </tr>
-                <tr>
-                    <td>本月充值总额:</td>
-                    <td>${dashbord.totalMonthlyPay/100}</td>
-                </tr>
-                <tr>
-                    <td>本月总新增用户:</td>
-                    <td>${dashbord.totalMonthlyNewUser}</td>
-                </tr>
-            </table>
+            <div class="table-responsive" style="width: 100%;">
+                <table class="table-hover table-striped table-bordered table-condensed table-big"
+                       style="width:90%;margin:auto;background-color: rgba(215,232,245,0.7)">
+                    <tr>
+                        <td><b>今日充值总额:</b></td>
+                        <td>${dashbord.totalPay/100}</td>
+                    </tr>
+                    <tr>
+                        <td><b>今日总新增用户:</b></td>
+                        <td>${dashbord.currentNewUser}</td>
+                    </tr>
+                    <tr>
+                        <td><b>本月充值总额:</b></td>
+                        <td>${dashbord.totalMonthlyPay/100}</td>
+                    </tr>
+                    <tr>
+                        <td><b>本月总新增用户:</b></td>
+                        <td>${dashbord.totalMonthlyNewUser}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
