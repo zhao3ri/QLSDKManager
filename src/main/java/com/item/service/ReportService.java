@@ -303,7 +303,6 @@ public class ReportService {
             hiddenData.add("【活跃用户】");
         }
         eChartUtil.setHiddenData(hiddenData);
-        System.err.println(eChartUtil.getLineOrBarOption(map, xValue, false, false, false, EChartUtil.TYPE_LINE));
         return eChartUtil.getLineOrBarOption(map, xValue, false, false, false, EChartUtil.TYPE_LINE);
     }
 

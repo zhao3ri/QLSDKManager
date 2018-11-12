@@ -4,9 +4,9 @@
 <struts>
 	<package name="login" extends="base" namespace="">
 		<action name="log*" method="{1}" class="com.item.web.action.login.LoginAction">
-			<result name="login">/WEB-INF/content/login.jsp</result>
-			<result name="in">/WEB-INF/content/login.jsp</result>
-			<result name="out">/WEB-INF/content/login.jsp</result>
+			<result name="login">/WEB-INF/login.jsp</result>
+			<result name="in">/WEB-INF/login.jsp</result>
+			<result name="out">/WEB-INF/login.jsp</result>
 			<result name="reload" type="redirect">${ctx}/index.shtml</result>
 		</action>
 		<action name="index" method="index" class="com.item.web.action.login.LoginAction">

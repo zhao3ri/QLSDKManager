@@ -11,6 +11,29 @@
 apply plugin: 'java'
 apply plugin: 'war'
 apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+apply plugin: 'org.hidetake.ssh'
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.hidetake:gradle-ssh-plugin:1.0.1'
+    }
+}
+
+ext {
+    tomcatPath = '/data/webapps/tomcat-8'
+}
+
+remotes {
+    server {
+        host = '192.168.6.138'
+        user = 'root'
+        password = '123456'
+    }
+}
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
@@ -43,17 +66,40 @@ sourceSets {
             srcDirs = ['src/main/java']
         }
         resources {
-            srcDirs = ['src/main/resources', 'src/main/config/dev']
-//            srcDirs = ['src/main/resources', 'src/main/config/prod']
+//            srcDirs = ['src/main/resources', 'src/main/config/dev']
+            srcDirs = ['src/main/resources', 'src/main/config/prod']
         }
     }
 }
 
+//gretty {
+//    contextPath = '/'
+//    jvmArgs = ["-Dcfg.env=local"]
+//    servletContainer = 'tomcat7'
+//    httpPort = 8081
+//    // ... many more properties
+//}
 gretty {
-    contextPath = '/'
-    jvmArgs = ["-Dcfg.env=local"]
-    servletContainer = 'tomcat7'
     httpPort = 8081
-    // ... many more properties
+    contextPath = "/sdk-manager"
+    servletContainer = 'tomcat8'
+    debugPort = 8081     // default
+    debugSuspend = true   // default
+//    httpsEnabled = true
+//    httpsPort = 4430
 }
 
+task deploy(dependsOn: war) << {
+    ssh.run {
+        session(remotes.server) {
+            put from:"$war.archivePath.path", into: "$tomcatPath/sdkapps/sdk-manager.war"
+//            execute "$tomcatPath/bin/shutdown.sh"
+            execute "$tomcatPath/bin/stop.sh"
+            execute "rm -rf $tomcatPath/sdkapps/sdk-manager"
+            execute "unzip -oq $tomcatPath/sdkapps/"+war.archiveName+" -d $tomcatPath/sdkapps/sdk-manager"
+            execute "rm -f $tomcatPath/sdkapps/sdk-manager.war"
+//            execute "$tomcatPath/bin/startup.sh"
+            execute "$tomcatPath/bin/restart.sh"
+        }
+    }
+}

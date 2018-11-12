@@ -30,6 +30,24 @@ public class DateUtils {
 			return null;
 		}
 	}
+
+	public static String format2HHmmss(Date date) {
+		try {
+			return DateFormatUtils.format(date, "HH:mm:ss");
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	public static String format2HHmm(Date date) {
+		try {
+			return DateFormatUtils.format(date, "HH:mm");
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
 	
 	public static String format(Date date,String pattern) {
 		try {

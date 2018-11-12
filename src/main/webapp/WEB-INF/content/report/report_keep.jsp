@@ -249,7 +249,7 @@
                                                                 <c:if test="${user==0}">0.00%</c:if>
                                                                 <c:if test="${user>0}">
                                                                     <fmt:formatNumber
-                                                                            value="${itemVal.keepUser1/user * 100 }"
+                                                                            value="${itemVal.keepUser1/user }"
                                                                             type="percent" minFractionDigits="2"
                                                                             maxFractionDigits="2"/></c:if>
                                                             </font></c:if>
@@ -260,7 +260,7 @@
                                                                 value="#itemVal.keepUser3"/>&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${user==0}">0.00%</c:if>
                                                             <c:if test="${user>0}"><fmt:formatNumber
-                                                                    value="${itemVal.keepUser3/user * 100 }"
+                                                                    value="${itemVal.keepUser3/user }"
                                                                     minFractionDigits="2" type="percent"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 2 }">--</c:if>
                                                     </td>
@@ -269,7 +269,7 @@
                                                                 value="#itemVal.keepUser4"/>&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${user==0}">0.00%</c:if>
                                                             <c:if test="${user>0}"><fmt:formatNumber
-                                                                    value="${itemVal.keepUser4/user * 100 }"
+                                                                    value="${itemVal.keepUser4/user }"
                                                                     type="percent" pattern="0.00" minFractionDigits="2"
                                                                     maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 3 }">--</c:if>
@@ -279,7 +279,7 @@
                                                                 value="#itemVal.keepUser5"/>&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${user==0}">0.00%</c:if>
                                                             <c:if test="${user>0}"><fmt:formatNumber
-                                                                    value="${itemVal.keepUser5/user * 100 }"
+                                                                    value="${itemVal.keepUser5/user }"
                                                                     type="percent" pattern="0.00" minFractionDigits="2"
                                                                     maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 4 }">--</c:if>
@@ -289,7 +289,7 @@
                                                                 value="#itemVal.keepUser6"/>&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${user==0}">0.00%</c:if>
                                                             <c:if test="${user>0}"><fmt:formatNumber
-                                                                    value="${itemVal.keepUser6/user * 100 }"
+                                                                    value="${itemVal.keepUser6/user }"
                                                                     type="percent" pattern="0.00"
                                                                     maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 5 }">--</c:if>
@@ -299,7 +299,7 @@
                                                                 value="#itemVal.keepUser7"/>&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${user==0}">0.00%</c:if>
                                                             <c:if test="${user>0}"><fmt:formatNumber
-                                                                    value="${itemVal.keepUser7/user * 100 }"
+                                                                    value="${itemVal.keepUser7/user }"
                                                                     type="percent" maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 6 }">--</c:if>
                                                     </td>
@@ -308,7 +308,7 @@
                                                                 value="#itemVal.keepUser14"/>&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${user==0}">0.00%</c:if>
                                                             <c:if test="${user>0}"><fmt:formatNumber
-                                                                    value="${itemVal.keepUser14/user * 100 }"
+                                                                    value="${itemVal.keepUser14/user }"
                                                                     type="percent" pattern="0.00"
                                                                     maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 13 }">--</c:if>
@@ -318,7 +318,7 @@
                                                                 value="#itemVal.keepUser30"/>&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${user==0}">0.00%</c:if>
                                                             <c:if test="${user>0}"><fmt:formatNumber
-                                                                    value="${itemVal.keepUser30/user * 100 }"
+                                                                    value="${itemVal.keepUser30/user }"
                                                                     type="percent" pattern="0.00" minFractionDigits="2"
                                                                     maxFractionDigits="2"/><</c:if>/font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 29 }">--</c:if>
@@ -334,7 +334,7 @@
                                                             <c:if test="${allUsers==0}">0.00%</c:if>
                                                             <c:if test="${allUsers>0}">
                                                                 <fmt:formatNumber
-                                                                        value="${allkeepUser1/allUsers * 100 }"
+                                                                        value="${allkeepUser1/allUsers }"
                                                                         type="percent" pattern="0.00"
                                                                         maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 1 }">--</c:if>
@@ -343,7 +343,7 @@
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 >= 2 }">${allkeepUser3 }&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${allUsers==0}">0.00%</c:if>
                                                             <c:if test="${allUsers>0}"></c:if><fmt:formatNumber
-                                                                    value="${allkeepUser3/allUsers * 100 }"
+                                                                    value="${allkeepUser3/allUsers }"
                                                                     type="percent" minFractionDigits="2"
                                                                     maxFractionDigits="2"/></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 2 }">--</c:if>
@@ -352,15 +352,16 @@
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 >= 3 }">${allkeepUser4 }&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${allUsers==0}">0.00%</c:if>
                                                             <c:if test="${allUsers>0}"><fmt:formatNumber
-                                                                    value="${allkeepUser4/allUsers * 100 }"
-                                                                    type="percent"/></c:if></font></c:if>
+                                                                    value="${allkeepUser4/allUsers }"
+                                                                    type="percent" minFractionDigits="2"
+                                                                    maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 3 }">--</c:if>
                                                     </td>
                                                     <td>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 >= 4 }">${allkeepUser5 }&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${allUsers==0}">0.00%</c:if>
                                                             <c:if test="${allUsers>0}"><fmt:formatNumber
-                                                                    value="${allkeepUser5/allUsers * 100 }"
+                                                                    value="${allkeepUser5/allUsers }"
                                                                     type="percent" minFractionDigits="2"
                                                                     maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 4 }">--</c:if>
@@ -369,7 +370,7 @@
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 >= 5 }">${allkeepUser6 }&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${allUsers==0}">0.00%</c:if>
                                                             <c:if test="${allUsers>0}"><fmt:formatNumber
-                                                                    value="${allkeepUser6/allUsers * 100 }"
+                                                                    value="${allkeepUser6/allUsers }"
                                                                     type="percent" minFractionDigits="2"
                                                                     maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 5 }">--</c:if>
@@ -378,14 +379,14 @@
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 >= 6 }">${allkeepUser7 }&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${allUsers==0}">0.00%</c:if>
                                                             <c:if test="${allUsers>0}"><fmt:formatNumber
-                                                                    value="${allkeepUser7/allUsers * 100 }"
+                                                                    value="${allkeepUser7/allUsers }"
                                                                     type="percent" minFractionDigits="2"
                                                                     maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 6 }">--</c:if>
                                                     </td>
                                                     <td>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 >= 13 }">${allkeepUser14 }&nbsp;&nbsp;<font color="red"><fmt:formatNumber
-                                                                value="${allkeepUser14/allUsers * 100 }"
+                                                                value="${allkeepUser14/allUsers }"
                                                                 type="percent" minFractionDigits="2"
                                                                 maxFractionDigits="2"/></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 13 }">--</c:if>
@@ -394,7 +395,7 @@
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 >= 30 }">${allkeepUser30 }&nbsp;&nbsp;<font color="red"><c:if
                                                                 test="${allUsers==0}">0.00%</c:if>
                                                             <c:if test="${allUsers>0}"><fmt:formatNumber
-                                                                    value="${allkeepUser30/allUsers * 100 }"
+                                                                    value="${allkeepUser30/allUsers }"
                                                                     type="percent" minFractionDigits="2"
                                                                     maxFractionDigits="2"/></c:if></font></c:if>
                                                         <c:if test="${(nowDate.time - someDate.time)/60/1000/60/24 < 30 }">--</c:if>
@@ -443,8 +444,9 @@
                                                             value="#item.keepUser1"/>&nbsp;&nbsp;<font color="red">
                                                         <c:if test="${userItem==0}">0.00%</c:if>
                                                         <c:if test="${userItem>0}"><fmt:formatNumber
-                                                                value="${item.keepUser1/userItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font></c:if>
+                                                                value="${item.keepUser1/userItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font></c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 1 }">--</c:if>
                                                 </td>
                                                 <td>
@@ -452,8 +454,9 @@
                                                             value="#item.keepUser3"/>&nbsp;&nbsp;<font color="red">
                                                         <c:if test="${userItem==0}">0.00%</c:if>
                                                         <c:if test="${userItem>0}"><fmt:formatNumber
-                                                                value="${item.keepUser3/userItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font></c:if>
+                                                                value="${item.keepUser3/userItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font></c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 2 }">--</c:if>
                                                 </td>
                                                 <td>
@@ -461,8 +464,9 @@
                                                             value="#item.keepUser4"/>&nbsp;&nbsp;<font color="red">
                                                         <c:if test="${userItem==0}">0.00%</c:if>
                                                         <c:if test="${userItem>0}"><fmt:formatNumber
-                                                                value="${item.keepUser4/userItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font></c:if>
+                                                                value="${item.keepUser4/userItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font></c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 3 }">--</c:if>
                                                 </td>
                                                 <td>
@@ -470,8 +474,9 @@
                                                             value="#item.keepUser5"/>&nbsp;&nbsp;<font color="red">
                                                         <c:if test="${userItem==0}">0.00%</c:if>
                                                         <c:if test="${userItem>0}"><fmt:formatNumber
-                                                                value="${item.keepUser5/userItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font></c:if>
+                                                                value="${item.keepUser5/userItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font></c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 4 }">--</c:if>
                                                 </td>
                                                 <td>
@@ -479,8 +484,9 @@
                                                             value="#item.keepUser6"/>&nbsp;&nbsp;<font color="red">
                                                         <c:if test="${userItem==0}">0.00%</c:if>
                                                         <c:if test="${userItem>0}"><fmt:formatNumber
-                                                                value="${item.keepUser6/userItem * 100 }"
-                                                                pattern="0.00"/>%</font></c:if></c:if>
+                                                                value="${item.keepUser6/userItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></font></c:if></c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 5 }">--</c:if>
                                                 </td>
                                                 <td>
@@ -488,15 +494,17 @@
                                                             value="#item.keepUser7"/>&nbsp;&nbsp;<font color="red">
                                                         <c:if test="${userItem==0}">0.00%</c:if>
                                                         <c:if test="${userItem>0}"><fmt:formatNumber
-                                                                value="${item.keepUser7/userItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font></c:if>
+                                                                value="${item.keepUser7/userItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font></c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 6 }">--</c:if>
                                                 </td>
                                                 <td>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 >= 13 }"><s:property
                                                             value="#item.keepUser14"/>&nbsp;&nbsp;<font color="red"><fmt:formatNumber
-                                                            value="${item.keepUser14/userItem * 100 }"
-                                                            pattern="0.00"/>%</font></c:if>
+                                                            value="${item.keepUser14/userItem }"
+                                                            type="percent" minFractionDigits="2"
+                                                            maxFractionDigits="2"/></font></c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 13 }">--</c:if>
                                                 </td>
                                                 <td>
@@ -504,8 +512,9 @@
                                                             value="#item.keepUser30"/>&nbsp;&nbsp;<font color="red">
                                                         <c:if test="${userItem==0}">0.00%</c:if>
                                                         <c:if test="${userItem>0}"><fmt:formatNumber
-                                                                value="${item.keepUser30/userItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font></c:if>
+                                                                value="${item.keepUser30/userItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font></c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 29 }">--</c:if>
                                                 </td>
                                             </tr>
@@ -553,8 +562,9 @@
                                                         ${result['compareData'][st.index].keepUser3 }&nbsp;&nbsp;<font color="red"><c:if
                                                             test="${userCompareItem==0}">0.00%</c:if>
                                                         <c:if test="${userCompareItem>0}"><fmt:formatNumber
-                                                                value="${result['compareData'][st.index].keepUser3/userCompareItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font>
+                                                                value="${result['compareData'][st.index].keepUser3/userCompareItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font>
                                                     </c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 2 }">--</c:if>
                                                 </td>
@@ -563,8 +573,9 @@
                                                         ${result['compareData'][st.index].keepUser4 }&nbsp;&nbsp;<font color="red"><c:if
                                                             test="${userCompareItem==0}">0.00%</c:if>
                                                         <c:if test="${userCompareItem>0}"><fmt:formatNumber
-                                                                value="${result['compareData'][st.index].keepUser4/userCompareItem * 100 }"
-                                                                pattern="0.00"/>%<</c:if>/font>
+                                                                value="${result['compareData'][st.index].keepUser4/userCompareItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/><</c:if>/font>
                                                     </c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 3 }">--</c:if>
                                                 </td>
@@ -573,8 +584,9 @@
                                                         ${result['compareData'][st.index].keepUser5 }&nbsp;&nbsp;<font color="red"><c:if
                                                             test="${userCompareItem==0}">0.00%</c:if>
                                                         <c:if test="${userCompareItem>0}"><fmt:formatNumber
-                                                                value="${result['compareData'][st.index].keepUser5/userCompareItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font>
+                                                                value="${result['compareData'][st.index].keepUser5/userCompareItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font>
                                                     </c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 4 }">--</c:if>
                                                 </td>
@@ -583,8 +595,9 @@
                                                         ${result['compareData'][st.index].keepUser6 }&nbsp;&nbsp;<font color="red"><c:if
                                                             test="${userCompareItem==0}">0.00%</c:if>
                                                         <c:if test="${userCompareItem>0}"><fmt:formatNumber
-                                                                value="${result['compareData'][st.index].keepUser6/userCompareItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font>
+                                                                value="${result['compareData'][st.index].keepUser6/userCompareItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font>
                                                     </c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 5 }">--</c:if>
                                                 </td>
@@ -593,8 +606,9 @@
                                                         ${result['compareData'][st.index].keepUser7 }&nbsp;&nbsp;<font color="red"><c:if
                                                             test="${userCompareItem==0}">0.00%</c:if>
                                                         <c:if test="${userCompareItem>0}"><fmt:formatNumber
-                                                                value="${result['compareData'][st.index].keepUser7/userCompareItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font>
+                                                                value="${result['compareData'][st.index].keepUser7/userCompareItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font>
                                                     </c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 6 }">--</c:if>
                                                 </td>
@@ -603,8 +617,9 @@
                                                         ${result['compareData'][st.index].keepUser14 }&nbsp;&nbsp;<font color="red"><c:if
                                                             test="${userCompareItem==0}">0.00%</c:if>
                                                         <c:if test="${userCompareItem>0}"><fmt:formatNumber
-                                                                value="${result['compareData'][st.index].keepUser14/userCompareItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font>
+                                                                value="${result['compareData'][st.index].keepUser14/userCompareItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font>
                                                     </c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 13 }">--</c:if>
                                                 </td>
@@ -613,8 +628,9 @@
                                                         ${result['compareData'][st.index].keepUser30 }&nbsp;&nbsp;<font color="red"><c:if
                                                             test="${userCompareItem==0}">0.00%</c:if>
                                                         <c:if test="${userCompareItem>0}"><fmt:formatNumber
-                                                                value="${result['compareData'][st.index].keepUser30/userCompareItem * 100 }"
-                                                                pattern="0.00"/>%</c:if></font>
+                                                                value="${result['compareData'][st.index].keepUser30/userCompareItem }"
+                                                                type="percent" minFractionDigits="2"
+                                                                maxFractionDigits="2"/></c:if></font>
                                                     </c:if>
                                                     <c:if test="${(nowDate.time - statDate.time)/60/1000/60/24 < 29 }">--</c:if>
                                                 </td>
