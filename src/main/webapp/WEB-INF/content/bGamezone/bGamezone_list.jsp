@@ -9,11 +9,11 @@
 	    <ol class="breadcrumb row">
 			<li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
 	      	<li class="active">游戏管理</li>
-	      	<li class="active">游戏分区管理列表</li>
+	      	<li class="active">游戏分区列表</li>
 	    </ol>
 		<form role="form" action="bGamezone_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
-	    <div class="panel-heading">游戏分区管理列表信息查询 </div>
+	    <div class="panel-heading">游戏分区列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
 		        <select class="form-control" name="gamezone.appId"  data-original-title="" title="" id="appSel" >

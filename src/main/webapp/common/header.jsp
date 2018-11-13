@@ -122,10 +122,97 @@
             </ul>
             <ul class="nav  nav-pills navbar-form  navbar-left">
                 <li class="menuTop <% out.print(getSelected("index")); %>"><a href="${ctx}/index.shtml">首页</a></li>
+
+                <!--渠道管理-->
+                <mt:auths authUrls="bPlatform_list.shtml,bPlatformApp_list.shtml">
+                    <li class="menuTop dropdown <% out.print(getSelected("bPlatform")); %>"><a href="#"
+                                                                                               class="dropdown-toggle"
+                                                                                               data-toggle="dropdown">渠道统计<b
+                            class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <mt:auth authUrl="bPlatform_list.shtml">
+                                <li><a href="${ctx}/bPlatform/bPlatform_list.shtml">渠道管理</a></li>
+                            </mt:auth>
+                            <mt:auth authUrl="bPlatformApp_list.shtml">
+                                <li><a href="${ctx}/bPlatformApp/bPlatformApp_list.shtml">渠道关联管理</a></li>
+                            </mt:auth>
+                            <mt:auth authUrl="bPlatform_listbalance.shtml">
+                                <li><a href="${ctx}/bPlatform/bPlatform_listbalance.shtml">加币记录</a></li>
+                            </mt:auth>
+                        </ul>
+                    </li>
+                </mt:auths>
+
+                <!-- 游戏管理 -->
+                <mt:auths authUrls="bGame_list.shtml,bGamezone_list.shtml">
+                    <li class="menuTop dropdown <% out.print(getSelected("bGame")); %>"><a href="#"
+                                                                                           class="dropdown-toggle"
+                                                                                           data-toggle="dropdown">游戏管理<b
+                            class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <mt:auth authUrl="bGame_list.shtml">
+                                <li><a href="${ctx}/bGame/bGame_list.shtml">游戏列表</a></li>
+                            </mt:auth>
+                            <mt:auth authUrl="bGame_list.shtml">
+                                <li><a href="${ctx}/bGamezone/bGamezone_list.shtml">游戏分区列表</a></li>
+                            </mt:auth>
+                            <mt:auth authUrl="bRole_list.shtml">
+                                <li><a href="${ctx}/bRole/bRole_list.shtml">游戏角色列表</a></li>
+                            </mt:auth>
+                                <%-- <mt:auth authUrl="bRole_list.shtml">
+                                        <li><a href="${ctx}/bAccount/bAccount_list.shtml">游戏玩家列表</a></li>
+                                </mt:auth> --%>
+                        </ul>
+                    </li>
+                </mt:auths>
+
+                <!--运营数据-->
+                <mt:auths authUrls="report_summary.shtml">
+                    <li class="menuTop dropdown <% out.print(getSelected("report")); %>"><a href="#"
+                                                                                            class="dropdown-toggle"
+                                                                                            data-toggle="dropdown">运营数据<b
+                            class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <mt:auth authUrl="report_summary.shtml">
+                                <li><a href="${ctx}/report/report_summary.shtml">运营数据</a></li>
+                            </mt:auth>
+                        </ul>
+                    </li>
+                </mt:auths>
+
+                <!--游戏数据-->
+                <mt:auths authUrls="roleReport_realTimeLogin.shtml">
+                    <li class="menuTop dropdown <% out.print(getSelected("roleReport")); %>"><a href="#"
+                                                                                                class="dropdown-toggle"
+                                                                                                data-toggle="dropdown">游戏数据<b
+                            class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <mt:auth authUrl="roleReport_realTimeLogin.shtml">
+                                <li><a href="${ctx}/roleReport/roleReport_keepRoles.shtml">游戏数据</a></li>
+                            </mt:auth>
+                        </ul>
+                    </li>
+                </mt:auths>
+
+                <!--充值管理-->
+                <mt:auths authUrls="bOrder_list.shtml">
+                    <li class="menuTop dropdown <% out.print(getSelected("bOrder")); %>"><a href="#"
+                                                                                            class="dropdown-toggle"
+                                                                                            data-toggle="dropdown">充值管理<b
+                            class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <mt:auth authUrl="bOrder_list.shtml">
+                                <li><a href="${ctx}/bOrder/bOrder_list.shtml">充值管理</a></li>
+                            </mt:auth>
+                        </ul>
+                    </li>
+                </mt:auths>
+
+                <!--权限管理-->
                 <mt:auths
                         authUrls="user_list.shtml,role_list.shtml,module_list.shtml,function_list.shtml,data_list.shtml,dictionary_list.shtml,systool_cleanCache.shtml">
                     <li class="menuTop dropdown <% out.print(getSelected("authority,dictionary,history,systool")); %>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">权限管理<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <mt:auth authUrl="user_list.shtml">
                                 <li><a href="${ctx}/user/user_list.shtml">管理员列表</a></li>
@@ -153,87 +240,6 @@
                             <mt:auth authUrl="systool_cleanCache.shtml">
                                 <li role="presentation" class="divider"></li>
                                 <li><a href="${ctx}/systool/systool_cleanCache.shtml">清除缓存</a></li>
-                            </mt:auth>
-                        </ul>
-                    </li>
-                </mt:auths>
-
-                <mt:auths authUrls="bPlatform_list.shtml,bPlatformApp_list.shtml">
-                    <li class="menuTop dropdown <% out.print(getSelected("bPlatform")); %>"><a href="#"
-                                                                                               class="dropdown-toggle"
-                                                                                               data-toggle="dropdown">联运平台管理<b
-                            class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <mt:auth authUrl="bPlatform_list.shtml">
-                                <li><a href="${ctx}/bPlatform/bPlatform_list.shtml">联运平台管理</a></li>
-                            </mt:auth>
-                            <mt:auth authUrl="bPlatformApp_list.shtml">
-                                <li><a href="${ctx}/bPlatformApp/bPlatformApp_list.shtml">联运游戏关联管理</a></li>
-                            </mt:auth>
-                            <mt:auth authUrl="bPlatform_listbalance.shtml">
-                                <li><a href="${ctx}/bPlatform/bPlatform_listbalance.shtml">加币记录</a></li>
-                            </mt:auth>
-                        </ul>
-                    </li>
-                </mt:auths>
-
-                <!-- 游戏管理 -->
-                <mt:auths authUrls="bGame_list.shtml,bGamezone_list.shtml">
-                    <li class="menuTop dropdown <% out.print(getSelected("bGame")); %>"><a href="#"
-                                                                                           class="dropdown-toggle"
-                                                                                           data-toggle="dropdown">游戏管理<b
-                            class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <mt:auth authUrl="bGame_list.shtml">
-                                <li><a href="${ctx}/bGame/bGame_list.shtml">游戏管理列表</a></li>
-                            </mt:auth>
-                            <mt:auth authUrl="bGame_list.shtml">
-                                <li><a href="${ctx}/bGamezone/bGamezone_list.shtml">游戏分区管理列表</a></li>
-                            </mt:auth>
-                            <mt:auth authUrl="bRole_list.shtml">
-                                <li><a href="${ctx}/bRole/bRole_list.shtml">游戏角色列表</a></li>
-                            </mt:auth>
-                                <%-- <mt:auth authUrl="bRole_list.shtml">
-                                        <li><a href="${ctx}/bAccount/bAccount_list.shtml">游戏玩家列表</a></li>
-                                </mt:auth> --%>
-                        </ul>
-                    </li>
-                </mt:auths>
-
-                <mt:auths authUrls="bOrder_list.shtml">
-                    <li class="menuTop dropdown <% out.print(getSelected("bOrder")); %>"><a href="#"
-                                                                                            class="dropdown-toggle"
-                                                                                            data-toggle="dropdown">充值管理<b
-                            class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <mt:auth authUrl="bOrder_list.shtml">
-                                <li><a href="${ctx}/bOrder/bOrder_list.shtml">充值管理</a></li>
-                            </mt:auth>
-                        </ul>
-                    </li>
-                </mt:auths>
-
-                <mt:auths authUrls="report_summary.shtml">
-                    <li class="menuTop dropdown <% out.print(getSelected("report")); %>"><a href="#"
-                                                                                            class="dropdown-toggle"
-                                                                                            data-toggle="dropdown">报表管理<b
-                            class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <mt:auth authUrl="report_summary.shtml">
-                                <li><a href="${ctx}/report/report_summary.shtml">报表管理</a></li>
-                            </mt:auth>
-                        </ul>
-                    </li>
-                </mt:auths>
-
-                <mt:auths authUrls="roleReport_realTimeLogin.shtml">
-                    <li class="menuTop dropdown <% out.print(getSelected("roleReport")); %>"><a href="#"
-                                                                                                class="dropdown-toggle"
-                                                                                                data-toggle="dropdown">报表管理2<b
-                            class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <mt:auth authUrl="roleReport_realTimeLogin.shtml">
-                                <li><a href="${ctx}/roleReport/roleReport_keepRoles.shtml">报表管理2</a></li>
                             </mt:auth>
                         </ul>
                     </li>

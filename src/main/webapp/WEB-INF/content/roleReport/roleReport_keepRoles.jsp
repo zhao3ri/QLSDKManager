@@ -48,7 +48,7 @@
             			<tr>
             				<th>时间</th>
             				<th>新增用户</th>
-            				<th>次日留存</th>
+            				<%--<th>次日留存</th>--%>
             				<th>2日留存</th>
             				<th>3日留存</th>
             				<th>4日留存</th>
@@ -65,7 +65,7 @@
 									<tr>
 										<td><s:date name="statDate" format="yyyy-MM-dd"/></td>
 										<td>${item.roleEstablishs }</td>
-										<td>${item.keepRole1 < 0 ? "--" : item.keepRole1 }</td>
+										<%--<td>${item.keepRole1 < 0 ? "--" : item.keepRole1 }</td>--%>
 										<td>${item.keepRole2 < 0 ? "--" : item.keepRole2 }</td>
 										<td>${item.keepRole3 < 0 ? "--" : item.keepRole3 }</td>
 										<td>${item.keepRole4 < 0 ? "--" : item.keepRole4 }</td>
@@ -79,7 +79,7 @@
 							</s:if>
 							<s:else>
 								<tr>
-									<td colspan="11" style="text-align: center;">当前列表没有数据！</td>
+									<td colspan="10" style="text-align: center;">当前列表没有数据！</td>
 								</tr>
 							</s:else>
           			</tbody>

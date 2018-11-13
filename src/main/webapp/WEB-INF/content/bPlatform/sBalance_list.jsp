@@ -7,7 +7,7 @@
 	<div class="container">
 	    <ol class="breadcrumb row">
 			<li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
-	      	<li class="active">联运平台管理</li>
+	      	<li class="active">渠道统计</li>
 	      	<li class="active">加币记录</li>
 	    </ol>
 	    <s:debug></s:debug>
@@ -15,8 +15,8 @@
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">加币记录 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
-				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="联运平台">
-		          	<input  class="form-control" type="text"  placeholder="联运平台" name="BPlatform.platformName" value="${bPlatform.platformName }"/>
+				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="渠道">
+		          	<input  class="form-control" type="text"  placeholder="请输入渠道名称" name="BPlatform.platformName" value="${bPlatform.platformName }"/>
 		        </div>
 		        
 	      		 <div class="form-group width_btn">
@@ -33,7 +33,7 @@
 	          			<thead>
 	            			<tr>
 								<th style="width: 50px">序号</th>
-								<th style="width: 150px">联运平台</th>
+								<th style="width: 150px">渠道</th>
 								<th style="width: 180px">创建时间</th>
 								<th>类型</th>
 								<th>金额</th>

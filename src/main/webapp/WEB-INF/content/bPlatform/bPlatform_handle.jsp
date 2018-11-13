@@ -7,18 +7,18 @@
 	<div class="container">
 	    <ol class="breadcrumb row">
 	      <li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
-	      <li class="active">联运平台管理</li>
-	      <li><a href="${ctx}/bPlatform/bPlatform_list.shtml">联运平台列表</a></li>
+	      <li class="active">渠道管理</li>
+	      <li><a href="${ctx}/bPlatform/bPlatform_list.shtml">渠道列表</a></li>
 	      <s:if test="id==null">
-	      <li class="active">新增联运平台信息</li>
+	      <li class="active">新增渠道信息</li>
 	      </s:if>
 	      <s:else>
-	      <li class="active">修改联运平台信息</li>
+	      <li class="active">修改渠道信息</li>
 	      </s:else>
 	    </ol>
 	    <div class="panel panel-default">
 	      	<div class="panel-heading ">
-	        	<h3 class="panel-title">${id==null?"新增":"修改"}联运平台信息</h3>
+	        	<h3 class="panel-title">${id==null?"新增":"修改"}渠道信息</h3>
 	      	</div>
 	      	<form role="form" id="inputForm" action="bPlatform_save.shtml" method="post">
 	        	<div class="panel-body ">
@@ -26,9 +26,9 @@
 	    				<input type="hidden" name="BPlatform.id" value="${id}"/>
 						
 						<div class="form-group clearfix" >
-							<label  class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>联运平台名称：</label>
+							<label  class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>渠道名称：</label>
 							<div class=" col-sm-9 col-lg-5">
-							<input class="form-control" type="text" id="bPlatform.platformName" name="BPlatform.platformName"  value="${bPlatform.platformName}" placeholder="请输入联运平台名称"/>
+							<input class="form-control" type="text" id="bPlatform.platformName" name="BPlatform.platformName"  value="${bPlatform.platformName}" placeholder="请输入渠道名称"/>
 							<label id="platformNameinfo"></label>
 							</div>
 						</div>
@@ -50,9 +50,9 @@
 						</div>
 
 						<div class="form-group clearfix" >
-							<label  class="control-label col-sm-3 col-lg-2 text-right">平台回调地址：</label>
+							<label  class="control-label col-sm-3 col-lg-2 text-right">回调地址：</label>
 							<div class=" col-sm-9 col-lg-5">
-							<input class="form-control" type="text" id="bPlatform.platformCallbackUrl" name="BPlatform.platformCallbackUrl"  value="${bPlatform.platformCallbackUrl}" placeholder="请输入平台回调地址"/>
+							<input class="form-control" type="text" id="bPlatform.platformCallbackUrl" name="BPlatform.platformCallbackUrl"  value="${bPlatform.platformCallbackUrl}" placeholder="请输入回调地址"/>
 							<label id="platformNameinfo"></label>
 							</div>
 						</div>

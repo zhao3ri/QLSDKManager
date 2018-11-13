@@ -7,17 +7,17 @@
 	<div class="container">
 	    <ol class="breadcrumb row">
 			<li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
-	      	<li class="active">联运游戏关联管理</li>
-	      	<li class="active">联运游戏关联列表</li>
+	      	<li class="active">渠道关联管理</li>
+	      	<li class="active">渠道关联列表</li>
 	    </ol>
 		<form role="form" action="bPlatformApp_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
-	      	<div class="panel-heading">联运游戏关联列表信息查询 </div>
+	      	<div class="panel-heading">渠道关联列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 
-		      <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择联运平台">
+		      <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
 		          	<select class="form-control" name="BPlatformApp.platformId"  data-original-title="" title="">
-									<option value="">==请选择联运平台==</option>
+									<option value="">==请选择渠道==</option>
 									<s:iterator value="bPlatforms" var="item">
 										<option value="${item.id}" <c:if test="${item.id==bPlatformApp.platformId}">selected</c:if>>${item.platformName }</option>
 									</s:iterator>								
@@ -28,9 +28,9 @@
                				    <input  class="form-control" type="text"  placeholder="游戏名称" name="BPlatformApp.appName" value="${BPlatformApp.appName}"/>
                		        </div>
 
-		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择联运游戏">
+		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
 		          	<select class="form-control" name="BPlatformApp.appId"  data-original-title="" title="">
-									<option value="">==请选择联运游戏==</option>
+									<option value="">==请选择游戏==</option>
 									<s:iterator value="games" var="item">
 										<option value="${item.id}" <c:if test="${item.id==bPlatformApp.appId}">selected</c:if>>${item.appName }</option>
 									</s:iterator>									
@@ -51,8 +51,8 @@
 	          			<thead>
 	            			<tr>
 								<th style="width: 30px;">序号</th>
-								<th style="width: 100px;">联运平台</th>
-								<th style="width: 100px;">联运游戏</th>
+								<th style="width: 100px;">渠道</th>
+								<th style="width: 100px;">游戏</th>
 								<th style="width: 100px;">分成比例</th>
 								<th>配置参数</th>
 								<th style="width: 150px;">创建时间</th>

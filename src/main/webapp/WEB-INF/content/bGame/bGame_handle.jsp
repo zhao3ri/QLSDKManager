@@ -8,17 +8,17 @@
 	    <ol class="breadcrumb row">
 	      <li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
 	      <li class="active">游戏管理</li>
-	      <li><a href="${ctx}/bGame/bGame_list.shtml">游戏管理列表</a></li>
+	      <li><a href="${ctx}/bGame/bGame_list.shtml">游戏列表</a></li>
 	      <s:if test="id==null">
-	      <li class="active">新增游戏管理信息</li>
+	      <li class="active">新增游戏信息</li>
 	      </s:if>
 	      <s:else>
-	      <li class="active">修改游戏管理信息</li>
+	      <li class="active">修改游戏信息</li>
 	      </s:else>
 	    </ol>
 	    <div class="panel panel-default">
 	      	<div class="panel-heading ">
-	        	<h3 class="panel-title">${id==null?"新增":"修改"}游戏管理信息</h3>
+	        	<h3 class="panel-title">${id==null?"新增":"修改"}游戏信息</h3>
 	      	</div>
 	      	<form role="form" id="inputForm" action="bGame_save.shtml" method="post">
 	        	<div class="panel-body ">
