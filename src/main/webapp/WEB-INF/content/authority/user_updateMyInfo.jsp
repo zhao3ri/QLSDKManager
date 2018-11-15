@@ -106,7 +106,7 @@
 				"password2": {
 					equalTo: "两次输入的密码不一致"
 				},
-				"user.roleID":"请选择角色",
+				"user.roleID":"请选择身份",
 				"user.did":"请选择部门"
 			}
 		});

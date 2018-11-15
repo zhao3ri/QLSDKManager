@@ -125,7 +125,7 @@ pageContext.setAttribute("r", r);
 			if(i==0){
 				alert("请选择要删除的数据！！");
 			}else{
-				if(confirm("删除角色将同时删除该角色下的所有用户，您确认删除？")){
+				if(confirm("删除身份权限将同时删除该身份权限下的所有用户，您确认删除？")){
 					location.assign("role_delete.shtml?checkedIds=" + checkedIds);
 				}
 			}
