@@ -59,7 +59,7 @@
                             </div>
                             <div class="clearfix">
                                 <div class="col-lg-12">
-                                    <dt>角色：</dt>
+                                    <dt>身份：</dt>
                                     <dd>
                                         ${sessionUserInfo.roleName }
                                     </dd>

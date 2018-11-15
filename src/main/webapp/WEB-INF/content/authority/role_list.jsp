@@ -15,14 +15,14 @@ pageContext.setAttribute("r", r);
     <ol class="breadcrumb row">
       <li><i class="icon-home"></i> <a href="#">首页</a></li>
       <li class="active">系统管理</li>
-      <li class="active">角色列表</li>
+      <li class="active">身份列表</li>
     </ol>
 	<form id="mainForm" action="role_list.shtml"  method="post" id="mainForm">
 	    <div class="panel panel-default">
-	      <div class="panel-heading ">角色列表信息查询 </div>
+	      <div class="panel-heading ">身份列表信息查询 </div>
 	      <div class="form-inline popover-show panel-body list_toolbar">
-	        <div class="form-group    width_input"  data-toggle="popover"  data-placement="top" data-content="请输入角色名称">
-	          <input  class="form-control" type="text"  placeholder="角色名称" name="searchRole.roleName" value="${searchRole.roleName}"/>
+	        <div class="form-group    width_input"  data-toggle="popover"  data-placement="top" data-content="请输入身份名称">
+	          <input  class="form-control" type="text"  placeholder="身份名称" name="searchRole.roleName" value="${searchRole.roleName}"/>
 	        </div>
 	        <div class="form-group width_btn">
 	          <button  type="button" class="btn  btn-primary " onclick="search();"><i class="icon-search"></i> 搜索</button>
@@ -39,8 +39,8 @@ pageContext.setAttribute("r", r);
 	            <tr>
 	            	<th>选择</th>
 	              	<th>序号</th>
-					<th>角色名称</th>
-					<th>角色描述</th>
+					<th>身份名称</th>
+					<th>身份描述</th>
 					<th>应用权限</th>
 					<th>操作</th>
 	            </tr>

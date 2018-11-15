@@ -25,6 +25,7 @@
 
     <select id="SGame.stat" resultClass="sGame" parameterClass="mb">
         SELECT
+        sg.appId as appId,
         sg.clientType as clientType,
         SUM(sg.totalRoleUser) as totalRoleUser,
         SUM(sg.totalRegUser) as totalRegUser,

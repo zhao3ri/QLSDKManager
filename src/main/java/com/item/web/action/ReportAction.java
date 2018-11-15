@@ -161,7 +161,8 @@ public class ReportAction extends Struts2Action {
         }
 
         MapBean mb = new MapBean();
-        mb.put("platformId", Constants.YOULE_PLATFROMID);
+        mb.put(MapBean.PLATFORM_Id, Constants.YOULE_PLATFROMID);
+        mb.put("groupby", "appId,clientType");
         boolean isMonStat = setDate(mb);
         for (Game game : allGames) {
             //年月有值
@@ -170,7 +171,7 @@ public class ReportAction extends Struts2Action {
                 gameClientMonthlyReport.setAppId(game.getId());
                 gameClientMonthlyReport.setAppName(game.getAppName());
 
-                mb.put("appId", game.getId());
+                mb.put(MapBean.APP_ID, game.getId());
                 setOSMonthlyReport(game, mb, Constants.CLIENT_ANDROID, gameClientMonthlyReport, mb.getString("month"));
                 setOSMonthlyReport(game, mb, Constants.CLIENT_IOS, gameClientMonthlyReport, mb.getString("month"));
 
@@ -181,7 +182,7 @@ public class ReportAction extends Struts2Action {
                 gameClientReport.setAppId(game.getId());
                 gameClientReport.setAppName(game.getAppName());
 
-                mb.put("appId", game.getId());
+                mb.put(MapBean.APP_ID, game.getId());
                 //ANDROID
                 setOSReport(game, mb, Constants.CLIENT_ANDROID, gameClientReport, mb.getString("statDate"));
                 //IOS
@@ -197,8 +198,9 @@ public class ReportAction extends Struts2Action {
      */
     private void setOSMonthlyReport(Game game, MapBean mb, int os, GameClientMonthlyReport gameClientReport, String like) {
         mb.put(MapBean.CLIENT_TYPE, os);
+        mb.put("like", like);
         //CPS
-        SGameMonthly sGame = sGameMonthlyService.summary(mb);
+        SGameMonthly sGame = sGameMonthlyService.getGameMonthly(mb);
         //CPA
         SPlatformMonthly cpapPlatform = sPlatformMonthlyService.getByMap(mb);
         if (cpapPlatform == null)
@@ -206,13 +208,14 @@ public class ReportAction extends Struts2Action {
         if (sGame == null)
             sGame = new SGameMonthly();
 
-        setCPAAndCPS(game, gameClientReport, os, cpapPlatform, sGame, null, like);
+        setCPAAndCPS(game, gameClientReport, os, cpapPlatform, sGame);
     }
 
     private void setOSReport(Game game, MapBean mb, int os, GameClientReport gameClientReport, String statDate) {
         mb.put(MapBean.CLIENT_TYPE, os);
+
         //CPS
-        SGame sGame = sGameService.summary(mb);
+        SGame sGame = sGameService.stat(mb);
         //CPA
         SPlatform cpapPlatform = sPlatformService.getByMap(mb);
         if (cpapPlatform == null)
@@ -220,56 +223,23 @@ public class ReportAction extends Struts2Action {
         if (sGame == null)
             sGame = new SGame();
 
-        setCPAAndCPS(game, gameClientReport, os, cpapPlatform, sGame, statDate, null);
+        setCPAAndCPS(game, gameClientReport, os, cpapPlatform, sGame);
     }
 
-    private void setCPAAndCPS(Game game, GameClientReport gameClientReport, int os, SPlatform sPlatform, SGame sGame, String statDate, String like) {
+    private void setCPAAndCPS(Game game, GameClientReport gameClientReport, int os, SPlatform sPlatform, SGame sGame) {
         if (gameClientReport instanceof GameClientMonthlyReport) {
             gameClientReport = (GameClientMonthlyReport) gameClientReport;
             sPlatform = (SPlatformMonthly) sPlatform;
             sGame = (SGameMonthly) sGame;
         }
         addCpsData(sPlatform, sGame);
-        int gamePremiumUser = getTotalPremiumUser(game, "game", os, 0, statDate, like);
-        int platformPremiumUser = getTotalPremiumUser(game, "platform", os, sPlatform.getPlatformId(), statDate, like);
         if (os == Constants.CLIENT_ANDROID) {
             gameClientReport.setAndroidCpa(sPlatform);
             gameClientReport.setAndroidCps(sGame);
-            gameClientReport.setTotalAndroidPremiumUserCPA(gamePremiumUser - platformPremiumUser);
-            gameClientReport.setTotalAndroidPremiumUserCPS(gamePremiumUser);
         } else {
             gameClientReport.setIosCpa(sPlatform);
             gameClientReport.setIosCps(sGame);
-            gameClientReport.setTotalIOSPremiumUserCPA(gamePremiumUser - platformPremiumUser);
-            gameClientReport.setTotalIOSPremiumUserCPS(gamePremiumUser);
         }
-    }
-
-    private int getTotalPremiumUser(Game game, String dimension, int os, int pid, String statDate, String like) {
-        MapBean mb = new MapBean();
-        mb.put("dimension", dimension);
-        mb.put(MapBean.APP_ID, game.getId());
-        mb.put(MapBean.CLIENT_TYPE, os);
-        mb.put("groupby", String.format("%s,%s", MapBean.APP_ID, MapBean.CLIENT_TYPE));
-        if (dimension.equals("platform")) {
-            mb.put("groupby", String.format("%s,%s,%s", MapBean.APP_ID, MapBean.CLIENT_TYPE, MapBean.PLATFORM_Id));
-            mb.put(MapBean.PLATFORM_Id, pid);
-        }
-        if (!StringUtil.isEmpty(statDate)) {
-            mb.put("statDate", statDate);
-        }
-        if (!StringUtil.isEmpty(like)) {
-            mb.put("like", like);
-        }
-        List<ReportDaily> dailyList = dailyService.getTotalPremiumUserStats(mb);
-        if (null == dailyList || dailyList.size() == 0) {
-            return 0;
-        }
-        int user = 0;
-        for (ReportDaily daily : dailyList) {
-            user += daily.getNewUserPays();
-        }
-        return user;
     }
 
     /*
@@ -279,6 +249,7 @@ public class ReportAction extends Struts2Action {
         if (sGame != null && sPlatform != null) {
             sGame.setTotalRoleUser(sGame.getTotalRoleUser() - sPlatform.getTotalRoleUser());
             sGame.setTotalRegUser(sGame.getTotalRegUser() - sPlatform.getTotalRegUser());
+            sGame.setTotalNewPayUser(sGame.getTotalNewPayUser() - sPlatform.getTotalNewPayUser());
             sGame.setDevices(sGame.getDevices() - sPlatform.getDevices());
             sGame.setActiveUsers(sGame.getActiveUsers() - sPlatform.getActiveUsers());
             sGame.setPayAmount(sGame.getPayAmount() - sPlatform.getPayAmount());
@@ -325,7 +296,7 @@ public class ReportAction extends Struts2Action {
             mb.put("statDate", String.format("'%s'", mb.getString("statDate")));
 //            mb.put("statDate", String.format("'%s'", "2018-10-30"));
             sPlatformsApp = sPlatformService.getLastDayAppData(mb);
-//            sPlatformsPlatform = sPlatformService.getLastDayPlatformData(mb);
+            sPlatformsPlatform = sPlatformService.getLastDayPlatformData(mb);
             updatePlatformStat();
         }
         return "platform";

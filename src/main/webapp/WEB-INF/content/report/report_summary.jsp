@@ -104,28 +104,29 @@
                                                                   pattern="0.00"/></td>
                                             <td>${item.androidCps.payTimes }</td>
                                             <!--新用户充值人数-->
-                                            <td>${item.totalAndroidPremiumUserCPS}</td>
+                                            <td>${item.androidCps.totalNewPayUser}</td>
                                             <td>${item.androidCps.payUsers}</td>
                                             <td>
-                                                <c:if test="${item.androidCps.payUsers== 0 }">0.00</c:if>
-                                                <c:if test="${item.androidCps.payUsers> 0 }"><fmt:formatNumber
-                                                        value="${(item.androidCps.payAmount )/100/(item.androidCps.payUsers ) }"
-                                                        pattern="0.00"/></c:if>
+                                                    <c:if test="${item.androidCps.payUsers== 0 }">0.00</c:if>
+                                                    <c:if test="${item.androidCps.payUsers> 0 }"><fmt:formatNumber
+                                                    value="${(item.androidCps.payAmount )/100/(item.androidCps.payUsers ) }"
+                                                    pattern="0.00"/></c:if>
+
                                             </td>
                                             <!--登录ARPU-->
                                             <td>
-                                                <c:if test="${item.androidCps.activeUsers== 0 }">0.00</c:if>
-                                                <c:if test="${item.androidCps.activeUsers> 0 }">
+                                                    <c:if test="${item.androidCps.activeUsers== 0 }">0.00</c:if>
+                                                    <c:if test="${item.androidCps.activeUsers> 0 }">
                                                     <fmt:formatNumber
-                                                            value="${(item.androidCps.payAmount)/100/(item.androidCps.activeUsers) }"
-                                                            pattern="0.00"/></c:if>
+                                                    value="${(item.androidCps.payAmount)/100/(item.androidCps.activeUsers) }"
+                                                    pattern="0.00"/></c:if>
                                             </td>
                                             <td>
-                                                <c:if test="${item.androidCps.totalRegUser== 0 }">0.00</c:if>
-                                                <c:if test="${item.androidCps.totalRegUser> 0 }">
+                                                    <c:if test="${item.androidCps.totalRegUser== 0 }">0.00</c:if>
+                                                    <c:if test="${item.androidCps.totalRegUser> 0 }">
                                                     <fmt:formatNumber
-                                                            value="${(item.androidCps.payAmount )/100/(item.androidCps.totalRegUser) }"
-                                                            pattern="0.00"/></c:if>
+                                                    value="${(item.androidCps.payAmount )/100/(item.androidCps.totalRegUser) }"
+                                                    pattern="0.00"/></c:if>
                                             </td>
                                             <!--登录付费率-->
                                             <td>
@@ -140,7 +141,7 @@
                                                 <c:if test="${item.androidCps.totalRoleUser== 0 }">0.00</c:if>
                                                 <c:if test="${item.androidCps.totalRoleUser> 0 }">
                                                     <fmt:formatNumber
-                                                            value="${(item.totalAndroidPremiumUserCPS)/100/(item.androidCps.totalRoleUser) }"
+                                                            value="${(item.androidCps.totalNewPayUser)/100/(item.androidCps.totalRoleUser) }"
                                                             pattern="0.00"/>
                                                 </c:if>
                                             </td>
@@ -156,7 +157,7 @@
                                                                   pattern="0.00"/></td>
                                             <td>${item.androidCpa.payTimes }</td>
                                             <!--新用户充值人数-->
-                                            <td>${item.totalAndroidPremiumUserCPA}</td>
+                                            <td>${item.androidCpa.totalNewPayUser}</td>
                                             <td>${item.androidCpa.payUsers }</td>
                                             <td>
                                                 <c:if test="${item.androidCpa.payUsers==0 }">0.00</c:if>
@@ -191,7 +192,7 @@
                                                 <c:if test="${item.androidCpa.totalRoleUser== 0 }">0.00</c:if>
                                                 <c:if test="${item.androidCpa.totalRoleUser> 0 }">
                                                     <fmt:formatNumber
-                                                            value="${(item.totalAndroidPremiumUserCPA)/100/(item.androidCpa.totalRoleUser) }"
+                                                            value="${(item.androidCpa.totalNewPayUser)/100/(item.androidCpa.totalRoleUser) }"
                                                             pattern="0.00"/>
                                                 </c:if>
                                             </td>
@@ -208,7 +209,7 @@
                                                                   pattern="0.00"/></td>
                                             <td>${item.iosCps.payTimes }</td>
                                             <!--新用户充值人数-->
-                                            <td>${item.totalIOSPremiumUserCPS}</td>
+                                            <td>${item.iosCps.totalNewPayUser}</td>
                                             <td>${item.iosCps.payUsers }</td>
                                             <td>
                                                 <c:if test="${item.iosCps.payUsers ==0 }">0.00</c:if>
@@ -244,7 +245,7 @@
                                                 <c:if test="${item.iosCps.totalRoleUser== 0 }">0.00</c:if>
                                                 <c:if test="${item.iosCps.totalRoleUser> 0 }">
                                                     <fmt:formatNumber
-                                                            value="${(item.totalIOSPremiumUserCPS)/100/(item.iosCps.totalRoleUser) }"
+                                                            value="${(item.iosCps.totalNewPayUser)/100/(item.iosCps.totalRoleUser) }"
                                                             pattern="0.00"/>
                                                 </c:if>
                                             </td>
@@ -260,7 +261,7 @@
                                                                   pattern="0.00"/></td>
                                             <td>${item.iosCpa.payTimes }</td>
                                             <!--新用户充值人数-->
-                                            <td>${item.totalIOSPremiumUserCPA}</td>
+                                            <td>${item.iosCpa.totalNewPayUser}</td>
                                             <td>${item.iosCpa.payUsers }</td>
                                             <td>
                                                 <c:if test="${item.iosCpa.payUsers == 0 }">0.00</c:if>
@@ -295,7 +296,7 @@
                                                 <c:if test="${item.iosCpa.totalRoleUser== 0 }">0.00</c:if>
                                                 <c:if test="${item.iosCpa.totalRoleUser> 0 }">
                                                     <fmt:formatNumber
-                                                            value="${(item.totalIOSPremiumUserCPA)/100/(item.iosCpa.totalRoleUser) }"
+                                                            value="${(item.iosCpa.totalNewPayUser)/100/(item.iosCpa.totalRoleUser) }"
                                                             pattern="0.00"/>
                                                 </c:if>
                                             </td>
@@ -313,7 +314,7 @@
                                                     pattern="0.00"/></td>
                                             <td>${item.iosCps.payTimes + item.androidCps.payTimes+item.iosCpa.payTimes + item.androidCpa.payTimes }</td>
                                             <!--新用户充值人数-->
-                                            <td>${item.totalAndroidPremiumUserCPS + item.totalAndroidPremiumUserCPA+item.totalIOSPremiumUserCPS + item.totalIOSPremiumUserCPA}</td>
+                                            <td>${item.androidCps.totalNewPayUser + item.androidCpa.totalNewPayUser+item.iosCps.totalNewPayUser + item.iosCpa.totalNewPayUser}</td>
                                             <td>${item.iosCps.payUsers +  item.androidCps.payUsers+item.iosCpa.payUsers +  item.androidCpa.payUsers}</td>
                                             <td>
                                                 <c:if test="${item.iosCps.payUsers +  item.androidCps.payUsers+item.iosCpa.payUsers +  item.androidCpa.payUsers == 0 }">0.00</c:if>
@@ -350,7 +351,7 @@
                                                 <c:if test="${item.iosCps.totalRoleUser +  item.androidCps.totalRoleUser == 0 }">0.00</c:if>
                                                 <c:if test="${item.iosCps.totalRoleUser +  item.androidCps.totalRoleUser > 0 }">
                                                     <fmt:formatNumber
-                                                            value="${(item.totalAndroidPremiumUserCPS + item.totalAndroidPremiumUserCPA+item.totalIOSPremiumUserCPS + item.totalIOSPremiumUserCPA)/100/(item.iosCps.totalRoleUser +  item.androidCps.totalRoleUser+item.iosCpa.totalRoleUser +  item.androidCpa.totalRoleUser) }"
+                                                            value="${(item.iosCps.totalNewPayUser + item.androidCps.totalNewPayUser+item.iosCpa.totalNewPayUser + item.androidCpa.totalNewPayUser)/100/(item.iosCps.totalRoleUser +  item.androidCps.totalRoleUser+item.iosCpa.totalRoleUser +  item.androidCpa.totalRoleUser) }"
                                                             pattern="0.00"/>
                                                 </c:if>
                                             </td>
@@ -380,6 +381,7 @@
         });
         $("#reportLeft_1").addClass("active");
         $("#summary").addClass("active");
+        // updateTable();
     });
 
     function select() {
@@ -397,14 +399,14 @@
             android = true
             ios = true
         }
-        var tab = document.getElementById("table-os")
-        var trs = tab.getElementsByTagName("tr")
+        var tab = document.getElementById("table-os");
+        var trs = tab.getElementsByTagName("tr");
         for (var i = 1; i < trs.length; i++) {
             var tr = trs[i]
             var row = i;
             if (row < minGameRows)
                 row = row + minGameRows
-            if (row % minGameRows == 0) {
+            if (row % minGameRows == 0) {//合计
                 setStyle(tr, android && ios)
             } else if (row % minGameRows == 1) {
                 var tds = tr.getElementsByTagName("td")
@@ -424,9 +426,106 @@
 
     function setStyle(tr, show) {
         if (show)
-            tr.style.display = ""
+            tr.style.display = "";
         else
-            tr.style.display = "none"
+            tr.style.display = "none";
+    }
+
+    function updateTable() {
+        var minGameRows = 6
+        var tab = document.getElementById("table-os");
+        var trs = tab.getElementsByTagName("tr");
+        for (var i = 1; i < trs.length; i++) {
+            var tr = trs[i];
+            var row = i;
+            var tds = tr.getElementsByTagName("td");
+            if (row < minGameRows)
+                row = row + minGameRows
+
+            var item
+            if (row % minGameRows == 0) {//合计
+
+            } else if (row % minGameRows == 1) {
+
+            } else {
+                var payARPU = 10;
+                var isAndroid = false;
+                var isCPA = false;
+                if ((row % minGameRows) % 2 == 1) {
+                    payARPU = payARPU - 1
+                    isCPA = true;
+                }
+                if (row % minGameRows < minGameRows - 2) {
+                    isAndroid = true;
+                }
+                for (var j = payARPU; j < tds.length; j++) {
+                    var td = tds[j];
+                    setColumn(td, i, j, payARPU, isAndroid, isCPA);
+                }
+            }
+        }
+    }
+
+    function setColumn(td, row, column, payARPU, android, cpa) {
+        var payAmount;
+        var payUsers;
+        var regUsers;
+        var activeUsers;
+        var totalNewPayUser;
+        var totalRoleUser;
+
+        if (android && cpa) {
+            payAmount =${valueList[row / minGameRows].androidCpa.payAmount/100};
+            payUsers =${valueList[row / minGameRows].androidCpa.payUsers};
+            activeUsers =${valueList[row / minGameRows].androidCpa.activeUsers};
+            regUsers =${valueList[row / minGameRows].androidCpa.totalRegUser};
+            totalNewPayUser =${valueList[row / minGameRows].androidCpa.totalNewPayUser};
+            totalRoleUser =${valueList[row / minGameRows].androidCpa.totalRoleUser};
+            // td.innerText = "Android CPA";
+        } else if (android && !cpa) {
+            payAmount =${valueList[row / minGameRows].androidCps.payAmount/100};
+            payUsers =${valueList[row / minGameRows].androidCps.payUsers};
+            activeUsers =${valueList[row / minGameRows].androidCps.activeUsers};
+            regUsers =${valueList[row / minGameRows].androidCps.totalRegUser};
+            totalNewPayUser =${valueList[row / minGameRows].androidCps.totalNewPayUser};
+            totalRoleUser =${valueList[row / minGameRows].androidCps.totalRoleUser};
+        } else if (!android && cpa) {
+            payAmount =${valueList[row / minGameRows].iosCpa.payAmount/100};
+            payUsers =${valueList[row / minGameRows].iosCpa.payUsers};
+            activeUsers =${valueList[row / minGameRows].iosCpa.activeUsers};
+            regUsers =${valueList[row / minGameRows].iosCpa.totalRegUser};
+            totalNewPayUser =${valueList[row / minGameRows].iosCpa.totalNewPayUser};
+            totalRoleUser =${valueList[row / minGameRows].iosCpa.totalRoleUser};
+            // td.innerText = "ios CPA";
+        } else if (!android && !cpa) {
+            payAmount =${valueList[row / minGameRows].iosCps.payAmount/100};
+            payUsers =${valueList[row / minGameRows].iosCps.payUsers};
+            activeUsers =${valueList[row / minGameRows].iosCps.activeUsers};
+            regUsers =${valueList[row / minGameRows].iosCps.totalRegUser};
+            totalNewPayUser =${valueList[row / minGameRows].iosCps.totalNewPayUser};
+            totalRoleUser =${valueList[row / minGameRows].iosCps.totalRoleUser};
+        }
+
+        if (column == payARPU) {//付费ARPU
+            setTableContent(td, payAmount, payUsers, "0.00")
+        } else if (column == payARPU + 1) {//登录ARPU
+            setTableContent(td, payAmount, activeUsers, "0.00")
+        } else if (column == payARPU + 2) {//注册ARPU
+            setTableContent(td, payAmount, regUsers, "0.00")
+        } else if (column == payARPU + 3) {//登录付费率
+            setTableContent(td, payUsers, activeUsers, "0.00")
+        } else if (column == payARPU + 4) {//新用户付费率
+            setTableContent(td, totalNewPayUser, totalRoleUser, "0.00")
+        }
+    }
+
+    function setTableContent(element, dividend, divisor, def) {
+        if (divisor == 0) {
+            element.innerText = def;
+        } else {
+            var result = dividend / divisor;
+            element.innerText = result;
+        }
     }
 </script>
 

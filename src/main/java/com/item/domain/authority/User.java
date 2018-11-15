@@ -33,7 +33,7 @@ public class User implements Serializable{
 	@LogAttribute(name="状态")
 	private Integer state;
 	
-	@LogAttribute(name="角色")
+	@LogAttribute(name="身份")
 	private Long roleID;
 	
 	private String roleName;

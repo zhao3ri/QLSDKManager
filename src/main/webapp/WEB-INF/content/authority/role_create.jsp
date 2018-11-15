@@ -8,12 +8,12 @@
 	    <ol class="breadcrumb row">
 	      <li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
 	      <li class="active">系统管理</li>
-	      <li><a href="${ctx}/role/role_list.shtml">角色列表</a></li>
-	      <li class="active">新增角色</li>
+	      <li><a href="${ctx}/role/role_list.shtml">身份列表</a></li>
+	      <li class="active">新增身份</li>
 	    </ol>
 	    <div class="panel panel-default">
 	      <div class="panel-heading ">
-	        <h3 class="panel-title">新增角色</h3>
+	        <h3 class="panel-title">新增身份</h3>
 	      </div>
 			<style type="text/css">
 				fieldset {
@@ -33,18 +33,18 @@
 				<div class="panel-body ">
 		          <div class=" tooltip-show form-horizontal">
 		          	<div class="form-group clearfix" >
-		              <label  class="control-label col-sm-3  col-lg-2 text-right"><b class="color_red">*</b>角色名称：</label>
+		              <label  class="control-label col-sm-3  col-lg-2 text-right"><b class="color_red">*</b>身份名称：</label>
 		              <div class=" col-sm-9 col-lg-5">
-		                <input  class="form-control" type="text" id="roleName" name="role.roleName" maxlength="50" value="<s:property value="role.roleName"/>"  placeholder="请输入角色名称"/>
+		                <input  class="form-control" type="text" id="roleName" name="role.roleName" maxlength="50" value="<s:property value="role.roleName"/>"  placeholder="请输入身份名称"/>
 		              </div>
-		              <span class=" help-block col-sm-9 col-sm-offset-3  col-lg-5 col-lg-offset-0">请输入角色名称</span>
+		              <span class=" help-block col-sm-9 col-sm-offset-3  col-lg-5 col-lg-offset-0">请输入身份名称</span>
 		            </div>
 		            <div class="form-group clearfix" >
-		              <label  class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>角色描述：</label>
+		              <label  class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>身份描述：</label>
 		              <div class=" col-sm-9  col-lg-5">
 		                <textarea class="form-control" name="role.description" id="role.description" rows="4"></textarea>
 		              </div>
-		              <span class=" help-block col-sm-9 col-sm-offset-3  col-lg-5 col-lg-offset-0">请输入角色描述</span> 
+		              <span class=" help-block col-sm-9 col-sm-offset-3  col-lg-5 col-lg-offset-0">请输入身份描述</span>
 		            </div>
 		            <div class="form-group clearfix" >
 		              <label  class="control-label col-sm-3  col-lg-2 text-right">权限设置：</label>
@@ -96,7 +96,7 @@
 					success: function(data, textStatus) {
 						// 验证 返回data 
 						if(data == "true"){
-							alert("该角色名已存在，请修正后再提交！");
+							alert("该用户身份已存在，请修正后再提交！");
 							$('#roleName').focus();
 							return false;
 						}

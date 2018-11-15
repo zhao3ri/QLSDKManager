@@ -4,42 +4,85 @@
 <sqlMap namespace="SGame">
 
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
-    
-    <typeAlias alias="sGameMonthly" type="com.item.domain.SGameMonthly" />
-    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <typeAlias alias="sGameMonthly" type="com.item.domain.SGameMonthly"/>
+    <typeAlias alias="mb" type="core.module.orm.MapBean"/>
 
     <sql id="sGameMonthly.Where">
-    	<dynamic prepend="where">
-    		<isNotNull prepend="and" property="id">
-    			sg.`id`=#id#
-    		</isNotNull>
-    		<isNotNull prepend="and" property="clientType">
-    			sg.`clientType`=#clientType#
-    		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			sg.`appId`=#appId#
-    		</isNotNull>
-    		<isNotNull prepend="and" property="statDate">
-    			sg.`statDate`=#statDate#
-    		</isNotNull>
-    		<isNotNull prepend="and" property="yearMonth">
-    		    sg.`yearMonth`=#yearMonth#          
-    		</isNotNull>
-    	</dynamic>
+        <dynamic prepend="where">
+            <isNotNull prepend="and" property="id">
+                sg.`id`=#id#
+            </isNotNull>
+            <isNotNull prepend="and" property="clientType">
+                sg.`clientType`=#clientType#
+            </isNotNull>
+            <isNotNull prepend="and" property="appId">
+                sg.`appId`=#appId#
+            </isNotNull>
+            <isNotNull prepend="and" property="statDate">
+                sg.`statDate`=#statDate#
+            </isNotNull>
+            <isNotNull prepend="and" property="yearMonth">
+                sg.`yearMonth`=#yearMonth#
+            </isNotNull>
+        </dynamic>
     </sql>
-    
+
     <select id="sGameMonthly.summary" resultClass="sGameMonthly" parameterClass="mb">
         SELECT
-            appId AS appId,
-			clientType AS clientType,
-			totalRoleUser AS totalRoleUser,
-			totalRegUser AS totalRegUser,
-			devices AS devices,
-			activeUsers AS activeUsers,
-			payAmount AS payAmount,
-			payTimes AS payTimes,
-			payUsers AS payUsers
-		FROM s_game_monthly sg 
-		<include refid="sGameMonthly.Where"/>
+        appId AS appId,
+        clientType AS clientType,
+        totalRoleUser AS totalRoleUser,
+        totalRegUser AS totalRegUser,
+        devices AS devices,
+        activeUsers AS activeUsers,
+        payAmount AS payAmount,
+        payTimes AS payTimes,
+        payUsers AS payUsers,
+        newUserPays AS totalNewPayUser
+        FROM s_game_monthly sg
+        <include refid="sGameMonthly.Where"/>
     </select>
+
+    <select id="sGameMonthly.stat" resultClass="sGameMonthly" parameterClass="mb">
+        SELECT
+        sd.appId as appId,
+        sd.clientType as clientType,
+        SUM(sd.roleUsers) as totalRoleUser,
+        SUM(sd.regUsers) as totalRegUser,
+        SUM(sd.regDevices) as devices,
+        SUM(sd.activeUsers) as activeUsers,
+        SUM(sd.payAmount) as payAmount,
+        SUM(sd.payTimes) as payTimes,
+        SUM(sd.payUsers) as payUsers,
+        SUM(sd.newUserPays) AS totalNewPayUser
+        FROM
+        s_game_daily sd
+        <dynamic prepend="where">
+            <isNotNull prepend="and" property="clientType">
+                sd.clientType=#clientType#
+            </isNotNull>
+            <isNotNull prepend="and" property="appId">
+                sd.appId=#appId#
+            </isNotNull>
+            <isNotEmpty prepend="and" property="statDate">
+                sd.statDate=#statDate#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="like">
+                sd.statDate LIKE '$like$%'
+            </isNotEmpty>
+        </dynamic>
+        <isNotEmpty property="groupby">
+            GROUP BY $groupby$
+        </isNotEmpty>
+    </select>
+
+    <!--<insert id="sGameMonthly.save" parameterClass="sGameMonthly">-->
+        <!--INSERT INTO-->
+        <!--s_game_monthly(appId,clientType,yearMonth,totalRoleUser,totalRegUser,devices,payAmount,payTimes,payUsers,activeUsers,newUserPayAmount,newUserPays,monthLoginRoles)-->
+        <!--VALUES(#appId#,#clientType#,#yearMonth#,#totalRoleUser#,#totalRegUser#,#devices#,#payAmount#,#payTimes#,#payUsers#,#activeUsers#,#newUserPayAmount#,#newUserPays#,#monthLoginRoles#)-->
+        <!--<selectKey resultClass="Long" keyProperty="id">-->
+            <!--select @@IDENTITY as `id`-->
+        <!--</selectKey>-->
+    <!--</insert>-->
 </sqlMap>

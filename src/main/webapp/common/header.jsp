@@ -218,7 +218,7 @@
                                 <li><a href="${ctx}/user/user_list.shtml">管理员列表</a></li>
                             </mt:auth>
                             <mt:auth authUrl="role_list.shtml">
-                                <li><a href="${ctx}/role/role_list.shtml">角色列表</a></li>
+                                <li><a href="${ctx}/role/role_list.shtml">身份列表</a></li>
                             </mt:auth>
                             <mt:auth authUrl="module_list.shtml">
                                 <li><a href="${ctx}/module/module_list.shtml">模块列表</a></li>
@@ -231,7 +231,7 @@
                                  </mt:auth> --%>
                             <mt:auth authUrl="dictionary_list.shtml">
                                 <li role="presentation" class="divider"></li>
-                                <li><a href="${ctx}/dictionary/dictionary_list.shtml">数据字典列表</a></li>
+                                <li><a href="${ctx}/dictionary/dictionary_list.shtml">部门列表</a></li>
                             </mt:auth>
                                 <%--  <mt:auth authUrl="history_list1.shtml">
                                    <li role="presentation" class="divider"></li>

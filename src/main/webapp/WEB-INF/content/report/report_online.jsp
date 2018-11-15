@@ -182,7 +182,7 @@
 
                                         <tr>
                                             <td>合计</td>
-                                            <td><fmt:formatNumber value="${allonlineUsers/allSize }" pattern="0"/></td>
+                                            <td><fmt:formatNumber value="${allonlineUsers/allSize }" pattern="0"/>(平均)</td>
                                             <td>${allroleUsers }</td>
                                             <td>${allnewDevices }</td>
                                             <td><fmt:formatNumber value="${allpayAmount/100 }" pattern="0.00"/></td>

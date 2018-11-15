@@ -57,15 +57,6 @@ public class ReportDailyService {
         }
     }
 
-    public List<ReportDaily> getTotalPremiumUserStats(MapBean mb) {
-        if ("game".equals(mb.get("dimension"))) {
-            return reportDailyDao.find("ReportDaily.getGameTotalPremiumUser", mb);
-        } else if ("platform".equals(mb.get("dimension"))) {
-            return reportDailyDao.find("ReportDaily.getPlatformTotalPremiumUser", mb);
-        }
-        return null;
-    }
-
     public List<ReportDaily> getPlatformStats(MapBean mb) {
         return reportDailyDao.find("ReportDaily.listGame", mb);
     }

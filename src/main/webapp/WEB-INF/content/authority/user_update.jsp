@@ -68,10 +68,10 @@
 	              </div>
               	</div> --%>
               	<div class="form-group clearfix col-lg-6" >
-	              <label  class="control-label col-sm-3 text-right"><b class="color_red">*</b>角色：</label>
+	              <label  class="control-label col-sm-3 text-right"><b class="color_red">*</b>身份：</label>
 	              <div class=" col-sm-9 ">
 	                <select name="user.roleID"  class="form-control" size="1">
-						<option value="">--请选择角色--</option>
+						<option value="">--请选择身份--</option>
 						<s:iterator value="roleList" var="role">
 							<option value="${role.id }" <s:if test="user.roleID==#role.id">selected</s:if>>${role.roleName }</option>
 						</s:iterator>

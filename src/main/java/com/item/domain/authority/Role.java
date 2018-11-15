@@ -14,15 +14,15 @@ import core.module.annotation.LogModule;
  * @since 2010-02-14
  *
  */
-@LogModule(name="角色",key="role")
+@LogModule(name="身份",key="role")
 public class Role {
 
 	private Long id;
 	
-	@LogAttribute(name="角色名称")
+	@LogAttribute(name="身份名称")
 	private String roleName;
 	
-	@LogAttribute(name="角色描述")
+	@LogAttribute(name="身份描述")
 	private String description;
 	
 	private Integer projectType;

@@ -17,14 +17,6 @@ public class GameClientReport {
 
     private SPlatform androidCpa;
 
-    private Integer totalIOSPremiumUserCPA;
-
-    private Integer totalIOSPremiumUserCPS;
-
-    private Integer totalAndroidPremiumUserCPA;
-
-    private Integer totalAndroidPremiumUserCPS;
-
     public Long getAppId() {
         return appId;
     }
@@ -73,35 +65,4 @@ public class GameClientReport {
         this.androidCpa = androidCpa;
     }
 
-    public Integer getTotalIOSPremiumUserCPA() {
-        return totalIOSPremiumUserCPA == null ? 0 : totalIOSPremiumUserCPA;
-    }
-
-    public void setTotalIOSPremiumUserCPA(Integer totalIOSPremiumUserCPA) {
-        this.totalIOSPremiumUserCPA = totalIOSPremiumUserCPA;
-    }
-
-    public Integer getTotalIOSPremiumUserCPS() {
-        return totalIOSPremiumUserCPS == null ? 0 : totalIOSPremiumUserCPS;
-    }
-
-    public void setTotalIOSPremiumUserCPS(Integer totalIOSPremiumUserCPS) {
-        this.totalIOSPremiumUserCPS = totalIOSPremiumUserCPS;
-    }
-
-    public Integer getTotalAndroidPremiumUserCPA() {
-        return totalAndroidPremiumUserCPA == null ? 0 : totalAndroidPremiumUserCPA;
-    }
-
-    public void setTotalAndroidPremiumUserCPA(Integer totalAndroidPremiumUserCPA) {
-        this.totalAndroidPremiumUserCPA = totalAndroidPremiumUserCPA;
-    }
-
-    public Integer getTotalAndroidPremiumUserCPS() {
-        return totalAndroidPremiumUserCPS == null ? 0 : totalAndroidPremiumUserCPS;
-    }
-
-    public void setTotalAndroidPremiumUserCPS(Integer totalAndroidPremiumUserCPS) {
-        this.totalAndroidPremiumUserCPS = totalAndroidPremiumUserCPS;
-    }
 }
