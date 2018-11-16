@@ -37,8 +37,8 @@
 	 	 	<isNotNull prepend="and" property="realName">
 	 	 		u.realName like concat('%',#realName#,'%')
 	 	 	</isNotNull> 
-	 	 	<isNotNull prepend="and" property="roleID">
-	 	 		u.roleID = #roleID#
+	 	 	<isNotNull prepend="and" property="identityId">
+	 	 		u.identityId= #identityId#
 	 	 	</isNotNull> 
 	 	 	<isNotNull prepend="and" property="state">
 	 	 		u.state = #state#
@@ -59,8 +59,8 @@
  	</sql>
 	
 	<select id="User.list" parameterClass="mb" resultClass="User" cacheModel="User-cache">
-		SELECT u.*,r.roleName roleName
-		FROM sysUser u JOIN sysRole r ON u.roleID=r.id
+		SELECT u.*,r.name as identityName
+		FROM sysUser u JOIN sysIdentity r ON u.identityId=r.id
 		<include refid="User.where"/>
 		ORDER BY u.createTime DESC
 		LIMIT #firstResult#,#pageSize#
@@ -80,14 +80,14 @@
 	
 	<select id="User.count" parameterClass="mb" resultClass="Long" cacheModel="User-cache">
 		SELECT COUNT(u.id)
-		FROM sysUser u JOIN sysRole r ON u.roleID=r.id
+		FROM sysUser u JOIN sysIdentity r ON u.identityId=r.id
 		<include refid="User.where"/>
 	</select>
 	
-	<select id="User.listByRoleID" parameterClass="Long" resultClass="User" cacheModel="User-cache">
+	<select id="User.listByIdentityId" parameterClass="Long" resultClass="User" cacheModel="User-cache">
 		SELECT u.*
 		FROM sysUser u
-		WHERE u.roleID=#roleID# and u.projectType =1;
+		WHERE u.identityId=#identityId# and u.projectType =1;
 	</select>
 	
 	<sql id="User.listByReturnIDWhere">
@@ -140,9 +140,9 @@
  	</sql>
 	
 	<select id="User.selectUniqueUserByName" parameterClass="mb" resultClass="User" cacheModel="User-cache">
-		SELECT u.*,r.roleName roleName,c.dname as dname
+		SELECT u.*,r.name as identityName,c.dname as dname
 		FROM sysUser u 
-		LEFT JOIN sysRole r ON u.roleID=r.id left join sysDictionary as c on u.did = c.id
+		LEFT JOIN sysIdentity r ON u.identityId=r.id left join sysDictionary as c on u.did = c.id
 		<include refid="User.UniqueWhere"/>
 	</select>
 	
@@ -164,15 +164,15 @@
 	
 	<insert id="User.save" parameterClass="User">
 		INSERT INTO sysUser(
-			userName,password,realName,did,gid,state,roleID,createTime,updateTime,projectType
+			userName,password,realName,did,gid,state,identityId,createTime,updateTime,projectType
 		)VALUES(
-			#userName#,#password#,#realName#,#did#,#gid#,0,#roleID#,now(),now(),1
+			#userName#,#password#,#realName#,#did#,#gid#,0,#identityId#,now(),now(),1
 		)
 	</insert>
 	
 	<update id="User.update" parameterClass="User">
 		UPDATE sysUser 
-			   SET realName=#realName#, did=#did#, gid=#gid# , roleID=#roleID#,updateTime=now()
+			   SET realName=#realName#, did=#did#, gid=#gid# , identityId=#identityId#,updateTime=now()
 			   <isNotEmpty prepend="," property="password">
 			   		password=#password#
 			   </isNotEmpty> 			   
@@ -188,6 +188,7 @@
 			   SET password=#password#,updateTime=#updateTime#		   
 			   WHERE id=#id#
 	</update>
+
 	<update id="User.disabled" parameterClass="mb">
 		update sysUser
 			<dynamic prepend="set">

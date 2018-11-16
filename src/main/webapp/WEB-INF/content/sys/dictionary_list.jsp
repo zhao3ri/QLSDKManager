@@ -31,7 +31,7 @@ pageContext.setAttribute("r", r);
     
     <div class="tab-content">
 	  	<div class="tab-pane active" id="tab_c01">
-		<form role="form" id="mainForm" action="dictionary_list.shtml" method="post">
+		<form identity="form" id="mainForm" action="dictionary_list.shtml" method="post">
 			<input type="hidden" name="dictionary.dtype" value="${dictionary.dtype }"/>
 			
 			<div class="panel panel-default">
@@ -109,13 +109,13 @@ pageContext.setAttribute("r", r);
 						<td><s:date name="inserttime" format="yyyy-MM-dd HH:mm:ss"/></td>
 		              <td><div class="btn-group btn-group-sm pull-right">
 		                  <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-		                  <ul class="dropdown-menu" role="menu">
+		                  <ul class="dropdown-menu" identity="menu">
 		                    <li><a href="dictionary_handle.shtml?id=<s:property value="id"/>">修改</a></li>
 		                    <li><a href="javascript:confirmAction('dictionary_updateState.shtml?checkedIds=<s:property value="id"/>&flag=0&dictionary.dtype=${page.dtype }','您确认删除？');">删除</a></li>
-		                    <li role="presentation" class="divider"></li>
+		                    <li identity="presentation" class="divider"></li>
 		                    <li><a href="javascript:confirmAction('dictionary_updateState.shtml?checkedIds=<s:property value="id"/>&flag=1&dictionary.dtype=${page.dtype }','您确认启用？');">启用</a></li>
 		                    <li><a href="javascript:confirmAction('dictionary_updateState.shtml?checkedIds=<s:property value="id"/>&flag=2&dictionary.dtype=${page.dtype }','您确认锁定？');">锁定</a></li>
-		                    <li role="presentation" class="divider"></li>
+		                    <li identity="presentation" class="divider"></li>
 											<li><mt:modalDialog remote="/history/history_list.shtml?history.rid=${page.id}&history.omkey=dictionary&t=${r}" id="historyWindow${page.id}" title="历史记录" role="dialog" name="历史记录" type="link" width="700"/></li>
 		                  </ul>
 		                </div></td>
@@ -137,9 +137,9 @@ pageContext.setAttribute("r", r);
 		            <input type="checkbox" id="checkedAll">
 		          </label>
 		          <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="caret"></span> </button>
-		          <ul class="dropdown-menu text-left" role="menu">
+		          <ul class="dropdown-menu text-left" identity="menu">
 		            <li><a id="remove" href="#">批量删除</a></li>
-		            <li role="presentation" class="divider"></li>
+		            <li identity="presentation" class="divider"></li>
 		            <li><a id="across" href="#">批量启用</a></li>
 		            <li><a id="unacross" href="#">批量锁定</a></li>
 		          </ul>

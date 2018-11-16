@@ -15,7 +15,7 @@ import com.item.exception.ApplicationException;
  * @since 2011-07-08
  */
 public class PropertyUtils {
-
+    private static final StringBuffer URL = new StringBuffer();
     private static Properties properties = new Properties();
 
     private PropertyUtils() {
@@ -47,13 +47,17 @@ public class PropertyUtils {
     }
 
     public static String getPath() {
-        String host = get("server.host");
-        String port = get("server.port");
-        String absPath = get("server.abs_path");
-        String url = String.format("%s:%s", host, port);
-        if (!StringUtil.isEmpty(absPath)) {
-            url = String.format("%s/%s", url, absPath);
+        if (URL.toString() == null || URL.toString().isEmpty()) {
+            String host = get("server.host");
+            String port = get("server.port");
+            String absPath = get("server.abs_path");
+            String url = String.format("%s:%s", host, port);
+            if (!StringUtil.isEmpty(absPath)) {
+                url = String.format("%s/%s", url, absPath);
+            }
+            URL.append(url);
         }
-        return url;
+
+        return URL.toString();
     }
 }

@@ -47,7 +47,7 @@ public class ModuleService{
 	public void list2map(List<Module> moduleList){
 		if(moduleList!=null && !moduleList.isEmpty()){
 			for (Module module:moduleList) {
-				AuthCacheManage.moduleCacheMap.put(module.getId(), module);
+				AuthCacheManager.getInstance().putModule2Cache(module);
 			}
 		}
 	}
@@ -58,10 +58,7 @@ public class ModuleService{
 	 * @return
 	 */
 	public Module getModuleByID(Long id){
-		if(AuthCacheManage.moduleCacheMap.isEmpty()){
-			return null;
-		}
-		return AuthCacheManage.moduleCacheMap.get(id);
+		return AuthCacheManager.getInstance().getModuleByCache(id);
 	}
 	
 	/**
@@ -70,7 +67,7 @@ public class ModuleService{
 	 */
 	@Transactional( readOnly = true )
 	public List<Module> getModuleListForCreate() {
-		List<Module> moduleList = AuthCacheManage.moduleCacheList;
+		List<Module> moduleList =  AuthCacheManager.getInstance().getModules();
 		if(moduleList!=null && !moduleList.isEmpty()){
 			for (Module module:moduleList) {
 				module.setAuthHtml(as.getAuthHtml(module.getId()));
@@ -86,7 +83,7 @@ public class ModuleService{
 	 */
 	@Transactional( readOnly = true )
 	public List<Module> getModuleListForUpdate(Long roleID){
-		List<Module> moduleList = AuthCacheManage.moduleCacheList;
+		List<Module> moduleList = AuthCacheManager.getInstance().getModules();
 		for (Module module : moduleList) {
 			module.setAuthHtml(as.getUpdateAuthHtml(module.getId(), roleID));
 			module.setDatasetHtml(ds.getUpdateDataListHtml(module.getId(), roleID));

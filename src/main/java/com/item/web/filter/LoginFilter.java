@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.item.constants.Constants;
 import com.item.domain.authority.User;
-import com.item.service.authority.AuthCacheManage;
+import com.item.service.authority.AuthCacheManager;
 import com.item.utils.CookieUtils;
 import com.item.utils.Md5PwdEncoder;
 import com.item.utils.PropertyUtils;
@@ -124,7 +124,7 @@ public class LoginFilter implements Filter {
      */
     public boolean isProtectedResource(String targetURL) {
         //如果请求的url存在权限Map中，则为受保护资源
-        if (AuthCacheManage.allAuthMap.containsKey(targetURL)) {
+        if (AuthCacheManager.getInstance().getAllPermissions().containsKey(targetURL)) {
             return true;
         }
         return false;
@@ -135,7 +135,7 @@ public class LoginFilter implements Filter {
      */
     public boolean checkAuth(String targetURL, User userInfo) {
         //取出当前登录用户所属角色拥有的权限
-        Map<String, String> map = AuthCacheManage.roleAuthMap.get(userInfo.getRoleID());
+        Map<String, String> map = AuthCacheManager.getInstance().getIdentityPermissions(userInfo.getIdentityId());
         if (map == null || map.isEmpty()) {
             return false;
         }

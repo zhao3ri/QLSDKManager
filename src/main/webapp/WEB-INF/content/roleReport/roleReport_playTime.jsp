@@ -47,8 +47,8 @@
         <div class="panel panel-default">
           <div class="panel-body ">
           	  <ul class="nav nav-tabs " >
-				  <li id="playTime"><a href="/roleReport/roleReport_playTime.shtml" role="tab">单次使用时长表</a></li>
-				  <li id="totalPlayTime"><a href="/roleReport/roleReport_totalPlayTime.shtml" role="tab">总使用时长表</a></li>
+				  <li id="playTime"><a href="/roleReport/roleReport_playTime.shtml" identity="tab">单次使用时长表</a></li>
+				  <li id="totalPlayTime"><a href="/roleReport/roleReport_totalPlayTime.shtml" identity="tab">总使用时长表</a></li>
 			  </ul>
       		<div class="table-responsive">
 	      		<table class="table table-hover table-striped table-bordered table-condensed table-big">

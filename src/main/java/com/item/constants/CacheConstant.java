@@ -8,8 +8,8 @@ public enum CacheConstant {
 	// namespace(cacheModel id)
 	Dictionary("Dictionary-cache"), 
 	User("User-cache"),
-	Role("Role-cache"),
-	RoleAuth("RoleAuth-cache")
+	Role("Identity-cache"),
+	RoleAuth("IdentityPermission-cache")
 	;
 	
 	private String value; 

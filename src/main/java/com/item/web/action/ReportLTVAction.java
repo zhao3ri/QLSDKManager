@@ -4,7 +4,6 @@ import com.item.domain.BPlatform;
 import com.item.domain.Game;
 import com.item.domain.authority.User;
 import com.item.domain.report.LTVGamePlatform;
-import com.item.domain.report.ReportHistoryDaily;
 import com.item.service.*;
 import com.item.utils.*;
 import core.module.orm.MapBean;
@@ -57,7 +56,7 @@ public class ReportLTVAction extends Struts2Action {
     @Autowired
     private BPlatformService platformService;
     @Resource
-    private SysroleappauthService roleAppAuthService;
+    private SysGameManagerService roleAppAuthService;
 
     public String ltv() {
         MapBean mb = new MapBean();
@@ -407,7 +406,7 @@ public class ReportLTVAction extends Struts2Action {
 
     private Boolean initSearch() {
         User userInfo = (User) Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
-        List<Long> appIds = roleAppAuthService.getAuthAppIdsByRoleId(userInfo.getRoleID());
+        List<Long> appIds = roleAppAuthService.getAppIdsByIdentityId(userInfo.getIdentityId());
         if (CollectionUtils.isEmpty(appIds)) {
             try {
                 Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath() + "/common/403.jsp");

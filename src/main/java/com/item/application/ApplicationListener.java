@@ -9,7 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.item.constants.Constants;
 import com.item.exception.ApplicationException;
-import com.item.service.authority.AuthCacheManage;
+import com.item.service.authority.AuthCacheManager;
 import com.item.utils.PropertyUtils;
 
 import core.module.utils.SpringUtils;
@@ -48,8 +48,8 @@ public class ApplicationListener implements ServletContextListener {
 
             if ("true".equals(PropertyUtils.get("authority.control"))) {
                 //缓存权限
-                AuthCacheManage acm = (AuthCacheManage) ctx.getBean("authCacheManage");
-                acm.init();
+                AuthCacheManager acm = (AuthCacheManager) ctx.getBean("authCacheManager");
+                AuthCacheManager.create(acm).init();
             }
             logger.info("=============== 加载平台系统应用完毕 ===============");
         } catch (ApplicationException e) {

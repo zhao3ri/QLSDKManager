@@ -10,7 +10,7 @@
 	      	<li class="active">渠道管理</li>
 	      	<li class="active">渠道列表</li>
 	    </ol>
-		<form role="form" action="bPlatform_list.shtml" method="post" id="mainForm">
+		<form identity="form" action="bPlatform_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">渠道列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
@@ -51,7 +51,7 @@
 								<td>
 									<div class="btn-group btn-group-sm pull-right">
 					                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-					                  	<ul class="dropdown-menu" role="menu">
+					                  	<ul class="dropdown-menu" identity="menu">
 											<li><a href="bPlatform_handle.shtml?id=<s:property value="id"/>">修改</a></li>
 											<li><a href="bPlatform_balance.shtml?id=<s:property value="id"/>">加币</a></li>
 											<li><a href="javascript:confirmAction('bPlatform_delete.shtml?id=<s:property value="id"/>','您确认删除？');">删除</a></li>

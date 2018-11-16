@@ -28,11 +28,11 @@
     		<isNotNull prepend="and" property="zoneId">
     			r.zoneId=#zoneId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="roleId">
-    			r.roleId=#roleId#
+    		<isNotNull prepend="and" property="identityId">
+    			r.identityId=#identityId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="roleName">
-    			r.roleName=#roleName#
+    		<isNotNull prepend="and" property="name">
+    			r.name=#name#
     		</isNotNull>
     		<isNotNull prepend="and" property="playTime">
     			r.playTime=#playTime#
@@ -55,16 +55,16 @@
 
     <select id="SRolePlayTimeDaily.pagePlayTime" parameterClass="mb" resultClass="mb">
     	SELECT b.*,SUM(a.playTime) as countPlayTime FROM s_role_play_time_daily a RIGHT JOIN 
-			(SELECT r.appId,r.platformId,r.uid,r.zoneId,r.roleId,r.roleName,SUM(r.playTime) as playTime,COALESCE(g.zoneName,'未知') as zoneName ,p.platformName 
-			FROM s_role_play_time_daily r LEFT JOIN b_game_zone g ON g.zoneId=r.zoneId  left join b_platform p on r.platformId=p.id <include refid="SRolePlayTimeDaily.Where"/> GROUP BY r.uid,r.roleId,r.zoneId ) b 
-			ON a.uid=b.uid AND a.zoneId=b.zoneId AND a.roleId=b.roleId GROUP BY b.uid,b.roleId,b.zoneId ORDER BY b.playTime DESC 
+			(SELECT r.appId,r.platformId,r.uid,r.zoneId,r.identityId,r.name,SUM(r.playTime) as playTime,COALESCE(g.zoneName,'未知') as zoneName ,p.platformName
+			FROM s_role_play_time_daily r LEFT JOIN b_game_zone g ON g.zoneId=r.zoneId  left join b_platform p on r.platformId=p.id <include refid="SRolePlayTimeDaily.Where"/> GROUP BY r.uid,r.identityId,r.zoneId ) b
+			ON a.uid=b.uid AND a.zoneId=b.zoneId AND a.identityId=b.identityId GROUP BY b.uid,b.identityId,b.zoneId ORDER BY b.playTime DESC
 			LIMIT #firstResult#, #pageSize#
     </select>
 
     <select id="SRolePlayTimeDaily.countPlayTime" resultClass="Long" parameterClass="mb">
     	SELECT COUNT(1) FROM 
-    	(SELECT r.appId,r.platformId,r.uid,r.zoneId,r.roleId,r.roleName,sum(r.playTime) as playTime FROM s_role_play_time_daily r
-			<include refid="SRolePlayTimeDaily.Where"/> GROUP BY r.uid,r.roleId,r.zoneId) b
+    	(SELECT r.appId,r.platformId,r.uid,r.zoneId,r.identityId,r.name,sum(r.playTime) as playTime FROM s_role_play_time_daily r
+			<include refid="SRolePlayTimeDaily.Where"/> GROUP BY r.uid,r.identityId,r.zoneId) b
     </select>
 
 

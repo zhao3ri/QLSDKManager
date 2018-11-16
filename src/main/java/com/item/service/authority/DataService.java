@@ -3,13 +3,13 @@ package com.item.service.authority;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.item.domain.authority.IdentityData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.item.dao.authority.DataDao;
 import com.item.domain.authority.Data;
-import com.item.domain.authority.RoleData;
 
 /**
  * 数据集管理信息处理类
@@ -22,7 +22,7 @@ import com.item.domain.authority.RoleData;
 public class DataService {
 
 	@Autowired
-	private RoleDataService rds;
+	private IdentityDataService rds;
 	@Autowired
 	private DataDao dataDao;
 	
@@ -43,7 +43,7 @@ public class DataService {
 	public void list2map(List<Data> list){
 		if(list != null && !list.isEmpty()){
 			for(Data data : list){
-				AuthCacheManage.dataCacheMap.put(data.getId(), data);
+				AuthCacheManager.getInstance().putData2Cache(data);
 			}
 		}
 	}
@@ -58,7 +58,7 @@ public class DataService {
 		if(moduleId == null){
 			return dataList;
 		}
-		for(Data data : AuthCacheManage.dataCacheList){
+		for(Data data : AuthCacheManager.getInstance().getDataCache()){
 			if(moduleId.equals(data.getModuleID())){
 				dataList.add(data);
 			}
@@ -69,13 +69,13 @@ public class DataService {
 	/**
 	 * 通过角色ID获取指定数据集的访问级别
 	 * @param dataId
-	 * @param roleDataList
+	 * @param identityDataList
 	 * @return
 	 */
-	public Long getRoleDataSelectedLevel(Long dataId, List<RoleData> roleDataList){
+	public Long getRoleDataSelectedLevel(Long dataId, List<IdentityData> identityDataList){
 		Long level = 4l;
-		for(RoleData rd : roleDataList){
-			if(dataId.equals(rd.getDatasetID())){
+		for(IdentityData rd : identityDataList){
+			if(dataId.equals(rd.getDatasetId())){
 				level = rd.getLevel();
 				break;
 			}
@@ -130,11 +130,11 @@ public class DataService {
 		Long level = 4l;
 		StringBuffer sb = new StringBuffer();
 		List<Data> dataList = this.getDataListByModuleId(moduleId);
-		List<RoleData> roleDataList = rds.getRoleDataListByRoleId(roleId);
+		List<IdentityData> identityDataList = rds.getIdentityDataListById(roleId);
 		sb.append("<table width=\"60%\">")
 			.append("<tr>");
 		for(Data data : dataList){
-			level = this.getRoleDataSelectedLevel(data.getId(), roleDataList);
+			level = this.getRoleDataSelectedLevel(data.getId(), identityDataList);
 			sb
 			.append("<td >")
 			.append(data.getDatasetName())

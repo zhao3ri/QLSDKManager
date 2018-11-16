@@ -16,17 +16,17 @@
           
           <form action="report_platform.shtml" method="post" id="mainForm">
           	  <ul class="nav nav-tabs " >
-				 <li id="summary"><a href="/report/report_summary.shtml" role="tab">平台分析</a></li>
-				  <li id="platform"><a href="/report/report_platform.shtml" role="tab">渠道分析</a></li>
-				  <li id="zone"><a href="/report/report_zone.shtml" role="tab">区服分析</a></li>
+				 <li id="summary"><a href="/report/report_summary.shtml" identity="tab">平台分析</a></li>
+				  <li id="platform"><a href="/report/report_platform.shtml" identity="tab">渠道分析</a></li>
+				  <li id="zone"><a href="/report/report_zone.shtml" identity="tab">区服分析</a></li>
 				  
-				   <li id="reset"  role="tab" style="float: right;">
+				   <li id="reset"  identity="tab" style="float: right;">
 			          <div class="form-group width_btn">
  				          <button  type="submit" class="btn  btn-primary "  id="yearMonthStr"><i class="icon-search"></i> 搜索</button>
 			          	  <button  id="resetBtn"  type="button" class="btn  btn-default " ><i class="icon-eraser"></i> 重置</button>
 			          </div>
 			      </li>	
-				  <li  id="date"  role="tab" style="float: right;">
+				  <li  id="date"  identity="tab" style="float: right;">
 				    <div class="form-group   width_input"  style="width: 300px">
 						<div  class="input-group  input-append date form_month "  data-date-format="yyyy-mm" sType="submit">
 							<input class="form-control "  id="yearMonth"  type="text" name="yearMonthStr"   readonly  placeholder="历史累计数据" data-toggle="popover"  data-placement="top" data-content="请选择日期"   value="${yearMonthStr}"/>

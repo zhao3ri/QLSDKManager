@@ -17,7 +17,7 @@ pageContext.setAttribute("r", r);
       <li class="active">系统管理</li>
       <li class="active">功能列表</li>
     </ol>
-	<form role="form" id="mainForm" action="function_list.shtml" method="post">
+	<form identity="form" id="mainForm" action="function_list.shtml" method="post">
 		<input type="hidden" name="mid" value="${mid }" />
 	    
 	    <div class="panel panel-default">
@@ -62,10 +62,10 @@ pageContext.setAttribute("r", r);
 						<td>${tempFunction.functionOrder}</td>
 						<td><div class="btn-group btn-group-sm pull-right">
 						    <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-						    <ul class="dropdown-menu" role="menu">
+						    <ul class="dropdown-menu" identity="menu">
 						      <li><a href="function_view.shtml?function.id=${tempFunction.id }">修改</a></li>
 						      <li><a href="javascript:confirmAction('function_delete.shtml?checkedIds=${tempFunction.id }','您确认删除？');">删除</a></li>
-						      <li role="presentation" class="divider"></li>
+						      <li identity="presentation" class="divider"></li>
 							  <li><mt:modalDialog remote="/history/history_list.shtml?history.rid=${tempFunction.id}&history.omkey=function&t=${r}" id="historyWindow${tempFunction.id}" title="历史记录" role="dialog" name="历史记录" type="link" width="700"/></li>
 						    </ul>
 						  </div></td>
@@ -87,7 +87,7 @@ pageContext.setAttribute("r", r);
 	            <input type="checkbox" id="checkedAll">
 	          </label>
 	          <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="caret"></span> </button>
-	          <ul class="dropdown-menu text-left" role="menu">
+	          <ul class="dropdown-menu text-left" identity="menu">
 	            <li><a id="remove" href="#">删除</a></li>
 	          </ul>
 	        </div>

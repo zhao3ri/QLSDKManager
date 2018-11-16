@@ -17,7 +17,7 @@
             <li class="active">系统管理</li>
             <li class="active">管理员列表</li>
         </ol>
-        <form role="form" action="user_list.shtml" method="post" id="mainForm">
+        <form identity="form" action="user_list.shtml" method="post" id="mainForm">
             <div class="panel panel-default">
                 <div class="panel-heading ">管理员列表信息查询</div>
                 <div class="form-inline popover-show panel-body list_toolbar">
@@ -33,12 +33,12 @@
                     </div>
                     <div class="form-group    width_input" data-toggle="popover" data-placement="top"
                          data-content="请选择身份">
-                        <select size="1" class="form-control" name="searchUser.roleID">
+                        <select size="1" class="form-control" name="searchUser.identityId">
                             <option value="">--请选择身份--</option>
-                            <s:iterator value="roleList" var="role">
+                            <s:iterator value="identityList" var="identity">
                                 <option
-                                        <s:if test="searchUser.roleID==#role.id">selected</s:if>
-                                        value="${role.id }">${role.roleName }</option>
+                                        <s:if test="searchUser.identityId==#identity.id">selected</s:if>
+                                        value="${identity.id }">${identity.name }</option>
                             </s:iterator>
                         </select>
                     </div>
@@ -79,12 +79,19 @@
                             <s:if test="page.result.size>0">
                                 <s:iterator value="page.result" var="tempUser">
                                     <tr>
-                                        <td><label><input type="checkbox" name="checkedIds" class="checkedIds"
-                                                          value="${tempUser.id}"></label></td>
+                                        <td><label>
+                                            <s:if test="#userName=='admin'">
+                                                <input type="checkbox" name="checkedIds" class="checkedIds"
+                                                       value="${tempUser.id}" style="visibility: hidden">
+                                            </s:if>
+                                            <s:else>
+                                                <input type="checkbox" name="checkedIds" class="checkedIds"
+                                                       value="${tempUser.id}">
+                                            </s:else></label></td>
                                         <td>${tempUser.id}</td>
                                         <td><s:property value="userName"/></td>
                                         <td><s:property value="realName"/></td>
-                                        <td><s:property value="roleName"/></td>
+                                        <td><s:property value="name"/></td>
                                         <td><mt:selectState showType="label" value="${tempUser.state}"
                                                             stateType="userState"/></td>
                                         <td><s:date name="#tempUser.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
@@ -92,19 +99,19 @@
                                             <div class="btn-group btn-group-sm pull-right">
                                                 <button type="button" class="btn btn-default  dropdown-toggle"
                                                         data-toggle="dropdown"> 操作 <span class="caret"></span></button>
-                                                <ul class="dropdown-menu" role="menu">
+                                                <ul class="dropdown-menu" identity="menu">
                                                     <li><a href="user_update.shtml?user.id=${tempUser.id }">修改</a></li>
                                                     <li>
                                                         <a href="javascript:confirmAction('user_disabled.shtml?audit=-1&checkedIds=${tempUser.id }','您确认删除？');">删除</a>
                                                     </li>
-                                                    <li role="presentation" class="divider"></li>
+                                                    <li identity="presentation" class="divider"></li>
                                                     <li>
                                                         <a href="javascript:confirmAction('user_disabled.shtml?audit=0&checkedIds=${tempUser.id }','您确认启用？');">启用</a>
                                                     </li>
                                                     <li>
                                                         <a href="javascript:confirmAction('user_disabled.shtml?audit=1&checkedIds=${tempUser.id }','您确认禁用？');">禁用</a>
                                                     </li>
-                                                    <li role="presentation" class="divider"></li>
+                                                    <li identity="presentation" class="divider"></li>
                                                     <li><mt:modalDialog
                                                             remote="/history/history_list.shtml?history.rid=${tempUser.id}&history.omkey=user&t=${r}"
                                                             id="historyWindow${tempUser.id}" title="历史记录" role="dialog"
@@ -131,9 +138,9 @@
                                 </label>
                                 <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span></button>
-                                <ul class="dropdown-menu text-left" role="menu">
+                                <ul class="dropdown-menu text-left" identity="menu">
                                     <li><a id="remove" href="#">批量删除</a></li>
-                                    <li role="presentation" class="divider"></li>
+                                    <li identity="presentation" class="divider"></li>
                                     <li><a id="across" href="#">批量启用</a></li>
                                     <li><a id="unacross" href="#">批量禁用</a></li>
                                 </ul>
@@ -212,36 +219,35 @@
         $("#newitem").click(function () {
             location.assign("user_create.shtml");
         });
-        updateAdmin();
     });
 
     function resetSearch() {
         location.assign("user_list.shtml");
     }
 
-    function updateAdmin() {
-        var users =${page.result};
-        var tab = document.getElementById("tab-user");
-        var trs = tab.getElementsByTagName("tr");
-        for (var i = 0; i < trs.length; i++) {
-            var tds = trs[i].getElementsByTagName("td")
-            if (i === 2) {
-                tds[1].getElementsByTagName("input").style.visibility = "hidden";
-            }
-            <%--var realName = ${users[i].realName};--%>
-            <%--var userName =${users[i].userName};--%>
-            <%--var roleId =${users[i].roleID};--%>
+    <%--function updateAdmin() {--%>
+    <%--var users =${page.result};--%>
+    <%--var tab = document.getElementById("tab-user");--%>
+    <%--var trs = tab.getElementsByTagName("tr");--%>
+    <%--for (var i = 0; i < trs.length; i++) {--%>
+    <%--var tds = trs[i].getElementsByTagName("td")--%>
+    <%--if (i === 2) {--%>
+    <%--tds[1].getElementsByTagName("input").style.visibility = "hidden";--%>
+    <%--}--%>
+    <%--&lt;%&ndash;var realName = ${users[i].realName};&ndash;%&gt;--%>
+    <%--&lt;%&ndash;var userName =${users[i].userName};&ndash;%&gt;--%>
+    <%--&lt;%&ndash;var identityId =${users[i].identityId};&ndash;%&gt;--%>
 
-            <%--if (userName == 'admin' && realName == 'admin' && roleId == 3) {--%>
-            <%--tds[0].style.visibility = "hidden";--%>
-            <%--}--%>
-        }
-        // if (userName == "admin") {
-        //
-        //     var uls = tab.getElementsByTagName("ul");
-        //     var lis = uls[0].getElementsByTagName("li");
-        // }
-    }
+    <%--&lt;%&ndash;if (userName == 'admin' && realName == 'admin' && identityId == 3) {&ndash;%&gt;--%>
+    <%--&lt;%&ndash;tds[0].style.visibility = "hidden";&ndash;%&gt;--%>
+    <%--&lt;%&ndash;}&ndash;%&gt;--%>
+    <%--}--%>
+    <%--// if (userName == "admin") {--%>
+    <%--//--%>
+    <%--//     var uls = tab.getElementsByTagName("ul");--%>
+    <%--//     var lis = uls[0].getElementsByTagName("li");--%>
+    <%--// }--%>
+    <%--}--%>
 </script>
 
 </body>

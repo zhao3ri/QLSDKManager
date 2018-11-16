@@ -11,7 +11,7 @@
 	      	<li class="active">游戏管理</li>
 	      	<li class="active">游戏列表</li>
 	    </ol>
-		<form role="form" action="bGame_list.shtml" method="post" id="mainForm">
+		<form identity="form" action="bGame_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	    <div class="panel-heading">游戏列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
@@ -56,7 +56,7 @@
 								<td>
 									<div class="btn-group btn-group-sm pull-right">
 					                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-					                  	<ul class="dropdown-menu" role="menu">
+					                  	<ul class="dropdown-menu" identity="menu">
 											<li><a href="bGame_handle.shtml?id=<s:property value="id"/>">修改</a></li>
 											<li><a href="bGame_delete.shtml?id=<s:property value="id"/>">删除</a></li>
 					                  	</ul>
@@ -82,7 +82,7 @@
 			            	<input type="checkbox" id="checkedAll">
 			          	</label>
 			          	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="caret"></span> </button>
-			          	<ul class="dropdown-menu text-left" role="menu">
+			          	<ul class="dropdown-menu text-left" identity="menu">
 			            	<li><a id="delete" href="javascript:void(0);">批量删除</a></li>
 			          	</ul>
 			        </div>

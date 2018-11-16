@@ -10,7 +10,7 @@
 	      	<li class="active">游戏管理</li>
 	      	<li class="active">游戏玩家列表</li>
 	    </ol>
-		<form role="form" action="bAccount_list.shtml" method="post" id="mainForm">
+		<form identity="form" action="bAccount_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">玩家列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">

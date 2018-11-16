@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="IdentityData">
+
+    <typeAlias alias="IdentityData" type="com.item.domain.authority.IdentityData"/>
+    <typeAlias alias="mb" type="core.module.orm.MapBean"/>
+
+    <select id="IdentityData.listByRoleID" parameterClass="Long" resultClass="IdentityData">
+		SELECT *
+		FROM sysIdentityData
+		WHERE identityId=#identityId#
+	</select>
+
+    <select id="IdentityData.listAll" parameterClass="mb" resultClass="IdentityData">
+		SELECT *
+  		FROM sysIdentityData
+	</select>
+
+    <select id="IdentityData.selectUnique" parameterClass="mb" resultClass="IdentityData">
+		SELECT *
+		FROM sysIdentityData
+		WHERE identityId=#identityId# AND datasetId=#datasetId#
+	</select>
+
+    <delete id="IdentityData.delete" parameterClass="Long">
+		DELETE FROM sysIdentityData WHERE id=#id#
+	</delete>
+
+    <delete id="IdentityData.deleteByIdentityId" parameterClass="Long">
+		DELETE FROM sysIdentityData WHERE identityId=#identityId#
+	</delete>
+
+    <delete id="IdentityData.deleteByDatasetId" parameterClass="Long">
+		DELETE FROM sysIdentityData WHERE datasetId=#datasetId#
+	</delete>
+
+    <insert id="IdentityData.save" parameterClass="IdentityData">
+        INSERT INTO sysIdentityData(
+        datasetId,identityId,level
+        )VALUES(
+        #datasetId#,#identityId#,#level#
+        )
+        <selectKey resultClass="Long" keyProperty="id">
+            select @@IDENTITY as id
+        </selectKey>
+    </insert>
+</sqlMap>

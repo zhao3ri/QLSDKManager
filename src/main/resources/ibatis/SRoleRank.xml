@@ -14,8 +14,8 @@
 			<isNotEmpty prepend="AND" property="platformId">
 				a.platformid=#platformId#
 			</isNotEmpty>
-			<isNotEmpty prepend="AND" property="roleName">
-				a.rolename=#roleName#
+			<isNotEmpty prepend="AND" property="name">
+				a.rolename=#name#
 			</isNotEmpty>
 		</dynamic>
 	</sql>

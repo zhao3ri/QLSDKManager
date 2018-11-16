@@ -43,8 +43,8 @@
         <div class="panel panel-default">
           <div class="panel-body ">
           	  <ul class="nav nav-tabs " >
-				  <li id="realTime"><a href="javascript:jumpRealTime();" role="tab">实时统计表</a></li>
-				  <li id="daily"><a href="javascript:void(0);" role="tab">日统计表</a></li>
+				  <li id="realTime"><a href="javascript:jumpRealTime();" identity="tab">实时统计表</a></li>
+				  <li id="daily"><a href="javascript:void(0);" identity="tab">日统计表</a></li>
 			  </ul><br/>
       		<div class="table-responsive">
         		<table class="table table-hover table-striped table-bordered table-condensed table-big">

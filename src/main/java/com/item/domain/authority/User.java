@@ -34,9 +34,9 @@ public class User implements Serializable{
 	private Integer state;
 	
 	@LogAttribute(name="身份")
-	private Long roleID;
+	private Long identityId;
 	
-	private String roleName;
+	private String identityName;
 	private String dname;
 	private Long levelId;
 	private Integer projectType;
@@ -79,12 +79,12 @@ public class User implements Serializable{
 		this.state = state;
 	}
 
-	public Long getRoleID() {
-		return roleID;
+	public Long getIdentityId() {
+		return identityId;
 	}
 
-	public void setRoleID(Long roleID) {
-		this.roleID = roleID;
+	public void setIdentityId(Long identityId) {
+		this.identityId = identityId;
 	}
 
 	public Date getCreateTime() {
@@ -103,12 +103,12 @@ public class User implements Serializable{
 		this.updateTime = updateTime;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	public String getIdentityName() {
+		return identityName;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setIdentityName(String identityName) {
+		this.identityName = identityName;
 	}
 
 	public String getViewRecharge() {

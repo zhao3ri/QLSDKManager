@@ -22,7 +22,7 @@ import com.item.service.BGameService;
 import com.item.service.SRechargeDistributeDailyService;
 import com.item.service.SRechargeHourlyService;
 import com.item.service.SRoleDailyService;
-import com.item.service.SysroleappauthService;
+import com.item.service.SysGameManagerService;
 import com.item.utils.CookieUtils;
 import com.item.utils.DateUtils;
 import com.item.utils.ExcelExport;
@@ -44,7 +44,7 @@ public class RoleReportAction extends Struts2Action {
 
 	private static final long serialVersionUID = 5551011746476847421L;
 	@Resource
-	private SysroleappauthService roleAppAuthService;
+	private SysGameManagerService roleAppAuthService;
 	@Resource
 	private BGameService gameService;
 	@Resource

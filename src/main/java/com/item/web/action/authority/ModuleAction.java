@@ -101,8 +101,6 @@ public class ModuleAction extends Struts2Action {
 		this.module = module;
 	}
 
-	
-
 	public Page<Module> getPage() {
 		return page;
 	}

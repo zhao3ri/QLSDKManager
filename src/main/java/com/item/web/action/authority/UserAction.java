@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.item.domain.authority.Identity;
 import com.item.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
@@ -19,10 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.item.application.StateContext;
 import com.item.constants.Constants;
 import com.item.constants.TypeConstant;
-import com.item.domain.authority.Role;
 import com.item.domain.authority.User;
 import com.item.domain.authority.Dictionary;
-import com.item.service.authority.RoleService;
+import com.item.service.authority.IdentityService;
 import com.item.service.authority.UserService;
 import com.item.service.authority.DictionaryService;
 
@@ -46,7 +46,7 @@ public class UserAction extends Struts2Action {
 	@Autowired
 	private UserService us;
 	@Autowired
-	private RoleService rs;
+	private IdentityService rs;
 	@Autowired
 	private DictionaryService ds;
 
@@ -54,7 +54,7 @@ public class UserAction extends Struts2Action {
 	private User searchUser;    //用于保存搜索条件的User对象
 	private Page<User> page = new Page<User>(10);
 	private String checkedIds;
-	private List<Role> roleList;
+	private List<Identity> identityList;
 	private String audit;
 	private Set<String> viewRechargeSet = new HashSet<String>();    //该管理员能查看哪几款游戏的充值
 	private String[] games = null;
@@ -88,7 +88,7 @@ public class UserAction extends Struts2Action {
 
 			MapBean mb = search();
 			page = us.getUserPage(page, UserTools.getVisitationRightMapBean(mb));
-			roleList = rs.getRoleList(null);
+			identityList = rs.getIdentityList(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("获取管理员列表出错：", e.getMessage());
@@ -117,8 +117,8 @@ public class UserAction extends Struts2Action {
 			if (searchUser.getGid() != null && searchUser.getGid() > 0) {
 				mb.put("gid", searchUser.getGid());
 			}
-			if (searchUser.getRoleID() != null && searchUser.getRoleID() > 0) {
-				mb.put("roleID", searchUser.getRoleID());
+			if (searchUser.getIdentityId() != null && searchUser.getIdentityId() > 0) {
+				mb.put("identityId", searchUser.getIdentityId());
 			}
 			if (searchUser.getState() != null && searchUser.getState() > -1) {
 				mb.put("state", searchUser.getState());
@@ -165,7 +165,7 @@ public class UserAction extends Struts2Action {
 		mb.put("orderby", "dsort desc");
 		departmentList = ds.list(mb);
 
-		roleList = rs.getRoleList(null);
+		identityList = rs.getIdentityList(null);
 		return SUCCESS;
 	}
 
@@ -223,7 +223,7 @@ public class UserAction extends Struts2Action {
 		groupMb.put("orderby", "dsort desc");
 		groupList = ds.list(groupMb);
 
-		roleList = rs.getRoleList(null);
+		identityList = rs.getIdentityList(null);
 		if (user != null)
 			viewRechargeSet = Tools.str2set(user.getViewRecharge());
 		return SUCCESS;
@@ -251,7 +251,7 @@ public class UserAction extends Struts2Action {
 		groupMb.put("orderby", "dsort desc");
 		groupList = ds.list(groupMb);
 
-		roleList = rs.getRoleList(null);
+		identityList = rs.getIdentityList(null);
 		if (user != null)
 			viewRechargeSet = Tools.str2set(user.getViewRecharge());
 		return "myInfo";
@@ -438,12 +438,12 @@ public class UserAction extends Struts2Action {
 		this.searchUser = searchUser;
 	}
 
-	public List<Role> getRoleList() {
-		return roleList;
+	public List<Identity> getIdentityList() {
+		return identityList;
 	}
 
-	public void setRoleList(List<Role> roleList) {
-		this.roleList = roleList;
+	public void setIdentityList(List<Identity> identityList) {
+		this.identityList = identityList;
 	}
 
 	public String getAudit() {

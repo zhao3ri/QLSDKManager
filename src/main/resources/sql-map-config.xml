@@ -7,16 +7,16 @@
 		lazyLoadingEnabled="true" maxRequests="1000" maxSessions="30"
 		maxTransactions="100" useStatementNamespaces="false" />
 	<!-- <sqlMap resource="ibatis/*.xml" /> -->
-	<sqlMap resource="ibatis/authority/RoleAuth.xml" />
 	<sqlMap resource="ibatis/authority/Auth.xml" />
-	<sqlMap resource="ibatis/authority/Function.xml" />
-	<sqlMap resource="ibatis/authority/Module.xml" />
-	<sqlMap resource="ibatis/authority/Role.xml" />
-	<sqlMap resource="ibatis/authority/User.xml" />
 	<sqlMap resource="ibatis/authority/Data.xml" />
-	<sqlMap resource="ibatis/authority/RoleData.xml" />
 	<sqlMap resource="ibatis/authority/Dictionary.xml" />
+	<sqlMap resource="ibatis/authority/Function.xml" />
 	<sqlMap resource="ibatis/authority/History.xml" />
+	<sqlMap resource="ibatis/authority/Identity.xml" />
+	<sqlMap resource="ibatis/authority/IdentityData.xml" />
+	<sqlMap resource="ibatis/authority/IdentityPermission.xml" />
+	<sqlMap resource="ibatis/authority/Module.xml" />
+	<sqlMap resource="ibatis/authority/User.xml" />
 	<sqlMap resource="ibatis/BOrder.xml" />
 	<sqlMap resource="ibatis/BPlatform.xml" />
 	<sqlMap resource="ibatis/BPlatformApp.xml" />
@@ -43,7 +43,7 @@
 	<sqlMap resource="ibatis/SRechargeHourly.xml" />
 	<sqlMap resource="ibatis/SRechargeDistributeDaily.xml" />
 	<sqlMap resource="ibatis/SPlayTimeDistributeDaily.xml" />
-	<sqlMap resource="ibatis/Sysroleappauth.xml" />
+	<sqlMap resource="ibatis/SysGameManager.xml" />
 	<sqlMap resource="ibatis/SDataDaily.xml" />
 	<sqlMap resource="ibatis/SDataMonthly.xml" />
 	<sqlMap resource="ibatis/BRole.xml" />

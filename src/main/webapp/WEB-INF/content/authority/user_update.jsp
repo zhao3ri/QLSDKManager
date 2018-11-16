@@ -15,7 +15,7 @@
 	      <div class="panel-heading ">
 	        <h3 class="panel-title">修改用户</h3>
 	      </div>
-		<form role="form" id="inputForm" action="user_save.shtml" method="post">
+		<form identity="form" id="inputForm" action="user_save.shtml" method="post">
 			<input type="hidden" name="user.id" value="${user.id }" />
 			
 			<div class="panel-body ">
@@ -70,10 +70,10 @@
               	<div class="form-group clearfix col-lg-6" >
 	              <label  class="control-label col-sm-3 text-right"><b class="color_red">*</b>身份：</label>
 	              <div class=" col-sm-9 ">
-	                <select name="user.roleID"  class="form-control" size="1">
+	                <select name="user.identityId"  class="form-control" size="1">
 						<option value="">--请选择身份--</option>
-						<s:iterator value="roleList" var="role">
-							<option value="${role.id }" <s:if test="user.roleID==#role.id">selected</s:if>>${role.roleName }</option>
+						<s:iterator value="identityList" var="identity">
+							<option value="${identity.id }" <s:if test="user.identityId==#identity.id">selected</s:if>>${identity.name }</option>
 						</s:iterator>
 					</select>
 	              </div>
@@ -117,7 +117,7 @@
 					required: true,
 					selectNone:true
 				},
-				"user.roleID":{
+				"user.identityId":{
 					required: true,
 					selectNone:true
 				}
@@ -126,7 +126,7 @@
 				"password2": {
 					equalTo: "两次输入的密码不一致"
 				},
-				"user.roleID":"请选择身份",
+				"user.identityId":"请选择身份",
 				"user.did":"请选择部门"
 			}
 		});

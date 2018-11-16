@@ -21,7 +21,7 @@ import com.item.service.BGamezoneService;
 import com.item.service.BPlatformService;
 import com.item.service.ReportDailyService;
 import com.item.service.ReportService;
-import com.item.service.SysroleappauthService;
+import com.item.service.SysGameManagerService;
 
 import core.module.orm.MapBean;
 import core.module.utils.Struts2Utils;
@@ -62,11 +62,11 @@ public class ReportDailyAction extends Struts2Action {
     @Autowired
     private BPlatformService platformService;
     @Resource
-    private SysroleappauthService roleAppAuthService;
+    private SysGameManagerService roleAppAuthService;
 
     private Boolean initSearch() {
         User userInfo = (User) Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
-        List<Long> appIds = roleAppAuthService.getAuthAppIdsByRoleId(userInfo.getRoleID());
+        List<Long> appIds = roleAppAuthService.getAppIdsByIdentityId(userInfo.getIdentityId());
         if (CollectionUtils.isEmpty(appIds)) {
             try {
                 Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath() + "/common/403.jsp");

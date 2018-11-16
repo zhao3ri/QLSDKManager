@@ -15,7 +15,7 @@
 	      <div class="panel-heading ">
 	        <h3 class="panel-title">新增/修改模块</h3>
 	      </div>
-		<form role="form" id="inputForm" action="module_save.shtml" method="post">
+		<form identity="form" id="inputForm" action="module_save.shtml" method="post">
 			<input type="hidden" name="module.id" value="${module.id }"/>
 			<div class="panel-body ">
 	          <div class=" tooltip-show form-horizontal">

@@ -14,7 +14,7 @@
 	      <div class="panel-heading ">
 	        <h3 class="panel-title">修改密码</h3>
 	      </div>
-			<form role="form" id="inputForm" action="user_saveMyPassword.shtml" method="post">
+			<form identity="form" id="inputForm" action="user_saveMyPassword.shtml" method="post">
 				<input type="hidden" name="user.id" value="${user.id }"/>
 				<div class="panel-body ">
 		          <div class=" tooltip-show form-horizontal">

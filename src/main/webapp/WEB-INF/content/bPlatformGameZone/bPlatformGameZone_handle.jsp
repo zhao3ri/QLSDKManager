@@ -20,7 +20,7 @@
 	      	<div class="panel-heading ">
 	        	<h3 class="panel-title">${id==null?"新增":"修改"}平台游戏分区表信息</h3>
 	      	</div>
-	      	<form role="form" id="inputForm" action="bPlatformGameZone_save.shtml" method="post">
+	      	<form identity="form" id="inputForm" action="bPlatformGameZone_save.shtml" method="post">
 	        	<div class="panel-body ">
 	          		<div class=" tooltip-show form-horizontal">
 	    				<input type="hidden" name="zoneIds" id="zoneIds"/>

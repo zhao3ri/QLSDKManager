@@ -29,11 +29,11 @@ public class BGameService {
     @Autowired
     private BGamezoneService gamezoneService;
     @Resource
-    private SysroleappauthService roleAppAuthService;
+    private SysGameManagerService gameManagerService;
 
     public Page<Game> page(Page<Game> page, MapBean mb) {
         User userInfo = (User) Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
-        List<Long> allAppIds = roleAppAuthService.getAuthAppIdsByRoleId(userInfo.getRoleID());
+        List<Long> allAppIds = gameManagerService.getAppIdsByIdentityId(userInfo.getIdentityId());
         mb.put("appIds", allAppIds);
         return gameDao.find(page, mb, "BGame.count", "BGame.page");
     }
@@ -65,7 +65,7 @@ public class BGameService {
         gameDao.save("BGame.save", entity);
         Long appIds[] = {appId};
         //新增游戏默认给roleId为3的超级管理员分配权限
-        roleAppAuthService.save(3L, appIds);
+        gameManagerService.save(3L, appIds);
     }
 
     public void update(Game entity) {
@@ -88,7 +88,7 @@ public class BGameService {
         if (userInfo == null) {
             return new ArrayList<>();
         }
-        List<Long> allAppIds = roleAppAuthService.getAuthAppIdsByRoleId(userInfo.getRoleID());
+        List<Long> allAppIds = gameManagerService.getAppIdsByIdentityId(userInfo.getIdentityId());
         if (CollectionUtils.isEmpty(allAppIds)) {
             allAppIds = new ArrayList<Long>();
             allAppIds.add(-1L);
@@ -97,9 +97,9 @@ public class BGameService {
         return gameDao.find("BGame.list", mb);
     }
 
-    public List<Game> listByRoleId(Long roleId) {
+    public List<Game> listByIdentityId(Long roleId) {
         MapBean mb = new MapBean();
-        List<Long> appIds = roleAppAuthService.getAuthAppIdsByRoleId(roleId);
+        List<Long> appIds = gameManagerService.getAppIdsByIdentityId(roleId);
         if (CollectionUtils.isEmpty(appIds)) {
             appIds = new ArrayList<Long>();
             appIds.add(-1L);

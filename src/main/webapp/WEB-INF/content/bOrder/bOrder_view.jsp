@@ -60,7 +60,7 @@
 						<div  class="col-lg-6">
 		        			<dt>角色Id：</dt>
 		        			<dd>
-								<s:property value="bOrder.roleId"/>
+								<s:property value="bOrder.identityId"/>
 							</dd>
 		        		</div>
 					</div>
@@ -68,7 +68,7 @@
 						<div  class="col-lg-6">
 		        			<dt>角色名称：</dt>
 		        			<dd>
-								<s:property value="bOrder.roleName"/>
+								<s:property value="bOrder.name"/>
 							</dd>
 		        		</div>
 		        		<div  class="col-lg-6">

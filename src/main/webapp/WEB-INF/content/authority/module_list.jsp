@@ -17,7 +17,7 @@ pageContext.setAttribute("r", r);
       <li class="active">系统管理</li>
       <li class="active">模块列表</li>
     </ol>
-	<form role="form" id="mainForm" action="module_list.shtml" method="post">
+	<form identity="form" id="mainForm" action="module_list.shtml" method="post">
 	    <div class="panel panel-default">
 	      <div class="panel-heading ">模块列表信息查询 </div>
 	      <div class="form-inline popover-show panel-body list_toolbar">
@@ -55,11 +55,11 @@ pageContext.setAttribute("r", r);
 						<td>${tempModule.moduleOrder}</td>
 						<td><div class="btn-group btn-group-sm pull-right">
 						    <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-						    <ul class="dropdown-menu" role="menu">
+						    <ul class="dropdown-menu" identity="menu">
 						      <li><a href="module_view.shtml?module.id=${tempModule.id }">修改</a></li>
 						      <li><a href="/function/function_list.shtml?mid=${tempModule.id }">查看功能</a></li>
 						      <li><a href="javascript:confirmAction('module_delete.shtml?checkedIds=${tempModule.id }','您确认删除？');">删除</a></li>
-						      <li role="presentation" class="divider"></li>
+						      <li identity="presentation" class="divider"></li>
 											<li><mt:modalDialog remote="/history/history_list.shtml?history.rid=${tempModule.id}&history.omkey=module&t=${r}" id="historyWindow${tempModule.id}" title="历史记录" role="dialog" name="历史记录" type="link" width="700"/></li>
 						    </ul>
 						  </div></td>
@@ -81,7 +81,7 @@ pageContext.setAttribute("r", r);
 	            <input type="checkbox" id="checkedAll">
 	          </label>
 	          <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="caret"></span> </button>
-	          <ul class="dropdown-menu text-left" role="menu">
+	          <ul class="dropdown-menu text-left" identity="menu">
 	            <li><a id="remove" href="#">批量删除</a></li>
 	          </ul>
 	        </div>

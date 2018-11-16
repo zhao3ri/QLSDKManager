@@ -86,7 +86,7 @@
 
 <div class="container">
     <iframe src="/common/refresh.jsp" width="0" height="0" style="display: none"></iframe>
-    <nav class="navbar navbar-default navbar-static-top row" role="navigation">
+    <nav class="navbar navbar-default navbar-static-top row" identity="navigation">
 
         <!-- 小屏幕菜单开始 -->
         <div class="navbar-header">
@@ -210,15 +210,15 @@
 
                 <!--权限管理-->
                 <mt:auths
-                        authUrls="user_list.shtml,role_list.shtml,module_list.shtml,function_list.shtml,data_list.shtml,dictionary_list.shtml,systool_cleanCache.shtml">
+                        authUrls="user_list.shtml,identity_list.shtml,module_list.shtml,function_list.shtml,data_list.shtml,dictionary_list.shtml,systool_cleanCache.shtml">
                     <li class="menuTop dropdown <% out.print(getSelected("authority,dictionary,history,systool")); %>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">权限管理<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <mt:auth authUrl="user_list.shtml">
                                 <li><a href="${ctx}/user/user_list.shtml">管理员列表</a></li>
                             </mt:auth>
-                            <mt:auth authUrl="role_list.shtml">
-                                <li><a href="${ctx}/role/role_list.shtml">身份列表</a></li>
+                            <mt:auth authUrl="identity_list.shtml">
+                                <li><a href="${ctx}/identity/identity_list.shtml">身份列表</a></li>
                             </mt:auth>
                             <mt:auth authUrl="module_list.shtml">
                                 <li><a href="${ctx}/module/module_list.shtml">模块列表</a></li>
@@ -230,15 +230,15 @@
                                      <li><a href="${ctx}/data/data_list.shtml">数据权限列表</a></li>
                                  </mt:auth> --%>
                             <mt:auth authUrl="dictionary_list.shtml">
-                                <li role="presentation" class="divider"></li>
+                                <li identity="presentation" class="divider"></li>
                                 <li><a href="${ctx}/dictionary/dictionary_list.shtml">部门列表</a></li>
                             </mt:auth>
                                 <%--  <mt:auth authUrl="history_list1.shtml">
-                                   <li role="presentation" class="divider"></li>
+                                   <li identity="presentation" class="divider"></li>
                                    <li><a href="${ctx}/history/history_list1.shtml?t=${r}&history.oid=<s:property value="#session.sessionUserInfo.id"/>">操作记录</a></li>
                                  </mt:auth> --%>
                             <mt:auth authUrl="systool_cleanCache.shtml">
-                                <li role="presentation" class="divider"></li>
+                                <li identity="presentation" class="divider"></li>
                                 <li><a href="${ctx}/systool/systool_cleanCache.shtml">清除缓存</a></li>
                             </mt:auth>
                         </ul>

@@ -11,7 +11,7 @@
 	</div>
     <div class=" col-md-11">
         <div class="panel panel-default">
-        	<form role="form"  action="report_roleRank.shtml" method="post" id="mainForm">
+        	<form identity="form"  action="report_roleRank.shtml" method="post" id="mainForm">
 	        	<div class="form-inline popover-show panel-body list_toolbar" >
 	        		<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏" >
 			          	<select class="form-control" name="appId"  placeholder="请选择游戏" id="appNameSel">
@@ -67,7 +67,7 @@
 						<tr>
 						    <td><s:property value="appName"/></td>
 						    <td><s:property value="platformName"/></td>
-						    <td><s:property value="roleName"/></td>
+						    <td><s:property value="name"/></td>
 							<td><fmt:formatNumber  value="${amount/100 }" pattern="0.00" /></td>
 							<td><s:property value="#st.count + firstResult"/></td>
 							<td><s:date name="lastLoginDate" format="yyyy-MM-dd HH:mm:ss"/></td>

@@ -19,8 +19,8 @@
     		<isNotNull prepend="and" property="uid">
     			a.`uid`=#uid#
     		</isNotNull>
-    		<isNotNull prepend="and" property="roleName">
-    			a.`roleName`=#roleName#
+    		<isNotNull prepend="and" property="name">
+    			a.`name`=#name#
     		</isNotNull>
     		<isNotNull prepend="and" property="zoneId">
     			a.`zoneId`=#zoneId#

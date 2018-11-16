@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.item.service.authority.AuthCacheManage;
+import com.item.service.authority.AuthCacheManager;
 import com.item.utils.EnumUtil;
 import com.item.utils.PropertyUtils;
 
@@ -61,7 +61,7 @@ public class SystoolAction extends Struts2Action{
 		try{
 			if("true".equals(PropertyUtils.get("authority.control"))){
 				//缓存权限
-				AuthCacheManage acm = (AuthCacheManage)SpringUtils.getBeanByName("authCacheManage");
+				AuthCacheManager acm = (AuthCacheManager)SpringUtils.getBeanByName("authCacheManage");
 				acm.clear();
 				acm.init();
 			}

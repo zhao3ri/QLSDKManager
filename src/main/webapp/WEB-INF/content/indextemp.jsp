@@ -61,7 +61,7 @@
                                 <div class="col-lg-12">
                                     <dt>身份：</dt>
                                     <dd>
-                                        ${sessionUserInfo.roleName }
+                                        ${sessionUserInfo.name }
                                     </dd>
                                 </div>
                             </div>

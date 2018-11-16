@@ -22,11 +22,11 @@
     		<isNotNull prepend="and" property="zoneId">
     			a.`zoneId`=#zoneId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="roleId">
-    			a.`roleId`=#roleId#
+    		<isNotNull prepend="and" property="identityId">
+    			a.`identityId`=#identityId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="roleName">
-    			a.`roleName`=#roleName#
+    		<isNotNull prepend="and" property="name">
+    			a.`name`=#name#
     		</isNotNull>
     		<isNotEmpty prepend="and" property="statStartDate">
     			<![CDATA[

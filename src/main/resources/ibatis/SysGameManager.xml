@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysGameManager">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sysGameManager" type="com.item.domain.SysGameManager" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SysGameManager.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="id">
+    			`id`=#id#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="identityId">
+    			`identityId`=#identityId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="appId">
+    			`appId`=#appId#
+    		</isNotNull>
+    	</dynamic>
+    </sql>
+
+    <select id="SysGameManager.list" resultClass="sysGameManager" parameterClass="mb">
+        SELECT
+	 		`id`,
+			identityId,
+			`appId`
+		FROM sysGamePermissionManager
+        <include refid="SysGameManager.Where"/>
+        <isNotNull property="orderby">
+             ORDER BY $orderby$
+        </isNotNull>
+        <isNotNull property="pageSize">
+       	     LIMIT 0, #pageSize#
+        </isNotNull>
+    </select>
+
+    <insert id="SysGameManager.save" parameterClass="sysGameManager">
+        INSERT INTO sysGamePermissionManager(
+        	identityId,
+			`appId`
+        )VALUES(
+        	#identityId#,
+			#appId#
+        )
+        <selectKey resultClass="Long" keyProperty="id">
+	       select @@IDENTITY as `id`
+        </selectKey> 
+    </insert>
+
+    <delete id="SysGameManager.deleteByIdentityId" parameterClass="Long">
+		DELETE FROM sysGamePermissionManager
+		WHERE
+			identityId=#identityId#
+    </delete>
+</sqlMap>

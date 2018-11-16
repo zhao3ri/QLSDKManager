@@ -3,7 +3,7 @@ package com.item.utils.component;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.item.service.authority.AuthCacheManage;
+import com.item.service.authority.AuthCacheManager;
 
 
 
@@ -20,7 +20,7 @@ public class AuthTag extends BodyTagSupport {
 	public int doStartTag() throws JspException {
 		boolean isAllowAccess = false;
 		//判断是否是受保护资源
-		if(AuthCacheManage.allAuthMap.containsKey(authUrl)){
+		if(AuthCacheManager.getInstance().getAllPermissions().containsKey(authUrl)){
 			String roleAuthStr = (String) pageContext.getSession().getAttribute("roleAuthStr");
 			// 权限不为空
 			if(roleAuthStr != null && !"".equals(roleAuthStr)){

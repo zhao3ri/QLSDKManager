@@ -36,7 +36,7 @@
 			        	<input  class="form-control" type="text"  placeholder="用户id" name="uid" value="${uid }"/>
 			        </div>
 			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入角色名称">
-			        	<input  class="form-control" type="text"  placeholder="角色名称" name="roleName" value="${roleName }"/>
+			        	<input  class="form-control" type="text"  placeholder="角色名称" name="name" value="${name }"/>
 			        </div>
 			        
 			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="时间">
@@ -48,8 +48,8 @@
 		    	</div>
           <div class="panel-body ">
           	  <ul class="nav nav-tabs " >
-				  <li id="playTime"><a href="/roleReport/roleReport_playTime.shtml" role="tab">单次使用时长表</a></li>
-				  <li id="totalPlayTime"><a href="/roleReport/roleReport_totalPlayTime.shtml" role="tab">总使用时长表</a></li>
+				  <li id="playTime"><a href="/roleReport/roleReport_playTime.shtml" identity="tab">单次使用时长表</a></li>
+				  <li id="totalPlayTime"><a href="/roleReport/roleReport_totalPlayTime.shtml" identity="tab">总使用时长表</a></li>
 			  </ul>
 			  <br/>
       		<div class="table-responsive">
@@ -69,7 +69,7 @@
 						<s:iterator value="page.result" var="page">
 						<tr>
 							<td><s:property value="uid"/></td>
-							<td><s:property value="roleName"/></td>
+							<td><s:property value="name"/></td>
 							<td><s:property value="zoneName"/></td>
 							<td><s:property value="platformName"/></td>
 							<td><s:property value="playTime"/></td>

@@ -23,12 +23,12 @@ public class BGamezoneService {
 	@Autowired
 	private BGameService gameService;
 	@Autowired
-	private SysroleappauthService roleAppAuthService;
+	private SysGameManagerService roleAppAuthService;
 	
 	public Page<Gamezone> page(Page<Gamezone> page,MapBean mb){
 		if (null == mb)
 			mb = new MapBean();
-		mb.put("appIds", roleAppAuthService.getAuthAppIdsByRoleId());
+		mb.put("appIds", roleAppAuthService.getAppIdsByIdentityId());
 		return gamezoneDao.find(page, mb, "BGamezone.count", "BGamezone.page");
 	}
 	

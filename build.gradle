@@ -10,7 +10,7 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'war'
-apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+//apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 apply plugin: 'org.hidetake.ssh'
 
 
@@ -34,7 +34,7 @@ remotes {
         password = '123456'
     }
 }
-
+//group = 'com.item'
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
@@ -66,8 +66,8 @@ sourceSets {
             srcDirs = ['src/main/java']
         }
         resources {
-//            srcDirs = ['src/main/resources', 'src/main/config/dev']
-            srcDirs = ['src/main/resources', 'src/main/config/prod']
+            srcDirs = ['src/main/resources', 'src/main/config/dev']
+//            srcDirs = ['src/main/resources', 'src/main/config/prod']
         }
     }
 }
@@ -79,27 +79,27 @@ sourceSets {
 //    httpPort = 8081
 //    // ... many more properties
 //}
-gretty {
-    httpPort = 8081
-    contextPath = "/sdk-manager"
-    servletContainer = 'tomcat8'
-    debugPort = 8081     // default
-    debugSuspend = true   // default
-//    httpsEnabled = true
-//    httpsPort = 4430
-}
-
-task deploy(dependsOn: war) << {
-    ssh.run {
-        session(remotes.server) {
-            put from:"$war.archivePath.path", into: "$tomcatPath/sdkapps/sdk-manager.war"
-//            execute "$tomcatPath/bin/shutdown.sh"
-            execute "$tomcatPath/bin/stop.sh"
-            execute "rm -rf $tomcatPath/sdkapps/sdk-manager"
-            execute "unzip -oq $tomcatPath/sdkapps/"+war.archiveName+" -d $tomcatPath/sdkapps/sdk-manager"
-            execute "rm -f $tomcatPath/sdkapps/sdk-manager.war"
-//            execute "$tomcatPath/bin/startup.sh"
-            execute "$tomcatPath/bin/restart.sh"
-        }
-    }
-}
+//gretty {
+//    httpPort = 8081
+//    contextPath = "/sdk-manager"
+//    servletContainer = 'tomcat8'
+//    debugPort = 8081     // default
+//    debugSuspend = true   // default
+////    httpsEnabled = true
+////    httpsPort = 4430
+//}
+//
+//task deploy(dependsOn: war) << {
+//    ssh.run {
+//        session(remotes.server) {
+//            put from:"$war.archivePath.path", into: "$tomcatPath/sdkapps/sdk-manager.war"
+////            execute "$tomcatPath/bin/shutdown.sh"
+//            execute "$tomcatPath/bin/stop.sh"
+//            execute "rm -rf $tomcatPath/sdkapps/sdk-manager"
+//            execute "unzip -oq $tomcatPath/sdkapps/"+war.archiveName+" -d $tomcatPath/sdkapps/sdk-manager"
+//            execute "rm -f $tomcatPath/sdkapps/sdk-manager.war"
+////            execute "$tomcatPath/bin/startup.sh"
+//            execute "$tomcatPath/bin/restart.sh"
+//        }
+//    }
+//}

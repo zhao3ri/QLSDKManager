@@ -14,9 +14,9 @@
         <div class="panel panel-default">
         <div class="panel-body ">
           	  <ul class="nav nav-tabs " >
-				  <li id="keep"><a href="/sZonePlatformDaily/sZonePlatformDaily_keep.shtml" role="tab">留存统计</a></li>
-				  <li id="loss"><a href="/sZonePlatformDaily/sZonePlatformDaily_loss.shtml" role="tab">流失统计</a></li>
-				  <li id="back"><a href="/sZonePlatformDaily/sZonePlatformDaily_back.shtml" role="tab">回流统计</a></li>
+				  <li id="keep"><a href="/sZonePlatformDaily/sZonePlatformDaily_keep.shtml" identity="tab">留存统计</a></li>
+				  <li id="loss"><a href="/sZonePlatformDaily/sZonePlatformDaily_loss.shtml" identity="tab">流失统计</a></li>
+				  <li id="back"><a href="/sZonePlatformDaily/sZonePlatformDaily_back.shtml" identity="tab">回流统计</a></li>
 			  </ul>
 			  <br/>
         	<form action="sZonePlatformDaily_keep.shtml" method="post" id="mainForm">

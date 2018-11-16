@@ -33,7 +33,7 @@ public class BPlatformAppService {
 	@Autowired
 	private BPlatformDao bPlatformDao;
 	@Resource
-	private SysroleappauthService sysroleappauthService;
+	private SysGameManagerService sysGameManagerService;
 	
 	/*
 	 * 分页，获取页内的数据量
@@ -43,7 +43,7 @@ public class BPlatformAppService {
 			mb = new MapBean();
 		}
 		if (mb.containsKey("appIds")) {
-			List<Long> permitionIds = sysroleappauthService.getAuthAppIdsByRoleId();
+			List<Long> permitionIds = sysGameManagerService.getAppIdsByIdentityId();
 			List<Long> apps = (List<Long>) mb.get("appIds");
 			for (int i = 0; i < apps.size(); i++) {
 				if (permitionIds.contains(apps.get(i))){
@@ -54,7 +54,7 @@ public class BPlatformAppService {
 				}
 			}
 		}else {
-			mb.put("appIds", sysroleappauthService.getAuthAppIdsByRoleId());
+			mb.put("appIds", sysGameManagerService.getAppIdsByIdentityId());
 		}
 		
 		return bPlatformAppDao.find(page,mb,"BPlatformApp.count", "BPlatformApp.page");

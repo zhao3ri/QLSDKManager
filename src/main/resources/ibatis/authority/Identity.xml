@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Identity">
+
+	<typeAlias alias="Identity" type="com.item.domain.authority.Identity" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+	
+	<cacheModel id="Identity-cache" type="OSCache" readOnly="true" serialize="false">
+		<property name="size" value="100" />
+		<flushInterval hours="24" />
+		<flushOnExecute statement="Identity.update"/>
+    	<flushOnExecute statement="Identity.save"/>
+    	<flushOnExecute statement="Identity.delete"/>
+	</cacheModel>
+	
+	<sql id="Identity.where">
+	 	 <dynamic prepend="WHERE">
+	 		<isNotNull prepend="and" property="name">
+	 	 		r.name like concat('%',#name#,'%')
+	 	 	</isNotNull>
+	 	 	<isNotPropertyAvailable prepend="and" property="projectType">
+	 	 		r.projectType != 1
+	 	 	</isNotPropertyAvailable>
+	 	 	<isPropertyAvailable prepend="and" property="projectType">
+	 	 		r.projectType = #projectType#
+	 	 	</isPropertyAvailable>
+	 	 </dynamic>
+ 	</sql>
+ 	
+	<select id="Identity.list" parameterClass="mb" resultClass="Identity"  cacheModel="Identity-cache">
+		SELECT r.*
+  		FROM sysIdentity r
+  		<include refid="Identity.where"/>
+		LIMIT #firstResult#,#pageSize#
+	</select>
+	
+	<select id="Identity.count" parameterClass="mb" resultClass="Long"  cacheModel="Identity-cache">
+		SELECT COUNT(r.id)
+  		FROM sysIdentity r
+  		<include refid="Identity.where"/>
+	</select>
+	
+	<select id="Identity.listAll" parameterClass="mb" resultClass="Identity"  cacheModel="Identity-cache">
+		SELECT *
+  		FROM sysIdentity r
+  		<include refid="Identity.where"/>
+	</select>
+	
+	<delete id="Identity.delete" parameterClass="Long">
+		DELETE FROM sysIdentity WHERE id=#id#
+	</delete>
+	
+	<select id="Identity.selectUniqueIdentityById" parameterClass="Long" resultClass="Identity"  cacheModel="Identity-cache">
+		SELECT r.*
+		FROM sysIdentity r
+		WHERE r.id=#id#
+	</select>
+	
+	<select id="Identity.getEntity" parameterClass="Long" resultClass="Identity"  cacheModel="Identity-cache">
+		SELECT r.*
+		FROM sysIdentity r
+		WHERE r.id=#id#
+	</select>
+	
+	<select id="Identity.selectUniqueIdentityByName" parameterClass="String" resultClass="Identity"  cacheModel="Identity-cache">
+		SELECT r.*
+		FROM sysIdentity r
+		WHERE r.name=#name#
+	</select>
+	
+	<insert id="Identity.save" parameterClass="Identity">
+		INSERT INTO sysIdentity(
+		name,description,projectType
+		)VALUES(
+			#name#,#description#,2
+		)
+		<selectKey resultClass="Long" keyProperty="id">
+			select @@IDENTITY as id
+		</selectKey> 
+	</insert>
+	
+	<update id="Identity.update" parameterClass="Identity">
+		UPDATE sysIdentity
+		SET name=#name#,
+		description=#description#
+		WHERE id=#id#
+	</update>
+	
+	
+</sqlMap>

@@ -10,22 +10,22 @@
 	      	<li class="active">报表管理</li>
 	      	<li class="active">角色列表</li>
 	    </ol>
-		<form role="form" action="bRole_list.shtml" method="post" id="mainForm">
+		<form identity="form" action="bRole_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">角色列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 	      		<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-		          	<select class="form-control" name="role.appId" placeholder="请选择游戏">
+		          	<select class="form-control" name="identity.appId" placeholder="请选择游戏">
 						<s:iterator value="games" var="item">
-							<option value="${item.id }" <c:if test="${item.id == role.appId }">selected</c:if>>${item.appName }</option>
+							<option value="${item.id }" <c:if test="${item.id == identity.appId }">selected</c:if>>${item.appName }</option>
 						</s:iterator>
 					</select>
 		        </div>
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择平台">
-		        	<select class="form-control" name="role.platformId" placeholder="请选择平台">
+		        	<select class="form-control" name="identity.platformId" placeholder="请选择平台">
 						<option value="">==请选择平台==</option>
 						<s:iterator value="platforms" var="item">
-							<option value="${item.id }" <c:if test="${item.id == role.platformId }">selected</c:if>>${item.platformName }</option>
+							<option value="${item.id }" <c:if test="${item.id == identity.platformId }">selected</c:if>>${item.platformName }</option>
 						</s:iterator>
 					</select>
 				</div>
@@ -60,8 +60,8 @@
 										<td><s:property value="appName"/></td>
 										<td><s:property value="platformName"/></td>
 										<td><s:property value="zoneId"/></td>
-										<td><s:property value="roleId"/></td>
-										<td><s:property value="roleName"/></td>
+										<td><s:property value="identityId"/></td>
+										<td><s:property value="name"/></td>
 										<td><s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
 									</tr>
 								</s:iterator>

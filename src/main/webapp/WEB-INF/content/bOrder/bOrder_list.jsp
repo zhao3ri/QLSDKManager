@@ -10,7 +10,7 @@
 	      	<li class="active">充值管理</li>
 	      	<li class="active">充值列表</li>
 	    </ol>
-		<form role="form" action="bOrder_list.shtml" method="post" id="mainForm">
+		<form identity="form" action="bOrder_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">充值列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
@@ -50,7 +50,7 @@
 		        	<input  class="form-control" type="text"  placeholder="用户ID" name="BOrder.uid" value="${BOrder.uid }"/>
 		        </div>
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入角色名称">
-		        	<input  class="form-control" type="text"  placeholder="角色名称" name="BOrder.roleName" value="${BOrder.roleName }"/>
+		        	<input  class="form-control" type="text"  placeholder="角色名称" name="BOrder.name" value="${BOrder.name }"/>
 		        </div>
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择客户端类型">
 		          <mt:selectState name="BOrder.clientType" showType="select" stateType="clientType" value="${bOrder.clientType}" clazz="form-control" emptyString="--请选择客户端类型--"/>
@@ -119,7 +119,7 @@
 										</c:if>
 										<td><s:property value="platformName"/></td>
 										<td><s:property value="uid"/></td>
-										<td><s:property value="roleName"/></td>
+										<td><s:property value="name"/></td>
 										<td><fmt:formatNumber  value="${amount/100 }" pattern="0.00" /></td>
 										<td><s:property value="gold"/></td>
 										<td><mt:selectState showType="label" value="${clientType}" stateType="clientType"/></td>
@@ -129,7 +129,7 @@
 										<td>
 											<div class="btn-group btn-group-sm pull-right">
 							                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-							                  	<ul class="dropdown-menu" role="menu">
+							                  	<ul class="dropdown-menu" identity="menu">
 							                    	<li><a href="bOrder_view.shtml?id=<s:property value="id"/>">查看</a></li>
 							                    	<c:if test="${status == 2 }">
 							                    		<li><a href="bOrder_reissue.shtml?id=<s:property value="id"/>">充值补发</a></li>

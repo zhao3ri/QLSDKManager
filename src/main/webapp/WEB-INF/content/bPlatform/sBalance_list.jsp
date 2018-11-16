@@ -11,7 +11,7 @@
 	      	<li class="active">加币记录</li>
 	    </ol>
 	    <s:debug></s:debug>
-		<form role="form" action="bPlatform_list.shtml" method="post" id="mainForm">
+		<form identity="form" action="bPlatform_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">加币记录 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">

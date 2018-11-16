@@ -10,7 +10,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.item.domain.report.ReportDaily;
 import com.item.service.*;
 import com.item.utils.*;
 import org.apache.commons.lang3.StringUtils;
@@ -66,7 +65,7 @@ public class ReportAction extends Struts2Action {
     @Autowired
     private SRoleRankService sRoleRankService;
     @Resource
-    private SysroleappauthService roleAppAuthService;
+    private SysGameManagerService roleAppAuthService;
 
     private List<GameClientReport> gameClientReports = new ArrayList<GameClientReport>();
     private List<GameClientMonthlyReport> gameClientMonthlyReports = new ArrayList<GameClientMonthlyReport>();

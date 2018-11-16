@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="IdentityPermission">
+
+	<typeAlias alias="IdentityPermission" type="com.item.domain.authority.IdentityPermission" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+	<cacheModel id="IdentityPermission-cache" type="OSCache" readOnly="true" serialize="false">
+		<property name="size" value="100" />
+		<flushInterval hours="24" />
+		<flushOnExecute statement="IdentityPermission.save"/>
+    	<flushOnExecute statement="IdentityPermission.deleteByAuthID"/>
+    	<flushOnExecute statement="IdentityPermission.delete"/>
+	</cacheModel>
+
+	<select id="IdentityPermission.listByIdentityId" parameterClass="Long" resultClass="IdentityPermission" cacheModel="IdentityPermission-cache">
+		SELECT *
+		FROM sysIdentityAuth
+		WHERE identityId=#identityId#
+	</select>
+
+	<select id="IdentityPermission.listAll" parameterClass="mb" resultClass="IdentityPermission" cacheModel="IdentityPermission-cache">
+		SELECT *
+  		FROM sysIdentityAuth
+	</select>
+
+	<select id="IdentityPermission.selectUnique" parameterClass="mb" resultClass="IdentityPermission" cacheModel="IdentityPermission-cache">
+		SELECT *
+		FROM sysIdentityAuth
+		WHERE identityId=#identityId# AND authId=#authId#
+	</select>
+
+	<delete id="IdentityPermission.delete" parameterClass="Long">
+		DELETE FROM sysIdentityAuth WHERE id=#id#
+	</delete>
+
+	<delete id="IdentityPermission.deleteByAuthID" parameterClass="Long">
+		DELETE FROM sysIdentityAuth WHERE authId=#authId#
+	</delete>
+
+	<insert id="IdentityPermission.save" parameterClass="IdentityPermission">
+		INSERT INTO sysIdentityAuth(
+			identityId,authId
+		)VALUES(
+			#identityId#,#authId#
+		)
+	</insert>
+</sqlMap>

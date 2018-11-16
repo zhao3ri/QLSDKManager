@@ -60,7 +60,7 @@
         //设置每页的条数
         out.print("<li><div class=\"page_onepage_num dropup\"><div class=\"btn-group pull-right \">");
         out.print("<button type=\"button\" class=\"btn btn-info  dropdown-toggle\" data-toggle=\"dropdown\">每页"+pageObj.getPageSize()+"条 <span class=\"caret\"></span></button>");
-        out.print("<ul class=\"dropdown-menu text-left\" role=\"menu\">");
+        out.print("<ul class=\"dropdown-menu text-left\" identity=\"menu\">");
         out.print("<li><a href=\"javascript:setPageSize(5)\">每页5条</a></li>");
         out.print("<li><a href=\"javascript:setPageSize(10)\">每页10条</a></li>");
         out.print("<li><a href=\"javascript:setPageSize(20)\">每页20条</a></li>");

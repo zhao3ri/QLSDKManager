@@ -15,7 +15,7 @@ pageContext.setAttribute("r", rt);
 	      	<li class="active">系统管理</li>
 	      	<li class="active">操作历史记录列表</li>
 	    </ol>
-		<form role="form" action="history_list1.shtml" method="post" id="mainForm">
+		<form identity="form" action="history_list1.shtml" method="post" id="mainForm">
 		<input type="hidden" id="oid" name="history.oid" value="${request.session.sessionUserInfo.id }"/>
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">操作历史记录信息查询 </div>
@@ -74,7 +74,7 @@ pageContext.setAttribute("r", rt);
 								  <td>
 									<div class="btn-group btn-group-sm pull-right">
 					                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-					                  	<ul class="dropdown-menu" role="menu">
+					                  	<ul class="dropdown-menu" identity="menu">
 					                    	<li><a href="history_view.shtml?id=<s:property value="id"/>">查看</a></li>
 					                  	</ul>
 					                </div>
