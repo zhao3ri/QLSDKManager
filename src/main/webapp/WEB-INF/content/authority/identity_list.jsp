@@ -26,7 +26,7 @@ pageContext.setAttribute("r", r);
 	        </div>
 	        <div class="form-group width_btn">
 	          <button  type="button" class="btn  btn-primary " onclick="search();"><i class="icon-search"></i> 搜索</button>
-	       	  <button  type="button" class="btn  btn-default " onclick="resetSearch();"><i class="icon-eraser"></i> 重置</button>	
+	       	  <button  type="button" class="btn  btn-default " onclick="resetSearch();"><i class="icon-eraser"></i> 重置</button>
 	        </div>
 	        <div class="form-group width_btn  pull-right">
 	          <button type="button" class="btn btn-success " id="newitem"><i class="icon-plus"></i> 添加</button>
@@ -38,7 +38,7 @@ pageContext.setAttribute("r", r);
 	          <thead>
 	            <tr>
 	            	<th>选择</th>
-	              	<th>序号</th>
+	              	<%--<th>序号</th>--%>
 					<th>身份名称</th>
 					<th>身份描述</th>
 					<th>应用权限</th>
@@ -49,8 +49,13 @@ pageContext.setAttribute("r", r);
 	          	<s:if test="page.result.size>0">
 					<s:iterator value="page.result" var="tempIdentity">
 			            <tr>
-			              	<td><label><input type="checkbox" name="checkedIds" class="checkedIds" value="${tempIdentity.id}"></label></td>
-			              	<td>${tempIdentity.id}</td>
+                            <td><label>
+                                <c:if test="${tempIdentity.id!=3}">
+                                    <input type="checkbox" name="checkedIds" class="checkedIds"
+                                           value="${tempIdentity.id}">
+                                </c:if>
+                            </label></td>
+			              	<%--<td>${tempIdentity.id}</td>--%>
 							<td><s:property value="name"/></td>
 							<td><s:if test="%{description.length()>20}"><pre><s:property value="description.substring(0,20)+'...'"/></pre></s:if><s:else><pre><s:property value="description"/></pre></s:else></td>
 							<td>
@@ -63,7 +68,11 @@ pageContext.setAttribute("r", r);
 				                  <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
 				                  <ul class="dropdown-menu" identity="menu">
 				                    <li><a href="identity_update.shtml?identity.id=${tempIdentity.id }">修改</a></li>
-				                    <li><a href="javascript:confirmAction('identity_delete.shtml?checkedIds=${tempIdentity.id }','您确认删除？');">删除</a></li>
+                                      <c:if test="${tempIdentity.id!=3}">
+                                          <li>
+                                              <a href="javascript:confirmAction('identity_delete.shtml?checkedIds=${tempIdentity.id }','您确认删除？');">删除</a>
+                                          </li>
+                                      </c:if>
 				                    <li identity="presentation" class="divider"></li>
 									<li><mt:modalDialog remote="/history/history_list.shtml?history.rid=${tempIdentity.id}&history.omkey=identity&t=${r}" id="historyWindow${tempIdentity.id}" title="历史记录" role="dialog" name="历史记录" type="link" width="700"/></li>
 				                  </ul>
@@ -74,7 +83,7 @@ pageContext.setAttribute("r", r);
 				</s:if>
 				<s:else>
 					<tr align="center">
-						<td align="center" colspan="6">当前页没有记录！</td>
+						<td align="center" colspan="5">当前页没有记录！</td>
 					</tr>
 				</s:else>
 	          </tbody>
@@ -112,7 +121,7 @@ pageContext.setAttribute("r", r);
 				}
 			});
 		});
-		
+
 		$("#remove").click(function() {
 			var checkedIds = new Array();
 			var i = 0;
@@ -137,7 +146,7 @@ pageContext.setAttribute("r", r);
 	function resetSearch(){
        location.assign("identity_list.shtml?mid=${mid}");
     }
-</script>	
+</script>
 
 </body>
 </html>

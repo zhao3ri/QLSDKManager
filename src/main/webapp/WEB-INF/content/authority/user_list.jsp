@@ -17,7 +17,7 @@
             <li class="active">系统管理</li>
             <li class="active">管理员列表</li>
         </ol>
-        <form identity="form" action="user_list.shtml" method="post" id="mainForm">
+        <form role="form" action="user_list.shtml" method="post" id="mainForm">
             <div class="panel panel-default">
                 <div class="panel-heading ">管理员列表信息查询</div>
                 <div class="form-inline popover-show panel-body list_toolbar">
@@ -66,7 +66,7 @@
                             <thead>
                             <tr>
                                 <th>选择</th>
-                                <th>序号</th>
+                                <%--<th>序号</th>--%>
                                 <th>用户名</th>
                                 <th>真实姓名</th>
                                 <th>用户身份</th>
@@ -79,19 +79,21 @@
                             <s:if test="page.result.size>0">
                                 <s:iterator value="page.result" var="tempUser">
                                     <tr>
-                                        <td><label>
-                                            <s:if test="#userName=='admin'">
-                                                <input type="checkbox" name="checkedIds" class="checkedIds"
-                                                       value="${tempUser.id}" style="visibility: hidden">
-                                            </s:if>
-                                            <s:else>
-                                                <input type="checkbox" name="checkedIds" class="checkedIds"
-                                                       value="${tempUser.id}">
-                                            </s:else></label></td>
-                                        <td>${tempUser.id}</td>
+                                        <td>
+                                            <label>
+                                                <c:if test="${tempUser.userName=='admin'&& tempUser.identityId==3}">
+                                                    &nbsp;&nbsp;
+                                                </c:if>
+                                                <c:if test="${tempUser.userName!='admin'}">
+                                                    <input type="checkbox" name="checkedIds" class="checkedIds"
+                                                           value="${tempUser.id}">
+                                                </c:if>
+                                            </label>
+                                        </td>
+                                        <%--<td>${tempUser.id}</td>--%>
                                         <td><s:property value="userName"/></td>
                                         <td><s:property value="realName"/></td>
-                                        <td><s:property value="name"/></td>
+                                        <td><s:property value="identityName"/></td>
                                         <td><mt:selectState showType="label" value="${tempUser.state}"
                                                             stateType="userState"/></td>
                                         <td><s:date name="#tempUser.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
@@ -99,22 +101,26 @@
                                             <div class="btn-group btn-group-sm pull-right">
                                                 <button type="button" class="btn btn-default  dropdown-toggle"
                                                         data-toggle="dropdown"> 操作 <span class="caret"></span></button>
-                                                <ul class="dropdown-menu" identity="menu">
-                                                    <li><a href="user_update.shtml?user.id=${tempUser.id }">修改</a></li>
-                                                    <li>
-                                                        <a href="javascript:confirmAction('user_disabled.shtml?audit=-1&checkedIds=${tempUser.id }','您确认删除？');">删除</a>
-                                                    </li>
-                                                    <li identity="presentation" class="divider"></li>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <c:if test="${tempUser.userName!='admin'}">
+                                                        <li><a href="user_update.shtml?user.id=${tempUser.id }">修改</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:confirmAction('user_disabled.shtml?audit=-1&checkedIds=${tempUser.id }','您确认删除？');">删除</a>
+                                                        </li>
+                                                        <li role="presentation" class="divider"></li>
+                                                    </c:if>
                                                     <li>
                                                         <a href="javascript:confirmAction('user_disabled.shtml?audit=0&checkedIds=${tempUser.id }','您确认启用？');">启用</a>
                                                     </li>
                                                     <li>
                                                         <a href="javascript:confirmAction('user_disabled.shtml?audit=1&checkedIds=${tempUser.id }','您确认禁用？');">禁用</a>
                                                     </li>
-                                                    <li identity="presentation" class="divider"></li>
+                                                    <li role="presentation" class="divider"></li>
                                                     <li><mt:modalDialog
                                                             remote="/history/history_list.shtml?history.rid=${tempUser.id}&history.omkey=user&t=${r}"
-                                                            id="historyWindow${tempUser.id}" title="历史记录" role="dialog"
+                                                            id="historyWindow${tempUser.id}" title="历史记录"
+                                                            role="dialog"
                                                             name="历史记录" type="link" width="700"/></li>
                                                 </ul>
                                             </div>
@@ -124,7 +130,7 @@
                             </s:if>
                             <s:else>
                                 <tr align="center">
-                                    <td align="center" colspan="8">当前页没有记录！</td>
+                                    <td align="center" colspan="7">当前页没有记录！</td>
                                 </tr>
                             </s:else>
                             </tbody>
@@ -138,9 +144,9 @@
                                 </label>
                                 <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span></button>
-                                <ul class="dropdown-menu text-left" identity="menu">
+                                <ul class="dropdown-menu text-left" role="menu">
                                     <li><a id="remove" href="#">批量删除</a></li>
-                                    <li identity="presentation" class="divider"></li>
+                                    <li role="presentation" class="divider"></li>
                                     <li><a id="across" href="#">批量启用</a></li>
                                     <li><a id="unacross" href="#">批量禁用</a></li>
                                 </ul>
@@ -219,35 +225,31 @@
         $("#newitem").click(function () {
             location.assign("user_create.shtml");
         });
-    });
+        // $("#tab-user").find("td").click(function () {
+        //     var row = $(this).parent().index(); // 行位置
+        //     var col = $(this).index(); // 列位置
+        //     alert("当前位置：第" + (row + 1) + "行，第" + (col + 1) + "列");
+        // });
+    })
+    ;
 
     function resetSearch() {
         location.assign("user_list.shtml");
     }
 
-    <%--function updateAdmin() {--%>
-    <%--var users =${page.result};--%>
-    <%--var tab = document.getElementById("tab-user");--%>
-    <%--var trs = tab.getElementsByTagName("tr");--%>
-    <%--for (var i = 0; i < trs.length; i++) {--%>
-    <%--var tds = trs[i].getElementsByTagName("td")--%>
-    <%--if (i === 2) {--%>
-    <%--tds[1].getElementsByTagName("input").style.visibility = "hidden";--%>
-    <%--}--%>
-    <%--&lt;%&ndash;var realName = ${users[i].realName};&ndash;%&gt;--%>
-    <%--&lt;%&ndash;var userName =${users[i].userName};&ndash;%&gt;--%>
-    <%--&lt;%&ndash;var identityId =${users[i].identityId};&ndash;%&gt;--%>
-
-    <%--&lt;%&ndash;if (userName == 'admin' && realName == 'admin' && identityId == 3) {&ndash;%&gt;--%>
-    <%--&lt;%&ndash;tds[0].style.visibility = "hidden";&ndash;%&gt;--%>
-    <%--&lt;%&ndash;}&ndash;%&gt;--%>
-    <%--}--%>
-    <%--// if (userName == "admin") {--%>
-    <%--//--%>
-    <%--//     var uls = tab.getElementsByTagName("ul");--%>
-    <%--//     var lis = uls[0].getElementsByTagName("li");--%>
-    <%--// }--%>
-    <%--}--%>
+    function updateTable() {
+        var userList = new Array();
+        <c:forEach items="${page.result}" var="item" varStatus="status">
+        userList.put("${item}")
+        </c:forEach>
+        for (var i = 0; i < userList.length; i++) {
+            var user = userList[i];
+            if ("${user.userName}" == 'admin' && "${user.realName}" == 'admin' && "${user.identityId}" == 3) {
+                var tr = document.getElementById("table-user").getElementsByTagName("tr")[i];
+                tr.getElementsByTagName("td")[0].getElementsByTagName("input").visibility = "hidden";
+            }
+        }
+    }
 </script>
 
 </body>
