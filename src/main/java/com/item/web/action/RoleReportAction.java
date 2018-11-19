@@ -44,7 +44,7 @@ public class RoleReportAction extends Struts2Action {
 
 	private static final long serialVersionUID = 5551011746476847421L;
 	@Resource
-	private SysGameManagerService roleAppAuthService;
+	private SysGameManagerService gameManagerService;
 	@Resource
 	private BGameService gameService;
 	@Resource

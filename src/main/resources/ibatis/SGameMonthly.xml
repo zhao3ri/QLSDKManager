@@ -68,8 +68,8 @@
             <isNotEmpty prepend="and" property="statDate">
                 sd.statDate=#statDate#
             </isNotEmpty>
-            <isNotEmpty prepend="and" property="like">
-                sd.statDate LIKE '$like$%'
+            <isNotEmpty prepend="and" property="month">
+                sd.statDate LIKE '$month$%'
             </isNotEmpty>
         </dynamic>
         <isNotEmpty property="groupby">
@@ -78,11 +78,11 @@
     </select>
 
     <!--<insert id="sGameMonthly.save" parameterClass="sGameMonthly">-->
-        <!--INSERT INTO-->
-        <!--s_game_monthly(appId,clientType,yearMonth,totalRoleUser,totalRegUser,devices,payAmount,payTimes,payUsers,activeUsers,newUserPayAmount,newUserPays,monthLoginRoles)-->
-        <!--VALUES(#appId#,#clientType#,#yearMonth#,#totalRoleUser#,#totalRegUser#,#devices#,#payAmount#,#payTimes#,#payUsers#,#activeUsers#,#newUserPayAmount#,#newUserPays#,#monthLoginRoles#)-->
-        <!--<selectKey resultClass="Long" keyProperty="id">-->
-            <!--select @@IDENTITY as `id`-->
-        <!--</selectKey>-->
+    <!--INSERT INTO-->
+    <!--s_game_monthly(appId,clientType,yearMonth,totalRoleUser,totalRegUser,devices,payAmount,payTimes,payUsers,activeUsers,newUserPayAmount,newUserPays,monthLoginRoles)-->
+    <!--VALUES(#appId#,#clientType#,#yearMonth#,#totalRoleUser#,#totalRegUser#,#devices#,#payAmount#,#payTimes#,#payUsers#,#activeUsers#,#newUserPayAmount#,#newUserPays#,#monthLoginRoles#)-->
+    <!--<selectKey resultClass="Long" keyProperty="id">-->
+    <!--select @@IDENTITY as `id`-->
+    <!--</selectKey>-->
     <!--</insert>-->
 </sqlMap>

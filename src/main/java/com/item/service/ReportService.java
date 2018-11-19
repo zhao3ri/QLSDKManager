@@ -57,8 +57,8 @@ public class ReportService {
             calendar.add(Calendar.DATE, -1);
             String startDate = DateUtils.format(calendar.getTime(), "yyyy-MM-dd");
             String endDate = DateUtils.format(new Date(), "yyyy-MM-dd");
-//            String startDate = "2018-10-30";
-//            String endDate = "2018-10-31";
+//            String startDate = "2018-11-15";
+//            String endDate = "2018-11-16";
             mb.put("statStartDate", startDate);
             mb.put("statEndDate", endDate);
             result.put("startDate", startDate);
@@ -228,69 +228,35 @@ public class ReportService {
         EChartUtil eChartUtil = new EChartUtil("", null);
         List<Object> xValue = new ArrayList<Object>();
         Map<String, List<Object>> map = new LinkedHashMap<String, List<Object>>();
-        map.put("实时在线", new ArrayList<Object>());
-        map.put("新增创角", new ArrayList<Object>());
-        map.put("新增设备", new ArrayList<Object>());
-        map.put("充值金额", new ArrayList<Object>());
-        map.put("活跃用户", new ArrayList<Object>());
 
         if (!CollectionUtils.isEmpty(sCompareRealtimes)) {
-            map.put("【实时在线】", new ArrayList<Object>());
-            map.put("【新增创角】", new ArrayList<Object>());
-            map.put("【新增设备】", new ArrayList<Object>());
-            map.put("【充值金额】", new ArrayList<Object>());
-            map.put("【活跃用户】", new ArrayList<Object>());
             for (K k : sCompareRealtimes) {
-                if (k instanceof SGameRealtime) {
-                    SGameRealtime item = (SGameRealtime) k;
-                    compareData.put(DateUtils.format(item.getStatDate()), k);
-                } else if (k instanceof SZonePlatformRealtime) {
-                    SZonePlatformRealtime item = (SZonePlatformRealtime) k;
-                    compareData.put(DateUtils.format(item.getStatDate()), k);
-                }
-
+                SGameRealtime item = (SGameRealtime) k;
+                compareData.put(DateUtils.format(item.getStatDate()), k);
             }
         }
         for (T t : sRealtimes) {
-            if (t instanceof SGameRealtime) {
-                SGameRealtime item = (SGameRealtime) t;
-                xValue.add(DateUtils.format(item.getStatDate(), "HH:mm"));
-                map.get("实时在线").add(item.getOnlineUsers());
-                map.get("新增创角").add(item.getRoleUsers());
-                map.get("新增设备").add(item.getNewDevices());
-                map.get("充值金额").add(DecimallFormatUtil.format((double) item.getPayAmount() / 100));
-                map.get("活跃用户").add(item.getActiveUsers());
-                if (!CollectionUtils.isEmpty(sCompareRealtimes)) {
-                    SGameRealtime comPareItem = (SGameRealtime) compareData.get(DateUtils.format(item.getStatDate()));
-                    if (comPareItem == null) {
-                        comPareItem = new SGameRealtime();
-                    }
-                    map.get("【实时在线】").add(comPareItem.getOnlineUsers());
-                    map.get("【新增创角】").add(comPareItem.getRoleUsers());
-                    map.get("【新增设备】").add(comPareItem.getNewDevices());
-                    map.get("【充值金额】").add(DecimallFormatUtil.format((double) comPareItem.getPayAmount() / 100));
-                    map.get("【活跃用户】").add(comPareItem.getActiveUsers());
-                }
-            } else if (t instanceof SZonePlatformRealtime) {
-                SZonePlatformRealtime item = (SZonePlatformRealtime) t;
-                xValue.add(DateUtils.format(item.getStatDate(), "HH:mm"));
-                map.get("实时在线").add(item.getOnlineUsers());
-                map.get("新增创角").add(item.getRoleUsers());
-                map.get("新增设备").add(item.getNewDevices());
-                map.get("充值金额").add(DecimallFormatUtil.format((double) item.getPayAmount() / 100));
-                map.get("活跃用户").add(item.getActiveUsers());
-                if (!CollectionUtils.isEmpty(sCompareRealtimes)) {
-                    SZonePlatformRealtime comPareItem = (SZonePlatformRealtime) compareData.get(DateUtils.format(item.getStatDate()));
-                    if (comPareItem == null)
-                        comPareItem = new SZonePlatformRealtime();
+            SGameRealtime item = (SGameRealtime) t;
+            xValue.add(DateUtils.format(item.getStatDate(), "HH:mm"));
 
-                    map.get("【实时在线】").add(comPareItem.getOnlineUsers());
-                    map.get("【新增创角】").add(comPareItem.getRoleUsers());
-                    map.get("【新增设备】").add(comPareItem.getNewDevices());
-                    map.get("【充值金额】").add(DecimallFormatUtil.format((double) comPareItem.getPayAmount() / 100));
-                    map.get("【活跃用户】").add(comPareItem.getActiveUsers());
+            addData(map, "实时在线", item.getOnlineUsers());
+            addData(map, "新增创角", item.getRoleUsers());
+            addData(map, "新增设备", item.getNewDevices());
+            addData(map, "充值金额", DecimallFormatUtil.format((double) item.getPayAmount() / 100));
+            addData(map, "活跃用户", item.getActiveUsers());
+
+            if (!CollectionUtils.isEmpty(sCompareRealtimes)) {
+                SGameRealtime comPareItem = (SGameRealtime) compareData.get(DateUtils.format(item.getStatDate()));
+                if (comPareItem == null) {
+                    comPareItem = new SGameRealtime();
                 }
+                addData(map, "【实时在线】", comPareItem.getOnlineUsers());
+                addData(map, "【新增创角】", comPareItem.getRoleUsers());
+                addData(map, "【新增设备】", comPareItem.getNewDevices());
+                addData(map, "【充值金额】", DecimallFormatUtil.format((double) comPareItem.getPayAmount() / 100));
+                addData(map, "【活跃用户】", comPareItem.getActiveUsers());
             }
+
         }
         List<String> hiddenData = new ArrayList<String>();
         if (!CollectionUtils.isEmpty(sCompareRealtimes)) {
@@ -306,30 +272,42 @@ public class ReportService {
         return eChartUtil.getLineOrBarOption(map, xValue, false, false, false, EChartUtil.TYPE_LINE);
     }
 
+    private void addData(Map<String, List<Object>> map, String key, Object o) {
+        List<Object> data = map.get(key);
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+        data.add(o);
+        map.put(key, data);
+
+    }
+
+    private static final String TOOLTIP_FORMAT = "function(params){var tip = \"\";\n" +
+            "\t\t\tfor (var i = 0; i < params.length; i++) {\n" +
+            "\t\t\t\tvar seriesName = params[i].seriesName;\n" +
+            "\t\t\t\tvar type = seriesName.substring(seriesName.indexOf(\"-\") + 3);\n" +
+            "\t\t\t\tvar day = seriesName.substring(0, seriesName.indexOf(\"-\") + 3);\n" +
+            "\t\t\t\tvar time = params[i].name;\n" +
+            "\t\t\t\tvar date = day + \" \" + time\n" +
+            "\t\t\t\tif (i > 0 && params[i - 1].seriesName.substring(0, params[i - 1].seriesName.indexOf(\"-\") + 3) == day) {\n" +
+            "\t\t\t\t    date = \"\"+params[i].marker;\n" +
+            "\t\t\t\t} else {\n" +
+            "\t\t\t\t    if(i!==0){date=\"<br/>\"+date;}\n" +
+            "\t\t\t\t    date = date + \"<br/> \"+params[i].marker;\n" +
+            "\t\t\t\t} \n" +
+            "\t\t\t\ttip = tip + date + type + \":&nbsp;\" + params[i].data + \"<br/>\";\n" +
+            "\t\t\t}return tip;}";
+
     public <T extends SGameRealtime> String getDefaultJson(List<T> sRealtimes) {
-        if (sRealtimes==null ||sRealtimes.isEmpty()){
+        if (sRealtimes == null || sRealtimes.isEmpty()) {
             return null;
         }
         List<GameStats> gameStats = GameStats.gameRealTime2GameStats((List<SGameRealtime>) sRealtimes);
         List<String> keys = GameStats.getAllKeys(gameStats);
-        Map<String, List<Object>> data = GameStats.getData(keys, gameStats, "实时在线", "新增设备", "新增创角", "活跃用户", "充值金额");
+        Map<String, List<Object>> data = GameStats.getData(keys, gameStats, null, "实时在线", "新增设备", "新增创角", "累计活跃", "充值金额");
         List<Object> xValue = new ArrayList<Object>(keys);
         EChartUtil eChartUtil = new EChartUtil("", null);
-        String formatter = "function(params){var tip = \"\";\n" +
-                "\t\t\tfor (var i = 0; i < params.length; i++) {\n" +
-                "\t\t\t\tvar seriesName = params[i].seriesName;\n" +
-                "\t\t\t\tvar type = seriesName.substring(seriesName.indexOf(\"-\") + 3);\n" +
-                "\t\t\t\tvar day = seriesName.substring(0, seriesName.indexOf(\"-\") + 3);\n" +
-                "\t\t\t\tvar time = params[i].name;\n" +
-                "\t\t\t\tvar date = day + \" \" + time\n" +
-                "\t\t\t\tif (i > 0 && params[i - 1].seriesName.substring(0, params[i - 1].seriesName.indexOf(\"-\") + 3) == day) {\n" +
-                "\t\t\t\t    date = \"\"+params[i].marker;\n" +
-                "\t\t\t\t} else {\n" +
-                "\t\t\t\t    if(i!==0){date=\"<br/>\"+date;}\n" +
-                "\t\t\t\t    date = date + \"<br/> \"+params[i].marker;\n" +
-                "\t\t\t\t} \n" +
-                "\t\t\t\ttip = tip + date + type + \":&nbsp;\" + params[i].data + \"<br/>\";\n" +
-                "\t\t\t}return tip;}";
+        String formatter = TOOLTIP_FORMAT;
         String json = eChartUtil.getLineOrBarOption(data, xValue, false, false, false, EChartUtil.TYPE_LINE, formatter);
         System.err.println(json);
         return json;

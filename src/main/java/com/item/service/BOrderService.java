@@ -34,13 +34,13 @@ public class BOrderService {
     @Autowired
     private BOrderDao bOrderDao;
     @Resource
-    private SysGameManagerService roleAppAuthService;
+    private SysGameManagerService gameManagerService;
 
     public Page<BOrder> page(Page<BOrder> page, MapBean mb){
     	if (null == mb)
 			mb = new MapBean();
         if (mb.containsKey("appIds")) {
-            List<Long> permitionIds = roleAppAuthService.getAppIdsByIdentityId();
+            List<Long> permitionIds = gameManagerService.getAppIdsByIdentityId();
             List<Long> apps = (List<Long>) mb.get("appIds");
             for (int i = 0; i < apps.size(); i++) {
                 if (permitionIds.contains(apps.get(i))){
@@ -51,9 +51,9 @@ public class BOrderService {
                 }
             }
         }else {
-            mb.put("appIds", roleAppAuthService.getAppIdsByIdentityId());
+            mb.put("appIds", gameManagerService.getAppIdsByIdentityId());
         }
-//    	mb.put("appIds", roleAppAuthService.getAppIdsByIdentityId());
+//    	mb.put("appIds", gameManagerService.getAppIdsByIdentityId());
     	return bOrderDao.find(page,mb,"BOrder.count","BOrder.page");
     }
 
@@ -82,7 +82,7 @@ public class BOrderService {
     public List<BOrder> list(MapBean mb){
     	if (null == mb)
 			mb = new MapBean();
-    	mb.put("appIds", roleAppAuthService.getAppIdsByIdentityId());
+    	mb.put("appIds", gameManagerService.getAppIdsByIdentityId());
         return bOrderDao.find("BOrder.list",mb);
     }
 }

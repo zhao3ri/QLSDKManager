@@ -37,13 +37,17 @@ public class SGameMonthlyService {
         return sGameMonthlyDao.get("sGameMonthly.stat", mb);
     }
 
+    public SGameMonthly save(SGameMonthly sGameMonthly) {
+        return sGameMonthlyDao.get("sGameMonthly.save", sGameMonthly);
+    }
+
     public SGameMonthly getGameMonthly(MapBean mb) {
         SGameMonthly gameMonthly = summary(mb);
         if (gameMonthly == null) {
             gameMonthly = stat(mb);
             if (gameMonthly != null && !StringUtil.isEmpty(mb.getString("yearMonth"))) {
                 gameMonthly.setYearMonth(Integer.valueOf(mb.getString("yearMonth")));
-//                sGameMonthlyDao.save("sGameMonthly.save", gameMonthly);
+//                save(gameMonthly);
             }
         }
         return gameMonthly;

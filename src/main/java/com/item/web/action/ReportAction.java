@@ -65,7 +65,7 @@ public class ReportAction extends Struts2Action {
     @Autowired
     private SRoleRankService sRoleRankService;
     @Resource
-    private SysGameManagerService roleAppAuthService;
+    private SysGameManagerService gameManagerService;
 
     private List<GameClientReport> gameClientReports = new ArrayList<GameClientReport>();
     private List<GameClientMonthlyReport> gameClientMonthlyReports = new ArrayList<GameClientMonthlyReport>();
@@ -133,12 +133,7 @@ public class ReportAction extends Struts2Action {
             }
         }
         CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_appId", String.valueOf(appId));
-
         return true;
-    }
-
-    private void initPlatform() {
-
     }
 
     private boolean setDate(MapBean mb) {
@@ -171,8 +166,8 @@ public class ReportAction extends Struts2Action {
                 gameClientMonthlyReport.setAppName(game.getAppName());
 
                 mb.put(MapBean.APP_ID, game.getId());
-                setOSMonthlyReport(game, mb, Constants.CLIENT_ANDROID, gameClientMonthlyReport, mb.getString("month"));
-                setOSMonthlyReport(game, mb, Constants.CLIENT_IOS, gameClientMonthlyReport, mb.getString("month"));
+                setOSMonthlyReport( mb, Constants.CLIENT_ANDROID, gameClientMonthlyReport);
+                setOSMonthlyReport( mb, Constants.CLIENT_IOS, gameClientMonthlyReport);
 
                 gameClientMonthlyReports.add(gameClientMonthlyReport);
 
@@ -183,9 +178,9 @@ public class ReportAction extends Struts2Action {
 
                 mb.put(MapBean.APP_ID, game.getId());
                 //ANDROID
-                setOSReport(game, mb, Constants.CLIENT_ANDROID, gameClientReport, mb.getString("statDate"));
+                setOSReport( mb, Constants.CLIENT_ANDROID, gameClientReport);
                 //IOS
-                setOSReport(game, mb, Constants.CLIENT_IOS, gameClientReport, mb.getString("statDate"));
+                setOSReport(mb, Constants.CLIENT_IOS, gameClientReport);
                 gameClientReports.add(gameClientReport);
             }
         }
@@ -195,9 +190,8 @@ public class ReportAction extends Struts2Action {
     /**
      * 月统计
      */
-    private void setOSMonthlyReport(Game game, MapBean mb, int os, GameClientMonthlyReport gameClientReport, String like) {
+    private void setOSMonthlyReport(MapBean mb, int os, GameClientMonthlyReport gameClientReport) {
         mb.put(MapBean.CLIENT_TYPE, os);
-        mb.put("like", like);
         //CPS
         SGameMonthly sGame = sGameMonthlyService.getGameMonthly(mb);
         //CPA
@@ -207,10 +201,10 @@ public class ReportAction extends Struts2Action {
         if (sGame == null)
             sGame = new SGameMonthly();
 
-        setCPAAndCPS(game, gameClientReport, os, cpapPlatform, sGame);
+        setCPAAndCPS(gameClientReport, os, cpapPlatform, sGame);
     }
 
-    private void setOSReport(Game game, MapBean mb, int os, GameClientReport gameClientReport, String statDate) {
+    private void setOSReport(MapBean mb, int os, GameClientReport gameClientReport) {
         mb.put(MapBean.CLIENT_TYPE, os);
 
         //CPS
@@ -222,10 +216,10 @@ public class ReportAction extends Struts2Action {
         if (sGame == null)
             sGame = new SGame();
 
-        setCPAAndCPS(game, gameClientReport, os, cpapPlatform, sGame);
+        setCPAAndCPS(gameClientReport, os, cpapPlatform, sGame);
     }
 
-    private void setCPAAndCPS(Game game, GameClientReport gameClientReport, int os, SPlatform sPlatform, SGame sGame) {
+    private void setCPAAndCPS(GameClientReport gameClientReport, int os, SPlatform sPlatform, SGame sGame) {
         if (gameClientReport instanceof GameClientMonthlyReport) {
             gameClientReport = (GameClientMonthlyReport) gameClientReport;
             sPlatform = (SPlatformMonthly) sPlatform;

@@ -3,7 +3,9 @@ package com.item.domain.report;
 import com.item.domain.SGameRealtime;
 import com.item.utils.DateUtils;
 import com.item.utils.JsonUtil;
+import com.item.utils.StringUtil;
 
+import javax.rmi.CORBA.Util;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -49,6 +51,10 @@ public class GameStats {
             return null;
         }
         Set<String> keySet = new HashSet();
+        //添加几个分隔时间点
+        keySet.add("00:00");
+        keySet.add("12:00");
+        keySet.add("23:59");
         for (GameStats stat : gameStats) {
             keySet.addAll(stat.data.keySet());
         }
@@ -57,7 +63,7 @@ public class GameStats {
         return keys;
     }
 
-    public static Map<String, List<Object>> getData(List<String> keys, List<GameStats> gameStats, String... label) {
+    public static Map<String, List<Object>> getData(List<String> keys, List<GameStats> gameStats, String format, String... label) {
         if (label == null || label.length == 0 || keys == null || keys.isEmpty()) {
             return null;
         }
@@ -69,6 +75,7 @@ public class GameStats {
                 });
 
         for (GameStats stat : gameStats) {
+            List<List<Object>> dataSet = new ArrayList<>();
             List<Object> onlineData = new ArrayList<>();
             List<Object> newDeviceData = new ArrayList<>();
             List<Object> newRoleData = new ArrayList<>();
@@ -76,11 +83,11 @@ public class GameStats {
             List<Object> payAmountData = new ArrayList<>();
             for (String time : keys) {
                 if (stat.data.get(time) == null) {
-                    onlineData.add(0);
-                    newDeviceData.add(0);
-                    newRoleData.add(0);
-                    activeData.add(0);
-                    payAmountData.add(new DecimalFormat("0.00").format(0f));
+                    onlineData.add("-");
+                    newDeviceData.add("-");
+                    newRoleData.add("-");
+                    activeData.add("-");
+                    payAmountData.add("-");
                 } else {
                     onlineData.add(stat.data.get(time).onlineUsers);
                     newDeviceData.add(stat.data.get(time).newDevices);
@@ -89,12 +96,21 @@ public class GameStats {
                     payAmountData.add(new DecimalFormat("0.00").format(stat.data.get(time).payAmount));
                 }
             }
+            dataSet.add(onlineData);
+            dataSet.add(newDeviceData);
+            dataSet.add(newRoleData);
+            dataSet.add(activeData);
+            dataSet.add(payAmountData);
             String date = stat.day.substring(stat.day.indexOf("-") + 1);
-            dataMap.put(date + label[0], onlineData);
-            dataMap.put(date + label[1], newDeviceData);
-            dataMap.put(date + label[2], newRoleData);
-            dataMap.put(date + label[3], activeData);
-            dataMap.put(date + label[4], payAmountData);
+            for (int i = 0; i < dataSet.size(); i++) {
+                String lab;
+                if (StringUtil.isEmpty(format)) {
+                    lab = date + label[i];
+                } else {
+                    lab = String.format(format, label[i]);
+                }
+                dataMap.put(lab, dataSet.get(i));
+            }
         }
         return dataMap;
     }
@@ -111,16 +127,6 @@ public class GameStats {
     @Override
     public String toString() {
         return JsonUtil.toJsonString(this);
-    }
-
-    public static StatData getEmptyData() {
-        StatData data = new StatData();
-        data.activeUsers = 0;
-        data.onlineUsers = 0;
-        data.newDevices = 0;
-        data.newRoles = 0;
-        data.payAmount = 0;
-        return getEmptyData();
     }
 
     public static class StatData {

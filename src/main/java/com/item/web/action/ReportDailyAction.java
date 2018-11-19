@@ -62,11 +62,11 @@ public class ReportDailyAction extends Struts2Action {
     @Autowired
     private BPlatformService platformService;
     @Resource
-    private SysGameManagerService roleAppAuthService;
+    private SysGameManagerService gameManagerService;
 
     private Boolean initSearch() {
         User userInfo = (User) Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
-        List<Long> appIds = roleAppAuthService.getAppIdsByIdentityId(userInfo.getIdentityId());
+        List<Long> appIds = gameManagerService.getAppIdsByIdentityId(userInfo.getIdentityId());
         if (CollectionUtils.isEmpty(appIds)) {
             try {
                 Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath() + "/common/403.jsp");
