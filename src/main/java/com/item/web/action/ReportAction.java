@@ -155,7 +155,6 @@ public class ReportAction extends Struts2Action {
         }
 
         MapBean mb = new MapBean();
-        mb.put(MapBean.PLATFORM_Id, Constants.YOULE_PLATFROMID);
         mb.put("groupby", "appId,clientType");
         boolean isMonStat = setDate(mb);
         for (Game game : allGames) {
@@ -195,7 +194,7 @@ public class ReportAction extends Struts2Action {
         //CPS
         SGameMonthly sGame = sGameMonthlyService.getGameMonthly(mb);
         //CPA
-        SPlatformMonthly cpapPlatform = sPlatformMonthlyService.getByMap(mb);
+        SPlatformMonthly cpapPlatform = sPlatformMonthlyService.statMonthly(mb);
         if (cpapPlatform == null)
             cpapPlatform = new SPlatformMonthly();
         if (sGame == null)

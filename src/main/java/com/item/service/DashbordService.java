@@ -75,7 +75,7 @@ public class DashbordService {
         String month = date.substring(0, date.lastIndexOf("-"));
         MapBean mb = MapBean.getBean();
         mb.put(QUERY_PARAM_LIKE, month);
-        SGame sGame = sGameService.stat(mb);
+        SGame sGame = sGameService.summary(mb);
         dashbord.setTotalMonthlyNewUser(sGame.getTotalRegUser());
         dashbord.setTotalMonthlyPay(sGame.getPayAmount());
         MapBean.cleanUp(mb);

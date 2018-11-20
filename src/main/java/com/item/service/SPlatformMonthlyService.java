@@ -42,4 +42,8 @@ public class SPlatformMonthlyService {
     public SPlatformMonthly getByMap(MapBean mb){
         return sPlatformMonthlyDao.get("SPlatformMonthly.getByMap",mb);
     }
+
+    public SPlatformMonthly statMonthly(MapBean mb){
+        return sPlatformMonthlyDao.get("SPlatformMonthly.stat",mb);
+    }
 }
