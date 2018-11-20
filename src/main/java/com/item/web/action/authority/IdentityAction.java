@@ -70,7 +70,7 @@ public class IdentityAction extends Struts2Action {
             MapBean mb = this.putSearchConditions();
             page = is.getIdentityPage(page, mb);
             for (Identity item : page.getResult()) {
-                item.setAuthGames(gameService.listByIdentityId(item.getId()));
+                item.setAuthGames(gameService.getGameList(item.getId()));
             }
         } catch (Exception e) {
             logger.error("获取身份列表出错：", e);
@@ -98,7 +98,7 @@ public class IdentityAction extends Struts2Action {
      */
     public String create() {
         moduleList = ms.getModuleListForCreate();
-        games = gameService.list(null);
+        games = gameService.getGameList(null);
         return SUCCESS;
     }
 
@@ -153,7 +153,7 @@ public class IdentityAction extends Struts2Action {
         identity = is.getIdentityById(identity.getId());
         moduleList = ms.getModuleListForUpdate(identity.getId());
 
-        games = gameService.list(null);
+        games = gameService.getGameList(null);
 
         List<Long> authAppIds = gameManagerService.getAppIdsByIdentityId(identity.getId());
         Map<String, String> map = new HashMap<String, String>();

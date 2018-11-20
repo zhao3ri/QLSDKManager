@@ -76,30 +76,26 @@ public class BGameService {
         return (int) gameDao.countResult("BGame.count", mb);
     }
 
-    public List<Game> list() {
-        return list(null);
+    public List<Game> getGameList() {
+        return getGameList(null);
     }
 
-    public List<Game> list(MapBean mb) {
-        if (mb == null)
-            mb = new MapBean();
-
+    public List<Game> getGameList(MapBean mb) {
         User userInfo = (User) Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
         if (userInfo == null) {
             return new ArrayList<>();
         }
-        List<Long> allAppIds = gameManagerService.getAppIdsByIdentityId(userInfo.getIdentityId());
-        if (CollectionUtils.isEmpty(allAppIds)) {
-            allAppIds = new ArrayList<Long>();
-            allAppIds.add(-1L);
-        }
-        mb.put("appIds", allAppIds);
-        return gameDao.find("BGame.list", mb);
+        return getGameList(userInfo.getIdentityId(), mb);
     }
 
-    public List<Game> listByIdentityId(Long roleId) {
-        MapBean mb = new MapBean();
-        List<Long> appIds = gameManagerService.getAppIdsByIdentityId(roleId);
+    public List<Game> getGameList(long identityId) {
+        return getGameList(identityId, null);
+    }
+
+    public List<Game> getGameList(long identityId, MapBean mb) {
+        if (mb == null)
+            mb = new MapBean();
+        List<Long> appIds = gameManagerService.getAppIdsByIdentityId(identityId);
         if (CollectionUtils.isEmpty(appIds)) {
             appIds = new ArrayList<Long>();
             appIds.add(-1L);

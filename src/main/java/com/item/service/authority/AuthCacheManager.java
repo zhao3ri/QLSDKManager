@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.item.domain.Game;
 import com.item.domain.authority.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,8 @@ public class AuthCacheManager {
     //缓存每个身份的权限字符串。字符串以分号连接。形如1;2;3(首页使用，用于控制左侧菜单显示与隐藏)
     private Map<Long, String> identityPermissionStrMap;
 
+    private List<Game> identityPermissionGameList;
+
     //初始化状态，用于初始化是否已初始化过
     private boolean initState = false;
 
@@ -86,6 +89,7 @@ public class AuthCacheManager {
         allPermissionMap = new HashMap<>();
         identityPermissionMap = new HashMap<>();
         identityPermissionStrMap = new HashMap<>();
+        identityPermissionGameList = new ArrayList<>();
     }
 
     public static AuthCacheManager getInstance() {
@@ -361,5 +365,17 @@ public class AuthCacheManager {
             }
         }
         return sb.toString();
+    }
+
+    public List<Game> getIdentityPermissionGameList() {
+        return identityPermissionGameList;
+    }
+
+    public void setIdentityPermissionGameList(List<Game> games) {
+        this.identityPermissionGameList = games;
+    }
+
+    public void cleanIdentityPermissionGameList(){
+        identityPermissionGameList.clear();
     }
 }

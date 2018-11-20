@@ -209,7 +209,7 @@ public class ReportDailyService {
             } else {
                 mb.put("groupby", "appId,statDate");
                 List<ReportDaily> reportDailies = list(mb);
-                List<Game> games = bGameService.list();
+                List<Game> games = bGameService.getGameList();
                 Map<String, List<ReportDaily>> data = new LinkedHashMap<String, List<ReportDaily>>();
                 for (ReportDaily reportDaily : reportDailies) {
                     if (data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd")) == null) {

@@ -42,7 +42,7 @@ public class BPlatformAppAction extends Struts2Action {
 	
 	public String list() {
 		bPlatforms = bPlatformAppService.getAllPlatform();
-		games = gameService.list();
+		games = gameService.getGameList();
 		
 		bPlatformApp = InitSearchCondition.initEntity(bPlatformApp, keepSearchCondition, "bPlatform");
 		bPlatformAppPage = InitSearchCondition.initPage(bPlatformAppPage, keepSearchCondition, "bPlatform");
@@ -123,7 +123,7 @@ public class BPlatformAppAction extends Struts2Action {
 			bPlatformApp=bPlatformAppService.getBPlatformAppById(id);
 		}else {
 			bPlatforms=bPlatformAppService.getAllPlatform();
-			games = gameService.list();
+			games = gameService.getGameList();
 		}
 		return "handle";
 	}

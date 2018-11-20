@@ -46,7 +46,7 @@ public class BRoleAction extends Struts2Action{
     public String list(){
         MapBean mb = search();
         
-        games = bGameService.list();
+        games = bGameService.getGameList();
         
         platforms = platformService.getAllPlatform();
         

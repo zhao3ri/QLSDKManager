@@ -43,7 +43,7 @@ public class BGamezoneAction extends Struts2Action{
 		gamezone = InitSearchCondition.initEntity(gamezone, keepSearchCondition, "gamezone");
 		page = InitSearchCondition.initPage(page, keepSearchCondition, "gamezone");
 		
-		gameList = gameService.list();
+		gameList = gameService.getGameList();
 		MapBean mb = search();
 		page = gamezoneService.page(page, mb);
 		return "list";
@@ -101,7 +101,7 @@ public class BGamezoneAction extends Struts2Action{
     }
 	
 	public String handle(){
-		gameList=gameService.list();
+		gameList=gameService.getGameList();
         if(id!=null){
         	gamezone=gamezoneService.getGamezoneById(id);
         }

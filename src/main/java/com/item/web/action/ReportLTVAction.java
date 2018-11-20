@@ -417,7 +417,7 @@ public class ReportLTVAction extends Struts2Action {
                 return false;
             }
         }
-        allGames = bGameService.list(null);
+        allGames = bGameService.getGameList(null);
 
         if (null == appId) {
             appId = allGames.get(0).getId();

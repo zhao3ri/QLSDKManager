@@ -288,7 +288,7 @@ public class RoleReportAction extends Struts2Action {
 	}
 	
 	private Boolean initSearch(){
-		games = gameService.list(null);
+		games = gameService.getGameList(null);
 		if (CollectionUtils.isEmpty(games)) {
 			try {
 				Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath()+"/common/403.jsp");

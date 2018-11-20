@@ -110,7 +110,7 @@ public class ReportAction extends Struts2Action {
     private Integer firstResult;
 
     private Boolean initSearch() {
-        allGames = bGameService.list(null);
+        allGames = bGameService.getGameList(null);
         if (CollectionUtils.isEmpty(allGames)) {
             try {
                 Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath() + "/common/403.jsp");

@@ -59,7 +59,7 @@ public class BOrderAction extends Struts2Action{
         MapBean mb = search();
         bOrderPage = bOrderService.page(bOrderPage, mb);
         
-        games = bGameService.list();
+        games = bGameService.getGameList();
         platforms = bPlatformService.getAllPlatform();
         
         return "list";

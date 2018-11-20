@@ -64,6 +64,12 @@
 			<isNotNull prepend="and" property="appId">
 				`appId`=#appId#
 			</isNotNull>
+			<isNotEmpty prepend="AND" property="appIds">
+				appId IN
+				<iterate property="appIds" open="(" close=")" conjunction=",">
+					#appIds[]#
+				</iterate>
+			</isNotEmpty>
 		</dynamic>
 	</select>
 </sqlMap>

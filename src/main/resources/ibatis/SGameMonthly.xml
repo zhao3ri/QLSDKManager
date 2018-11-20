@@ -25,6 +25,12 @@
             <isNotNull prepend="and" property="yearMonth">
                 sg.`yearMonth`=#yearMonth#
             </isNotNull>
+            <isNotEmpty prepend="AND" property="appIds">
+                sg.appId IN
+                <iterate property="appIds" open="(" close=")" conjunction=",">
+                    #appIds[]#
+                </iterate>
+            </isNotEmpty>
         </dynamic>
     </sql>
 

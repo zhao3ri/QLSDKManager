@@ -22,6 +22,12 @@
             <isNotEmpty prepend="and" property="like">
                 sg.statDate LIKE '$like$%'
             </isNotEmpty>
+            <isNotEmpty prepend="AND" property="appIds">
+                sg.appId IN
+                <iterate property="appIds" open="(" close=")" conjunction=",">
+                    #appIds[]#
+                </iterate>
+            </isNotEmpty>
         </dynamic>
     </sql>
 

@@ -5,6 +5,7 @@ import com.item.domain.BPlatform;
 import com.item.domain.Dashbord;
 import com.item.domain.Game;
 import com.item.domain.SGame;
+import com.item.service.authority.AuthCacheManager;
 import com.item.utils.DateUtils;
 import com.item.utils.RedisClient;
 import core.module.orm.MapBean;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,15 +44,18 @@ public class DashbordService {
     private String redisPayPre = REDIS_PREFIX + "totalpay" + REDIS_SEPARATOR;
 
     private static final String QUERY_PARAM_LIKE = "like";
+    private static final String QUERY_PARAM_GAME_IDS = "appIds";
     private Dashbord dashbord;
 
     public Dashbord loadDashbord() {
         if (dashbord == null)
             dashbord = new Dashbord();
-        List<Game> list = bApplicationService.list(null);
+        List<Game> gameList = bApplicationService.getGameList();
+        AuthCacheManager.getInstance().setIdentityPermissionGameList(gameList);
+        List<Long> gameIds = getGameIds(gameList);
         List<BPlatform> platformList = bPlatformService.getAllPlatform();
         String date = DateUtils.format(new Date(), "yyyy-MM-dd");
-        for (Game bApplication : list) {
+        for (Game bApplication : gameList) {
             for (BPlatform bPlatform : platformList) {
                 String payKey = redisPayPre + date + REDIS_SEPARATOR + bApplication.getId() + REDIS_SEPARATOR + bPlatform.getId();
                 Object redisTemp = RedisClient.get(payKey);
@@ -60,21 +65,32 @@ public class DashbordService {
                 }
             }
         }
-        getCurrentGameStats(date);
-        getMonthlyGameStats(date);
+        getCurrentGameStats(date, gameIds);
+        getMonthlyGameStats(date, gameIds);
         return dashbord;
+    }
+
+    private List<Long> getGameIds(List<Game> games) {
+        List<Long> ids = new ArrayList<>();
+        if (games != null && !games.isEmpty()) {
+            for (Game g : games) {
+                ids.add(g.getId());
+            }
+        }
+        return ids;
     }
 
     /**
      * 获取截止到今天之前本月的新增用户和总支付金额
      */
-    private void getMonthlyGameStats(String date) {
+    private void getMonthlyGameStats(String date, List<Long> ids) {
         if (isInit) {
             return;
         }
         String month = date.substring(0, date.lastIndexOf("-"));
         MapBean mb = MapBean.getBean();
         mb.put(QUERY_PARAM_LIKE, month);
+        mb.put(QUERY_PARAM_GAME_IDS, ids);
         SGame sGame = sGameService.summary(mb);
         dashbord.setTotalMonthlyNewUser(sGame.getTotalRegUser());
         dashbord.setTotalMonthlyPay(sGame.getPayAmount());
@@ -85,16 +101,22 @@ public class DashbordService {
     /**
      * 获取今日新增用户
      */
-    private void getCurrentGameStats(String date) {
+    private void getCurrentGameStats(String date, List<Long> ids) {
         if (System.currentTimeMillis() < lastTime + TIME_INTERVAL) {
             return;
         }
         MapBean mb = MapBean.getBean();
         mb.put(QUERY_PARAM_LIKE, date);
+        mb.put(QUERY_PARAM_GAME_IDS, ids);
         long newUsers = sGameRealtimeService.getCurrentNewUsers(mb);
         dashbord.setCurrentNewUser((int) newUsers);
         MapBean.cleanUp(mb);
         lastTime = System.currentTimeMillis();
+    }
+
+    public void reset() {
+        lastTime = 0;
+        isInit = false;
     }
 
 }

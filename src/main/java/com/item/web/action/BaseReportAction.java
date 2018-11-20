@@ -16,7 +16,7 @@ class BaseReportAction extends Struts2Action {
     protected List<Game> allGames;
 
     protected boolean initData() {
-        allGames = bGameService.list(null);
+        allGames = bGameService.getGameList(null);
         return true;
     }
 

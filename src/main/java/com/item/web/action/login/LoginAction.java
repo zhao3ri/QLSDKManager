@@ -134,8 +134,10 @@ public class LoginAction extends Struts2Action {
             CookieUtils.setCookieValue(Struts2Utils.getResponse(), "autoLogin", "0");
             CookieUtils.setCookieValue(Struts2Utils.getResponse(), new Md5PwdEncoder().encodePassword(sid + "zdop_us"), "");
             CookieUtils.setCookieValue(Struts2Utils.getResponse(), new Md5PwdEncoder().encodePassword(sid + "zdop_pw"), "");
+            dashbordService.reset();
             if ("true".equals(PropertyUtils.get("authority.control"))) {
                 Struts2Utils.getSession().removeAttribute("roleAuthStr");
+                AuthCacheManager.getInstance().cleanIdentityPermissionGameList();
             }
         } catch (Exception e) {
             logger.error("退出错误：" + e.getMessage());
@@ -150,7 +152,7 @@ public class LoginAction extends Struts2Action {
     }
 
     public String list() {
-        return "list";
+        return "getGameList";
     }
 
     public String getUserName() {
