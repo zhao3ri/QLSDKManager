@@ -6,7 +6,6 @@
     <%@ include file="/common/header.jsp" %>
     <%
         int channelFunctionId = com.item.constants.Constants.FUNCTION_ID_CHANNEL_MANAGER;
-        System.out.println("function===" + channelFunctionId);
     %>
     <div class="container">
         <ol class="breadcrumb row">
@@ -162,14 +161,22 @@
     //取消选择
     function cancel(moduleId) {
         var cb = document.getElementsByTagName("input");
-        var functionId = "<%=channelFunctionId %>"
         for (var i = 0; i < cb.length; i++) {
             if (cb[i].lang == moduleId) {
                 cb[i].checked = false;
             }
         }
-        if (moduleId == functionId) {
-            cancel('channel')
+    }
+
+    function checkChannel(obj, checkId) {
+        var functionId = "<%=channelFunctionId %>"
+        if (!obj.checked) {
+            if (checkId == functionId) {
+                document.getElementById("checkChannelAll").checked = false;
+                cancel('channel')
+            }
+        } else {
+            select(functionId);
         }
     }
 </script>

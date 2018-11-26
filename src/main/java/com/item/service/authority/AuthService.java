@@ -86,14 +86,24 @@ public class AuthService {
             String str = " ";
             //判断是否有该权限,如果有,checkbox设置为勾选
             boolean hasPermission = false;
+            boolean isIdentityChannel = false;
             if (identityId != null && ips.getIdentityPermissionByIdentityAndAuth(identityId, auth.getFunctionID()) != null) {
                 hasPermission = true;
             }
-            if (hasPermission)
-                str = " checked ";
-            sb.append("<input type=\"checkbox\" " + str + " name=\"authIds\" value=\"" + auth.getFunctionID() + "\" lang=\"" + moduleId + "\"/>");
-            sb.append(fs.getFunctionByID(auth.getFunctionID()).getDescription() + "\n");
             if (moduleId == Constants.MODULE_ID_PERMISSION && auth.getFunctionID() == Constants.FUNCTION_ID_CHANNEL_MANAGER) {
+                isIdentityChannel = true;
+            }
+            if (hasPermission) {
+                str = " checked ";
+            }
+
+            sb.append("<input type=\"checkbox\" " + str + " name=\"authIds\" value=\"" + auth.getFunctionID() + "\" lang=\"" + moduleId + "\" ");
+            if (isIdentityChannel) {
+                sb.append("id=\"channelManager\" onclick=\"checkChannel(this," + auth.getFunctionID() + ")\"");
+            }
+            sb.append("/>");
+            sb.append(fs.getFunctionByID(auth.getFunctionID()).getDescription() + "\n");
+            if (isIdentityChannel) {
                 sb.append(getChannelHtml(moduleId, identityId));
             }
             count++;
@@ -113,7 +123,7 @@ public class AuthService {
         if (identityId != null)
             identityChannel = channelService.getIdentityChannelList(identityId);
         sb.append("<fieldset>");
-        sb.append("<legend> <input type=\"checkbox\" onclick=\"selectAll(this,'channel')\"/>全选 </legend>");
+        sb.append("<legend> <input type=\"checkbox\" id=\"checkChannelAll\" onclick=\"selectAll(this,'channel')\"/>全选 </legend>");
         for (BPlatform channel : allChannel) {
             String check = " ";
             if (identityChannel != null && identityChannel.contains(channel)) {

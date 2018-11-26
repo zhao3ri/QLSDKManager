@@ -76,6 +76,7 @@ public class LoginAction extends Struts2Action {
                 mb.put("state", 0);
                 mb.put("projectType", 1);
                 User user = userService.getUserByUserName(mb);
+                AuthCacheManager.getInstance().setUser(user);
                 if (user != null) {
                     if (md5_password.equals(user.getPassword())) {
                         Struts2Utils.getSession().setAttribute("sessionUser", user.getUserName());

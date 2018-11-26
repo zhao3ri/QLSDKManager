@@ -103,7 +103,7 @@ public class IdentityAction extends Struts2Action {
      * 初始化新建身份页面
      */
     public String create() {
-        moduleList = ms.getModuleList();
+        moduleList = ms.getModuleList(null);
         games = gameService.getGameList();
         channelList = channelService.getAllPlatform();
         return SUCCESS;
@@ -320,5 +320,21 @@ public class IdentityAction extends Struts2Action {
 
     public void setGameIds(Long[] gameIds) {
         this.gameIds = gameIds;
+    }
+
+    public Long[] getChannelIds() {
+        return channelIds;
+    }
+
+    public void setChannelIds(Long[] channelIds) {
+        this.channelIds = channelIds;
+    }
+
+    public List<BPlatform> getChannelList() {
+        return channelList;
+    }
+
+    public void setChannelList(List<BPlatform> channelList) {
+        this.channelList = channelList;
     }
 }

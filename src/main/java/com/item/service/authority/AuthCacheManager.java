@@ -72,6 +72,8 @@ public class AuthCacheManager {
 
     private List<Game> identityPermissionGameList;
 
+    private User user;
+
     //初始化状态，用于初始化是否已初始化过
     private boolean initState = false;
 
@@ -175,10 +177,11 @@ public class AuthCacheManager {
         return permissionCacheMap.get(id);
     }
 
-    public List<Auth> getPermissionsByModuleId(long moduleId) {
+    public List<Auth> getPermissionsByModuleId(Long moduleId) {
         List<Auth> authList = new ArrayList<>();
         if (permissionCacheList != null && !permissionCacheList.isEmpty()) {
             for (Auth auth : permissionCacheList) {
+                System.err.println("auth moduleId==" + auth.getModuleID() + ",moduleId==" + moduleId);
                 if (auth.getModuleID().equals(moduleId)) {
                     authList.add(auth);
                 }
@@ -386,5 +389,13 @@ public class AuthCacheManager {
             }
         }
         return ids;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

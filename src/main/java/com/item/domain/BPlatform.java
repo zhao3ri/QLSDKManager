@@ -9,112 +9,117 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  */
 public class BPlatform {
 
-	private Long id;
-	
-	private String platformName;
+    private Long id;
 
-	private Integer balance ;
-	private float amount ;
+    private String platformName;
 
-	private Integer amountType=0 ;
-	private Integer version ;
-	private Integer newversion ;
-	private String business ;
-	private String phone;
+    private Integer balance;
+    private float amount;
 
-	@JsonIgnore
-	private  Date createTime;
-	
-	@JsonIgnore
-	private String platformCallbackUrl;
+    private Integer amountType = 0;
+    private Integer version;
+    private Integer newversion;
+    private String business;
+    private String phone;
 
-	public Integer getVersion() {
-		return version;
-	}
+    @JsonIgnore
+    private Date createTime;
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+    @JsonIgnore
+    private String platformCallbackUrl;
 
-	public Integer getNewversion() {
-		return newversion;
-	}
+    public Integer getVersion() {
+        return version;
+    }
 
-	public void setNewversion(Integer newversion) {
-		this.newversion = newversion;
-	}
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
-	public Integer getAmountType() {
-		return amountType;
-	}
+    public Integer getNewversion() {
+        return newversion;
+    }
 
-	public void setAmountType(Integer amountType) {
-		this.amountType = amountType;
-	}
+    public void setNewversion(Integer newversion) {
+        this.newversion = newversion;
+    }
 
-	public float getAmount() {
-		return amount;
-	}
+    public Integer getAmountType() {
+        return amountType;
+    }
 
-	public void setAmount(float amount) {
-		this.amount = amount;
-	}
+    public void setAmountType(Integer amountType) {
+        this.amountType = amountType;
+    }
 
-	public Integer getBalance() {
-		return balance;
-	}
+    public float getAmount() {
+        return amount;
+    }
 
-	public void setBalance(Integer balance) {
-		this.balance = balance;
-	}
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Integer getBalance() {
+        return balance;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
 
-	public String getPlatformName() {
-		return platformName;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setPlatformName(String platformName) {
-		this.platformName = platformName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@JsonIgnore
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public String getPlatformName() {
+        return platformName;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
+    }
 
-	@JsonIgnore
-	public String getPlatformCallbackUrl() {
-		return platformCallbackUrl;
-	}
+    @JsonIgnore
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setPlatformCallbackUrl(String platformCallbackUrl) {
-		this.platformCallbackUrl = platformCallbackUrl;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public String getBusiness() {
-		return business;
-	}
+    @JsonIgnore
+    public String getPlatformCallbackUrl() {
+        return platformCallbackUrl;
+    }
 
-	public void setBusiness(String business) {
-		this.business = business;
-	}
+    public void setPlatformCallbackUrl(String platformCallbackUrl) {
+        this.platformCallbackUrl = platformCallbackUrl;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public String getBusiness() {
+        return business;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setBusiness(String business) {
+        this.business = business;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.id == ((BPlatform) obj).id;
+    }
 }

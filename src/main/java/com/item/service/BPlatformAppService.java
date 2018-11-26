@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.item.domain.SysGameManager;
+import com.item.service.authority.AuthCacheManager;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -147,6 +148,10 @@ public class BPlatformAppService {
     public List<BPlatform> getIdentityChannelList(long identityId) {
         return bPlatformDao.find("BPlatform.getChannelList", identityId);
     }
+
+//    public List<BPlatform> getIdentityChannelList() {
+//        return getIdentityChannelList(AuthCacheManager.getInstance().getUser().getIdentityId());
+//    }
 
     public void deleteIdentityChannel(long identityId) {
         bPlatformDao.delete("BPlatform.deleteIdentityChannel", identityId);
