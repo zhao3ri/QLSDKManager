@@ -8,68 +8,57 @@ import core.module.annotation.LogAttribute;
 import core.module.annotation.LogModule;
 
 /**
- * 
  * 角色表实体类
+ *
  * @author guojt
  * @since 2010-02-14
- *
  */
-@LogModule(name="身份",key="identity")
-public class Identity {
+@LogModule(name = "身份", key = "identity")
+public class Identity extends SystemModule {
 
-	private Long id;
-	
-	@LogAttribute(name="身份名称")
-	private String name;
-	
-	@LogAttribute(name="身份描述")
-	private String description;
-	
-	private Integer projectType;
-	
-	private List<Game> authGames;
+    @LogAttribute(name = "身份名称")
+    private String name;
 
-	public Identity() {
+    @LogAttribute(name = "身份描述")
+    private String description;
 
-	}
+    private Integer projectType;
 
-	public Long getId() {
-		return id;
-	}
+    private List<Game> authGames;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Identity() {
 
-	public String getName() {
-		return name;
-	}
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public Integer getProjectType() {
-		return projectType;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setProjectType(Integer projectType) {
-		this.projectType = projectType;
-	}
+    public Integer getProjectType() {
+        return projectType;
+    }
 
-	public List<Game> getAuthGames() {
-		return authGames;
-	}
+    public void setProjectType(Integer projectType) {
+        this.projectType = projectType;
+    }
 
-	public void setAuthGames(List<Game> authGames) {
-		this.authGames = authGames;
-	}
+    public List<Game> getAuthGames() {
+        return authGames;
+    }
+
+    public void setAuthGames(List<Game> authGames) {
+        this.authGames = authGames;
+    }
 }

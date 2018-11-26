@@ -52,7 +52,7 @@ public class DashbordService {
             dashbord = new Dashbord();
         List<Game> gameList = bApplicationService.getGameList();
         AuthCacheManager.getInstance().setIdentityPermissionGameList(gameList);
-        List<Long> gameIds = getGameIds(gameList);
+        List<Long> gameIds = AuthCacheManager.getInstance().getGameIds();
         List<BPlatform> platformList = bPlatformService.getAllPlatform();
         String date = DateUtils.format(new Date(), "yyyy-MM-dd");
         for (Game bApplication : gameList) {
@@ -70,15 +70,6 @@ public class DashbordService {
         return dashbord;
     }
 
-    private List<Long> getGameIds(List<Game> games) {
-        List<Long> ids = new ArrayList<>();
-        if (games != null && !games.isEmpty()) {
-            for (Game g : games) {
-                ids.add(g.getId());
-            }
-        }
-        return ids;
-    }
 
     /**
      * 获取截止到今天之前本月的新增用户和总支付金额

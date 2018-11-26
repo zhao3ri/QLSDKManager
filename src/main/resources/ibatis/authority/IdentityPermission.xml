@@ -16,31 +16,31 @@
 
 	<select id="IdentityPermission.listByIdentityId" parameterClass="Long" resultClass="IdentityPermission" cacheModel="IdentityPermission-cache">
 		SELECT *
-		FROM sysIdentityAuth
+		FROM sysIdentityFunction
 		WHERE identityId=#identityId#
 	</select>
 
 	<select id="IdentityPermission.listAll" parameterClass="mb" resultClass="IdentityPermission" cacheModel="IdentityPermission-cache">
 		SELECT *
-  		FROM sysIdentityAuth
+  		FROM sysIdentityFunction
 	</select>
 
 	<select id="IdentityPermission.selectUnique" parameterClass="mb" resultClass="IdentityPermission" cacheModel="IdentityPermission-cache">
 		SELECT *
-		FROM sysIdentityAuth
+		FROM sysIdentityFunction
 		WHERE identityId=#identityId# AND authId=#authId#
 	</select>
 
 	<delete id="IdentityPermission.delete" parameterClass="Long">
-		DELETE FROM sysIdentityAuth WHERE id=#id#
+		DELETE FROM sysIdentityFunction WHERE id=#id#
 	</delete>
 
 	<delete id="IdentityPermission.deleteByAuthID" parameterClass="Long">
-		DELETE FROM sysIdentityAuth WHERE authId=#authId#
+		DELETE FROM sysIdentityFunction WHERE authId=#authId#
 	</delete>
 
 	<insert id="IdentityPermission.save" parameterClass="IdentityPermission">
-		INSERT INTO sysIdentityAuth(
+		INSERT INTO sysIdentityFunction(
 			identityId,authId
 		)VALUES(
 			#identityId#,#authId#

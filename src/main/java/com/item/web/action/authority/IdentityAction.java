@@ -6,7 +6,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.item.domain.BPlatform;
 import com.item.domain.authority.Identity;
+import com.item.service.BPlatformAppService;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -48,11 +50,14 @@ public class IdentityAction extends Struts2Action {
     private SysGameManagerService gameManagerService;
     @Resource
     private BGameService gameService;
+    @Autowired
+    private BPlatformAppService channelService;
 
     private Identity identity;
     private Identity searchIdentity;
     private Long[] authIds;
     private Long[] gameIds;
+    private Long[] channelIds;
     private List<Identity> identityList;
     private List<Module> moduleList;
     private List<Game> games;
@@ -61,6 +66,7 @@ public class IdentityAction extends Struts2Action {
     private String name;
     private Long id;
     private List<String> datasetLevels;
+    private List<BPlatform> channelList;
 
     /**
      * 获取身份列表
@@ -97,8 +103,9 @@ public class IdentityAction extends Struts2Action {
      * 初始化新建身份页面
      */
     public String create() {
-        moduleList = ms.getModuleListForCreate();
-        games = gameService.getGameList(null);
+        moduleList = ms.getModuleList();
+        games = gameService.getGameList();
+        channelList = channelService.getAllPlatform();
         return SUCCESS;
     }
 
@@ -116,6 +123,8 @@ public class IdentityAction extends Struts2Action {
                 acm.refreshPermissionCache(identityId);    //添加新的身份后，刷新该身份权限缓存
 
                 gameManagerService.save(identityId, gameIds);
+                channelService.saveIdentityChannel(identityId, channelIds);
+                System.err.println(channelIds);
 
                 addActionMessage("新增身份成功");
             } catch (Exception e) {
@@ -132,7 +141,7 @@ public class IdentityAction extends Struts2Action {
                     gameManagerService.deleteByIdentityId(identity.getId());
                     gameManagerService.save(identity.getId(), gameIds);
                 }
-
+                channelService.saveIdentityChannel(identity.getId(), channelIds);
                 addActionMessage("身份修改成功");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -151,7 +160,8 @@ public class IdentityAction extends Struts2Action {
      */
     public String update() {
         identity = is.getIdentityById(identity.getId());
-        moduleList = ms.getModuleListForUpdate(identity.getId());
+        moduleList = ms.getModuleList(identity.getId());
+        channelList = channelService.getIdentityChannelList(identity.getId());
 
         games = gameService.getGameList(null);
 
@@ -178,6 +188,7 @@ public class IdentityAction extends Struts2Action {
     public String delete() {
         try {
             is.deleteIdentities(checkedIds);
+            channelService.deleteIdentitiesChannel(checkedIds);
             addActionMessage("删除身份成功");
         } catch (Exception e) {
             logger.error("删除身份出错：" + e);

@@ -3,42 +3,42 @@
 
 <sqlMap namespace="Auth">
 
-	<typeAlias alias="Auth" type="com.item.domain.authority.Auth" />
-	<typeAlias alias="mb" type="core.module.orm.MapBean" />
-	
-	<select id="Auth.listAll" parameterClass="mb" resultClass="Auth">
+    <typeAlias alias="Auth" type="com.item.domain.authority.Auth"/>
+    <typeAlias alias="mb" type="core.module.orm.MapBean"/>
+
+    <select id="Auth.listAll" parameterClass="mb" resultClass="Auth">
 		SELECT *
   		FROM sysAuth 
 	</select>
-		
-	<select id="Auth.listByModuleID" parameterClass="Long" resultClass="Auth">
+
+    <select id="Auth.listByModuleID" parameterClass="Long" resultClass="Auth">
 		SELECT *
   		FROM sysAuth 
   		WHERE moduleID=#moduleID#
-	</select>	
-	
-	<select id="Auth.selectUniqueAuthById" parameterClass="Long" resultClass="Auth">
+	</select>
+
+    <select id="Auth.selectUniqueAuthById" parameterClass="Long" resultClass="Auth">
 		SELECT *
 		FROM sysAuth
 		WHERE id=#id#
 	</select>
-	
-	<select id="Auth.getAuthByFunctionID" parameterClass="Long" resultClass="Auth">
+
+    <select id="Auth.getAuthByFunctionID" parameterClass="Long" resultClass="Auth">
 		SELECT *
 		FROM sysAuth
 		WHERE functionID=#fid#
 	</select>
-	
-	<insert id="Auth.save" parameterClass="Auth">
+
+    <insert id="Auth.save" parameterClass="Auth">
 		INSERT INTO sysAuth(
 			moduleID,functionID
 		)VALUES(
 			#moduleID#,#functionID#
 		)
 	</insert>
-	
-	<delete id="Auth.delete" parameterClass="Long">
+
+    <delete id="Auth.delete" parameterClass="Long">
 		DELETE FROM sysAuth WHERE functionID=#fid#
 	</delete>
-	
+
 </sqlMap>

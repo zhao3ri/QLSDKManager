@@ -4,72 +4,72 @@
 <sqlMap namespace="SGameRealtime">
 
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
-    
-    <typeAlias alias="sGameRealtime" type="com.item.domain.SGameRealtime" />
-    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <typeAlias alias="sGameRealtime" type="com.item.domain.SGameRealtime"/>
+    <typeAlias alias="mb" type="core.module.orm.MapBean"/>
 
     <sql id="SGameRealtime.Where">
-    	<dynamic prepend="where">
-    		<isNotNull prepend="and" property="clientType">
-    			`clientType`=#clientType#
-    		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			`appId`=#appId#
-    		</isNotNull>
-    		<isNotNull prepend="and" property="statDate">
-    			<![CDATA[
+        <dynamic prepend="where">
+            <isNotNull prepend="and" property="clientType">
+                `clientType`=#clientType#
+            </isNotNull>
+            <isNotNull prepend="and" property="appId">
+                `appId`=#appId#
+            </isNotNull>
+            <isNotNull prepend="and" property="statDate">
+                <![CDATA[
 	 	 	  	 date_format(`statDate`,'%Y-%m-%d')=date_format(#statDate#,'%Y-%m-%d') 
 	 	 		]]>
-    		</isNotNull>
-    		<isNotEmpty prepend="and" property="statStartDate">
-    			<![CDATA[
+            </isNotNull>
+            <isNotEmpty prepend="and" property="statStartDate">
+                <![CDATA[
 	 	 	  	 date_format(`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
 	 	 		]]>
-    		</isNotEmpty>
-    		<isNotEmpty prepend="and" property="statEndDate">
-    			<![CDATA[
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="statEndDate">
+                <![CDATA[
 	 	 	  	 date_format(`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
 	 	 		]]>
-    		</isNotEmpty>
-    	</dynamic>
+            </isNotEmpty>
+        </dynamic>
     </sql>
 
     <select id="SGameRealtime.listGroupBy" resultClass="sGameRealtime" parameterClass="mb">
         SELECT
-			`statDate`,
-			SUM(`onlineUsers`) AS onlineUsers,
-			SUM(`roleUsers`) AS roleUsers,
-			SUM(`newDevices`) AS newDevices,
-			SUM(`payAmount`) AS payAmount,
-			SUM(`activeUsers`) AS activeUsers
-		FROM s_game_realtime
+        `statDate`,
+        SUM(`onlineUsers`) AS onlineUsers,
+        SUM(`roleUsers`) AS roleUsers,
+        SUM(`newDevices`) AS newDevices,
+        SUM(`payAmount`) AS payAmount,
+        SUM(`activeUsers`) AS activeUsers
+        FROM s_game_realtime
         <include refid="SGameRealtime.Where"/>
-         GROUP BY 
-         <isEmpty property="groupType">
-         	date_format(`statDate`,'%H:%i:00')
-         </isEmpty>
-         <isEqual property="groupType" compareValue="statDate">
-         	statDate
-         </isEqual>
-         ORDER BY statDate ASC
+        GROUP BY
+        <isEmpty property="groupType">
+            date_format(`statDate`,'%H:%i:00')
+        </isEmpty>
+        <isEqual property="groupType" compareValue="statDate">
+            statDate
+        </isEqual>
+        ORDER BY statDate ASC
     </select>
 
-	<select id="SGameRealtime.getCurrentNewUsers"  resultClass="Long" parameterClass="mb">
-		SELECT COUNT(*)
-		FROM s_game_realtime
-		<dynamic prepend="where">
-			<isNotEmpty prepend="and" property="like">
-				statDate LIKE '$like$%'
-			</isNotEmpty>
-			<isNotNull prepend="and" property="appId">
-				`appId`=#appId#
-			</isNotNull>
-			<isNotEmpty prepend="AND" property="appIds">
-				appId IN
-				<iterate property="appIds" open="(" close=")" conjunction=",">
-					#appIds[]#
-				</iterate>
-			</isNotEmpty>
-		</dynamic>
-	</select>
+    <select id="SGameRealtime.getCurrentNewUsers" resultClass="sGameRealtime" parameterClass="mb">
+        SELECT SUM(newUsers)
+        FROM s_game_realtime
+        <dynamic prepend="where">
+            <isNotEmpty prepend="and" property="like">
+                statDate LIKE '$like$%'
+            </isNotEmpty>
+            <isNotNull prepend="and" property="appId">
+                `appId`=#appId#
+            </isNotNull>
+            <isNotEmpty prepend="AND" property="appIds">
+                appId IN
+                <iterate property="appIds" open="(" close=")" conjunction=",">
+                    #appIds[]#
+                </iterate>
+            </isNotEmpty>
+        </dynamic>
+    </select>
 </sqlMap>

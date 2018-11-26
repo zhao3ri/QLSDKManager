@@ -144,7 +144,7 @@
                 </mt:auths>
 
                 <!-- 游戏管理 -->
-                <mt:auths authUrls="bGame_list.shtml,bGamezone_list.shtml">
+                <mt:auths authUrls="bGame_list.shtml,bGamezone_list.shtml,bRole_list.shtml">
                     <li class="menuTop dropdown <% out.print(getSelected("bGame")); %>"><a href="#"
                                                                                            class="dropdown-toggle"
                                                                                            data-toggle="dropdown">游戏管理<b

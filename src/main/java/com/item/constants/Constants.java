@@ -57,7 +57,14 @@ public class Constants {
     public static final Integer CLIENT_IOS = 2;
 
     /**
-     * 游乐PlatformId
+     * 超级管理员身份id
      */
-    public static final Integer YOULE_PLATFROMID = 1009;
+    public static final int ADMIN_IDENTITY_ID = 3;
+
+    public static final int FUNCTION_ID_CHANNEL_MANAGER = 228;
+
+    /**
+     * 权限管理模块id
+     * */
+    public static final int MODULE_ID_PERMISSION = 2;
 }

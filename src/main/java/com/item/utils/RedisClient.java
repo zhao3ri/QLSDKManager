@@ -7,7 +7,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisClient {
-	public static JedisPool jedisPool;
+	private static JedisPool jedisPool;
 
 	static {
 		int maxActive = Configuration.getInstance().getRedisMaxActive();

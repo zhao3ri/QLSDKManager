@@ -3,75 +3,65 @@ package com.item.domain.authority;
 import core.module.annotation.LogAttribute;
 import core.module.annotation.LogModule;
 
-@LogModule(name="功能",key="function")
-public class Function {
+@LogModule(name = "功能", key = "function")
+public class Function extends SystemModule {
 
-	private Long id;
-	
-	@LogAttribute(name="功能地址")
-	private String functionName;
-	
-	@LogAttribute(name="功能名称")
-	private String description;
-	
-	
-	private Integer isFullPath;
-	
-	@LogAttribute(name="排序")
-	private Integer functionOrder;
-	
-	private Integer projectType;
+    @LogAttribute(name = "功能地址")
+    private String functionName;
 
-	public Function() {
+    @LogAttribute(name = "功能名称")
+    private String description;
 
-	}
 
-	public Long getId() {
-		return id;
-	}
+    private Integer isFullPath;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @LogAttribute(name = "排序")
+    private Integer functionOrder;
 
-	public String getFunctionName() {
-		return functionName;
-	}
+    private Integer projectType;
 
-	public void setFunctionName(String functionName) {
-		this.functionName = functionName;
-	}
+    public Function() {
 
-	public String getDescription() {
-		return description;
-	}
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getFunctionName() {
+        return functionName;
+    }
 
-	public Integer getIsFullPath() {
-		return isFullPath;
-	}
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
+    }
 
-	public void setIsFullPath(Integer isFullPath) {
-		this.isFullPath = isFullPath;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public Integer getFunctionOrder() {
-		return functionOrder;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setFunctionOrder(Integer functionOrder) {
-		this.functionOrder = functionOrder;
-	}
+    public Integer getIsFullPath() {
+        return isFullPath;
+    }
 
-	public Integer getProjectType() {
-		return projectType;
-	}
+    public void setIsFullPath(Integer isFullPath) {
+        this.isFullPath = isFullPath;
+    }
 
-	public void setProjectType(Integer projectType) {
-		this.projectType = projectType;
-	}
+    public Integer getFunctionOrder() {
+        return functionOrder;
+    }
+
+    public void setFunctionOrder(Integer functionOrder) {
+        this.functionOrder = functionOrder;
+    }
+
+    public Integer getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(Integer projectType) {
+        this.projectType = projectType;
+    }
 
 }

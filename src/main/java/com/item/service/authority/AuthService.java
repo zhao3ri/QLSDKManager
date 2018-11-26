@@ -3,6 +3,10 @@ package com.item.service.authority;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.item.constants.Constants;
+import com.item.domain.BPlatform;
+import com.item.service.BPlatformAppService;
+import core.module.orm.MapBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +29,8 @@ public class AuthService {
     private IdentityPermissionService ips;
     @Autowired
     private FunctionService fs;
+    @Autowired
+    private BPlatformAppService channelService;
 
     /**
      * 取所有权限
@@ -55,7 +61,7 @@ public class AuthService {
      * @return
      */
     public List<Auth> getAuthListByModuleId(Long moduleId) {
-       return AuthCacheManager.getInstance().getPermissionsByModuleId(moduleId);
+        return AuthCacheManager.getInstance().getPermissionsByModuleId(moduleId);
     }
 
     /**
@@ -69,39 +75,7 @@ public class AuthService {
         return AuthCacheManager.getInstance().getPermissionByCache(id);
     }
 
-    /**
-     * 根据模块id取出该模块的所有操作权限,并拼成带复选框的html字符串,新建角色的时候使用它
-     *
-     * @param moduleId
-     * @return
-     */
-    public String getAuthHtml(Long moduleId) {
-        int count = 0;
-        StringBuffer sb = new StringBuffer();
-        List<Auth> authList = this.getAuthListByModuleId(moduleId);
-        for (Auth auth : authList) {
-            if (fs.getFunctionByID(auth.getFunctionID()) == null) {
-                continue;
-            }
-            sb.append("<input type=\"checkbox\" name=\"authIds\" value=\"" + auth.getId() + "\" lang=\"" + moduleId + "\"/>");
-            sb.append(fs.getFunctionByID(auth.getFunctionID()).getDescription() + "\n");
-            count++;
-            if (7 == count) {
-                sb.append("<br/>");    //每7个一行
-                count = 0;
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 取出角色已经拥有的权限。更新角色时使用
-     *
-     * @param moduleId
-     * @param role
-     * @return
-     */
-    public String getUpdateAuthHtml(Long moduleId, Long identityId) {
+    public String getFunctionHtml(Long moduleId, Long identityId) {
         int count = 0;
         StringBuffer sb = new StringBuffer();
         List<Auth> authList = this.getAuthListByModuleId(moduleId);
@@ -111,10 +85,17 @@ public class AuthService {
             }
             String str = " ";
             //判断是否有该权限,如果有,checkbox设置为勾选
-            if (ips.getIdentityPermissionByIdentityAndAuth(identityId, auth.getId()) != null)
+            boolean hasPermission = false;
+            if (identityId != null && ips.getIdentityPermissionByIdentityAndAuth(identityId, auth.getFunctionID()) != null) {
+                hasPermission = true;
+            }
+            if (hasPermission)
                 str = " checked ";
-            sb.append("<input type=\"checkbox\" " + str + " name=\"authIds\" value=\"" + auth.getId() + "\" lang=\"" + moduleId + "\"/>");
+            sb.append("<input type=\"checkbox\" " + str + " name=\"authIds\" value=\"" + auth.getFunctionID() + "\" lang=\"" + moduleId + "\"/>");
             sb.append(fs.getFunctionByID(auth.getFunctionID()).getDescription() + "\n");
+            if (moduleId == Constants.MODULE_ID_PERMISSION && auth.getFunctionID() == Constants.FUNCTION_ID_CHANNEL_MANAGER) {
+                sb.append(getChannelHtml(moduleId, identityId));
+            }
             count++;
             if (7 == count) {
                 sb.append("<br/>");    //每7个一行
@@ -124,8 +105,35 @@ public class AuthService {
         return sb.toString();
     }
 
+    public String getChannelHtml(Long moduleId, Long identityId) {
+        int count = 0;
+        StringBuffer sb = new StringBuffer();
+        List<BPlatform> allChannel = channelService.getAllPlatform();
+        List<BPlatform> identityChannel = null;
+        if (identityId != null)
+            identityChannel = channelService.getIdentityChannelList(identityId);
+        sb.append("<fieldset>");
+        sb.append("<legend> <input type=\"checkbox\" onclick=\"selectAll(this,'channel')\"/>全选 </legend>");
+        for (BPlatform channel : allChannel) {
+            String check = " ";
+            if (identityChannel != null && identityChannel.contains(channel)) {
+                check = " checked ";
+            }
+            sb.append("<input type=\"checkbox\" " + check + " name=\"channelIds\" value=\"" + channel.getId() + "\" lang=\"channel\"/>");
+            sb.append(channel.getPlatformName() + "\n");
+            count++;
+            if (10 == count) {
+                sb.append("<br/>");
+                count = 0;
+            }
+        }
+        sb.append("</fieldset>");
+        return sb.toString();
+    }
+
     public void save(Auth entity) {
         authDao.save("Auth.save", entity);
+
     }
 
     public void delete(Long fid) {
@@ -141,4 +149,5 @@ public class AuthService {
     public Auth getAuthByFunctionID(Long fid) {
         return authDao.get("Auth.getAuthByFunctionID", fid);
     }
+
 }

@@ -84,7 +84,7 @@ public class FunctionService {
             functionDao.delete("Function.delete", Long.valueOf(checkedId));
 
             Auth auth = authService.getAuthByFunctionID(Long.valueOf(checkedId));
-            identityPermissionService.deleteByAuthID(auth.getId());
+            identityPermissionService.deleteByAuthID(auth.getFunctionID());
 
             authService.delete(Long.valueOf(checkedId));
         }

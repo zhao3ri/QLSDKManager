@@ -53,7 +53,7 @@ public class BPlatformAppAction extends Struts2Action {
 	}
 	
 	public void getGamePlatformsAsync() {
-		List<BPlatformApp> platformApps = bPlatformAppService.GetByAppId(id);
+		List<BPlatformApp> platformApps = bPlatformAppService.getByAppId(id);
 		try {
 			Struts2Utils.getResponse().getWriter().write(JsonUtil.toJsonString(platformApps));
 		} catch (IOException e) {

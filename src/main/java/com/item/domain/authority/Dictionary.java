@@ -16,11 +16,7 @@ import core.module.annotation.LogModule;
  * @since JDK 1.5
  */
 @LogModule(name="数据字典",key="dictionary")
- public class Dictionary{
-	/*
-	 *主键
-	 */
-	private Long id;
+ public class Dictionary extends SystemModule{
 	/*
 	 *类型 (部门、分组、计费方式、账期、广告主类型等等)
 	 */
@@ -59,19 +55,6 @@ import core.module.annotation.LogModule;
 	 */
 	private Dictionary dictionaryObj;
 	
-	/**
-	 * @return 主键
-	 */
-	public Long getId(){
-		return id;
-	}
-	/**
-	 * 设置 主键[id]
-	 * @param id 主键
-	 */
-	public void setId(Long id){
-		this.id=id;
-	}
 	/**
 	 * @return 类型 (部门、分组、计费方式、账期、广告主类型等等)
 	 */

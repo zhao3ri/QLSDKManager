@@ -37,7 +37,7 @@ import core.module.orm.Page;
 import core.module.utils.Struts2Utils;
 import core.module.web.Struts2Action;
 
-public class ReportAction extends Struts2Action {
+public class ReportAction extends BaseAction {
     private static final long serialVersionUID = 5645405406052360424L;
 
     @Autowired
@@ -109,30 +109,16 @@ public class ReportAction extends Struts2Action {
     private Page<SRoleRank> pageRoleRank = new Page<SRoleRank>(10);
     private Integer firstResult;
 
-    private Boolean initSearch() {
-        allGames = bGameService.getGameList(null);
-        if (CollectionUtils.isEmpty(allGames)) {
-            try {
-                Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath() + "/common/403.jsp");
-                return false;
-            } catch (IOException e) {
-                return false;
+    @Override
+    protected boolean initData() {
+        boolean success = super.initData();
+        if (success) {
+            allGames = getCurrentIdentityGames();
+            appIds = getGameIds();
+            if (null == appId) {
+                appId = getFirstGameId();
             }
         }
-
-        appIds = new ArrayList<Long>();
-        for (Game game : allGames) {
-            appIds.add(game.getId());
-        }
-
-        if (null == appId) {
-            appId = allGames.get(0).getId();
-            String cookieAppId = CookieUtils.getCookieValue(Struts2Utils.getRequest(), "cookie_appId");
-            if (StringUtils.isNotBlank(cookieAppId) && appIds.contains(Long.valueOf(cookieAppId))) {
-                appId = Long.valueOf(cookieAppId);
-            }
-        }
-        CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_appId", String.valueOf(appId));
         return true;
     }
 
@@ -150,7 +136,7 @@ public class ReportAction extends Struts2Action {
     }
 
     public String summary() {
-        if (!initSearch()) {
+        if (!initData()) {
             return null;
         }
 
@@ -165,8 +151,8 @@ public class ReportAction extends Struts2Action {
                 gameClientMonthlyReport.setAppName(game.getAppName());
 
                 mb.put(MapBean.APP_ID, game.getId());
-                setOSMonthlyReport( mb, Constants.CLIENT_ANDROID, gameClientMonthlyReport);
-                setOSMonthlyReport( mb, Constants.CLIENT_IOS, gameClientMonthlyReport);
+                setOSMonthlyReport(mb, Constants.CLIENT_ANDROID, gameClientMonthlyReport);
+                setOSMonthlyReport(mb, Constants.CLIENT_IOS, gameClientMonthlyReport);
 
                 gameClientMonthlyReports.add(gameClientMonthlyReport);
 
@@ -177,7 +163,7 @@ public class ReportAction extends Struts2Action {
 
                 mb.put(MapBean.APP_ID, game.getId());
                 //ANDROID
-                setOSReport( mb, Constants.CLIENT_ANDROID, gameClientReport);
+                setOSReport(mb, Constants.CLIENT_ANDROID, gameClientReport);
                 //IOS
                 setOSReport(mb, Constants.CLIENT_IOS, gameClientReport);
                 gameClientReports.add(gameClientReport);
@@ -262,7 +248,7 @@ public class ReportAction extends Struts2Action {
     }
 
     public String platform() {
-        if (!initSearch()) {
+        if (!initData()) {
             return null;
         }
 
@@ -319,7 +305,7 @@ public class ReportAction extends Struts2Action {
      * 区服分析
      */
     public String zone() {
-        if (!initSearch()) {
+        if (!initData()) {
             return null;
         }
         MapBean mb = new MapBean();
@@ -396,7 +382,7 @@ public class ReportAction extends Struts2Action {
     }
 
     public String rank() {
-        if (!initSearch()) {
+        if (!initData()) {
             return null;
         }
 //		platforms = bPlatformService.getAllPlatform();
@@ -456,7 +442,7 @@ public class ReportAction extends Struts2Action {
     }
 
     public String roleRank() {
-        if (!initSearch()) {
+        if (!initData()) {
             return null;
         }
         Map<String, String> idToName = new HashMap<String, String>();

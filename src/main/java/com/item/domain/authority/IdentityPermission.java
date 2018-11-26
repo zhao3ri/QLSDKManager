@@ -1,20 +1,11 @@
 package com.item.domain.authority;
 
-public class IdentityPermission {
-	private Long id;
+public class IdentityPermission extends SystemModule {
 	private Long identityId;
 	private Long authId;
 	
 	public IdentityPermission(){
 		
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Long getIdentityId() {

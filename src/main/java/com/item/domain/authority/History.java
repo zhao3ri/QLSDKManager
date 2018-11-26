@@ -4,8 +4,6 @@
  */
 package com.item.domain.authority;
 
-import com.item.domain.authority.User;
-
 /**
  * 历史记录表 实体
  * <br/>

@@ -303,9 +303,8 @@ public class AuthCacheManager {
      */
     private void putPermissionsToMap(Long identityId, List<IdentityPermission> identityPermissionList) {
         //保存每个身份的权限的map
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         if (identityPermissionList != null && !identityPermissionList.isEmpty()) {
-
             for (IdentityPermission identityPermission : identityPermissionList) {
                 Auth auth = permissionCacheMap.get(identityPermission.getAuthId());
                 Module module = moduleCacheMap.get(auth.getModuleID());
@@ -375,7 +374,17 @@ public class AuthCacheManager {
         this.identityPermissionGameList = games;
     }
 
-    public void cleanIdentityPermissionGameList(){
+    public void cleanIdentityPermissionGameList() {
         identityPermissionGameList.clear();
+    }
+
+    public List<Long> getGameIds() {
+        List<Long> ids = new ArrayList<>();
+        if (identityPermissionGameList != null && !identityPermissionGameList.isEmpty()) {
+            for (Game g : identityPermissionGameList) {
+                ids.add(g.getId());
+            }
+        }
+        return ids;
     }
 }

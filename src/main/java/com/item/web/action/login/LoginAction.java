@@ -83,7 +83,9 @@ public class LoginAction extends Struts2Action {
                         Struts2Utils.getSession().setAttribute("sessionUserInfo", user);
 
                         //从缓存中取出该用户所属角色的权限，并拼凑成字符串放到session中，由页面解析
-                        Struts2Utils.getSession().setAttribute("roleAuthStr", AuthCacheManager.getInstance().getPermissionText(user.getIdentityId()));
+                        String permission = AuthCacheManager.getInstance().getPermissionText(user.getIdentityId());
+                        Struts2Utils.getSession().setAttribute("roleAuthStr", permission);
+                        System.err.println("roleAuthStr===" + permission);
 
                         CookieUtils.setCookieValue(Struts2Utils.getResponse(), encoder.encodePassword(sid + "zdop_us"), DES.encryptAndBase64(user.getUserName(), null));
                         CookieUtils.setCookieValue(Struts2Utils.getResponse(), encoder.encodePassword(sid + "zdop_pw"), DES.encryptAndBase64(user.getPassword(), null));
