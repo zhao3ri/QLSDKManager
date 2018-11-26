@@ -120,6 +120,6 @@ public class BPlatform {
 
     @Override
     public boolean equals(Object obj) {
-        return this.id == ((BPlatform) obj).id;
+        return this.id.equals(((BPlatform)obj).id);
     }
 }

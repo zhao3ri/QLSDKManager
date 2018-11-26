@@ -30,6 +30,12 @@
 			      #appIds[]#
 			    </iterate>
 			</isNotEmpty>
+			<isNotEmpty prepend="and" property="platformIds">
+				bpg.platformId IN
+				<iterate property="platformIds" open="(" close=")" conjunction=",">
+					#platformIds[]#
+				</iterate>
+			</isNotEmpty>
 		</dynamic>
 	</sql>
 

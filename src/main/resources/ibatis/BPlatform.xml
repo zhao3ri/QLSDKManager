@@ -20,6 +20,12 @@
 			<isNotNull prepend="AND" property="version">
 				version=#version#
 			</isNotNull>
+			<isNotEmpty prepend="and" property="platformIds">
+				id IN
+				<iterate property="platformIds" open="(" close=")" conjunction=",">
+					#platformIds[]#
+				</iterate>
+			</isNotEmpty>
 		</dynamic>
 	</sql>
 
@@ -89,6 +95,12 @@
 			<isNotNull prepend="," property="phone">
 				phone=#phone#
 			</isNotNull>
+			<isNotEmpty prepend="and" property="platformIds">
+				id IN
+				<iterate property="platformIds" open="(" close=")" conjunction=",">
+					#platformIds[]#
+				</iterate>
+			</isNotEmpty>
 		</dynamic>
 		<include refid="BPlatform.Where" />
 	</update>

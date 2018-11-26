@@ -149,9 +149,9 @@ public class BPlatformAppService {
         return bPlatformDao.find("BPlatform.getChannelList", identityId);
     }
 
-//    public List<BPlatform> getIdentityChannelList() {
-//        return getIdentityChannelList(AuthCacheManager.getInstance().getUser().getIdentityId());
-//    }
+    public List<BPlatform> getIdentityChannelList() {
+        return getIdentityChannelList(AuthCacheManager.getInstance().getUser().getIdentityId());
+    }
 
     public void deleteIdentityChannel(long identityId) {
         bPlatformDao.delete("BPlatform.deleteIdentityChannel", identityId);

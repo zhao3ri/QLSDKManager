@@ -43,7 +43,8 @@ public class BPlatformAppAction extends Struts2Action {
     private List<Game> games;
 
     public String list() {
-        bPlatforms = bPlatformAppService.getAllPlatform();
+//        bPlatforms = bPlatformAppService.getAllPlatform();
+        bPlatforms = bPlatformAppService.getIdentityChannelList();
         games = gameService.getGameList();
 
         bPlatformApp = InitSearchCondition.initEntity(bPlatformApp, keepSearchCondition, "bPlatform");

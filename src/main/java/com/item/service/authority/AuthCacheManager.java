@@ -181,7 +181,6 @@ public class AuthCacheManager {
         List<Auth> authList = new ArrayList<>();
         if (permissionCacheList != null && !permissionCacheList.isEmpty()) {
             for (Auth auth : permissionCacheList) {
-                System.err.println("auth moduleId==" + auth.getModuleID() + ",moduleId==" + moduleId);
                 if (auth.getModuleID().equals(moduleId)) {
                     authList.add(auth);
                 }
