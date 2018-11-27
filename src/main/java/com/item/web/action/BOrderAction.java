@@ -60,7 +60,7 @@ public class BOrderAction extends Struts2Action{
         bOrderPage = bOrderService.page(bOrderPage, mb);
         
         games = bGameService.getGameList();
-        platforms = bPlatformService.getAllPlatform();
+        platforms = bPlatformService.getCurrentIdentityChannelList();
         
         return "list";
     }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.item.service.BPlatformService;
 import com.item.service.authority.AuthCacheManager;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ import core.module.web.Struts2Action;
 @Action
 public class BPlatformAppAction extends Struts2Action {
     private static final long serialVersionUID = 1L;
-
+    @Autowired
+    private BPlatformService channelService;
     @Autowired
     private BPlatformAppService bPlatformAppService;
     @Autowired
@@ -44,7 +46,7 @@ public class BPlatformAppAction extends Struts2Action {
 
     public String list() {
 //        bPlatforms = bPlatformAppService.getAllPlatform();
-        bPlatforms = bPlatformAppService.getIdentityChannelList();
+        bPlatforms = channelService.getCurrentIdentityChannelList();
         games = gameService.getGameList();
 
         bPlatformApp = InitSearchCondition.initEntity(bPlatformApp, keepSearchCondition, "bPlatform");
@@ -125,7 +127,8 @@ public class BPlatformAppAction extends Struts2Action {
         if (id != null) {
             bPlatformApp = bPlatformAppService.getBPlatformAppById(id);
         } else {
-            bPlatforms = bPlatformAppService.getAllPlatform();
+//            bPlatforms = channelService.getAllPlatform();
+            bPlatforms = channelService.getCurrentIdentityChannelList();
             games = gameService.getGameList();
         }
         return "handle";

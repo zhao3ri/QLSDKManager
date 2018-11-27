@@ -6,6 +6,7 @@ import java.util.List;
 import com.item.constants.Constants;
 import com.item.domain.BPlatform;
 import com.item.service.BPlatformAppService;
+import com.item.service.BPlatformService;
 import core.module.orm.MapBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class AuthService {
     @Autowired
     private FunctionService fs;
     @Autowired
-    private BPlatformAppService channelService;
+    private BPlatformService channelService;
 
     /**
      * 取所有权限

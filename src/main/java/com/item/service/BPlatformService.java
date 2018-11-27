@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.item.dao.SBalanceDao;
 import com.item.domain.SBalance;
+import com.item.service.authority.AuthCacheManager;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +25,12 @@ import core.module.orm.Page;
 @Service
 @Transactional
 public class BPlatformService {
+    private static final Logger logger = LoggerFactory.getLogger(BPlatformService.class);
     @Autowired
     private BPlatformDao bPlatformDao;
 
     @Autowired
     private SBalanceDao sBalanceDao;
-    private static final Logger logger = LoggerFactory.getLogger(BPlatformService.class);
 
     public int countPlatform(MapBean mb) {
         return (int) bPlatformDao.countResult("BPlatform.count", mb);
@@ -114,4 +115,38 @@ public class BPlatformService {
         return 0;
     }
 
+    public void saveIdentityChannel(MapBean mb) {
+        bPlatformDao.save("BPlatform.saveChannel", mb);
+    }
+
+    public void saveIdentityChannel(Long identityId, Long[] channelIds) {
+        if (null == channelIds) {
+            return;
+        }
+        deleteIdentityChannel(identityId);
+        MapBean mb = new MapBean();
+        mb.put("identityId", identityId);
+        for (Long channelId : channelIds) {
+            mb.put("channelId", channelId);
+            saveIdentityChannel(mb);
+        }
+    }
+
+    public List<BPlatform> getIdentityChannelList(long identityId) {
+        return bPlatformDao.find("BPlatform.getChannelList", identityId);
+    }
+
+    public List<BPlatform> getCurrentIdentityChannelList() {
+        return getIdentityChannelList(AuthCacheManager.getInstance().getUser().getIdentityId());
+    }
+
+    public void deleteIdentityChannel(long identityId) {
+        bPlatformDao.delete("BPlatform.deleteIdentityChannel", identityId);
+    }
+
+    public void deleteIdentitiesChannel(String identityIds) {
+        for (String identityId : StringUtils.split(identityIds, ",")) {
+            deleteIdentityChannel(Long.valueOf(identityId));
+        }
+    }
 }

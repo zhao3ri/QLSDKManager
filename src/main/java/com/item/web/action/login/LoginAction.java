@@ -138,6 +138,7 @@ public class LoginAction extends Struts2Action {
             CookieUtils.setCookieValue(Struts2Utils.getResponse(), new Md5PwdEncoder().encodePassword(sid + "zdop_us"), "");
             CookieUtils.setCookieValue(Struts2Utils.getResponse(), new Md5PwdEncoder().encodePassword(sid + "zdop_pw"), "");
             dashbordService.reset();
+            AuthCacheManager.getInstance().setUser(null);
             if ("true".equals(PropertyUtils.get("authority.control"))) {
                 Struts2Utils.getSession().removeAttribute("roleAuthStr");
                 AuthCacheManager.getInstance().cleanIdentityPermissionGameList();

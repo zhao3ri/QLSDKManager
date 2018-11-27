@@ -63,7 +63,7 @@ public class ModuleService {
     }
 
     @Transactional(readOnly = true)
-    public List<Module> getModuleList(Long identityId) {
+    public List<Module> getModuleListWithHtml(Long identityId) {
         List<Module> moduleList = AuthCacheManager.getInstance().getModules();
         if (moduleList != null && !moduleList.isEmpty()) {
             for (Module module : moduleList) {

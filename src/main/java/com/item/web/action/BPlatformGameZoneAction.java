@@ -64,7 +64,7 @@ public class BPlatformGameZoneAction extends Struts2Action{
         MapBean mb=search();
         bPlatformGameZonePage=bPlatformGameZoneService.page(bPlatformGameZonePage, mb);
         games=bGameService.getGameList();
-        platforms=bPlatformService.getAllPlatform();
+        platforms=bPlatformService.getCurrentIdentityChannelList();
         bPlatformGameZonePage=bPlatformGameZoneService.page(bPlatformGameZonePage, mb);
         return "list";
     }

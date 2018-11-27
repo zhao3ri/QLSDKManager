@@ -32,7 +32,7 @@ public class SRechargeRankService {
 		page = sRechargeRankDao.find(page, mb, "SRechargeRank.count", "SRechargeRank.page");
 		mb.put("ranks", CollectionUtils.isEmpty(page.getResult()) ? null : page.getResult());
 		
-		List<BPlatform> platforms = bPlatformService.getAllPlatform();
+		List<BPlatform> platforms = bPlatformService.getCurrentIdentityChannelList();
 		Map<String, String> id2name = new HashMap<String, String>();
 		for (BPlatform bPlatform : platforms) {
 			id2name.put(String.valueOf(bPlatform.getId()), bPlatform.getPlatformName());
@@ -54,7 +54,7 @@ public class SRechargeRankService {
 		List<SRechargeRank> ranks = sRechargeRankDao.find("SRechargeRank.list", mb);
 		mb.put("ranks", CollectionUtils.isEmpty(ranks) ? null : ranks);
 		
-		List<BPlatform> platforms = bPlatformService.getAllPlatform();
+		List<BPlatform> platforms = bPlatformService.getCurrentIdentityChannelList();
 		Map<String, String> id2name = new HashMap<String, String>();
 		for (BPlatform bPlatform : platforms) {
 			id2name.put(String.valueOf(bPlatform.getId()), bPlatform.getPlatformName());

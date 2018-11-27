@@ -100,25 +100,6 @@
 		SELECT * FROM b_game
 	</select>
 
-	<select id="BPlatform.getChannelList" parameterClass="Long" resultClass="BPlatform">
-		SELECT bp.*
-		FROM sysIdentityChannel si,b_platform bp
-		WHERE si.channelId=bp.id
-		AND identityId=#identity#
-	</select>
-
-	<insert id="BPlatform.saveChannel" parameterClass="mb">
-		INSERT INTO sysIdentityChannel(
-			identityId,channelId
-		)VALUES(
-			#identityId#,#channelId#
-		)
-	</insert>
-
-	<delete id="BPlatform.deleteIdentityChannel" parameterClass="Long">
-		DELETE FROM sysIdentityChannel WHERE identityId=#identityId#
-	</delete>
-
 	<update id="BPlatformApp.update" parameterClass="BPlatformApp">
 		UPDATE b_platform_game
 		<dynamic prepend="SET">

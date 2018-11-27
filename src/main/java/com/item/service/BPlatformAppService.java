@@ -7,9 +7,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.item.domain.SysGameManager;
-import com.item.service.authority.AuthCacheManager;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,13 +75,6 @@ public class BPlatformAppService {
     }
 
     /*
-     * 获取全部平台
-     */
-    public List<BPlatform> getAllPlatform() {
-        return bPlatformDao.find("BPlatformApp.getAllPlatform", null);
-    }
-
-    /*
      * 获取某个游戏全部平台
      */
     @SuppressWarnings("unchecked")
@@ -128,38 +118,4 @@ public class BPlatformAppService {
         return bPlatformAppDao.find("BPlatformApp.GetByAppId", appId);
     }
 
-    public void saveIdentityChannel(MapBean mb) {
-        bPlatformDao.save("BPlatform.saveChannel", mb);
-    }
-
-    public void saveIdentityChannel(Long identityId, Long[] channelIds) {
-        if (null == channelIds) {
-            return;
-        }
-        deleteIdentityChannel(identityId);
-        MapBean mb = new MapBean();
-        mb.put("identityId", identityId);
-        for (Long channelId : channelIds) {
-            mb.put("channelId", channelId);
-            saveIdentityChannel(mb);
-        }
-    }
-
-    public List<BPlatform> getIdentityChannelList(long identityId) {
-        return bPlatformDao.find("BPlatform.getChannelList", identityId);
-    }
-
-    public List<BPlatform> getIdentityChannelList() {
-        return getIdentityChannelList(AuthCacheManager.getInstance().getUser().getIdentityId());
-    }
-
-    public void deleteIdentityChannel(long identityId) {
-        bPlatformDao.delete("BPlatform.deleteIdentityChannel", identityId);
-    }
-
-    public void deleteIdentitiesChannel(String identityIds) {
-        for (String identityId : StringUtils.split(identityIds, ",")) {
-            deleteIdentityChannel(Long.valueOf(identityId));
-        }
-    }
 }

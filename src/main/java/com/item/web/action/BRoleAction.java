@@ -48,7 +48,7 @@ public class BRoleAction extends Struts2Action{
         
         games = bGameService.getGameList();
         
-        platforms = platformService.getAllPlatform();
+        platforms = platformService.getCurrentIdentityChannelList();
         
         if (null == mb.get("appId") && !CollectionUtils.isEmpty(games)){
 			Long appId = games.get(0).getId();

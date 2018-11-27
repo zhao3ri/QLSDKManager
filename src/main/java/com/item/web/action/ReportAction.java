@@ -446,7 +446,7 @@ public class ReportAction extends BaseAction {
             return null;
         }
         Map<String, String> idToName = new HashMap<String, String>();
-        platforms = bPlatformService.getAllPlatform();
+        platforms = bPlatformService.getCurrentIdentityChannelList();
         for (BPlatform bPlatform : platforms) {
             idToName.put(String.valueOf(bPlatform.getId()), bPlatform.getPlatformName());
         }
@@ -473,7 +473,7 @@ public class ReportAction extends BaseAction {
     public void roleRankExcelExport() {
         try {
             Map<String, String> idToName = new HashMap<String, String>();
-            platforms = bPlatformService.getAllPlatform();
+            platforms = bPlatformService.getCurrentIdentityChannelList();
             for (BPlatform bPlatform : platforms) {
                 idToName.put(String.valueOf(bPlatform.getId()), bPlatform.getPlatformName());
             }

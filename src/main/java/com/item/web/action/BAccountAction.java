@@ -34,7 +34,7 @@ public class BAccountAction extends Struts2Action {
 
 	public String list() {
 		MapBean mb = search();
-		platforms = platformService.getAllPlatform();
+		platforms = platformService.getCurrentIdentityChannelList();
 
 		if (account == null) {
 			account = new BAccount();

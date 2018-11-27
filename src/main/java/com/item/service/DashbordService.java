@@ -53,7 +53,7 @@ public class DashbordService {
         List<Game> gameList = bApplicationService.getGameList();
         AuthCacheManager.getInstance().setIdentityPermissionGameList(gameList);
         List<Long> gameIds = AuthCacheManager.getInstance().getGameIds();
-        List<BPlatform> platformList = bPlatformService.getAllPlatform();
+        List<BPlatform> platformList = bPlatformService.getCurrentIdentityChannelList();
         String date = DateUtils.format(new Date(), "yyyy-MM-dd");
         for (Game bApplication : gameList) {
             for (BPlatform bPlatform : platformList) {
