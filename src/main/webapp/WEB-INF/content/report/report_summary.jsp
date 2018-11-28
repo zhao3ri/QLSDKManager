@@ -91,7 +91,7 @@
 
                                     <s:iterator value="valueList" var="item">
                                         <tr>
-                                            <td rowspan='6'>${item.appName}</td>
+                                            <td rowspan='6'>${item.gameName}</td>
                                         </tr>
                                         <tr>
                                             <td rowspan='2' id="android">安卓</td>

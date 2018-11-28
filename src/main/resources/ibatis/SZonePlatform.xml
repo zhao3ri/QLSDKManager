@@ -16,8 +16,8 @@
     		<isNotNull prepend="AND" property="clientType">
     			szp.`clientType`=#clientType#
     		</isNotNull>
-    		<isNotNull prepend="AND" property="appId">
-    			szp.`appId`=#appId#
+    		<isNotNull prepend="AND" property="gameId">
+    			szp.`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="AND" property="zoneId">
     			szp.`zoneId`=#zoneId#
@@ -25,8 +25,8 @@
     		<isNotNull prepend="AND" property="platformId">
     			szp.`platformId`=#platformId#
     		</isNotNull>
-    		<isNotNull prepend="AND" property="appName">
-    			szp.`appName`=#appName#
+    		<isNotNull prepend="AND" property="gameName">
+    			szp.`gameName`=#gameName#
     		</isNotNull>
     		<isNotNull prepend="AND" property="zoneName">
     			szp.`zoneName`=#zoneName#
@@ -69,8 +69,8 @@
 	    SELECT 
 	        szp.`id` AS id,
 	        szp.`clientType` AS clientType,
-	        szp.`appId` AS appId,
-	        bg.`appName` AS appName,
+	        szp.gameId AS gameId,
+	        bg.gameName AS gameName,
 	        szp.`zoneId` AS zoneId,
 	        bgz.`zoneName` AS zoneName,
 	        szp.`platformId` AS platformId,
@@ -82,10 +82,10 @@
 			SUM(szp.payTimes) AS payTimes,
 			SUM(szp.payUsers) AS payUsers
 	   	FROM s_zone_platform_history szp 
-	    JOIN b_game bg ON bg.id=szp.appId
-		JOIN b_game_zone bgz ON bgz.appId=szp.appId AND bgz.zoneId=szp.zoneId
+	    JOIN b_game bg ON bg.id=szp.gameId
+		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
 		<include refid="SZonePlatform.Where"/>
-	    GROUP BY szp.zoneId,szp.appId
+	    GROUP BY szp.zoneId,szp.gameId
     </select>
     
     <!-- 区服分析 ：区服详细-->
@@ -99,14 +99,14 @@
 			SUM(szp.totalRegUser) AS totalRegUser,
 			SUM(szp.activeUsers) AS activeUsers,
 			szp.`zoneId` AS zoneId,
-			szp.`appId` AS appId,
+			szp.gameId AS gameId,
 	        szp.`platformId` AS platformId,
 	        bgz.`zoneName` AS zoneName,
-			bg.appName AS appName,
+			bg.gameName AS gameName,
 			bp.platformName AS platformName
 		FROM s_zone_platform_history szp
-		JOIN b_game bg ON bg.id=szp.appId
-		JOIN b_game_zone bgz ON bgz.appId=szp.appId AND bgz.zoneId=szp.zoneId
+		JOIN b_game bg ON bg.id=szp.gameId
+		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
 		JOIN b_platform bp ON szp.platformId=bp.id
 		<include refid="SZonePlatform.Where"/>
        	GROUP BY bgz.`zoneName`,bp.platformName ORDER BY szp.zoneId
@@ -123,14 +123,14 @@
 			SUM(szp.totalRegUser) AS totalRegUser,
 			SUM(szp.activeUsers) AS activeUsers,
 			szp.`zoneId` AS zoneId,
-			szp.`appId` AS appId,
+			szp.gameId AS gameId,
 	        szp.`platformId` AS platformId,
 	        bgz.`zoneName` AS zoneName,
-			bg.appName AS appName,
+			bg.gameName AS gameName,
 			bp.platformName AS platformName
 		FROM s_zone_platform_history szp
-		JOIN b_game bg ON bg.id=szp.appId
-		JOIN b_game_zone bgz ON bgz.appId=szp.appId AND bgz.zoneId=szp.zoneId
+		JOIN b_game bg ON bg.id=szp.gameId
+		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
 		JOIN b_platform bp ON szp.platformId=bp.id 
 		<include refid="SZonePlatform.Where"/>
        	GROUP BY bgz.`zoneName`,bp.platformName ORDER BY szp.platformId

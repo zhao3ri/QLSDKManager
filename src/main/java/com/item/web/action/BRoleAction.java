@@ -50,21 +50,21 @@ public class BRoleAction extends Struts2Action{
         
         platforms = platformService.getCurrentIdentityChannelList();
         
-        if (null == mb.get("appId") && !CollectionUtils.isEmpty(games)){
-			Long appId = games.get(0).getId();
-			String cookieAppId = CookieUtils.getCookieValue(Struts2Utils.getRequest(), "cookie_appId");
-			if (StringUtils.isNotBlank(cookieAppId)) {
-				appId = Long.valueOf(cookieAppId);
+        if (null == mb.get(MapBean.GAME_ID) && !CollectionUtils.isEmpty(games)){
+			Long gameId = games.get(0).getId();
+			String cookieGameId = CookieUtils.getCookieValue(Struts2Utils.getRequest(), "cookie_gameId");
+			if (StringUtils.isNotBlank(cookieGameId)) {
+				gameId = Long.valueOf(cookieGameId);
 				
 			}
-			mb.put("appId", appId);
+			mb.put(MapBean.GAME_ID, gameId);
 		}
-		CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_appId", String.valueOf(mb.get("appId")));
+		CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_gameId", String.valueOf(mb.get(MapBean.GAME_ID)));
 		if (role == null) {
 			role = new BRole();
 		}
-		if (mb.get("appId") != null) {
-			role.setAppId((Long)mb.get("appId"));
+		if (mb.get(MapBean.GAME_ID) != null) {
+			role.setGameId((Long)mb.get(MapBean.GAME_ID));
 		}
 		rolePage = bRoleService.page(rolePage, mb);
         return "list";
@@ -85,7 +85,7 @@ public class BRoleAction extends Struts2Action{
             
             for(int i=0; i<list.size(); i++){
             	List<Excel> e=new ArrayList<Excel>();
- 	            e.add(new Excel(list.get(i).getAppName(), 20));
+ 	            e.add(new Excel(list.get(i).getGameName(), 20));
 	            e.add(new Excel(list.get(i).getPlatformName(), 20));
 	            e.add(new Excel(list.get(i).getZoneId(), 20));
 	            e.add(new Excel(list.get(i).getRoleId(), 20));
@@ -104,13 +104,13 @@ public class BRoleAction extends Struts2Action{
         MapBean mb=new MapBean();
         if(role != null){
         	if (role.getClientType() != null){
-                mb.put("clientType", role.getClientType());
+                mb.put(MapBean.CLIENT_TYPE, role.getClientType());
             }
-        	if (role.getAppId() != null){
-                mb.put("appId", role.getAppId());
+        	if (role.getGameId() != null){
+                mb.put(MapBean.GAME_ID, role.getGameId());
             }
         	if (role.getPlatformId() != null){
-                mb.put("platformId", role.getPlatformId());
+                mb.put(MapBean.PLATFORM_ID, role.getPlatformId());
             }
         	if (StringUtils.isNotBlank(role.getZoneId())){
                 mb.put("zoneId", role.getZoneId());

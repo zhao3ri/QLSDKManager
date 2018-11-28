@@ -16,8 +16,8 @@
     		<isNotNull prepend="and" property="identityId">
     			`identityId`=#identityId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			`gameId`=#gameId#
     		</isNotNull>
     	</dynamic>
     </sql>
@@ -26,7 +26,7 @@
         SELECT
 	 		`id`,
 			identityId,
-			`appId`
+			gameId
 		FROM sysGamePermissionManager
         <include refid="SysGameManager.Where"/>
         <isNotNull property="orderby">
@@ -40,10 +40,10 @@
     <insert id="SysGameManager.save" parameterClass="sysGameManager">
         INSERT INTO sysGamePermissionManager(
         	identityId,
-			`appId`
+			gameId
         )VALUES(
         	#identityId#,
-			#appId#
+			#gameId#
         )
         <selectKey resultClass="Long" keyProperty="id">
 	       select @@IDENTITY as `id`

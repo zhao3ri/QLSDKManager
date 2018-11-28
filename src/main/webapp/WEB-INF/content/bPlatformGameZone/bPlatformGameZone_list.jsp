@@ -15,10 +15,10 @@
 	      	<div class="panel-heading">平台游戏分区表列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-				<select class="form-control" name="BPlatformGameZone.appId"  data-original-title="" title="">
+				<select class="form-control" name="BPlatformGameZone.gameId"  data-original-title="" title="">
 									<option value="">==请选择游戏==</option>
 									<s:iterator value="games" var="item">
-										<option value="${item.id}" <c:if test="${item.id==bPlatformGameZone.appId}">selected</c:if>>${item.appName }</option>
+										<option value="${item.id}" <c:if test="${item.id==bPlatformGameZone.gameId}">selected</c:if>>${item.gameName }</option>
 									</s:iterator>								
 				</select>
 		          	
@@ -60,7 +60,7 @@
 							<tr>
 								<th><input name="checkedIds" class="checkedIds" value="<s:property value="id"/>" type="checkbox"/></th>
 								<td><s:property value="id"/></td>
-								<td><s:property value="appName"/></td>
+								<td><s:property value="gameName"/></td>
 								<td><s:property value="platformName"/></td>
 								<td><s:property value="zoneName"/></td>
 								<td>

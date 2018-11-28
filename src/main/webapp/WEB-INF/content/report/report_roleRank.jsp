@@ -14,9 +14,9 @@
         	<form identity="form"  action="report_roleRank.shtml" method="post" id="mainForm">
 	        	<div class="form-inline popover-show panel-body list_toolbar" >
 	        		<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏" >
-			          	<select class="form-control" name="appId"  placeholder="请选择游戏" id="appNameSel">
+			          	<select class="form-control" name="gameId"  placeholder="请选择游戏" id="appNameSel">
 							<s:iterator value="allGames" var="item">
-								<option value="${item.id}" <c:if test="${item.id == appId }">selected</c:if>>${item.appName }</option>
+								<option value="${item.id}" <c:if test="${item.id == gameId }">selected</c:if>>${item.gameName }</option>
 							</s:iterator>
 						</select>	 
 			        </div>
@@ -65,7 +65,7 @@
             			<s:if test="pageRoleRank.result.size>0">
 						<s:iterator value="pageRoleRank.result" var="item" status="st">
 						<tr>
-						    <td><s:property value="appName"/></td>
+						    <td><s:property value="gameName"/></td>
 						    <td><s:property value="platformName"/></td>
 						    <td><s:property value="name"/></td>
 							<td><fmt:formatNumber  value="${amount/100 }" pattern="0.00" /></td>
@@ -121,9 +121,9 @@
 		
 		
 		function view(uid, platformId){
-			var appId = $("#appNameSel").val();
+			var gameId = $("#appNameSel").val();
 			var selectRange = $("#selectRange").val();
-			location.assign("/bOrder/bOrder_list.shtml?BOrder.status=2&BOrder.notifyStatus=2&BOrder.uid=" + uid + "&BOrder.platformId=" + platformId + "&BOrder.appId=" + appId )
+			location.assign("/bOrder/bOrder_list.shtml?BOrder.status=2&BOrder.notifyStatus=2&BOrder.uid=" + uid + "&BOrder.platformId=" + platformId + "&BOrder.gameId=" + gameId )
 		}
 	</script>
 </body>

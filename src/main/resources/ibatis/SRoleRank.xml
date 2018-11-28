@@ -8,8 +8,8 @@
 	<!-- 动态条件 -->
 	<sql id="SRoleRank.Where">
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="AND" property="appId">
-				a.appid=#appId#
+			<isNotNull prepend="AND" property="gameId">
+				a.gameId=#gameId#
 			</isNotNull>
 			<isNotEmpty prepend="AND" property="platformId">
 				a.platformid=#platformId#
@@ -25,7 +25,7 @@
         	SELECT count(1)
 			FROM s_pay_rank AS a
 			<include refid="SRoleRank.Where" />
-			GROUP BY a.appid,a.roleid
+			GROUP BY a.gameId,a.roleid
 			ORDER BY a.amount DESC) as c
 	</select>
 
@@ -39,12 +39,12 @@
 			a.rolename,
 			a.lastlogin,
 			SUM(a.amount)  AS amount,
-			a.appid,
-			b.appName
+			a.gameId,
+			b.gameName
 		FROM s_pay_rank AS a
-		JOIN b_game AS b  ON a.appid = b.id
+		JOIN b_game AS b  ON a.gameId = b.id
 		<include refid="SRoleRank.Where" /> 
-		GROUP BY a.appid,a.roleid
+		GROUP BY a.gameId,a.roleid
 		ORDER BY SUM(a.amount) DESC 
 		LIMIT #firstResult#, #pageSize#
 	</select>
@@ -57,12 +57,12 @@
 			a.platformid,
 			a.rolename,
 			SUM(a.amount)  AS amount,
-			a.appid,
-			b.appName 
+			a.gameId,
+			b.gameName
 		FROM s_pay_rank AS a
-		JOIN b_game AS b  ON a.appid = b.id
+		JOIN b_game AS b  ON a.gameId = b.id
 		<include refid="SRoleRank.Where" /> 
-		GROUP BY a.appid,a.roleid
+		GROUP BY a.gameId,a.roleid
 		ORDER BY SUM(a.amount) DESC 
 	</select>
 </sqlMap>

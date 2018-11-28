@@ -46,10 +46,10 @@
 				 
 				 <li style="float:right">&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				 
-				  <li id="appName" style="float:right">
-				    <select name="appId" onchange="update()" class="form-control" >
+				  <li id="gameName" style="float:right">
+				    <select name="gameId" onchange="update()" class="form-control" >
 				    <s:iterator value="allGames" var="item" >
-				      <option id="appNameOpt" value="${item.id}" <c:if test="${item.id==appId}">selected</c:if>>${item.appName}</option>
+				      <option id="appNameOpt" value="${item.id}" <c:if test="${item.id==gameId}">selected</c:if>>${item.gameName}</option>
 				    </s:iterator>
 				    </select>
 				  </li>
@@ -123,7 +123,7 @@
 										<c:if test="${itemVal.totalRegUser>0}">					
 										<td><fmt:formatNumber  value="${itemVal.payAmount/100/itemVal.totalRegUser }" pattern="0.00" /></td>
 								</c:if>	
-									<td><a class="basic" href="/report/reportDaily_basic.shtml?appId=${itemVal.appId}&groupType=1&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
+									<td><a class="basic" href="/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=1&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
 		          			</tr>
 	          			</s:iterator>
                         <s:if test="#itemVal.size>1">
@@ -149,7 +149,7 @@
 										<c:if test="${allRegUser>0}">					
 										<td><fmt:formatNumber  value="${allpayAmount/100/allRegUser }" pattern="0.00" /></td>
 							</c:if>
-	          			<td><a class="basic" href="/report/reportDaily_basic.shtml?appId=${appId}&selectRange=${selectRange}">查看</a></td>
+	          			<td><a class="basic" href="/report/reportDaily_basic.shtml?gameId=${gameId}&selectRange=${selectRange}">查看</a></td>
 	          			</tr>
           			</s:if>
           			</s:if>
@@ -238,7 +238,7 @@
 										<c:if test="${itemVal.totalRegUser>0}">					
 										<td><fmt:formatNumber  value="${itemVal.payAmount/100/itemVal.totalRegUser }" pattern="0.00" /></td>
 								</c:if>	
-								<td><a class="basic" href="/report/reportDaily_basic.shtml?appId=${itemVal.appId}&groupType=1&channelIds=${itemVal.platformId}&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
+								<td><a class="basic" href="/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=1&channelIds=${itemVal.platformId}&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
 		          			</tr>
 	          			</s:iterator>
 	          			<s:if test="#item.value.size >1">
@@ -264,7 +264,7 @@
 										<c:if test="${allRegUser>0}">					
 										<td><fmt:formatNumber  value="${allpayAmount/100/allRegUser }" pattern="0.00" /></td>
 							</c:if>
-		          			<td><a class="basic" href="/report/reportDaily_basic.shtml?appId=${itemVal.appId}&groupType=1&zoneName=${item.key}&selectRange=${selectRange}">查看</a></td>
+		          			<td><a class="basic" href="/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=1&zoneName=${item.key}&selectRange=${selectRange}">查看</a></td>
 	          			</tr>
 	          			</s:if>
 				    </s:iterator>
@@ -349,7 +349,7 @@
 										<c:if test="${itemVal.totalRegUser>0}">					
 										<td><fmt:formatNumber  value="${itemVal.payAmount/100/itemVal.totalRegUser }" pattern="0.00" /></td>
 								        </c:if>	
-										<td><a class="basic" href="/report/reportDaily_basic.shtml?appId=${itemVal.appId}&groupType=1&channelIds=${itemVal.platformId}&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
+										<td><a class="basic" href="/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=1&channelIds=${itemVal.platformId}&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
 				          			</tr>
 			          			</s:iterator>
 			          			<s:if test="#item.value.size>1">
@@ -375,7 +375,7 @@
 										<c:if test="${allRegUser>0}">					
 										<td><fmt:formatNumber  value="${allpayAmount/100/allRegUser }" pattern="0.00" /></td>
 							</c:if>
-				          			<td><a class="basic" href="/report/reportDaily_basic.shtml?appId=${itemVal.appId}&groupType=2&channelName=${item.key}&selectRange=${selectRange}">查看</a></td>
+				          			<td><a class="basic" href="/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=2&channelName=${item.key}&selectRange=${selectRange}">查看</a></td>
 			          			</tr>
 			          			</s:if>
 						    </s:iterator>

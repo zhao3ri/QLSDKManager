@@ -16,16 +16,16 @@
             <isNotNull prepend="AND" property="clientType">
                 spm.clientType=#clientType#
             </isNotNull>
-            <isNotNull prepend="AND" property="appId">
-                spm.appId=#appId#
+            <isNotNull prepend="AND" property="gameId">
+                spm.gameId=#gameId#
             </isNotNull>
             <isNotNull prepend="AND" property="yearMonth">
                 spm.yearMonth=#yearMonth#
             </isNotNull>
-            <isNotEmpty prepend="AND" property="appIds">
-                <![CDATA[ spm.appId in ]]>
-                <iterate property="appIds" conjunction="," open="(" close=")">
-                    #appIds[]#
+            <isNotEmpty prepend="AND" property="gameIds">
+                <![CDATA[ spm.gameId in ]]>
+                <iterate property="gameIds" conjunction="," open="(" close=")">
+                    #gameIds[]#
                 </iterate>
             </isNotEmpty>
 
@@ -50,8 +50,8 @@
             <isNotNull prepend="AND" property="payUsers">
                 spm.payUsers=#payUsers#
             </isNotNull>
-            <isNotNull prepend="AND" property="appName">
-                bg.appName=#appName#
+            <isNotNull prepend="AND" property="gameName">
+                bg.gameName=#gameName#
             </isNotNull>
             <isNotNull prepend="AND" property="activeUsers">
                 spm.activeUsers=#activeUsers#
@@ -69,13 +69,13 @@
         SUM(spm.totalRoleUser) as totalRoleUser,
         SUM(spm.activeUsers) as activeUsers,
         bp.platformName as platformName,
-        bg.appName as appName
+        bg.gameName as gameName
         FROM s_platform_monthly spm
         JOIN b_platform bp ON spm.platformId=bp.id
-        JOIN b_game bg ON spm.appId=bg.id
+        JOIN b_game bg ON spm.gameId=bg.id
         <include refid="SPlatformMonthly.where"/>
-        GROUP BY bp.platformName,bg.appName
-        ORDER BY bg.appName,bp.platformName,spm.clientType
+        GROUP BY bp.platformName,bg.gameName
+        ORDER BY bg.gameName,bp.platformName,spm.clientType
     </select>
 
 
@@ -91,7 +91,7 @@
         SUM(spm.totalRoleUser) as totalRoleUser
         FROM s_platform_monthly spm
         JOIN b_platform bp ON spm.platformId=bp.id
-        JOIN b_game bg ON spm.appId=bg.id
+        JOIN b_game bg ON spm.gameId=bg.id
         <include refid="SPlatformMonthly.where"/>
         GROUP BY bp.platformName
         ORDER BY bp.platformName
@@ -99,7 +99,7 @@
 
     <select id="SPlatformMonthly.getByMap" resultClass="sPlatformMonthly" parameterClass="mb">
         SELECT
-        appId AS appId,
+        gameId AS gameId,
         clientType AS clientType,
         totalRoleUser AS totalRoleUser,
         totalRegUser AS totalRegUser,
@@ -114,7 +114,7 @@
 
     <select id="SPlatformMonthly.stat" resultClass="sPlatformMonthly" parameterClass="mb">
         SELECT
-        sd.appId as appId,
+        sd.gameId as gameId,
         sd.clientType as clientType,
         sd.platformId as platformId,
         SUM(sd.roleUsers) as totalRoleUser,
@@ -131,8 +131,8 @@
             <isNotNull prepend="and" property="clientType">
                 sd.clientType=#clientType#
             </isNotNull>
-            <isNotNull prepend="and" property="appId">
-                sd.appId=#appId#
+            <isNotNull prepend="and" property="gameId">
+                sd.gameId=#gameId#
             </isNotNull>
             <isNotEmpty prepend="and" property="statDate">
                 sd.statDate=#statDate#

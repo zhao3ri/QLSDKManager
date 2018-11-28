@@ -28,7 +28,7 @@ public class BGamezoneService {
 	public Page<Gamezone> page(Page<Gamezone> page,MapBean mb){
 		if (null == mb)
 			mb = new MapBean();
-		mb.put("appIds", gameManagerService.getAppIdsByIdentityId());
+		mb.put(MapBean.GAME_IDS, gameManagerService.getGameIdsByIdentityId());
 		return gamezoneDao.find(page, mb, "BGamezone.count", "BGamezone.page");
 	}
 	
@@ -41,8 +41,8 @@ public class BGamezoneService {
 	}
 	
 	//根据appId获取相应数据
-	public List<Gamezone> getGamezoneByappId(Long appId) {
-		return gamezoneDao.find("BGamezone.getGamezoneByappId", appId);
+	public List<Gamezone> getGamezoneByGameId(Long appId) {
+		return gamezoneDao.find("BGamezone.getGamezoneByGameId", appId);
 	}
 	
 	/*
@@ -64,7 +64,7 @@ public class BGamezoneService {
 	
 	
 	public void save(Gamezone entity){
-		Game game=gameService.getGameById(entity.getAppId());
+		Game game=gameService.getGameById(entity.getGameId());
 		if(game!=null)
 			gamezoneDao.save("BGamezone.save", entity);
 	}
@@ -86,7 +86,7 @@ public class BGamezoneService {
 			return null;
 		}
 		MapBean mb = new MapBean();
-		mb.put("appId", appId);
+		mb.put(MapBean.GAME_ID, appId);
 		mb.put("zoneIds", zoneIds);
 		return gamezoneDao.find("BGamezone.getByIds", mb);
 	}

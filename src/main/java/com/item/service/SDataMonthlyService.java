@@ -50,9 +50,9 @@ public class SDataMonthlyService {
 			String yearMonthStr, String yearMonthStr2) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		MapBean mb = new MapBean();
-		mb.put("appId", appId);
-		mb.put("clientType", clientType);
-		mb.put("platformId", platformId);
+		mb.put(MapBean.GAME_ID, appId);
+		mb.put(MapBean.CLIENT_TYPE, clientType);
+		mb.put(MapBean.PLATFORM_ID, platformId);
 		mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 		
 		mb.put("statStartDate", yearMonthStr.replace("-", ""));
@@ -157,9 +157,9 @@ public class SDataMonthlyService {
         
         Game game = gameService.getGameById(appId);
         MapBean mb = new MapBean();
-		mb.put("appId", appId);
-		mb.put("clientType", clientType);
-		mb.put("platformId", platformId);
+		mb.put(MapBean.GAME_ID, appId);
+		mb.put(MapBean.CLIENT_TYPE, clientType);
+		mb.put(MapBean.PLATFORM_ID, platformId);
 		mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 		if (StringUtils.isNotBlank(yearMonthStr)){
 			mb.put("statStartDate", yearMonthStr.replace("-", ""));
@@ -172,11 +172,11 @@ public class SDataMonthlyService {
         for(int i=0; i<dataMonthlyList.size(); i++){
             BPlatform platform = platformService.getPlatformById(dataMonthlyList.get(i).getPlatformId()+0L);
             MapBean mb2 = new MapBean();
-    		mb2.put("appId", appId);
+    		mb2.put(MapBean.GAME_ID, appId);
     		mb2.put("zoneId", dataMonthlyList.get(i).getZoneId()+"");
             Gamezone gamezone = gamezoneService.get(mb2);
         	List<Excel> e = new ArrayList<Excel>();
-        	e.add(new Excel(game.getAppName(),20));
+        	e.add(new Excel(game.getGameName(),20));
         	e.add(new Excel(appId,20));
         	e.add(new Excel(dataMonthlyList.get(i).getClientType()==1?"android":"ios", 20));
         	e.add(new Excel(platform.getPlatformName(),20));

@@ -21,16 +21,16 @@
 		        	<input  class="form-control" type="text"  placeholder="CP订单号" name="BOrder.cpOrderId" value="${BOrder.cpOrderId }"/>
 		        </div>
 				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-		          	<select class="form-control" name="BOrder.appId" id="appId" onchange="changeGame();" placeholder="请选择游戏">
+		          	<select class="form-control" name="BOrder.gameId" id="gameId" onchange="changeGame();" placeholder="请选择游戏">
 						<option value="">==请选择游戏==</option>
 						<s:iterator value="games" var="item">
-							<option value="${item.id }" <c:if test="${item.id == bOrder.appId }">selected</c:if>>${item.appName }</option>
+							<option value="${item.id }" <c:if test="${item.id == bOrder.gameId }">selected</c:if>>${item.gameName }</option>
 						</s:iterator>
 					</select>
 		        </div>
 
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-                				    <input  class="form-control" type="text"  placeholder="游戏名称" name="BOrder.appName" value="${BOrder.appName }"/>
+                				    <input  class="form-control" type="text"  placeholder="游戏名称" name="BOrder.gameName" value="${BOrder.gameName }"/>
                 		        </div>
 
 		       <!-- <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择服务器">
@@ -110,7 +110,7 @@
 									<s:set value="#allGold + #page.gold" var="allGold"></s:set>
 									<tr>
 										<td><s:property value="orderId"/></td>
-										<td><s:property value="appName"/></td>
+										<td><s:property value="gameName"/></td>
 										<c:if test="${empty page.zoneName}">
 											<td><s:property value="zoneId"/></td>
 										</c:if>
@@ -197,13 +197,13 @@
 		}
 		
 		function changeGame(){
-			var appId = $("#appId").val();
+			var gameId = $("#gameId").val();
 			var zoneId = '${bOrder.zoneId}';
 			$("#zoneId").html("");
-			if(appId == ""){
+			if(gameId == ""){
 				return;
 			}
-			$.post("/bGamezone/bGamezone_getGameZonesAsync.shtml",{appId : appId},function(data){
+			$.post("/bGamezone/bGamezone_getGameZonesAsync.shtml",{gameId : gameId},function(data){
 				json = eval(data);
 				$("#zoneId").append("<option value=''>==请选择服务器==</option>");
 			    for(var i=0; i<json.length; i++){

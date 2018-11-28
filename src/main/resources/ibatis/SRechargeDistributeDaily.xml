@@ -25,7 +25,7 @@
 			SUM(`s10`) AS s10,
 			`statDate`
 		FROM s_recharge_distribute_daily
-		WHERE appId = #appId#
+		WHERE gameId = #gameId#
 		<isNotNull property="platformId">
    			AND `platformId`=#platformId#
    		</isNotNull>

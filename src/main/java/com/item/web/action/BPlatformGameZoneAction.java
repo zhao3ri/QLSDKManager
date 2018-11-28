@@ -51,7 +51,7 @@ public class BPlatformGameZoneAction extends Struts2Action{
     private BPlatformGameZone bPlatformGameZone;
     private String platformIds;
 	private String zoneIds;
-	private Long appId;
+	private Long gameId;
 	private List<BPlatformGameZone> platformGameZones;
 	private List<Game> games;
 	private List<BPlatform> platforms;
@@ -72,7 +72,7 @@ public class BPlatformGameZoneAction extends Struts2Action{
     
     public String getPlatformZones(){
     	MapBean mb = new MapBean();
-    	mb.put("appId", appId);
+    	mb.put(MapBean.GAME_ID, gameId);
     	mb.put("platformIds", platformIds.split(","));
     	platformGameZones = bPlatformGameZoneService.getPlatformZones(mb);
     	return "getPlatformZones";
@@ -80,7 +80,7 @@ public class BPlatformGameZoneAction extends Struts2Action{
     
     public String getZonePlatforms(){
     	MapBean mb = new MapBean();
-    	mb.put("appId", appId);
+    	mb.put(MapBean.GAME_ID, gameId);
     	mb.put("zoneIds", zoneIds.split(","));
     	platformGameZones = bPlatformGameZoneService.getZonePlatforms(mb);
     	return "getZonePlatforms";
@@ -102,9 +102,9 @@ public class BPlatformGameZoneAction extends Struts2Action{
 	
     public String handle(){
     	MapBean mb = new MapBean();
-    	mb.put("appId", bPlatformGameZone.getAppId());
+    	mb.put("gameId", bPlatformGameZone.getGameId());
     	mb.put("platformId", bPlatformGameZone.getPlatformId());
-    	gamezones = bGamezoneService.getGamezoneByappId(bPlatformGameZone.getAppId());
+    	gamezones = bGamezoneService.getGamezoneByGameId(bPlatformGameZone.getGameId());
 
     	Map<String, String> map = new HashMap<String, String>();
     	List<BPlatformGameZone> bPlatformGameZones = bPlatformGameZoneService.list(mb);
@@ -150,8 +150,8 @@ public class BPlatformGameZoneAction extends Struts2Action{
         	if (bPlatformGameZone.getPlatformId()!=null){
                 mb.put("platformId",bPlatformGameZone.getPlatformId());
             }
-        	if (bPlatformGameZone.getAppId()!=null){
-                mb.put("appId",bPlatformGameZone.getAppId());
+        	if (bPlatformGameZone.getGameId()!=null){
+                mb.put("gameId",bPlatformGameZone.getGameId());
             }
         	if (bPlatformGameZone.getZoneId()!=null&&!"".equals(bPlatformGameZone.getZoneId())){
                 mb.put("zoneId",bPlatformGameZone.getZoneId());
@@ -201,12 +201,12 @@ public class BPlatformGameZoneAction extends Struts2Action{
 		this.zoneIds = zoneIds;
 	}
 
-	public Long getAppId() {
-		return appId;
+	public Long getGameId() {
+		return gameId;
 	}
 
-	public void setAppId(Long appId) {
-		this.appId = appId;
+	public void setGameId(Long gameId) {
+		this.gameId = gameId;
 	}
 
 	public List<BPlatformGameZone> getPlatformGameZones() {

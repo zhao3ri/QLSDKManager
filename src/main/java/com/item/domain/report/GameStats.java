@@ -5,7 +5,6 @@ import com.item.utils.DateUtils;
 import com.item.utils.JsonUtil;
 import com.item.utils.StringUtil;
 
-import javax.rmi.CORBA.Util;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -20,7 +19,7 @@ public class GameStats {
         }
         Map<String, GameStats> gameStatsMap = new HashMap<>();
         for (SGameRealtime gr : gameRealtimes) {
-            long gameId = gr.getAppId();
+            long gameId = gr.getGameId();
             String day = DateUtils.format2yyMMdd(gr.getStatDate());
             GameStats gameStats;
             if (gameStatsMap.containsKey(gameId + day)) {
@@ -28,7 +27,7 @@ public class GameStats {
             } else {
                 gameStats = new GameStats();
                 gameStats.day = day;
-                gameStats.gameId = gr.getAppId();
+                gameStats.gameId = gr.getGameId();
                 gameStats.data = new HashMap<>();
             }
 

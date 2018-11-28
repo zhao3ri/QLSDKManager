@@ -37,7 +37,7 @@ public class BPlatformGameZoneService {
     }
 
     public Long save(BPlatformGameZone entity,String zoneIds){
-    	deleteAll(entity.getAppId(),entity.getPlatformId());
+    	deleteAll(entity.getGameId(),entity.getPlatformId());
     	String zoneId [] = StringUtils.split(zoneIds, ",");
     	for (String string : zoneId) {
     		entity.setZoneId(string);
@@ -48,8 +48,8 @@ public class BPlatformGameZoneService {
 
     private void deleteAll(Long appId, Integer platformId) {
     	MapBean mb = new MapBean();
-    	mb.put("appId", appId);
-    	mb.put("platformId", platformId);
+    	mb.put(MapBean.GAME_ID, appId);
+    	mb.put(MapBean.PLATFORM_ID, platformId);
     	bPlatformGameZoneDao.delete("BPlatformGameZone.deleteAll", mb);
 	}
 

@@ -15,9 +15,9 @@
         	<input type="hidden" id="checkedIds" name="checkedIds" value="${checkedIds }"/>
 	        	<div class="form-inline popover-show panel-body list_toolbar">
 		        	<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">  
-			          	<select class="form-control" name="appId"  placeholder="请选择游戏" id="appNameSel">
+			          	<select class="form-control" name="gameId"  placeholder="请选择游戏" id="appNameSel">
 							<s:iterator value="allGames" var="item">
-								<option value="${item.id}" <c:if test="${item.id == appId }">selected</c:if>>${item.appName }</option>
+								<option value="${item.id}" <c:if test="${item.id == gameId }">selected</c:if>>${item.gameName }</option>
 							</s:iterator>
 						</select>	 
 			        </div>
@@ -113,20 +113,20 @@
 		});
 		
 		function selectZone(){
-			var appId = $("#appNameSel").val();
-			if($.trim(appId) == ""){
+			var gameId = $("#appNameSel").val();
+			if($.trim(gameId) == ""){
 				errorTip("请先选择游戏！");
 				return;
 			}
-			art.dialog.open("${ctx}/report/report_getZone.shtml?appId="+appId, {title:'筛选',id:'addBox',fixed:true,lock:true,background:'#000',opacity:0,height:'60%',width:'60%',fited:true
+			art.dialog.open("${ctx}/report/report_getZone.shtml?gameId="+gameId, {title:'筛选',id:'addBox',fixed:true,lock:true,background:'#000',opacity:0,height:'60%',width:'60%',fited:true
 				
 			});
 		}
 		
 		function view(uid,platformId){
-			var appId = $("#appNameSel").val();
+			var gameId = $("#appNameSel").val();
 			var selectRange = $("#selectRange").val();
-			location.assign("/bOrder/bOrder_list.shtml?BOrder.status=2&BOrder.notifyStatus=2&BOrder.uid=" + uid + "&BOrder.platformId=" + platformId + "&BOrder.appId=" + appId )
+			location.assign("/bOrder/bOrder_list.shtml?BOrder.status=2&BOrder.notifyStatus=2&BOrder.uid=" + uid + "&BOrder.platformId=" + platformId + "&BOrder.gameId=" + gameId )
 		}
 	</script>
 </body>

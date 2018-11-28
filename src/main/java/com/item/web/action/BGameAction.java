@@ -42,8 +42,8 @@ public class BGameAction extends Struts2Action{
 		if(game!=null){
 			if(game.getId()!=null)
 				mb.put("id", game.getId());
-			if(StringUtils.isNotBlank(game.getAppName()))
-				mb.put("appName", game.getAppName());
+			if(StringUtils.isNotBlank(game.getGameName()))
+				mb.put(MapBean.GAME_NAME, game.getGameName());
 			if(game.getServiceTime()!=null)
 				mb.put("serviceTime", game.getServiceTime());
 		}
@@ -55,7 +55,7 @@ public class BGameAction extends Struts2Action{
         if(game!=null){
         	
         	MapBean mb = new MapBean();
-        	mb.put("appName", game.getAppName());
+        	mb.put(MapBean.GAME_NAME, game.getGameName());
         	mb.put("exceptId", game.getId() == null ? -1 : game.getId());
         	if (gameService.count(mb) > 0) {
         		 addActionMessage("游戏名称不能重复！");
@@ -68,7 +68,7 @@ public class BGameAction extends Struts2Action{
                 addActionMessage("修改信息成功");
             }else{
             	game.setId(Long.valueOf(RandomTool.randomAppId()));
-            	game.setAppName(game.getAppName());
+            	game.setGameName(game.getGameName());
             	game.setCreateTime(new Date());
             	game.setSecretKey(RandomTool.randomSecretKey());
             	game.setServiceTime(game.getServiceTime());

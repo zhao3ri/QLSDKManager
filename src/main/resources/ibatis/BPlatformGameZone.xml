@@ -16,8 +16,8 @@
     		<isNotNull prepend="and" property="platformId">
     			a.`platformId`=#platformId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			a.`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			a.`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="zoneId">
     			a.`zoneId`=#zoneId#
@@ -41,15 +41,15 @@
         SELECT
 	  		a.`id`,
 			a.`platformId`,
-			a.`appId`,
+			a.gameId,
 			a.`zoneId`,
 			b.platformName AS platformName,
 			c.zoneName AS zoneName,
-			d.appName AS appName
+			d.gameName AS gameName
 		FROM b_platform_game_zone AS a
-		JOIN b_game AS d ON d.id=a.appId  
+		JOIN b_game AS d ON d.id=a.gameId
 		JOIN b_platform AS b ON a.platformId = b.id
-		JOIN b_game_zone AS c ON a.appId = c.appId AND a.zoneId = c.zoneId
+		JOIN b_game_zone AS c ON a.gameId = c.gameId AND a.zoneId = c.zoneId
         <include refid="BPlatformGameZone.Where"/>
         <isNotNull property="orderby">
         	ORDER BY $orderby$
@@ -60,9 +60,9 @@
     <select id="BPlatformGameZone.count" resultClass="Long" parameterClass="mb">
         SELECT COUNT(1)
 		FROM b_platform_game_zone AS a
-		JOIN b_game AS d ON d.id=a.appId  
+		JOIN b_game AS d ON d.id=a.gameId
 		JOIN b_platform AS b ON a.platformId = b.id
-		JOIN b_game_zone AS c ON a.appId = c.appId AND a.zoneId = c.zoneId
+		JOIN b_game_zone AS c ON a.gameId = c.gameId AND a.zoneId = c.zoneId
         <include refid="BPlatformGameZone.Where"/>
     </select>
 
@@ -70,13 +70,13 @@
         SELECT
 	  		a.`id`,
 			a.`platformId`,
-			a.`appId`,
+			a.gameId,
 			a.`zoneId`,
 			b.platformName,
 			c.zoneName
 		FROM b_platform_game_zone AS a 
 		JOIN b_platform AS b ON a.platformId = b.id
-		JOIN b_game_zone AS c ON a.appId = c.appId AND a.zoneId = c.zoneId
+		JOIN b_game_zone AS c ON a.gameId = c.gameId AND a.zoneId = c.zoneId
         <include refid="BPlatformGameZone.Where"/>
         <isNotNull property="orderby">
              ORDER BY $orderby$
@@ -91,7 +91,7 @@
         	a.zoneId,
         	b.zoneName 
         FROM b_platform_game_zone AS a 
-        JOIN b_game_zone AS b ON a.appId = b.appId AND a.zoneId = b.zoneId 
+        JOIN b_game_zone AS b ON a.gameId = b.gameId AND a.zoneId = b.zoneId
         <include refid="BPlatformGameZone.Where"/> 
         GROUP BY a.zoneId;
     </select>
@@ -110,7 +110,7 @@
         SELECT
 	   		`id`,
 			`platformId`,
-			`appId`,
+			gameId,
 			`zoneId`
 		FROM b_platform_game_zone
 		WHERE
@@ -120,11 +120,11 @@
     <insert id="BPlatformGameZone.save" parameterClass="bPlatformGameZone">
         INSERT INTO b_platform_game_zone(
         	`platformId`,
-			`appId`,
+			gameId,
 			`zoneId`
         )VALUES(
         	#platformId#,
-			#appId#,
+			#gameId#,
 			#zoneId#
         )
         <selectKey resultClass="Long" keyProperty="id">
@@ -138,8 +138,8 @@
 	    		<isNotNull prepend="," property="platformId">
 					`platformId`=#platformId#
 				</isNotNull>
-	    		<isNotNull prepend="," property="appId">
-					`appId`=#appId#
+	    		<isNotNull prepend="," property="gameId">
+					`gameId`=#gameId#
 				</isNotNull>
 	    		<isNotNull prepend="," property="zoneId">
 					`zoneId`=#zoneId#
@@ -158,7 +158,7 @@
     <delete id="BPlatformGameZone.deleteAll" parameterClass="mb">
 		DELETE FROM b_platform_game_zone
 		WHERE
-			`appId`=#appId# AND `platformId`=#platformId#
+			gameId=#gameId# AND `platformId`=#platformId#
     </delete>
     
     	<!-- 获取指定id对应的数据  -->

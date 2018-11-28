@@ -19,7 +19,7 @@
 				    <input  class="form-control" type="text"  placeholder="游戏标识" name="game.id" value="${game.id }"/>
 		        </div>
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-				    <input  class="form-control" type="text"  placeholder="游戏名称" name="game.appName" value="${game.appName }"/>
+				    <input  class="form-control" type="text"  placeholder="游戏名称" name="game.gameName" value="${game.gameName }"/>
 		        </div>
 	      		 <div class="form-group width_btn">
 	          		<button  type="button" class="btn  btn-primary " onclick="search();"><i class="icon-search"></i> 搜索</button>
@@ -49,7 +49,7 @@
 							<tr>
 								<th><input name="checkedIds" class="checkedIds" value="<s:property value="id"/>" type="checkbox"/></th>
 								<td><s:property value="id"/></td>
-								<td><s:property value="appName"/></td>
+								<td><s:property value="gameName"/></td>
 								<td><s:property value="secretKey"/></td>
 								<td><s:date name="#page.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
 								<td><s:date name="#page.serviceTime" format="yyyy-MM-dd"/></td>

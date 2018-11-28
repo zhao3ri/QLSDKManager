@@ -36,9 +36,9 @@ public class BGamezoneAction extends Struts2Action{
 	private List<Gamezone> gamezones;
 	private Game game;
 	private Integer keepSearchCondition;
-	private Long appId;
+	private Long gameId;
 	public String list(){
-		gamezones = gamezoneService.getGamezoneByappId(appId);
+		gamezones = gamezoneService.getGamezoneByGameId(gameId);
 		
 		gamezone = InitSearchCondition.initEntity(gamezone, keepSearchCondition, "gamezone");
 		page = InitSearchCondition.initPage(page, keepSearchCondition, "gamezone");
@@ -50,7 +50,7 @@ public class BGamezoneAction extends Struts2Action{
     }
 	
 	public void getGameZonesAsync(){
-		gamezones = gamezoneService.getGamezoneByappId(appId);
+		gamezones = gamezoneService.getGamezoneByGameId(gameId);
 		try {
 			Struts2Utils.getResponse().getWriter().write(JsonUtil.toJsonString(gamezones));
 		} catch (IOException e) {
@@ -68,8 +68,8 @@ public class BGamezoneAction extends Struts2Action{
 				mb.put("zoneId", gamezone.getZoneId());
 			if(gamezone.getZoneName()!=null&&"".equals(gamezone.getZoneName())==false)
 				mb.put("zoneName", gamezone.getZoneName());
-			if(gamezone.getAppId()!=null)
-				mb.put("appId", gamezone.getAppId());
+			if(gamezone.getGameId()!=null)
+				mb.put(MapBean.GAME_ID, gamezone.getGameId());
 		}
 		mb.put("orderby","id desc");
 		return mb;
@@ -78,7 +78,7 @@ public class BGamezoneAction extends Struts2Action{
 	public String save(){
         if(gamezone!=null){
         	MapBean mb = new MapBean();
-        	mb.put("appId", gamezone.getAppId());
+        	mb.put(MapBean.GAME_ID, gamezone.getGameId());
         	mb.put("zoneId", gamezone.getZoneId());
         	mb.put("exceptId", gamezone.getId()==null ? -1 : gamezone.getId());
         	if (gamezoneService.count(mb) > 0) {
@@ -92,7 +92,7 @@ public class BGamezoneAction extends Struts2Action{
             }else{
             	gamezone.setZoneId(gamezone.getZoneId());
             	gamezone.setZoneName(gamezone.getZoneName());
-            	gamezone.setAppId(gamezone.getAppId());
+            	gamezone.setGameId(gamezone.getGameId());
             	gamezoneService.save(gamezone);
                 addActionMessage("保存信息成功");
             }
@@ -175,12 +175,12 @@ public class BGamezoneAction extends Struts2Action{
 		this.game = game;
 	}
 
-	public Long getAppId() {
-		return appId;
+	public Long getGameId() {
+		return gameId;
 	}
 
-	public void setAppId(Long appId) {
-		this.appId = appId;
+	public void setGameId(Long gameId) {
+		this.gameId = gameId;
 	}
 
 	public List<Gamezone> getGamezones() {

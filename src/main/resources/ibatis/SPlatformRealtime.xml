@@ -16,8 +16,8 @@
     		<isNotNull prepend="and" property="clientType">
     			`clientType`=#clientType#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="platformId">
     			`platformId`=#platformId#
@@ -47,7 +47,7 @@
         SELECT
 	  		`id`,
 			`clientType`,
-			`appId`,
+			gameId,
 			`platformId`,
 			`statDate`,
 			`onlineUsers`,
@@ -74,7 +74,7 @@
         SELECT
 	 		`id`,
 			`clientType`,
-			`appId`,
+			gameId,
 			`platformId`,
 			`statDate`,
 			`onlineUsers`,
@@ -96,7 +96,7 @@
     <select id="SPlatformRealtime.listGroupBy" resultClass="sPlatformRealtime" parameterClass="mb">
         SELECT
 			`statDate`,
-			appId,
+			gameId,
 	        platformId,
 			SUM(`onlineUsers`) AS onlineUsers,
 			SUM(`roleUsers`) AS roleUsers,
@@ -122,7 +122,7 @@
         SELECT
 	   		`id`,
 			`clientType`,
-			`appId`,
+			gameId,
 			`platformId`,
 			`statDate`,
 			`onlineUsers`,
@@ -139,7 +139,7 @@
     <insert id="SPlatformRealtime.save" parameterClass="sPlatformRealtime">
         INSERT INTO s_platform_realtime(
         	`clientType`,
-			`appId`,
+			gameId,
 			`platformId`,
 			`statDate`,
 			`onlineUsers`,
@@ -150,7 +150,7 @@
 		    `newUsers`
         )VALUES(
         	#clientType#,
-			#appId#,
+			#gameId#,
 			#platformId#,
 			#statDate#,
 			#onlineUsers#,
@@ -171,8 +171,8 @@
 	    		<isNotNull prepend="," property="clientType">
 					`clientType`=#clientType#
 				</isNotNull>
-	    		<isNotNull prepend="," property="appId">
-					`appId`=#appId#
+	    		<isNotNull prepend="," property="gameId">
+					`gameId`=#gameId#
 				</isNotNull>
 	    		<isNotNull prepend="," property="platformId">
 					`platformId`=#platformId#

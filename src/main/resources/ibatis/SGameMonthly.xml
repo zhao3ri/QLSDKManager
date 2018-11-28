@@ -16,8 +16,8 @@
             <isNotNull prepend="and" property="clientType">
                 sg.`clientType`=#clientType#
             </isNotNull>
-            <isNotNull prepend="and" property="appId">
-                sg.`appId`=#appId#
+            <isNotNull prepend="and" property="gameId">
+                sg.`gameId`=#gameId#
             </isNotNull>
             <isNotNull prepend="and" property="statDate">
                 sg.`statDate`=#statDate#
@@ -25,10 +25,10 @@
             <isNotNull prepend="and" property="yearMonth">
                 sg.`yearMonth`=#yearMonth#
             </isNotNull>
-            <isNotEmpty prepend="AND" property="appIds">
-                sg.appId IN
-                <iterate property="appIds" open="(" close=")" conjunction=",">
-                    #appIds[]#
+            <isNotEmpty prepend="AND" property="gameIds">
+                sg.gameId IN
+                <iterate property="gameIds" open="(" close=")" conjunction=",">
+                    #gameIds[]#
                 </iterate>
             </isNotEmpty>
         </dynamic>
@@ -36,7 +36,7 @@
 
     <select id="sGameMonthly.summary" resultClass="sGameMonthly" parameterClass="mb">
         SELECT
-        appId AS appId,
+        gameId AS gameId,
         clientType AS clientType,
         totalRoleUser AS totalRoleUser,
         totalRegUser AS totalRegUser,
@@ -52,7 +52,7 @@
 
     <select id="sGameMonthly.stat" resultClass="sGameMonthly" parameterClass="mb">
         SELECT
-        sd.appId as appId,
+        sd.gameId as gameId,
         sd.clientType as clientType,
         SUM(sd.roleUsers) as totalRoleUser,
         SUM(sd.regUsers) as totalRegUser,
@@ -68,8 +68,8 @@
             <isNotNull prepend="and" property="clientType">
                 sd.clientType=#clientType#
             </isNotNull>
-            <isNotNull prepend="and" property="appId">
-                sd.appId=#appId#
+            <isNotNull prepend="and" property="gameId">
+                sd.gameId=#gameId#
             </isNotNull>
             <isNotEmpty prepend="and" property="statDate">
                 sd.statDate=#statDate#
@@ -85,8 +85,8 @@
 
     <!--<insert id="sGameMonthly.save" parameterClass="sGameMonthly">-->
     <!--INSERT INTO-->
-    <!--s_game_monthly(appId,clientType,yearMonth,totalRoleUser,totalRegUser,devices,payAmount,payTimes,payUsers,activeUsers,newUserPayAmount,newUserPays,monthLoginRoles)-->
-    <!--VALUES(#appId#,#clientType#,#yearMonth#,#totalRoleUser#,#totalRegUser#,#devices#,#payAmount#,#payTimes#,#payUsers#,#activeUsers#,#newUserPayAmount#,#newUserPays#,#monthLoginRoles#)-->
+    <!--s_game_monthly(gameId,clientType,yearMonth,totalRoleUser,totalRegUser,devices,payAmount,payTimes,payUsers,activeUsers,newUserPayAmount,newUserPays,monthLoginRoles)-->
+    <!--VALUES(#gameId#,#clientType#,#yearMonth#,#totalRoleUser#,#totalRegUser#,#devices#,#payAmount#,#payTimes#,#payUsers#,#activeUsers#,#newUserPayAmount#,#newUserPays#,#monthLoginRoles#)-->
     <!--<selectKey resultClass="Long" keyProperty="id">-->
     <!--select @@IDENTITY as `id`-->
     <!--</selectKey>-->

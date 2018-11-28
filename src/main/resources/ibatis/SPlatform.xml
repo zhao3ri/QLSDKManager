@@ -16,13 +16,13 @@
 			<isNotNull prepend="AND" property="clientType">
 				sp.clientType=#clientType#
 			</isNotNull>
-			<isNotNull prepend="AND" property="appId">
-				sp.appId=#appId#
+			<isNotNull prepend="AND" property="gameId">
+				sp.gameId=#gameId#
 			</isNotNull>
-			<isNotEmpty prepend="AND" property="appIds">
-		          <![CDATA[ sp.appId in ]]>
-		          <iterate property="appIds" conjunction="," open="(" close=")">
-		              #appIds[]#
+			<isNotEmpty prepend="AND" property="gameIds">
+		          <![CDATA[ sp.gameId in ]]>
+		          <iterate property="gameIds" conjunction="," open="(" close=")">
+		              #gameIds[]#
 		          </iterate>
 	    	</isNotEmpty>
 			<isNotNull prepend="AND" property="statDate">
@@ -62,13 +62,13 @@
 			SUM(sp.devices) as devices,
 			SUM(sp.activeUsers) as activeUsers,
 			bp.platformName as platformName,
-			bg.appName as appName
+			bg.gameName as gameName
 		FROM s_platform_history sp
 		JOIN b_platform bp ON sp.platformId=bp.id
-		JOIN b_game bg ON sp.appId=bg.id
+		JOIN b_game bg ON sp.gameId=bg.id
 		<include refid="SPlatform.where" />
-		GROUP BY bp.platformName,bg.appName
-		ORDER BY bg.appName,bp.platformName,sp.clientType
+		GROUP BY bp.platformName,bg.gameName
+		ORDER BY bg.gameName,bp.platformName,sp.clientType
 	</select>
 
 	<select id="SPlatform.maxDateDataPlatform" resultClass="sPlatform"
@@ -85,7 +85,7 @@
 			SUM(sp.activeUsers) as activeUsers
 		FROM s_platform_history sp
 		JOIN b_platform bp ON sp.platformId=bp.id
-		JOIN b_game bg ON sp.appId=bg.id
+		JOIN b_game bg ON sp.gameId=bg.id
 		<include refid="SPlatform.where" />
 		GROUP BY bp.platformName
 	</select>
@@ -93,7 +93,7 @@
 	<select id="SPlatform.getLastDayAppData" resultClass="sPlatform"
 			parameterClass="mb">
 		SELECT
-		sp.appId as appId,
+		sp.gameId as gameId,
 		sp.platformId as platformId,
 		SUM(sp.payAmount) as payAmount,
 		SUM(sp.payTimes) as payTimes,
@@ -104,11 +104,11 @@
 		SUM(sp.devices) as devices,
 		SUM(sp.activeUsers) as activeUsers,
 		bp.platformName as platformName,
-		bg.appName as appName
+		bg.gameName as gameName
 		FROM s_platform_history sp
 		JOIN s_platform_daily sd ON sp.platformId=sd.platformId
 		JOIN b_platform bp ON sp.platformId=bp.id
-		JOIN b_game bg ON sp.appId=bg.id
+		JOIN b_game bg ON sp.gameId=bg.id
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="id">
 				sp.id=#id#
@@ -116,13 +116,13 @@
 			<isNotNull prepend="AND" property="clientType">
 				sp.clientType=#clientType#
 			</isNotNull>
-			<isNotNull prepend="AND" property="appId">
-				sp.appId=#appId#
+			<isNotNull prepend="AND" property="gameId">
+				sp.gameId=#gameId#
 			</isNotNull>
-			<isNotEmpty prepend="AND" property="appIds">
-				<![CDATA[ sp.appId in ]]>
-				<iterate property="appIds" conjunction="," open="(" close=")">
-					#appIds[]#
+			<isNotEmpty prepend="AND" property="gameIds">
+				<![CDATA[ sp.gameId in ]]>
+				<iterate property="gameIds" conjunction="," open="(" close=")">
+					#gameIds[]#
 				</iterate>
 			</isNotEmpty>
 			<isNotNull prepend="AND" property="statDate">
@@ -132,8 +132,8 @@
 				sp.platformId=#platformId#
 			</isNotNull>
 		</dynamic>
-		GROUP BY bp.platformName,bg.appName
-		ORDER BY bg.appName,bp.platformName,sp.clientType
+		GROUP BY bp.platformName,bg.gameName
+		ORDER BY bg.gameName,bp.platformName,sp.clientType
 	</select>
 
 	<select id="SPlatform.getLastDayPlatformData" resultClass="sPlatform"
@@ -151,7 +151,7 @@
 		FROM s_platform_history sp
 		JOIN s_platform_daily sd ON sp.platformId=sd.platformId
 		JOIN b_platform bp ON sp.platformId=bp.id
-		JOIN b_game bg ON sp.appId=bg.id
+		JOIN b_game bg ON sp.gameId=bg.id
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="id">
 				sp.id=#id#
@@ -159,13 +159,13 @@
 			<isNotNull prepend="AND" property="clientType">
 				sp.clientType=#clientType#
 			</isNotNull>
-			<isNotNull prepend="AND" property="appId">
-				sp.appId=#appId#
+			<isNotNull prepend="AND" property="gameId">
+				sp.gameId=#gameId#
 			</isNotNull>
-			<isNotEmpty prepend="AND" property="appIds">
-				<![CDATA[ sp.appId in ]]>
-				<iterate property="appIds" conjunction="," open="(" close=")">
-					#appIds[]#
+			<isNotEmpty prepend="AND" property="gameIds">
+				<![CDATA[ sp.gameId in ]]>
+				<iterate property="gameIds" conjunction="," open="(" close=")">
+					#gameIds[]#
 				</iterate>
 			</isNotEmpty>
 			<isNotNull prepend="AND" property="statDate">

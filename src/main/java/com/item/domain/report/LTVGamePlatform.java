@@ -17,7 +17,7 @@ public class LTVGamePlatform implements Serializable {
     private int registUser ;
     private Byte clientType;
 
-    private Long appId;
+    private Long gameId;
 
     private String zoneId;
 
@@ -91,12 +91,12 @@ public class LTVGamePlatform implements Serializable {
         this.clientType = clientType;
     }
 
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long appId) {
+        this.gameId = appId;
     }
 
     public String getZoneId() {

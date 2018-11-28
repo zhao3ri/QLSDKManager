@@ -13,8 +13,8 @@
             <isNotNull prepend="and" property="clientType">
                 sg.clientType=#clientType#
             </isNotNull>
-            <isNotNull prepend="and" property="appId">
-                sg.appId=#appId#
+            <isNotNull prepend="and" property="gameId">
+                sg.gameId=#gameId#
             </isNotNull>
             <isNotEmpty prepend="and" property="statDate">
                 sg.statDate=#statDate#
@@ -22,10 +22,10 @@
             <isNotEmpty prepend="and" property="like">
                 sg.statDate LIKE '$like$%'
             </isNotEmpty>
-            <isNotEmpty prepend="AND" property="appIds">
-                sg.appId IN
-                <iterate property="appIds" open="(" close=")" conjunction=",">
-                    #appIds[]#
+            <isNotEmpty prepend="AND" property="gameIds">
+                sg.gameId IN
+                <iterate property="gameIds" open="(" close=")" conjunction=",">
+                    #gameIds[]#
                 </iterate>
             </isNotEmpty>
         </dynamic>
@@ -33,7 +33,7 @@
 
     <select id="SGame.summary" resultClass="sGame" parameterClass="mb">
         SELECT
-        sg.appId as appId,
+        sg.gameId as gameId,
         sg.clientType as clientType,
         SUM(sg.totalRoleUser) as totalRoleUser,
         SUM(sg.totalRegUser) as totalRegUser,
@@ -44,7 +44,7 @@
         SUM(sg.payUsers) as payUsers,
         SUM(sd.newUserPays) AS totalNewPayUser
         FROM
-        s_game_history sg JOIN s_game_daily sd ON (sg.appId=sd.appId AND sg.clientType=sd.clientType AND
+        s_game_history sg JOIN s_game_daily sd ON (sg.gameId=sd.gameId AND sg.clientType=sd.clientType AND
         sg.statDate=sd.statDate)
         <include refid="SGame.Where"/>
         <isNotEmpty property="groupby">
@@ -54,7 +54,7 @@
 
     <select id="SGame.stat" resultClass="sGame" parameterClass="mb">
         SELECT
-        sg.appId as appId,
+        sg.gameId as gameId,
         sg.clientType as clientType,
         sg.statDate as statDate,
         sg.totalRoleUser as totalRoleUser,
@@ -66,7 +66,7 @@
         sg.payUsers as payUsers,
         sd.newUserPays AS totalNewPayUser
         FROM
-        s_game_history sg JOIN s_game_daily sd ON (sg.appId=sd.appId AND sg.clientType=sd.clientType AND
+        s_game_history sg JOIN s_game_daily sd ON (sg.gameId=sd.gameId AND sg.clientType=sd.clientType AND
         sg.statDate=sd.statDate)
         <include refid="SGame.Where"/>
         <isNotEmpty property="groupby">

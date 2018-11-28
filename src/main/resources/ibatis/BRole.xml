@@ -13,8 +13,8 @@
     		<isNotNull prepend="and" property="clientType">
     			a.`clientType`=#clientType#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			a.`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			a.`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="platformId">
     			a.`platformId`=#platformId#
@@ -44,10 +44,10 @@
     <select id="BRole.page" parameterClass="mb" resultClass="bRole">
         SELECT
 	   		a.*,
-	   		b.appName,
+	   		b.gameName,
 	   		c.platformName
 		FROM b_role AS a 
-		JOIN b_game AS b ON a.appId = b.id
+		JOIN b_game AS b ON a.gameId = b.id
 		JOIN b_platform AS c ON a.platformId = c.id
         <include refid="BRole.Where"/>
         <isNotNull property="orderby">
@@ -60,7 +60,7 @@
         SELECT 
         	COUNT(1)
 		FROM b_role AS a
-		JOIN b_game AS b ON a.appId = b.id
+		JOIN b_game AS b ON a.gameId = b.id
 		JOIN b_platform AS c ON a.platformId = c.id
         <include refid="BRole.Where"/>
     </select>
@@ -68,10 +68,10 @@
     <select id="BRole.list" resultClass="bRole" parameterClass="mb">
         SELECT
 	   		a.*,
-	   		b.appName,
+	   		b.gameName,
 	   		c.platformName
 		FROM b_role AS a 
-		JOIN b_game AS b ON a.appId = b.id
+		JOIN b_game AS b ON a.gameId = b.id
 		JOIN b_platform AS c ON a.platformId = c.id
         <include refid="BRole.Where"/>
         <isNotNull property="orderby">

@@ -1,7 +1,6 @@
 package com.item.web.action;
 
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,7 +22,6 @@ import com.item.service.SRechargeDistributeDailyService;
 import com.item.service.SRechargeHourlyService;
 import com.item.service.SRoleDailyService;
 import com.item.service.SysGameManagerService;
-import com.item.utils.CookieUtils;
 import com.item.utils.DateUtils;
 import com.item.utils.ExcelExport;
 
@@ -35,9 +33,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.item.service.RoleReportService;
-
-import core.module.utils.Struts2Utils;
-import core.module.web.Struts2Action;
 
 public class RoleReportAction extends BaseAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleReportAction.class);
@@ -60,7 +55,7 @@ public class RoleReportAction extends BaseAction {
 
     private List<Game> games;
     private List<SRechargeHourly> rechargeHourlies;
-    private Long appId;
+    private Long gameId;
     private Integer platformId;
     private String zoneId;
     private String uid;
@@ -75,7 +70,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.realTimeLogin(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.realTimeLogin(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -86,7 +81,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.dailyLogin(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -97,7 +92,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.online(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.online(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -107,7 +102,7 @@ public class RoleReportAction extends BaseAction {
     public void excelExportOnline() {
         try {
             ExcelExport ee = new ExcelExport();
-            roleReportService.excelExportOnline(ee, appId, clientType, platformId, zoneId, selectRange);
+            roleReportService.excelExportOnline(ee, gameId, clientType, platformId, zoneId, selectRange);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +113,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.onlineDaily(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.onlineDaily(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -128,7 +123,7 @@ public class RoleReportAction extends BaseAction {
     public void excelExportOnlineDaily() {
         try {
             ExcelExport ee = new ExcelExport();
-            roleReportService.excelExportOnlineDaily(ee, appId, clientType, platformId, zoneId, selectRange);
+            roleReportService.excelExportOnlineDaily(ee, gameId, clientType, platformId, zoneId, selectRange);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,7 +134,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.daily(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.daily(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -149,7 +144,7 @@ public class RoleReportAction extends BaseAction {
     public void excelExportDaily() {
         try {
             ExcelExport ee = new ExcelExport();
-            roleReportService.excelExportDaily(ee, appId, clientType, platformId, zoneId, selectRange);
+            roleReportService.excelExportDaily(ee, gameId, clientType, platformId, zoneId, selectRange);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,7 +155,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.playTime(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.playTime(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -171,7 +166,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.totalPlayTime(page, appId, clientType, platformId, zoneId, selectRange, roleName, uid);
+        result = roleReportService.totalPlayTime(page, gameId, clientType, platformId, zoneId, selectRange, roleName, uid);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -188,7 +183,7 @@ public class RoleReportAction extends BaseAction {
             selectRange = DateUtils.format(calendar.getTime(), "yyyy-MM-dd") + " 至 " + DateUtils.format(calendar.getTime(), "yyyy-MM-dd");
         }
         MapBean mb = new MapBean();
-        mb.put("appId", appId);
+        mb.put("gameId", gameId);
         mb.put("platformId", platformId);
         mb.put("zoneId", zoneId);
         mb.put("startDate", selectRange.split("至")[0].trim());
@@ -202,7 +197,7 @@ public class RoleReportAction extends BaseAction {
             return null;
         }
 
-        result = roleReportService.dailyLogin(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -217,8 +212,8 @@ public class RoleReportAction extends BaseAction {
             selectRange = DateUtils.format(new Date(), "yyyy-MM-dd");
 
         MapBean mb = new MapBean();
-        mb.put("appId", appId);
-        mb.put("platformId", platformId);
+        mb.put(MapBean.GAME_ID, gameId);
+        mb.put(MapBean.PLATFORM_ID, platformId);
         mb.put("zoneId", zoneId);
         mb.put("statDate", selectRange);
         rechargeHourlies = rechargeHourlyService.list(mb);
@@ -237,8 +232,8 @@ public class RoleReportAction extends BaseAction {
         }
 
         MapBean mb = new MapBean();
-        mb.put("appId", appId);
-        mb.put("platformId", platformId);
+        mb.put(MapBean.GAME_ID, gameId);
+        mb.put(MapBean.PLATFORM_ID, platformId);
         mb.put("zoneId", zoneId);
         mb.put("statStartDate", selectRange.split("至")[0].trim());
         mb.put("statEndDate", selectRange.split("至")[1].trim());
@@ -259,7 +254,7 @@ public class RoleReportAction extends BaseAction {
             return null;
         }
 
-        result = roleReportService.dailyLogin(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -270,7 +265,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData())
             return null;
 
-        result = roleReportService.dailyLogin(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange"))
             selectRange = result.get("selectRange").toString();
         return "keepRoles";
@@ -280,7 +275,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData())
             return null;
 
-        result = roleReportService.dailyLogin(appId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange"))
             selectRange = result.get("selectRange").toString();
         return "lossRoles";
@@ -291,8 +286,8 @@ public class RoleReportAction extends BaseAction {
         boolean success = super.initData();
         if (success) {
             games = getCurrentIdentityGames();
-            if (null == appId) {
-                appId = getFirstGameId();
+            if (null == gameId) {
+                gameId = getFirstGameId();
             }
         }
         return success;
@@ -306,12 +301,12 @@ public class RoleReportAction extends BaseAction {
         this.games = games;
     }
 
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public Integer getPlatformId() {

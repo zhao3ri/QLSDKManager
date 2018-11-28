@@ -27,7 +27,7 @@
 						<div  class="col-lg-6">
 		        			<dt>游戏名称：</dt>
 		        			<dd>
-								<s:property value="bOrder.appName"/>
+								<s:property value="bOrder.gameName"/>
 							</dd>
 		        		</div>
 					</div>

@@ -25,14 +25,14 @@
 		        </div>
 
 		       <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入游戏">
-               				    <input  class="form-control" type="text"  placeholder="游戏名称" name="BPlatformApp.appName" value="${BPlatformApp.appName}"/>
+               				    <input  class="form-control" type="text"  placeholder="游戏名称" name="BPlatformApp.gameName" value="${BPlatformApp.gameName}"/>
                		        </div>
 
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-		          	<select class="form-control" name="BPlatformApp.appId"  data-original-title="" title="">
+		          	<select class="form-control" name="BPlatformApp.gameId"  data-original-title="" title="">
 									<option value="">==请选择游戏==</option>
 									<s:iterator value="games" var="item">
-										<option value="${item.id}" <c:if test="${item.id==bPlatformApp.appId}">selected</c:if>>${item.appName }</option>
+										<option value="${item.id}" <c:if test="${item.id==bPlatformApp.gameId}">selected</c:if>>${item.gameName }</option>
 									</s:iterator>									
 							</select>
 		        </div>
@@ -65,7 +65,7 @@
 							<tr>
 								<td><s:property value="id"/></td>
 								<td><s:property value="platformName"/></td>
-								<td><s:property value="appName"/></td>
+								<td><s:property value="gameName"/></td>
 								<td><s:property value="discount"/></td>
 								<td style="overflow: scroll;white-space: nowrap;" title="<s:property value="configParams"/>"><s:property value="configParams"/></td>
 								<td><s:date name="#page.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
@@ -75,7 +75,7 @@
 					                  	<ul class="dropdown-menu" identity="menu">
 											<li><a href="bPlatformApp_handle.shtml?id=<s:property value="id"/>">修改</a></li>
 											<li><a href="javascript:confirmAction('bPlatformApp_delete.shtml?id=<s:property value="id"/>','您确认删除？');">删除</a></li>
-					                  		<li><a href="/bPlatformGameZone/bPlatformGameZone_handle.shtml?BPlatformGameZone.appId=${appId }&BPlatformGameZone.platformId=${platformId}">分区管理</a></li>
+					                  		<li><a href="/bPlatformGameZone/bPlatformGameZone_handle.shtml?BPlatformGameZone.gameId=${gameId }&BPlatformGameZone.platformId=${platformId}">分区管理</a></li>
 					                  	</ul>
 					                </div>
 								</td>

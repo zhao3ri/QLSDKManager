@@ -11,8 +11,8 @@
 			<isNotNull prepend="AND" property="uid">
 				a.uid=#uid#
 			</isNotNull>
-			<isNotNull prepend="AND" property="appId">
-				a.appid=#appId#
+			<isNotNull prepend="AND" property="gameId">
+				a.gameId=#gameId#
 			</isNotNull>
 			<isNotEmpty prepend="AND" property="platformId">
 				a.platformid=#platformId#

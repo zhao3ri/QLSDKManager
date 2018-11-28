@@ -27,7 +27,7 @@
 						<div class="form-group clearfix" >
 							<label  class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>游戏名称：</label>
 							<div class=" col-sm-9 col-lg-5">
-							<input class="form-control" type="text" id="game.appName" name="game.appName" value="${game.appName}"  placeholder="请输入游戏名称"/>
+							<input class="form-control" type="text" id="game.gameName" name="game.gameName" value="${game.gameName}"  placeholder="请输入游戏名称"/>
 							</div>
 						</div>
 						<div class="form-group clearfix" >
@@ -56,7 +56,7 @@
 			appendValidate();
 			$("#inputForm").validate({
 				rules: {
-					"game.appName":{required:true,maxlength:20},
+					"game.gameName":{required:true,maxlength:20},
 			        "game.serviceTime":{required:true}
 				}
 			});

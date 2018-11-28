@@ -1,6 +1,5 @@
 package com.item.web.action;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +13,6 @@ import com.item.service.*;
 import com.item.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 
 import com.item.constants.Constants;
 import com.item.domain.BPlatform;
@@ -34,8 +32,6 @@ import com.item.domain.report.GameClientReport;
 
 import core.module.orm.MapBean;
 import core.module.orm.Page;
-import core.module.utils.Struts2Utils;
-import core.module.web.Struts2Action;
 
 public class ReportAction extends BaseAction {
     private static final long serialVersionUID = 5645405406052360424L;
@@ -70,7 +66,7 @@ public class ReportAction extends BaseAction {
     private List<GameClientReport> gameClientReports = new ArrayList<GameClientReport>();
     private List<GameClientMonthlyReport> gameClientMonthlyReports = new ArrayList<GameClientMonthlyReport>();
     private List<Game> allGames;
-    private Long appId;
+    private Long gameId;
     private String selectRange;
     private List<Gamezone> gamezones;
     private List<BPlatformApp> platformApps;
@@ -79,7 +75,7 @@ public class ReportAction extends BaseAction {
     private String checkedIds;
     private String platformId;
     private List<BPlatform> platforms;
-    private List<Long> appIds;
+    private List<Long> gameIds;
     // 渠道分析总数Map
     private Map<Game, List<SPlatform>> iteratePlatformsMap = new HashMap<>();
     // 渠道分析月份Map
@@ -114,12 +110,12 @@ public class ReportAction extends BaseAction {
         boolean success = super.initData();
         if (success) {
             allGames = getCurrentIdentityGames();
-            appIds = getGameIds();
-            if (null == appId) {
-                appId = getFirstGameId();
+            gameIds = getGameIds();
+            if (null == gameId) {
+                gameId = getFirstGameId();
             }
         }
-        return true;
+        return success;
     }
 
     private boolean setDate(MapBean mb) {
@@ -141,16 +137,16 @@ public class ReportAction extends BaseAction {
         }
 
         MapBean mb = new MapBean();
-        mb.put("groupby", "appId,clientType");
+        mb.put("groupby", "gameId,clientType");
         boolean isMonStat = setDate(mb);
         for (Game game : allGames) {
             //年月有值
             if (isMonStat) {
                 GameClientMonthlyReport gameClientMonthlyReport = new GameClientMonthlyReport();
-                gameClientMonthlyReport.setAppId(game.getId());
-                gameClientMonthlyReport.setAppName(game.getAppName());
+                gameClientMonthlyReport.setGameId(game.getId());
+                gameClientMonthlyReport.setGameName(game.getGameName());
 
-                mb.put(MapBean.APP_ID, game.getId());
+                mb.put(MapBean.GAME_ID, game.getId());
                 setOSMonthlyReport(mb, Constants.CLIENT_ANDROID, gameClientMonthlyReport);
                 setOSMonthlyReport(mb, Constants.CLIENT_IOS, gameClientMonthlyReport);
 
@@ -158,10 +154,10 @@ public class ReportAction extends BaseAction {
 
             } else {
                 GameClientReport gameClientReport = new GameClientReport();
-                gameClientReport.setAppId(game.getId());
-                gameClientReport.setAppName(game.getAppName());
+                gameClientReport.setGameId(game.getId());
+                gameClientReport.setGameName(game.getGameName());
 
-                mb.put(MapBean.APP_ID, game.getId());
+                mb.put(MapBean.GAME_ID, game.getId());
                 //ANDROID
                 setOSReport(mb, Constants.CLIENT_ANDROID, gameClientReport);
                 //IOS
@@ -237,13 +233,13 @@ public class ReportAction extends BaseAction {
     }
 
     public String getChannelZone() {
-        platformApps = bPlatformAppService.getAllPlatform(appId);
-        gamezones = bGameService.getZones(appId);
+        platformApps = bPlatformAppService.getAllPlatform(gameId);
+        gamezones = bGameService.getZones(gameId);
         return "getChannelZone";
     }
 
     public String getZone() {
-        gamezones = bGameService.getZones(appId);
+        gamezones = bGameService.getZones(gameId);
         return "getZone";
     }
 
@@ -254,20 +250,20 @@ public class ReportAction extends BaseAction {
 
         MapBean mb = new MapBean();
         boolean isMonStat = setDate(mb);
-        mb.put("appIds", appIds);
+        mb.put("gameIds", gameIds);
         if (isMonStat) {
             sPlatformMonthliesApp = sPlatformMonthlyService.listApp(mb);
             sPlatformMonthliesPlatform = sPlatformMonthlyService.listPlatform(mb);
 
             for (SPlatformMonthly sPlatformMonthly : sPlatformMonthliesApp) {
-                if (iteratePlatformsMonthlyMap.get(sPlatformMonthly.getAppName()) == null) {
+                if (iteratePlatformsMonthlyMap.get(sPlatformMonthly.getGameName()) == null) {
                     List<SPlatformMonthly> thisSPlatformsMonthliesList = new ArrayList<SPlatformMonthly>();
                     thisSPlatformsMonthliesList.add(sPlatformMonthly);
-                    iteratePlatformsMonthlyMap.put(sPlatformMonthly.getAppName(), thisSPlatformsMonthliesList);
+                    iteratePlatformsMonthlyMap.put(sPlatformMonthly.getGameName(), thisSPlatformsMonthliesList);
                 } else {
-                    List<SPlatformMonthly> thisSPlatformsMonthliesList = iteratePlatformsMonthlyMap.get(sPlatformMonthly.getAppName());
+                    List<SPlatformMonthly> thisSPlatformsMonthliesList = iteratePlatformsMonthlyMap.get(sPlatformMonthly.getGameName());
                     thisSPlatformsMonthliesList.add(sPlatformMonthly);
-                    iteratePlatformsMonthlyMap.put(sPlatformMonthly.getAppName(), thisSPlatformsMonthliesList);
+                    iteratePlatformsMonthlyMap.put(sPlatformMonthly.getGameName(), thisSPlatformsMonthliesList);
                 }
             }
         } else {
@@ -284,7 +280,7 @@ public class ReportAction extends BaseAction {
         //初始化页面游戏数据
         for (Game game : allGames) {
             for (SPlatform sPlatform : sPlatformsApp) {
-                if (game.getAppName().equals(sPlatform.getAppName())) {
+                if (game.getGameName().equals(sPlatform.getGameName())) {
                     List<SPlatform> list;
                     if (iteratePlatformsMap.get(game) == null) {
                         list = new ArrayList<>();
@@ -310,7 +306,7 @@ public class ReportAction extends BaseAction {
         }
         MapBean mb = new MapBean();
         setDate(mb);
-        mb.put("appId", appId);
+        mb.put("gameId", gameId);
 
         if (type == null || type == 1) {                                                //type==1--- 区服总计--
             if (StringUtils.isNotBlank(yearMonthStr)) {
@@ -388,7 +384,7 @@ public class ReportAction extends BaseAction {
 //		platforms = bPlatformService.getAllPlatform();
 
         MapBean mb = new MapBean();
-        mb.put("appId", appId);
+        mb.put("gameId", gameId);
 //		mb.put("status", 2);
 //		mb.put("notifyStatus", 2);
         mb.put("platformId", platformId);
@@ -407,7 +403,7 @@ public class ReportAction extends BaseAction {
     public void rankExcelExport() {
         try {
             MapBean mb = new MapBean();
-            mb.put("appId", appId);
+            mb.put("gameId", gameId);
             mb.put("status", 2);
             mb.put("notifyStatus", 2);
             mb.put("platformId", platformId);
@@ -452,7 +448,7 @@ public class ReportAction extends BaseAction {
         }
 
         MapBean mb = new MapBean();
-        mb.put("appId", appId);
+        mb.put("gameId", gameId);
         mb.put("roleName", checkedIds);
 //		mb.put("status", 2);
 //		mb.put("notifyStatus", 2);
@@ -479,7 +475,7 @@ public class ReportAction extends BaseAction {
             }
 
             MapBean mb = new MapBean();
-            mb.put("appId", appId);
+            mb.put("gameId", gameId);
             mb.put("roleName", checkedIds);
             mb.put("status", 2);
             mb.put("notifyStatus", 2);
@@ -503,7 +499,7 @@ public class ReportAction extends BaseAction {
             int i = 1;
             for (SRoleRank item : ranks) {
                 List<Excel> e = new ArrayList<Excel>();
-                e.add(new Excel(item.getAppName(), 30));
+                e.add(new Excel(item.getGameName(), 30));
                 e.add(new Excel(idToName.get(String.valueOf(item.getPlatformId())), 30));
                 e.add(new Excel(item.getRoleName(), 30));
                 e.add(new Excel(DecimallFormatUtil.format((double) item.getAmount() / 100), 20));
@@ -543,12 +539,12 @@ public class ReportAction extends BaseAction {
         this.allGames = allGames;
     }
 
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public String getSelectRange() {
@@ -717,12 +713,12 @@ public class ReportAction extends BaseAction {
         this.pageRoleRank = pageRoleRank;
     }
 
-    public void setAppIds(List<Long> appIds) {
-        this.appIds = appIds;
+    public void setGameIds(List<Long> gameIds) {
+        this.gameIds = gameIds;
     }
 
-    public List<Long> getAppIds() {
-        return appIds;
+    public List<Long> getGameIds() {
+        return gameIds;
     }
 
     public String getPlatformId() {

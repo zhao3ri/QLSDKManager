@@ -11,8 +11,8 @@
     		<isNotNull prepend="and" property="clientType">
     			`clientType`=#clientType#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="channelIds">
     			platformId IN
@@ -47,7 +47,7 @@
 
      <select id="ReportLtv.list" resultClass="reportLtv" parameterClass="mb">
         SELECT
-			`appId`,
+			gameId,
 			`platformId`,
 			`statDate`,
 		 SUM(`ltv1`) AS ltv1,
@@ -93,7 +93,7 @@
     
     <select id="ReportLtv.listZone" resultClass="reportDaily" parameterClass="mb">
         SELECT
-			`appId`,
+			gameId,
 			`platformId`,
 			`zoneId`,
 			`statDate`,

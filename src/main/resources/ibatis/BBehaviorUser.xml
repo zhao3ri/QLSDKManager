@@ -13,8 +13,8 @@
         WHERE 
         uid = #uid#
         AND platformId = #platformId#
-        <isNotNull property="appId">
-			AND appId=#appId#
+        <isNotNull property="gameId">
+			AND gameId=#gameId#
 		</isNotNull>
 		<isNotNull property="clientType">
 			AND clientType=#clientType#

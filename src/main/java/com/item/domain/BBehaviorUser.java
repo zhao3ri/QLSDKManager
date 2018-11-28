@@ -25,7 +25,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 	@JsonIgnore
     private Integer platformId;
 	@JsonIgnore
-    private Long appId;
+    private Long gameId;
 	@JsonIgnore
 	private Integer clientType;
 	@JsonIgnore
@@ -55,11 +55,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 	public void setPlatformId(Integer platformId) {
 		this.platformId = platformId;
 	}
-	public Long getAppId() {
-		return appId;
+	public Long getGameId() {
+		return gameId;
 	}
-	public void setAppId(Long appId) {
-		this.appId = appId;
+	public void setGameId(Long gameId) {
+		this.gameId = gameId;
 	}
 	public Integer getClientType() {
 		return clientType;

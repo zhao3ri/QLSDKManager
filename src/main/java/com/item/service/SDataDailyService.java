@@ -49,9 +49,9 @@ public class SDataDailyService {
 			String selectRange) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		MapBean mb = new MapBean();
-		mb.put("appId", appId);
-		mb.put("clientType", clientType);
-		mb.put("platformId", platformId);
+		mb.put(MapBean.GAME_ID, appId);
+		mb.put(MapBean.CLIENT_TYPE, clientType);
+		mb.put(MapBean.PLATFORM_ID, platformId);
 		mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 		
 		mb.put("statStartDate", selectRange.split("至")[0]);
@@ -155,9 +155,9 @@ public class SDataDailyService {
         
         Game game = gameService.getGameById(appId);
         MapBean mb = new MapBean();
-		mb.put("appId", appId);
-		mb.put("clientType", clientType);
-		mb.put("platformId", platformId);
+		mb.put(MapBean.GAME_ID, appId);
+		mb.put(MapBean.CLIENT_TYPE, clientType);
+		mb.put(MapBean.PLATFORM_ID, platformId);
 		mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 		if (StringUtils.isNotBlank(selectRange)){
 			mb.put("statStartDate", selectRange.split("至")[0]);
@@ -171,11 +171,11 @@ public class SDataDailyService {
         for(int i=0; i<dataDailyList.size(); i++){
             BPlatform platform = platformService.getPlatformById(dataDailyList.get(i).getPlatformId()+0L);
             MapBean mb2 = new MapBean();
-    		mb2.put("appId", appId);
+    		mb2.put(MapBean.GAME_ID, appId);
     		mb2.put("zoneId", dataDailyList.get(i).getZoneId()+"");
             Gamezone gamezone = gamezoneService.get(mb2);
         	List<Excel> e = new ArrayList<Excel>();
-        	e.add(new Excel(game.getAppName(),20));
+        	e.add(new Excel(game.getGameName(),20));
         	e.add(new Excel(appId,20));
         	e.add(new Excel(dataDailyList.get(i).getClientType()==1?"android":"ios", 20));
         	e.add(new Excel(platform.getPlatformName(),20));

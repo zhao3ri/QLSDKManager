@@ -1,6 +1,5 @@
 package com.item.web.action;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +15,8 @@ import com.item.domain.Game;
 import com.item.service.BGameService;
 import com.item.service.SDataDailyService;
 import com.item.service.SDataMonthlyService;
-import com.item.utils.CookieUtils;
 import com.item.utils.DateUtils;
 import com.item.utils.ExcelExport;
-
-import core.module.utils.Struts2Utils;
-import core.module.web.Struts2Action;
 
 public class DataReportAction extends BaseAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataReportAction.class);
@@ -29,7 +24,7 @@ public class DataReportAction extends BaseAction {
     private static final long serialVersionUID = 147087466892521642L;
 
     private List<Game> games;
-    private Long appId;
+    private Long gameId;
     private Integer clientType;
     private Integer platformId;
     private String zoneId;
@@ -58,7 +53,7 @@ public class DataReportAction extends BaseAction {
             calendar.add(Calendar.DATE, -1);
             selectRange = DateUtils.format(calendar.getTime(), "yyyy-MM-dd") + " 至 " + DateUtils.format(calendar.getTime(), "yyyy-MM-dd");
         }
-        result = dataDailyService.dataDaily(appId, clientType, platformId, zoneId, selectRange);
+        result = dataDailyService.dataDaily(gameId, clientType, platformId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -94,7 +89,7 @@ public class DataReportAction extends BaseAction {
             this.setYearMonthStr(year3 / 100 + "-" + (year3 % 100 < 10 ? "0" + year3 % 100 : year3 % 100));
         }
 
-        result = dataMonthlyService.dataMonthly(appId, clientType, platformId, zoneId, yearMonthStr, yearMonthStr2);
+        result = dataMonthlyService.dataMonthly(gameId, clientType, platformId, zoneId, yearMonthStr, yearMonthStr2);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -104,7 +99,7 @@ public class DataReportAction extends BaseAction {
     public void excelExportDaily() {
         try {
             ExcelExport ee = new ExcelExport();
-            dataDailyService.excelExportDaily(ee, appId, clientType, platformId, zoneId, selectRange);
+            dataDailyService.excelExportDaily(ee, gameId, clientType, platformId, zoneId, selectRange);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +117,7 @@ public class DataReportAction extends BaseAction {
                 yearMonthStr2 = DateUtils.format(calendar.getTime(), "yyyy-MM");
             }
             ExcelExport ee = new ExcelExport();
-            dataMonthlyService.excelExportMonthly(ee, appId, clientType, platformId, zoneId, yearMonthStr, yearMonthStr2);
+            dataMonthlyService.excelExportMonthly(ee, gameId, clientType, platformId, zoneId, yearMonthStr, yearMonthStr2);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,7 +129,7 @@ public class DataReportAction extends BaseAction {
         boolean success = super.initData();
         if (success) {
             games = getCurrentIdentityGames();
-            appId = getFirstGameId();
+            gameId = getFirstGameId();
         }
         return success;
     }
@@ -147,12 +142,12 @@ public class DataReportAction extends BaseAction {
         this.games = games;
     }
 
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public Integer getClientType() {

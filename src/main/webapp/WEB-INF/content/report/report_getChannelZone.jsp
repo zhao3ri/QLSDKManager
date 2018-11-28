@@ -2,7 +2,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ include file="/common/jquerylibs.jsp" %>
 <body class="fix_top_nav_padding">
-	<input type="hidden" id="appId" value="${appId }">
+	<input type="hidden" id="gameId" value="${gameId }">
 
 	<div class="panel-body ">
 		<button type="button" id="changeZone" class="btn btn-primary " onclick="change();"> &nbsp;&nbsp;区&nbsp;服&nbsp;&nbsp;</button>
@@ -177,7 +177,7 @@
 		
 		
 		function next(){
-			var appId = $("#appId").val();
+			var gameId = $("#gameId").val();
 			var isCompare = '${isCompare}';
 			//渠道可见 
 			if($("#platforms").is(":visible")){
@@ -201,7 +201,7 @@
 						$("#compareZoneIds", window.parent.document).val("");
 						$("#compareType", window.parent.document).val(2);
 					}
-					document.location.href="${ctx}/bPlatformGameZone/bPlatformGameZone_getPlatformZones.shtml?appId="+appId+"&platformIds="+checkedIds+"&isCompare="+isCompare;
+					document.location.href="${ctx}/bPlatformGameZone/bPlatformGameZone_getPlatformZones.shtml?gameId="+gameId+"&platformIds="+checkedIds+"&isCompare="+isCompare;
 				}else{
 					parent.errorTip("请选择渠道！");
 				}
@@ -228,7 +228,7 @@
 						$("#compareChannelIds", window.parent.document).val("");
 						$("#compareType", window.parent.document).val(1);
 					}
-					document.location.href="${ctx}/bPlatformGameZone/bPlatformGameZone_getZonePlatforms.shtml?appId="+${appId}+"&zoneIds="+checkedIds+"&isCompare="+isCompare;
+					document.location.href="${ctx}/bPlatformGameZone/bPlatformGameZone_getZonePlatforms.shtml?gameId="+${gameId}+"&zoneIds="+checkedIds+"&isCompare="+isCompare;
 				}else{
 					parent.errorTip("请选择分区！");
 				}

@@ -60,7 +60,7 @@ pageContext.setAttribute("r", r);
 							<td><s:if test="%{description.length()>20}"><pre><s:property value="description.substring(0,20)+'...'"/></pre></s:if><s:else><pre><s:property value="description"/></pre></s:else></td>
 							<td>
 								<s:iterator value="authGames" var="game">
-									${game.appName }，
+									${game.gameName }，
 								</s:iterator>
 							</td>
 							<td>

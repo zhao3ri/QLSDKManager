@@ -9,9 +9,11 @@ import java.util.HashMap;
  * @since 2010-03-23
  */
 public class MapBean extends HashMap<String, Object> {
-    public static final String APP_ID = "appId";
+    public static final String GAME_ID = "gameId";
+    public static final String GAME_IDS = "gameIds";
+    public static final String GAME_NAME = "gameName";
     public static final String CLIENT_TYPE = "clientType";
-    public static final String PLATFORM_Id = "platformId";
+    public static final String PLATFORM_ID = "platformId";
     public static final String STAT_DATE = "statDate";
 
     private static final long serialVersionUID = 1775432731349180989L;

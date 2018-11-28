@@ -78,7 +78,7 @@
                                     <s:iterator value="valueMap" var="item" >
                                         <s:iterator value="#item.value" var="itemVal" status="st">
                                             <tr>
-                                                <c:if test="${st.index == 0 }"><td rowspan=<s:property value="#item.value.size"/>><s:property value="#item.key.appName"/></td></c:if>
+                                                <c:if test="${st.index == 0 }"><td rowspan=<s:property value="#item.value.size"/>><s:property value="#item.key.gameName"/></td></c:if>
                                                 <td><s:property value="#itemVal.platformName"/></td>
                                                 <td><s:property value="#itemVal.totalRoleUser"/></td>
                                                 <td><s:property value="#itemVal.totalRegUser"/></td>

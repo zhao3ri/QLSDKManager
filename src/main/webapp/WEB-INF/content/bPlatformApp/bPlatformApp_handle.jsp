@@ -47,16 +47,16 @@
 							<label  class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>游戏：</label>
 							<div class=" col-sm-9 col-lg-5">
 								<c:if test="${id == null }">
-									<select class="form-control" name="BPlatformApp.appId"  data-original-title="" title="">
+									<select class="form-control" name="BPlatformApp.gameId"  data-original-title="" title="">
 										<option value="">请选择游戏</option>
 										<s:iterator value="games" var="item">
-											<option value="${item.id}" <c:if test="${item.id==bPlatformApp.appId}">selected</c:if>>${item.appName }</option>
+											<option value="${item.id}" <c:if test="${item.id==bPlatformApp.gameId}">selected</c:if>>${item.gameName }</option>
 										</s:iterator>									
 									</select>
 								</c:if>
 								<c:if test="${id != null }">
-									<input type="hidden" name="BPlatformApp.appId" value="${bPlatformApp.appId}"/>
-									${bPlatformApp.appName }
+									<input type="hidden" name="BPlatformApp.gameId" value="${bPlatformApp.gameId}"/>
+									${bPlatformApp.gameName }
 								</c:if>
 							</div>
 						</div>
@@ -107,7 +107,7 @@
 				rules: {
 					"BPlatformApp.configParams":{required:true,maxlength:3072},
 					"BPlatformApp.platformId":{required:true},
-					"BPlatformApp.appId":{required:true}
+					"BPlatformApp.gameId":{required:true}
 				}
 			});
 		});

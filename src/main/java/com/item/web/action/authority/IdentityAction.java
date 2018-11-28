@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 
 import com.item.domain.BPlatform;
 import com.item.domain.authority.Identity;
-import com.item.service.BPlatformAppService;
 import com.item.service.BPlatformService;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,10 +165,10 @@ public class IdentityAction extends Struts2Action {
 
         games = gameService.getGameList(null);
 
-        List<Long> authAppIds = gameManagerService.getAppIdsByIdentityId(identity.getId());
+        List<Long> authGameIds = gameManagerService.getGameIdsByIdentityId(identity.getId());
         Map<String, String> map = new HashMap<String, String>();
-        for (Long appId : authAppIds) {
-            map.put(appId.toString(), "");
+        for (Long gameId : authGameIds) {
+            map.put(gameId.toString(), "");
         }
         if (!CollectionUtils.isEmpty(games)) {
             for (Game game : games) {

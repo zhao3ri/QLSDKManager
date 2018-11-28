@@ -13,8 +13,8 @@
     		<isNotNull prepend="and" property="clientType">
     			`clientType`=#clientType#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="platformId">
     			`platformId`=#platformId#

@@ -23,7 +23,7 @@ package com.item.domain;
 	/*
 	 *
 	 */
-	private Long appId;
+	private Long gameId;
 	/*
 	 *
 	 */
@@ -125,15 +125,15 @@ package com.item.domain;
 	/**
 	 * @return 
 	 */
-	public Long getAppId(){
-		return appId;
+	public Long getGameId(){
+		return gameId;
 	}
 	/**
-	 * 设置 [appId]
-	 * @param appId 
+	 * 设置 [gameId]
+	 * @param gameId
 	 */
-	public void setAppId(Long appId){
-		this.appId=appId;
+	public void setGameId(Long gameId){
+		this.gameId = gameId;
 	}
 	/**
 	 * @return 

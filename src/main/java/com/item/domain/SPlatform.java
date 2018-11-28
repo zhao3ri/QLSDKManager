@@ -25,11 +25,11 @@ public class SPlatform {
     /*
      *
      */
-    private Long appId;
+    private Long gameId;
     /*
      *
      */
-    private String appName;
+    private String gameName;
     /*
      *
      */
@@ -107,17 +107,17 @@ public class SPlatform {
     /**
      * @return
      */
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
     /**
-     * 设置 [appId]
+     * 设置 [gameId]
      *
-     * @param appId
+     * @param gameId
      */
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     /**
@@ -232,12 +232,12 @@ public class SPlatform {
         this.payUsers = payUsers;
     }
 
-    public String getAppName() {
-        return appName;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     public String getPlatformName() {

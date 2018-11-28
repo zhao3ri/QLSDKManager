@@ -24,7 +24,7 @@ public class SGame {
     /*
      *
      */
-    private Long appId;
+    private Long gameId;
     /*
      *
      */
@@ -101,17 +101,17 @@ public class SGame {
     /**
      * @return
      */
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
     /**
-     * 设置 [appId]
+     * 设置 [gameId]
      *
-     * @param appId
+     * @param gameId
      */
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     /**

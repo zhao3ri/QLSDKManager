@@ -14,7 +14,7 @@ package com.item.domain;
  */
 public class SZonePlatformRealtime extends SGameRealtime {
 
-    private String appName;
+    private String gameName;
     /*
      *
      */
@@ -60,12 +60,12 @@ public class SZonePlatformRealtime extends SGameRealtime {
         this.platformId = platformId;
     }
 
-    public String getAppName() {
-        return appName;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     public String getZoneName() {

@@ -8,8 +8,8 @@
 
     <sql id="SDataMonthly.Where">
     	<dynamic prepend="where">
-    		<isNotNull prepend="and" property="appId">
-    			a.`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			a.`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="clientType">
     			a.`clientType`=#clientType#
@@ -40,8 +40,8 @@
         SELECT
             a.`id` AS id,
             a.`clientType` AS clientType,
-            a.`appId` AS appId,
-            bg.`appName` AS appName,
+            a.gameId AS gameId,
+            bg.gameName AS gameName,
             a.`zoneId` AS zoneId,
             a.`platformId` AS platformId,
 			SUM(a.totalRegUser) AS regUsers,
@@ -56,7 +56,7 @@
 		JOIN 
 		b_game bg
 		ON 
-		bg.id=a.appId
+		bg.id=a.gameId
         <include refid="SDataMonthly.Where"/>
                  GROUP BY 
          	a.`yearMonth`

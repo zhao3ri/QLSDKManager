@@ -1,18 +1,13 @@
 package com.item.service;
 
-import com.item.dao.ReportDailyDao;
 import com.item.dao.ReportHistoryDailyDao;
 import com.item.dao.ReportLTVDao;
 import com.item.domain.BPlatform;
-import com.item.domain.Game;
 import com.item.domain.Gamezone;
-import com.item.domain.report.LTVGamePlatform;
 import com.item.domain.report.LTVGamePlatform;
 import com.item.domain.report.ReportDaily;
 import com.item.domain.report.ReportHistoryDaily;
 import com.item.utils.DateUtils;
-import com.item.utils.DecimallFormatUtil;
-import com.item.utils.EChartUtil;
 import core.module.orm.MapBean;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,9 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -59,8 +52,8 @@ public class ReportLTVService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		logger.info("###############1"+channelIds);
 		MapBean mb = new MapBean();
-		mb.put("appId", appId);
-		mb.put("clientType", clientType);
+		mb.put(MapBean.GAME_ID, appId);
+		mb.put(MapBean.CLIENT_TYPE, clientType);
 		mb.put("channelIds", StringUtils.isBlank(channelIds) ? null : StringUtils.split(channelIds,","));
 		mb.put("zoneIds", StringUtils.isBlank(zoneIds) ? null : StringUtils.split(zoneIds,","));
 		List<BPlatform> platforms = bPlatformService.getByIds(channelIds);
@@ -96,7 +89,7 @@ public class ReportLTVService {
         List<ReportHistoryDaily> dailyList= reportDailyService.listOperate(mb);
 		for (LTVGamePlatform ltv:list){
 			for (ReportDaily daily:dailyList){
-				if (ltv.getAppId().equals(daily.getAppId())&&ltv.getStatDate().equals(daily.getStatDate())){
+				if (ltv.getGameId().equals(daily.getGameId())&&ltv.getStatDate().equals(daily.getStatDate())){
 					ltv.setRegistUser(daily.getRegUsers());
 //					ltv.setRegistUser(1155);
 				}
@@ -324,8 +317,8 @@ public class ReportLTVService {
 //					}
 //
 //					for (Game game : games) {
-//						if (game.getId().intValue() == reportDaily.getAppId().intValue()) {
-//							reportDaily.setAppName(game.getAppName());
+//						if (game.getId().intValue() == reportDaily.getGameId().intValue()) {
+//							reportDaily.setGameName(game.getGameName());
 //							break;
 //						}
 //					}
@@ -349,7 +342,7 @@ public class ReportLTVService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		MapBean mb = new MapBean();
-		mb.put("appId", appId);
+		mb.put(MapBean.GAME_ID, appId);
 		mb.put("clientType", clientType);
 		mb.put("channelIds", StringUtils.isBlank(channelIds) ? null : channelIds);
 		mb.put("zoneIds", StringUtils.isBlank(zoneIds) ? null : zoneIds);

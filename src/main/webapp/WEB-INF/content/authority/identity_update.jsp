@@ -70,7 +70,7 @@
                                             <s:iterator value="games" var="game">
                                                 <input type="checkbox" name="gameIds"
                                                        <c:if test="${game.isAuth == 1 }">checked</c:if> lang="game"
-                                                       value="${game.id }"/>&nbsp;${game.appName }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                       value="${game.id }"/>&nbsp;${game.gameName }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             </s:iterator>
                                         </fieldset>
                                     </fieldset>

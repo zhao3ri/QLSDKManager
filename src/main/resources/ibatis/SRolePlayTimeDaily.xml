@@ -16,8 +16,8 @@
     		<isNotNull prepend="and" property="clientType">
     			r.clientType=#clientType#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			r.appId=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			r.gameId=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="platformId">
     			r.platformId=#platformId#
@@ -55,7 +55,7 @@
 
     <select id="SRolePlayTimeDaily.pagePlayTime" parameterClass="mb" resultClass="mb">
     	SELECT b.*,SUM(a.playTime) as countPlayTime FROM s_role_play_time_daily a RIGHT JOIN 
-			(SELECT r.appId,r.platformId,r.uid,r.zoneId,r.identityId,r.name,SUM(r.playTime) as playTime,COALESCE(g.zoneName,'未知') as zoneName ,p.platformName
+			(SELECT r.gameId,r.platformId,r.uid,r.zoneId,r.identityId,r.name,SUM(r.playTime) as playTime,COALESCE(g.zoneName,'未知') as zoneName ,p.platformName
 			FROM s_role_play_time_daily r LEFT JOIN b_game_zone g ON g.zoneId=r.zoneId  left join b_platform p on r.platformId=p.id <include refid="SRolePlayTimeDaily.Where"/> GROUP BY r.uid,r.identityId,r.zoneId ) b
 			ON a.uid=b.uid AND a.zoneId=b.zoneId AND a.identityId=b.identityId GROUP BY b.uid,b.identityId,b.zoneId ORDER BY b.playTime DESC
 			LIMIT #firstResult#, #pageSize#
@@ -63,7 +63,7 @@
 
     <select id="SRolePlayTimeDaily.countPlayTime" resultClass="Long" parameterClass="mb">
     	SELECT COUNT(1) FROM 
-    	(SELECT r.appId,r.platformId,r.uid,r.zoneId,r.identityId,r.name,sum(r.playTime) as playTime FROM s_role_play_time_daily r
+    	(SELECT r.gameId,r.platformId,r.uid,r.zoneId,r.identityId,r.name,sum(r.playTime) as playTime FROM s_role_play_time_daily r
 			<include refid="SRolePlayTimeDaily.Where"/> GROUP BY r.uid,r.identityId,r.zoneId) b
     </select>
 

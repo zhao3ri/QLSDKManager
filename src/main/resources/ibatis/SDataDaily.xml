@@ -8,8 +8,8 @@
 
     <sql id="SDataDaily.Where">
     	<dynamic prepend="where">
-    		<isNotNull prepend="and" property="appId">
-    			a.`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			a.`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="clientType">
     			a.`clientType`=#clientType#
@@ -40,8 +40,8 @@
         SELECT
             a.`id` AS id,
             a.`clientType` AS clientType,
-            a.`appId` AS appId,
-            bg.`appName` AS appName,
+            a.gameId AS gameId,
+            bg.gameName AS gameName,
             a.`zoneId` AS zoneId,
             a.`platformId` AS platformId,
 			SUM(a.regUsers) AS regUsers,
@@ -62,11 +62,11 @@
 		JOIN 
 		b_game bg
 		ON 
-		bg.id=a.appId
+		bg.id=a.gameId
 		JOIN 
 		s_role_daily b 
 		ON
-		 a.appId=b.appId AND a.zoneId=b.zoneId AND a.platformId=b.platformId AND a.clientType=b.clientType AND a.statDate=b.statDate
+		 a.gameId=b.gameId AND a.zoneId=b.zoneId AND a.platformId=b.platformId AND a.clientType=b.clientType AND a.statDate=b.statDate
         <include refid="SDataDaily.Where"/>
          GROUP BY 
          	a.`statDate`

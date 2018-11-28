@@ -25,10 +25,10 @@
                                 <input type="hidden" id="zoneIds" name="zoneIds" value="${zoneIds }">
                                 <input type="hidden" id="compareZoneIds" name="compareZoneIds"
                                        value="${compareZoneIds }">
-                                <select class="form-control" name="appId" id="appId" placeholder="请选择游戏">
+                                <select class="form-control" name="gameId" id="gameId" placeholder="请选择游戏">
                                     <s:iterator value="allGames" var="item">
                                         <option value="${item.id }"
-                                                <c:if test="${item.id==appId }">selected</c:if>>${item.appName }</option>
+                                                <c:if test="${item.id==gameId }">selected</c:if>>${item.gameName }</option>
                                     </s:iterator>
                                 </select>
                             </div>
@@ -633,12 +633,12 @@
     <%--);--%>
 
     function selectChannelZone() {
-        var appId = $("#appId").val();
-        if ($.trim(appId) == "") {
+        var gameId = $("#gameId").val();
+        if ($.trim(gameId) == "") {
             errorTip("请先选择游戏！");
             return;
         }
-        art.dialog.open("${ctx}/report/report_getChannelZone.shtml?appId=" + appId + "&isCompare=0",
+        art.dialog.open("${ctx}/report/report_getChannelZone.shtml?gameId=" + gameId + "&isCompare=0",
             {
                 title: '筛选',
                 id: 'addBox',
@@ -653,12 +653,12 @@
     }
 
     function selectCompareChannelZone() {
-        var appId = $("#appId").val();
-        if ($.trim(appId) == "") {
+        var gameId = $("#gameId").val();
+        if ($.trim(gameId) == "") {
             errorTip("请先选择游戏！");
             return;
         }
-        art.dialog.open("${ctx}/report/report_getChannelZone.shtml?appId=" + appId + "&isCompare=1",
+        art.dialog.open("${ctx}/report/report_getChannelZone.shtml?gameId=" + gameId + "&isCompare=1",
             {
                 title: '筛选',
                 id: 'addBox',

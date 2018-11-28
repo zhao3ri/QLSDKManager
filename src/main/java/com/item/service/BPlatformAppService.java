@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.item.dao.BPlatformAppDao;
 import com.item.dao.BPlatformDao;
-import com.item.domain.BPlatform;
 import com.item.domain.BPlatformApp;
 import com.item.utils.RedisClient;
 
@@ -42,9 +41,9 @@ public class BPlatformAppService {
         if (mb == null) {
             mb = new MapBean();
         }
-        if (mb.containsKey("appIds")) {
-            List<Long> permitionIds = gameManagerService.getAppIdsByIdentityId();
-            List<Long> apps = (List<Long>) mb.get("appIds");
+        if (mb.containsKey(MapBean.GAME_IDS)) {
+            List<Long> permitionIds = gameManagerService.getGameIdsByIdentityId();
+            List<Long> apps = (List<Long>) mb.get(MapBean.GAME_IDS);
             for (int i = 0; i < apps.size(); i++) {
                 if (permitionIds.contains(apps.get(i))) {
                     continue;
@@ -54,7 +53,7 @@ public class BPlatformAppService {
                 }
             }
         } else {
-            mb.put("appIds", gameManagerService.getAppIdsByIdentityId());
+            mb.put(MapBean.GAME_IDS, gameManagerService.getGameIdsByIdentityId());
         }
 
         return bPlatformAppDao.find(page, mb, "BPlatformApp.count", "BPlatformApp.page");
@@ -85,14 +84,14 @@ public class BPlatformAppService {
             result = new HashMap<String, List<BPlatformApp>>();
             List<BPlatformApp> bPlatforms = bPlatformAppDao.find("BPlatformApp.list", null);
             for (BPlatformApp bPlatform : bPlatforms) {
-                if (result.get(bPlatform.getAppId().toString()) == null) {
+                if (result.get(bPlatform.getGameId().toString()) == null) {
                     List<BPlatformApp> thisAppbPlatforms = new ArrayList<BPlatformApp>();
                     thisAppbPlatforms.add(bPlatform);
-                    result.put(bPlatform.getAppId().toString(), thisAppbPlatforms);
+                    result.put(bPlatform.getGameId().toString(), thisAppbPlatforms);
                 } else {
-                    List<BPlatformApp> thisAppbPlatforms = result.get(bPlatform.getAppId().toString());
+                    List<BPlatformApp> thisAppbPlatforms = result.get(bPlatform.getGameId().toString());
                     thisAppbPlatforms.add(bPlatform);
-                    result.put(bPlatform.getAppId().toString(), thisAppbPlatforms);
+                    result.put(bPlatform.getGameId().toString(), thisAppbPlatforms);
                 }
             }
             RedisClient.set("platform_app_all", result);

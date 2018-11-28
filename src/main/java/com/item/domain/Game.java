@@ -10,7 +10,7 @@ public class Game {
 	 /**
 	  * 游戏名称
 	 */
-	private String appName;
+	private String gameName;
 	/**
 	 * 密钥
 	 * */
@@ -37,12 +37,12 @@ public class Game {
 		this.id = id;
 	}
 
-	public String getAppName() {
-		return appName;
+	public String getGameName() {
+		return gameName;
 	}
 
-	public void setAppName(String appName) {
-		this.appName = appName;
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
 	}
 
 	public String getSecretKey() {

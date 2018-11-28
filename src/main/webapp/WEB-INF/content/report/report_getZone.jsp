@@ -2,7 +2,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ include file="/common/jquerylibs.jsp" %>
 <body class="fix_top_nav_padding">
-	<input type="hidden" id="appId" value="${appId }">
+	<input type="hidden" id="gameId" value="${gameId }">
 
 	<div class="panel-body ">
 		<button type="button" id="changeZone" class="btn btn-primary " > &nbsp;&nbsp;区&nbsp;服&nbsp;&nbsp;</button>

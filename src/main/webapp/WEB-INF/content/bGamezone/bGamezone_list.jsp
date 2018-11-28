@@ -16,10 +16,10 @@
 	    <div class="panel-heading">游戏分区列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-		        <select class="form-control" name="gamezone.appId"  data-original-title="" title="" id="appSel" >
+		        <select class="form-control" name="gamezone.gameId"  data-original-title="" title="" id="appSel" >
 						<option value="">==请选择游戏==</option>
 						<s:iterator value="gameList" var="item">
-							<option value="${item.id}" <c:if test="${item.id==gamezone.appId}">selected</c:if>>${item.appName }</option>
+							<option value="${item.id}" <c:if test="${item.id==gamezone.gameId}">selected</c:if>>${item.gameName }</option>
 						</s:iterator>								
 				    </select>
 		        </div>
@@ -59,7 +59,7 @@
 								<td><s:property value="id"/></td>
 								<td><s:property value="zoneId"/></td>
 								<td><s:property value="zoneName"/></td>
-								<td><s:property value="appName"/></td>
+								<td><s:property value="gameName"/></td>
 								<td>
 									<div class="btn-group btn-group-sm pull-right">
 					                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>

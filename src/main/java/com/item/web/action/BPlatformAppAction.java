@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.item.service.BPlatformService;
-import com.item.service.authority.AuthCacheManager;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -74,11 +73,11 @@ public class BPlatformAppAction extends Struts2Action {
             if (bPlatformApp.getId() != null) {
                 mb.put("id", bPlatformApp.getId());
             }
-            if (bPlatformApp.getAppId() != null) {
-                mb.put("appId", bPlatformApp.getAppId());
+            if (bPlatformApp.getGameId() != null) {
+                mb.put(MapBean.GAME_ID, bPlatformApp.getGameId());
             }
             if (bPlatformApp.getPlatformId() != null) {
-                mb.put("platformId", bPlatformApp.getPlatformId());
+                mb.put(MapBean.PLATFORM_ID, bPlatformApp.getPlatformId());
             }
             if (bPlatformApp.getConfigParams() != null) {
                 mb.put("configParams", bPlatformApp.getConfigParams());
@@ -86,9 +85,9 @@ public class BPlatformAppAction extends Struts2Action {
             if (bPlatformApp.getCreateTime() != null) {
                 mb.put("createTime", bPlatformApp.getCreateTime());
             }
-            List<Long> ids = getAppIds();
+            List<Long> ids = getGameIds();
             if (ids != null) {
-                mb.put("appIds", ids);
+                mb.put(MapBean.GAME_IDS, ids);
             }
         }
         mb.put("orderby", "id desc");
@@ -96,10 +95,10 @@ public class BPlatformAppAction extends Struts2Action {
         return mb;
     }
 
-    private List<Long> getAppIds() {
-        if (bPlatformApp.getAppName() != null) {
+    private List<Long> getGameIds() {
+        if (bPlatformApp.getGameName() != null) {
             MapBean mapBean = new MapBean();
-            mapBean.put("appName", bPlatformApp.getAppName());
+            mapBean.put(MapBean.GAME_NAME, bPlatformApp.getGameName());
             List<Game> gameList = gameService.getGameByWhere(mapBean);
             if (gameList == null || gameList.size() == 0) {
                 return null;
@@ -119,7 +118,7 @@ public class BPlatformAppAction extends Struts2Action {
             bPlatformApp = bPlatformAppService.getBPlatformAppById(id);
         }
         bPlatformAppService.deleteBPlatformApp(id);
-        RedisClient.del("rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getAppId());
+        RedisClient.del("rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getGameId());
         return "delete";
     }
 
@@ -143,9 +142,9 @@ public class BPlatformAppAction extends Struts2Action {
             bPlatformAppService.savePlatformApp(bPlatformApp);
             addActionMessage("保存信息成功");
         }
-        logger.debug("del " + "rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getAppId());
+        logger.debug("del " + "rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getGameId());
 
-        RedisClient.del("rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getAppId());
+        RedisClient.del("rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getGameId());
         return "save";
     }
 

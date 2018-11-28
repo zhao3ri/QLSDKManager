@@ -11,8 +11,8 @@
     		<isNotNull prepend="and" property="clientType">
     			a.`clientType`=#clientType#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			a.`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			a.`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="zoneIds">
     			a.`zoneId` IN ($zoneIds$)
@@ -40,7 +40,7 @@
 
     <select id="ReportHistoryDaily.listGame" resultClass="reportHistoryDaily" parameterClass="mb">
         SELECT * FROM (SELECT
-			a.`appId`,
+			a.gameId,
 			a.`statDate`,
 			SUM(a.`roleUsers`) AS roleUsers,
 			SUM(a.`regUsers`) AS regUsers,
@@ -85,19 +85,19 @@
 			b.activeUsers AS totalActiveUsers
 		FROM 
 			s_game_daily AS a 
-			JOIN s_game_history AS b ON a.appId = b.appId 
+			JOIN s_game_history AS b ON a.gameId = b.gameId
 			AND a.clientType = b.clientType 
 			AND a.statDate = b.statDate
         <include refid="ReportHistoryDaily.Where"/>
         <isNotEmpty property="groupby">
         	GROUP BY $groupby$
         </isNotEmpty>
-        ORDER BY a.statDate ASC) AS c WHERE c.appId > 0
+        ORDER BY a.statDate ASC) AS c WHERE c.gameId > 0
     </select>
     
      <select id="ReportHistoryDaily.listPlatform" resultClass="reportHistoryDaily" parameterClass="mb">
          SELECT * FROM (SELECT
-			a.`appId`,
+			a.gameId,
 			a.`platformId`,
 			a.`statDate`,
 			SUM(a.`roleUsers`) AS roleUsers,
@@ -143,19 +143,19 @@
 		FROM 
 			s_platform_daily AS a JOIN s_platform_history AS b 
 			ON a.clientType = b.clientType 
-			AND a.appId = b.appId 
+			AND a.gameId = b.gameId
 			AND a.platformId = b.platformId 
 			AND a.statDate = b.statDate
         <include refid="ReportHistoryDaily.Where"/>
         <isNotEmpty property="groupby">
         	GROUP BY $groupby$
         </isNotEmpty>
-        ORDER BY statDate ASC) AS c WHERE c.appId > 0
+        ORDER BY statDate ASC) AS c WHERE c.gameId > 0
     </select>
     
     <select id="ReportHistoryDaily.listZone" resultClass="reportHistoryDaily" parameterClass="mb">
          SELECT * FROM (SELECT
-			a.`appId`,
+			a.gameId,
 			a.`platformId`,
 			a.`zoneId`,
 			a.`statDate`,
@@ -202,7 +202,7 @@
 		FROM 
 			s_zone_platform_daily AS a JOIN s_zone_platform_history AS b
 			ON a.clientType = b.clientType 
-			AND a.appId = b.appId 
+			AND a.gameId = b.gameId
 			AND a.platformId = b.platformId 
 			AND a.statDate = b.statDate
 			AND a.zoneId = b.zoneId
@@ -210,11 +210,11 @@
         <isNotEmpty property="groupby">
         	GROUP BY $groupby$
         </isNotEmpty>
-        ORDER BY statDate ASC) AS c WHERE c.appId > 0
+        ORDER BY statDate ASC) AS c WHERE c.gameId > 0
     </select>
 	<select id="ReportHistoryDaily.listPlatformSummary" resultClass="reportHistoryDaily" parameterClass="mb">
 		SELECT * FROM (SELECT
-		a.`appId`,
+		a.gameId,
 		a.`platformId`,
 		c.`platformName`,
 		a.`statDate`,
@@ -261,7 +261,7 @@
 		FROM
 		b_platform AS c, s_platform_daily AS a JOIN s_platform_history AS b
 		ON a.clientType = b.clientType
-		AND a.appId = b.appId
+		AND a.gameId = b.gameId
 		AND a.platformId = b.platformId
 		AND a.statDate = b.statDate
         AND a.platformId=c.id
@@ -269,6 +269,6 @@
 		<isNotEmpty property="groupby">
 			GROUP BY $groupby$
 		</isNotEmpty>
-		ORDER BY statDate ASC) AS c WHERE c.appId > 0
+		ORDER BY statDate ASC) AS c WHERE c.gameId > 0
 	</select>
 </sqlMap>

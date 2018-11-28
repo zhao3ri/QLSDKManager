@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,10 +74,10 @@ public class ReportDailyService {
         return null;
     }
 
-    public Map<String, Object> basic(Long appId, Integer clientType, Integer groupType, String channelIds, String compareChannelIds, String zoneIds, String compareZoneIds, String selectRange, String compareSelectRange, Integer type) {
+    public Map<String, Object> basic(Long gameId, Integer clientType, Integer groupType, String channelIds, String compareChannelIds, String zoneIds, String compareZoneIds, String selectRange, String compareSelectRange, Integer type) {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
-        mb.put("appId", appId);
+        mb.put(MapBean.GAME_ID, gameId);
         mb.put("clientType", clientType);
         mb.put("channelIds", StringUtils.isBlank(channelIds) ? null : StringUtils.split(channelIds, ","));
         mb.put("zoneIds", StringUtils.isBlank(zoneIds) ? null : StringUtils.split(zoneIds, ","));
@@ -96,9 +95,9 @@ public class ReportDailyService {
             result.put("selectRange", mb.get("statStartDate") + " 至 " + mb.get("statEndDate"));
         }
         List<BPlatform> platforms = bPlatformService.getByIds(channelIds);
-        List<Gamezone> gamezones = bGamezoneService.getByIds(appId, zoneIds);
+        List<Gamezone> gamezones = bGamezoneService.getByIds(gameId, zoneIds);
         List<BPlatform> comparePlatforms = bPlatformService.getByIds(compareChannelIds);
-        List<Gamezone> compareGamezones = bGamezoneService.getByIds(appId, compareZoneIds);
+        List<Gamezone> compareGamezones = bGamezoneService.getByIds(gameId, compareZoneIds);
         result.put("platforms", platforms);
         result.put("gamezones", gamezones);
         result.put("comparePlatforms", comparePlatforms);
@@ -150,7 +149,7 @@ public class ReportDailyService {
             result.put("optionJson", getOptionJson(reportDailies, compareReportDailies, false, type));
         } else {                                                                                            //无对比
             if (null != groupType && 1 == groupType) {                                                                        //有选多分区
-                mb.put("groupby", "appId,zoneId,statDate");
+                mb.put("groupby", "gameId,zoneId,statDate");
                 List<ReportDaily> reportDailies = list(mb);
                 Map<String, List<ReportDaily>> data = new LinkedHashMap<String, List<ReportDaily>>();
                 for (ReportDaily reportDaily : reportDailies) {
@@ -178,7 +177,7 @@ public class ReportDailyService {
                 mb.put("groupby", "statDate");
                 result.put("optionJson", getOptionJson(list(mb), null, false, type));
             } else if (null != groupType && 2 == groupType) {                                                                    //有选多渠道
-                mb.put("groupby", "appId,platformId,statDate");
+                mb.put("groupby", "gameId,platformId,statDate");
                 List<ReportDaily> reportDailies = list(mb);
 
                 Map<String, List<ReportDaily>> data = new LinkedHashMap<String, List<ReportDaily>>();
@@ -207,7 +206,7 @@ public class ReportDailyService {
                 mb.put("groupby", "statDate");
                 result.put("optionJson", getOptionJson(list(mb), null, false, type));
             } else {
-                mb.put("groupby", "appId,statDate");
+                mb.put("groupby", "gameId,statDate");
                 List<ReportDaily> reportDailies = list(mb);
                 List<Game> games = bGameService.getGameList();
                 Map<String, List<ReportDaily>> data = new LinkedHashMap<String, List<ReportDaily>>();
@@ -223,8 +222,8 @@ public class ReportDailyService {
                     }
 
                     for (Game game : games) {
-                        if (game.getId().intValue() == reportDaily.getAppId().intValue()) {
-                            reportDaily.setAppName(game.getAppName());
+                        if (game.getId().intValue() == reportDaily.getGameId().intValue()) {
+                            reportDaily.setGameName(game.getGameName());
                             break;
                         }
                     }
@@ -556,12 +555,12 @@ public class ReportDailyService {
         return eChartUtil.getLineOrBarOption(map, xValue, false, false, false, EChartUtil.TYPE_LINE);
     }
 
-    public Map<String, Object> operate(Long appId, Integer clientType, String channelIds, String zoneIds, String selectRange) {
+    public Map<String, Object> operate(Long gameId, Integer clientType, String channelIds, String zoneIds, String selectRange) {
         Map<String, Object> result = new HashMap<String, Object>();
 
         MapBean mb = new MapBean();
-        mb.put("appId", appId);
-        mb.put("clientType", clientType);
+        mb.put(MapBean.GAME_ID, gameId);
+        mb.put(MapBean.CLIENT_TYPE, clientType);
         mb.put("channelIds", StringUtils.isBlank(channelIds) ? null : channelIds);
         mb.put("zoneIds", StringUtils.isBlank(zoneIds) ? null : zoneIds);
         mb.put("groupby", "a.`statDate`");
@@ -589,11 +588,11 @@ public class ReportDailyService {
         return result;
     }
 
-    public Map<String, Object> chanels(Long appId, Integer clientType, String channelIds, String selectRange) {
+    public Map<String, Object> chanels(Long gameId, Integer clientType, String channelIds, String selectRange) {
         Map<String, Object> result = new HashMap<String, Object>();
 
         MapBean mb = new MapBean();
-        mb.put("appId", appId);
+        mb.put(MapBean.GAME_ID, gameId);
         mb.put("clientType", clientType);
         mb.put("channelIds", StringUtils.isBlank(channelIds) ? null : channelIds);
         mb.put("groupby", "a.`platformId`");

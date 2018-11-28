@@ -7,8 +7,8 @@ import com.item.utils.DateUtils;
 public class ReportDaily {
     private Long id;
     private Integer clientType;
-    private Long appId;
-    private String appName;
+    private Long gameId;
+    private String gameName;
     private String zoneId;
     private String zoneName;
     private Integer platformId;
@@ -62,12 +62,12 @@ public class ReportDaily {
         this.clientType = clientType;
     }
 
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public String getZoneId() {
@@ -278,12 +278,12 @@ public class ReportDaily {
         this.startTimes = startTimes;
     }
 
-    public String getAppName() {
-        return appName;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     public Integer getNewUserPayTimes() {

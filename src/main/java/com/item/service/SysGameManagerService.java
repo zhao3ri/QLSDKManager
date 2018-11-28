@@ -26,19 +26,19 @@ public class SysGameManagerService {
     	sysGameManagerDao.delete("SysGameManager.deleteByIdentityId", roleId);
     }
     
-    public List<Long> getAppIdsByIdentityId(){
+    public List<Long> getGameIdsByIdentityId(){
     	User userInfo=(User)Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
-    	return getAppIdsByIdentityId(userInfo.getIdentityId());
+    	return getGameIdsByIdentityId(userInfo.getIdentityId());
     }
     
-    public ArrayList<Long> getAppIdsByIdentityId(Long identityId){
+    public ArrayList<Long> getGameIdsByIdentityId(Long identityId){
     	ArrayList<Long> result = new ArrayList<Long>();
     	
     	MapBean mb = new MapBean();
     	mb.put("identityId", identityId);
     	List<SysGameManager> list = sysGameManagerDao.find("SysGameManager.list",mb);
     	for (SysGameManager sysroleappauth : list)
-    		result.add(sysroleappauth.getAppId());
+    		result.add(sysroleappauth.getGameId());
     	
     	if (CollectionUtils.isEmpty(result)) {
     		result.add(-1L);
@@ -50,7 +50,7 @@ public class SysGameManagerService {
 		for (Long appId : gameIds) {
 			SysGameManager auth = new SysGameManager();
 			auth.setIdentityId(roleID.intValue());
-			auth.setAppId(appId);
+			auth.setGameId(appId);
 			sysGameManagerDao.save("SysGameManager.save", auth);
 		}
 		

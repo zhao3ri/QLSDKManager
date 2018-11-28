@@ -20,13 +20,13 @@
 			<isNotNull prepend="AND" property="zoneName" open="">
 				a.zoneName like  '%$zoneName$%'
 			</isNotNull>
-			<isNotNull prepend="AND" property="appId">
-				a.appId = #appId#
+			<isNotNull prepend="AND" property="gameId">
+				a.gameId = #gameId#
 			</isNotNull>
-			<isNotEmpty prepend="AND" property="appIds">
-				a.appId IN 
-				<iterate property="appIds" open="(" close=")" conjunction=",">
-			      #appIds[]#
+			<isNotEmpty prepend="AND" property="gameIds">
+				a.gameId IN
+				<iterate property="gameIds" open="(" close=")" conjunction=",">
+			      #gameIds[]#
 			    </iterate>
 			</isNotEmpty>
 		</dynamic>
@@ -38,10 +38,10 @@
 			a.id,
 			a.zoneId,
 			a.zoneName,
-			a.appId,
-			b.appName
+			a.gameId,
+			b.gameName
 		FROM b_game_zone AS a
-		JOIN b_game AS b ON a.appId = b.id
+		JOIN b_game AS b ON a.gameId = b.id
 		<include refid="BGamezone.Where" />
 		<isNotNull property="orderby">
 			ORDER BY $orderby$
@@ -54,23 +54,23 @@
 			a.id,
 			a.zoneId,
 			a.zoneName,
-			a.appId,
-			b.appName
+			a.gameId,
+			b.gameName
 		FROM b_game_zone AS a
-		JOIN b_game AS b ON a.appId = b.id
+		JOIN b_game AS b ON a.gameId = b.id
 		<include refid="BGamezone.Where" />
 		</select>
 	
 	<select id="BGamezone.list" parameterClass="mb" resultClass="Gamezone">
-		SELECT id,zoneId,zoneName,appId FROM b_game_zone AS a
+		SELECT id,zoneId,zoneName,gameId FROM b_game_zone AS a
 		<include refid="BGamezone.Where"/>
 	</select>
 	
 	<!-- 增加游戏分区 -->
 	<insert id="BGamezone.save" parameterClass="Gamezone">
 		INSERT INTO 
-		b_game_zone(zoneId,zoneName,appId)
-		VALUES(#zoneId#,#zoneName#,#appId#)
+		b_game_zone(zoneId,zoneName,gameId)
+		VALUES(#zoneId#,#zoneName#,#gameId#)
 		<selectKey resultClass="Long" keyProperty="id">
 			select @@IDENTITY
 			as `id`
@@ -105,8 +105,8 @@
 			<isNotNull prepend="," property="zoneName">
 				zoneName=#zoneName#
 			</isNotNull>
-			<isNotNull prepend="," property="appId">
-				appId=#appId#
+			<isNotNull prepend="," property="gameId">
+				gameId=#gameId#
 			</isNotNull>
 		</dynamic>
 		WHERE id=#id#
@@ -117,7 +117,7 @@
 		SELECT 
 			COUNT(*) 
 		FROM b_game_zone AS a  
-		JOIN b_game b ON a.appId=b.id
+		JOIN b_game b ON a.gameId=b.id
 		<include refid="BGamezone.Where" />
 	</select>
 	
@@ -132,8 +132,8 @@
 	</select>
 	
 	<!-- 获取指定appId对应的游戏分区  -->
-	<select id="BGamezone.getGamezoneByappId" parameterClass="Long" resultClass="Gamezone">
-		SELECT * FROM b_game_zone WHERE appId=#appId#
+	<select id="BGamezone.getGamezoneByGameId" parameterClass="Long" resultClass="Gamezone">
+		SELECT * FROM b_game_zone WHERE gameId=#gameId#
 	</select>
 	
 	<select id="BGamezone.getByIds" parameterClass="mb" resultClass="Gamezone">
@@ -141,7 +141,7 @@
 			* 
 		FROM b_game_zone 
 		WHERE 
-			appId=#appId# 
+			gameId=#gameId#
 			AND zoneId IN ($zoneIds$)
 	</select>
 	

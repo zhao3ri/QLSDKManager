@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import com.item.constants.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +34,8 @@ public class BGameService {
 
     public Page<Game> page(Page<Game> page, MapBean mb) {
         User userInfo = (User) Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
-        List<Long> allAppIds = gameManagerService.getAppIdsByIdentityId(userInfo.getIdentityId());
-        mb.put("appIds", allAppIds);
+        List<Long> allGameIds = gameManagerService.getGameIdsByIdentityId(userInfo.getIdentityId());
+        mb.put(MapBean.GAME_IDS, allGameIds);
         return gameDao.find(page, mb, "BGame.count", "BGame.page");
     }
 
@@ -61,11 +62,11 @@ public class BGameService {
     }
 
     public void save(Game entity) {
-        Long appId = entity.getId();
+        Long gameId = entity.getId();
         gameDao.save("BGame.save", entity);
-        Long appIds[] = {appId};
+        Long gameIds[] = {gameId};
         //新增游戏默认给roleId为3的超级管理员分配权限
-        gameManagerService.save(3L, appIds);
+        gameManagerService.save((long) Constants.ADMIN_IDENTITY_ID, gameIds);
     }
 
     public void update(Game entity) {
@@ -95,12 +96,12 @@ public class BGameService {
     public List<Game> getGameList(long identityId, MapBean mb) {
         if (mb == null)
             mb = new MapBean();
-        List<Long> appIds = gameManagerService.getAppIdsByIdentityId(identityId);
-        if (CollectionUtils.isEmpty(appIds)) {
-            appIds = new ArrayList<Long>();
-            appIds.add(-1L);
+        List<Long> gameIds = gameManagerService.getGameIdsByIdentityId(identityId);
+        if (CollectionUtils.isEmpty(gameIds)) {
+            gameIds = new ArrayList<Long>();
+            gameIds.add(-1L);
         }
-        mb.put("appIds", appIds);
+        mb.put(MapBean.GAME_IDS, gameIds);
         return gameDao.find("BGame.list", mb);
     }
 
@@ -112,14 +113,14 @@ public class BGameService {
             result = new HashMap<String, List<Gamezone>>();
             List<Gamezone> gamezones = gamezoneService.list();
             for (Gamezone gamezone : gamezones) {
-                if (result.get(gamezone.getAppId().toString()) == null) {
+                if (result.get(gamezone.getGameId().toString()) == null) {
                     List<Gamezone> appGamezones = new ArrayList<Gamezone>();
                     appGamezones.add(gamezone);
-                    result.put(gamezone.getAppId().toString(), appGamezones);
+                    result.put(gamezone.getGameId().toString(), appGamezones);
                 } else {
-                    List<Gamezone> appGamezones = result.get(gamezone.getAppId().toString());
+                    List<Gamezone> appGamezones = result.get(gamezone.getGameId().toString());
                     appGamezones.add(gamezone);
-                    result.put(gamezone.getAppId().toString(), appGamezones);
+                    result.put(gamezone.getGameId().toString(), appGamezones);
                 }
             }
             RedisClient.set("game_zones_all", result);

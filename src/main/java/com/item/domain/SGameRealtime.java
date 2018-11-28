@@ -24,7 +24,7 @@ public class SGameRealtime {
     /*
      *
      */
-    private Long appId;
+    private Long gameId;
     /*
      *
      */
@@ -88,17 +88,17 @@ public class SGameRealtime {
     /**
      * @return
      */
-    public long getAppId() {
-        return appId == null ? 0 : appId;
+    public long getGameId() {
+        return gameId == null ? 0 : gameId;
     }
 
     /**
-     * 设置 [appId]
+     * 设置 [gameId]
      *
-     * @param appId
+     * @param gameId
      */
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     /**

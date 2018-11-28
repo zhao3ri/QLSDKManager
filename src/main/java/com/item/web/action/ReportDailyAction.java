@@ -27,13 +27,13 @@ import core.module.orm.MapBean;
 import core.module.utils.Struts2Utils;
 import core.module.web.Struts2Action;
 
-public class ReportDailyAction extends Struts2Action {
+public class ReportDailyAction extends BaseAction {
     private static final long serialVersionUID = 5645405406052360424L;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReportDailyAction.class);
 
     private List<Game> allGames;
-    private Long appId;
+    private Long gameId;
     private Integer clientType;
     private Integer groupType;
     private Integer compareGroupType;
@@ -64,32 +64,18 @@ public class ReportDailyAction extends Struts2Action {
     @Resource
     private SysGameManagerService gameManagerService;
 
-    private Boolean initSearch() {
-        User userInfo = (User) Struts2Utils.getRequest().getSession().getAttribute("sessionUserInfo");
-        List<Long> appIds = gameManagerService.getAppIdsByIdentityId(userInfo.getIdentityId());
-        if (CollectionUtils.isEmpty(appIds)) {
-            try {
-                Struts2Utils.getResponse().sendRedirect(Struts2Utils.getRequest().getContextPath() + "/common/403.jsp");
-                return false;
-            } catch (IOException e) {
-                LOGGER.error("rechargeRegion error", e);
-                e.printStackTrace();
-                return false;
+    @Override
+    protected boolean initData() {
+        boolean success= super.initData();
+        if (success){
+            allGames = getCurrentIdentityGames();
+            if (null == gameId) {
+                gameId = getFirstGameId();
             }
+            if (StringUtil.isEmpty(keepStatType))
+                keepStatType = "0";
         }
-        allGames = bGameService.getGameList(null);
-
-        if (null == appId) {
-            appId = allGames.get(0).getId();
-            String cookieAppId = CookieUtils.getCookieValue(Struts2Utils.getRequest(), "cookie_appId");
-            if (StringUtils.isNotBlank(cookieAppId) && appIds.contains(Long.valueOf(cookieAppId))) {
-                appId = Long.valueOf(cookieAppId);
-            }
-        }
-        CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_appId", String.valueOf(appId));
-        if (StringUtil.isEmpty(keepStatType))
-            keepStatType = "0";
-        return true;
+        return success;
     }
 
     public String basic() {
@@ -101,13 +87,13 @@ public class ReportDailyAction extends Struts2Action {
         }
         if (StringUtils.isNotBlank(zoneName)) {
             mb.put("zoneName", zoneName);
-            mb.put("appId", appId);
+            mb.put("gameId", gameId);
             zoneIds = gamezoneService.get(mb).getZoneId();
         }
 
-        if (!initSearch())
+        if (!initData())
             return null;
-        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 1);
+        result = reportDailyService.basic(gameId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 1);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -115,9 +101,9 @@ public class ReportDailyAction extends Struts2Action {
     }
 
     public String newly() {
-        if (!initSearch())
+        if (!initData())
             return null;
-        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 2);
+        result = reportDailyService.basic(gameId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 2);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -125,9 +111,9 @@ public class ReportDailyAction extends Struts2Action {
     }
 
     public String first() {
-        if (!initSearch())
+        if (!initData())
             return null;
-        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 3);
+        result = reportDailyService.basic(gameId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 3);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -135,9 +121,9 @@ public class ReportDailyAction extends Struts2Action {
     }
 
     public String keep() {
-        if (!initSearch())
+        if (!initData())
             return null;
-        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, null, 4);
+        result = reportDailyService.basic(gameId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, null, 4);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -145,9 +131,9 @@ public class ReportDailyAction extends Struts2Action {
     }
 
     public String loss() {
-        if (!initSearch())
+        if (!initData())
             return null;
-        result = reportDailyService.basic(appId, clientType, null, channelIds, null, zoneIds, null, null, null, 6);
+        result = reportDailyService.basic(gameId, clientType, null, channelIds, null, zoneIds, null, null, null, 6);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -155,9 +141,9 @@ public class ReportDailyAction extends Struts2Action {
     }
 
     public String back() {
-        if (!initSearch())
+        if (!initData())
             return null;
-        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 5);
+        result = reportDailyService.basic(gameId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 5);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -165,9 +151,9 @@ public class ReportDailyAction extends Struts2Action {
     }
 
     public String change() {
-        if (!initSearch())
+        if (!initData())
             return null;
-        result = reportDailyService.basic(appId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 7);
+        result = reportDailyService.basic(gameId, clientType, groupType, channelIds, compareChannelIds, zoneIds, compareZoneIds, selectRange, compareSelectRange, 7);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -175,10 +161,10 @@ public class ReportDailyAction extends Struts2Action {
     }
 
     public String operate() {
-        if (!initSearch())
+        if (!initData())
             return null;
 
-        result = reportDailyService.operate(appId, clientType, channelIds, zoneIds, selectRange);
+        result = reportDailyService.operate(gameId, clientType, channelIds, zoneIds, selectRange);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -186,10 +172,10 @@ public class ReportDailyAction extends Struts2Action {
     }
 
     public String chanels() {
-        if (!initSearch())
+        if (!initData())
             return null;
 
-        result = reportDailyService.chanels(appId, clientType, channelIds, selectRange);
+        result = reportDailyService.chanels(gameId, clientType, channelIds, selectRange);
         if (result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -198,9 +184,9 @@ public class ReportDailyAction extends Struts2Action {
 
 
     public String online() {
-        if (!initSearch())
+        if (!initData())
             return null;
-        result = reportService.online(appId, clientType, channelIds
+        result = reportService.online(gameId, clientType, channelIds
                 , compareChannelIds, zoneIds, compareZoneIds, groupType
                 , compareGroupType, selectRange, compareSelectRange);
         if (result.containsKey("selectRange")) {
@@ -213,9 +199,9 @@ public class ReportDailyAction extends Struts2Action {
 
     @SuppressWarnings("unchecked")
     public void operateExport() {
-        if (!initSearch())
+        if (!initData())
             return;
-        result = reportDailyService.operate(appId, clientType, channelIds, zoneIds, selectRange);
+        result = reportDailyService.operate(gameId, clientType, channelIds, zoneIds, selectRange);
         List<ReportHistoryDaily> dailies = (List<ReportHistoryDaily>) result.get("data");
 
         ExcelExport ee = new ExcelExport();
@@ -422,12 +408,12 @@ public class ReportDailyAction extends Struts2Action {
         this.allGames = allGames;
     }
 
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public Integer getClientType() {

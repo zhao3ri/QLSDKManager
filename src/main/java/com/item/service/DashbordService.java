@@ -44,7 +44,6 @@ public class DashbordService {
     private String redisPayPre = REDIS_PREFIX + "totalpay" + REDIS_SEPARATOR;
 
     private static final String QUERY_PARAM_LIKE = "like";
-    private static final String QUERY_PARAM_GAME_IDS = "appIds";
     private Dashbord dashbord;
 
     public Dashbord loadDashbord() {
@@ -81,7 +80,7 @@ public class DashbordService {
         String month = date.substring(0, date.lastIndexOf("-"));
         MapBean mb = MapBean.getBean();
         mb.put(QUERY_PARAM_LIKE, month);
-        mb.put(QUERY_PARAM_GAME_IDS, ids);
+        mb.put(MapBean.GAME_IDS, ids);
         SGame sGame = sGameService.summary(mb);
         dashbord.setTotalMonthlyNewUser(sGame.getTotalRegUser());
         dashbord.setTotalMonthlyPay(sGame.getPayAmount());
@@ -98,7 +97,7 @@ public class DashbordService {
         }
         MapBean mb = MapBean.getBean();
         mb.put(QUERY_PARAM_LIKE, date);
-        mb.put(QUERY_PARAM_GAME_IDS, ids);
+        mb.put(MapBean.GAME_IDS, ids);
         long newUsers = sGameRealtimeService.getCurrentNewUsers(mb);
         dashbord.setCurrentNewUser((int) newUsers);
         MapBean.cleanUp(mb);

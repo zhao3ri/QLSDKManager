@@ -16,8 +16,8 @@
     		<isNotNull prepend="and" property="clientType">
     			`clientType`=#clientType#
     		</isNotNull>
-    		<isNotNull prepend="and" property="appId">
-    			`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="zoneId">
     			`zoneId`=#zoneId#
@@ -53,7 +53,7 @@
         SELECT
 	  		`id`,
 			`clientType`,
-			`appId`,
+			gameId,
 			`zoneId`,
 			`platformId`,
 			`statDate`,
@@ -80,7 +80,7 @@
         SELECT
 	 		`id`,
 			`clientType`,
-			`appId`,
+			gameId,
 			`zoneId`,
 			`platformId`,
 			`statDate`,
@@ -102,7 +102,7 @@
     <select id="SZonePlatformRealtime.listGroupBy" resultClass="sZonePlatformRealtime" parameterClass="mb">
         SELECT
 			`statDate`,
-			appId,
+			gameId,
 			zoneId,
 	        platformId,
 			SUM(`onlineUsers`) AS onlineUsers,
@@ -132,7 +132,7 @@
         SELECT
 	   		`id`,
 			`clientType`,
-			`appId`,
+			gameId,
 			`zoneId`,
 			`platformId`,
 			`statDate`,
@@ -149,7 +149,7 @@
     <insert id="SZonePlatformRealtime.save" parameterClass="sZonePlatformRealtime">
         INSERT INTO s_zone_platform_realtime(
         	`clientType`,
-			`appId`,
+			gameId,
 			`zoneId`,
 			`platformId`,
 			`statDate`,
@@ -160,7 +160,7 @@
 			`activeUsers`
         )VALUES(
         	#clientType#,
-			#appId#,
+			#gameId#,
 			#zoneId#,
 			#platformId#,
 			#statDate#,
@@ -181,8 +181,8 @@
 	    		<isNotNull prepend="," property="clientType">
 					`clientType`=#clientType#
 				</isNotNull>
-	    		<isNotNull prepend="," property="appId">
-					`appId`=#appId#
+	    		<isNotNull prepend="," property="gameId">
+					`gameId`=#gameId#
 				</isNotNull>
 	    		<isNotNull prepend="," property="zoneId">
 					`zoneId`=#zoneId#

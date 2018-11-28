@@ -13,8 +13,8 @@
             <isNotNull prepend="and" property="clientType">
                 `clientType`=#clientType#
             </isNotNull>
-            <isNotNull prepend="and" property="appId">
-                `appId`=#appId#
+            <isNotNull prepend="and" property="gameId">
+                `gameId`=#gameId#
             </isNotNull>
             <isNotNull prepend="and" property="statDate">
                 <![CDATA[
@@ -61,13 +61,13 @@
             <isNotEmpty prepend="and" property="like">
                 statDate LIKE '$like$%'
             </isNotEmpty>
-            <isNotNull prepend="and" property="appId">
-                `appId`=#appId#
+            <isNotNull prepend="and" property="gameId">
+                `gameId`=#gameId#
             </isNotNull>
-            <isNotEmpty prepend="AND" property="appIds">
-                appId IN
-                <iterate property="appIds" open="(" close=")" conjunction=",">
-                    #appIds[]#
+            <isNotEmpty prepend="AND" property="gameIds">
+                gameId IN
+                <iterate property="gameIds" open="(" close=")" conjunction=",">
+                    #gameIds[]#
                 </iterate>
             </isNotEmpty>
         </dynamic>

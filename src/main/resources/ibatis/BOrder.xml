@@ -10,8 +10,8 @@
 
     <sql id="BOrder.Where">
     	<dynamic prepend="where">
-    		<isNotNull prepend="and" property="appId">
-    			a.`appId`=#appId#
+    		<isNotNull prepend="and" property="gameId">
+    			a.`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="platformId">
     			a.`platformId`=#platformId#
@@ -40,10 +40,10 @@
     		<isNotNull prepend="and" property="notifyStatus">
     			a.`notifyStatus`=#notifyStatus#
     		</isNotNull>
-    		<isNotEmpty prepend="AND" property="appIds">
-				a.appId IN 
-				<iterate property="appIds" open="(" close=")" conjunction=",">
-			      #appIds[]#
+    		<isNotEmpty prepend="AND" property="gameIds">
+				a.gameId IN
+				<iterate property="gameIds" open="(" close=")" conjunction=",">
+			      #gameIds[]#
 			    </iterate>
 			</isNotEmpty>
     		<isNotEmpty prepend="and" property="statStartDate">
@@ -73,13 +73,13 @@
     <select id="BOrder.page" parameterClass="mb" resultClass="bOrder">
         SELECT
 	   		a.*,
-	   		b.appName,
+	   		b.gameName,
 	   		c.platformName,
 	   		d.zoneName
 		FROM b_order AS a 
-		LEFT JOIN b_game AS b ON a.appId = b.id
+		LEFT JOIN b_game AS b ON a.gameId = b.id
 		LEFT JOIN b_platform AS c ON a.platformId = c.id
-		LEFT JOIN b_game_zone AS d ON a.appId = d.appId AND a.zoneId = d.zoneId
+		LEFT JOIN b_game_zone AS d ON a.gameId = d.gameId AND a.zoneId = d.zoneId
         <include refid="BOrder.Where"/>
         <isNotNull property="orderby">
         	ORDER BY $orderby$
@@ -90,22 +90,22 @@
     <select id="BOrder.count" resultClass="Long" parameterClass="mb">
         SELECT COUNT(1)
 		FROM b_order AS a
-		LEFT JOIN b_game AS b ON a.appId = b.id
+		LEFT JOIN b_game AS b ON a.gameId = b.id
 		LEFT JOIN b_platform AS c ON a.platformId = c.id
-		LEFT JOIN b_game_zone AS d ON a.appId = d.appId AND a.zoneId = d.zoneId
+		LEFT JOIN b_game_zone AS d ON a.gameId = d.gameId AND a.zoneId = d.zoneId
         <include refid="BOrder.Where"/>
     </select>
 
     <select id="BOrder.list" resultClass="bOrder" parameterClass="mb">
         SELECT
 	   		a.*,
-	   		b.appName,
+	   		b.gameName,
 	   		c.platformName,
 	   		d.zoneName
 		FROM b_order AS a 
-		LEFT JOIN b_game AS b ON a.appId = b.id
+		LEFT JOIN b_game AS b ON a.gameId = b.id
 		LEFT JOIN b_platform AS c ON a.platformId = c.id
-		LEFT JOIN b_game_zone AS d ON a.appId = d.appId AND a.zoneId = d.zoneId
+		LEFT JOIN b_game_zone AS d ON a.gameId = d.gameId AND a.zoneId = d.zoneId
         <include refid="BOrder.Where"/>
         <isNotNull property="orderby">
              ORDER BY $orderby$
@@ -118,13 +118,13 @@
     <select id="BOrder.get" resultClass="bOrder" parameterClass="Long">
         SELECT
 	   		a.*,
-	   		b.appName,
+	   		b.gameName,
 	   		c.platformName,
 	   		d.zoneName
 		FROM b_order AS a 
-		LEFT JOIN b_game AS b ON a.appId = b.id
+		LEFT JOIN b_game AS b ON a.gameId = b.id
 		LEFT JOIN b_platform AS c ON a.platformId = c.id
-		LEFT JOIN b_game_zone AS d ON a.appId = d.appId AND a.zoneId = d.zoneId
+		LEFT JOIN b_game_zone AS d ON a.gameId = d.gameId AND a.zoneId = d.zoneId
 		WHERE
 	  		a.`id`=#id# 
     </select>

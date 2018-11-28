@@ -26,7 +26,7 @@ public class SRoleRankService {
 //			mb.put("uid", rank.getUid());
 //			mb.put("platformId", rank.getPlatformId());
 //			mb.put("clientType", rank.getClientType());
-//			mb.put("appId", rank.getAppId());
+//			mb.put("appId", rank.getGameId());
 //			logger.info("Set last Login Time");
 //			rank.setLastLoginDate(bBehaviorUserService.getLastLoginDate(mb));
 //		}

@@ -39,11 +39,11 @@ class BaseAction extends Struts2Action {
 
     protected long getFirstGameId() {
         long appId = currentIdentityGames.get(0).getId();
-        String cookieAppId = CookieUtils.getCookieValue(Struts2Utils.getRequest(), "cookie_appId");
+        String cookieAppId = CookieUtils.getCookieValue(Struts2Utils.getRequest(), "cookie_gameId");
         if (StringUtils.isNotBlank(cookieAppId)) {
             appId = Long.valueOf(cookieAppId);
         }
-        CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_appId", String.valueOf(appId));
+        CookieUtils.setCookieValue(Struts2Utils.getResponse(), "cookie_gameId", String.valueOf(appId));
         return appId;
     }
 

@@ -28,10 +28,10 @@
 	    				<div class="form-group clearfix" >
 							<label  class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>游戏：</label>
 							<div class=" col-sm-9 col-lg-5">
-							 <select class="form-control" name="gamezone.appId"  data-original-title="" title="">
+							 <select class="form-control" name="gamezone.gameId"  data-original-title="" title="">
 						         <option value="">请选择游戏</option>
 						         <s:iterator value="gameList" var="item">
-							     <option value="${item.id}" <c:if test="${item.id==gamezone.appId}">selected</c:if>>${item.appName }</option>
+							     <option value="${item.id}" <c:if test="${item.id==gamezone.gameId}">selected</c:if>>${item.gameName }</option>
 						         </s:iterator>								
 				             </select>
 							</div>
@@ -70,7 +70,7 @@
 				rules: {
 					"gamezone.zoneId":{required:true},
 			        "gamezone.zoneName":{required:true},
-					"gamezone.appId":{required:true}
+					"gamezone.gameId":{required:true}
 				}
 			});
 		});

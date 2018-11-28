@@ -15,9 +15,9 @@
 	      	<div class="panel-heading">角色列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 	      		<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-		          	<select class="form-control" name="identity.appId" placeholder="请选择游戏">
+		          	<select class="form-control" name="identity.gameId" placeholder="请选择游戏">
 						<s:iterator value="games" var="item">
-							<option value="${item.id }" <c:if test="${item.id == identity.appId }">selected</c:if>>${item.appName }</option>
+							<option value="${item.id }" <c:if test="${item.id == identity.gameId }">selected</c:if>>${item.gameName }</option>
 						</s:iterator>
 					</select>
 		        </div>
@@ -57,7 +57,7 @@
 	            			<s:if test="rolePage.result.size>0">
 								<s:iterator value="rolePage.result" var="page">
 									<tr>
-										<td><s:property value="appName"/></td>
+										<td><s:property value="gameName"/></td>
 										<td><s:property value="platformName"/></td>
 										<td><s:property value="zoneId"/></td>
 										<td><s:property value="identityId"/></td>

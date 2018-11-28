@@ -5,9 +5,9 @@ import com.item.domain.SPlatform;
 
 public class GameClientReport {
 
-    private Long appId;
+    private Long gameId;
 
-    private String appName;
+    private String gameName;
 
     private SGame iosCps;
 
@@ -17,20 +17,20 @@ public class GameClientReport {
 
     private SPlatform androidCpa;
 
-    public Long getAppId() {
-        return appId;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setAppId(Long appId) {
-        this.appId = appId;
+    public void setGameId(Long appId) {
+        this.gameId = appId;
     }
 
-    public String getAppName() {
-        return appName;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     public SGame getIosCps() {

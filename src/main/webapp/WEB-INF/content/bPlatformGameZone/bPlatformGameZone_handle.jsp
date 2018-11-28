@@ -24,7 +24,7 @@
 	        	<div class="panel-body ">
 	          		<div class=" tooltip-show form-horizontal">
 	    				<input type="hidden" name="zoneIds" id="zoneIds"/>
-	    				<input type="hidden" name="BPlatformGameZone.appId" value="${BPlatformGameZone.appId }"/>
+	    				<input type="hidden" name="BPlatformGameZone.gameId" value="${BPlatformGameZone.gameId }"/>
 	    				<input type="hidden" name="BPlatformGameZone.platformId" value="${BPlatformGameZone.platformId }"/>
 						
 						<div class="form-group clearfix" >
@@ -58,7 +58,7 @@
 		$(document).ready(function() {
 			$("#inputForm").validate({
 				rules: {
-					"BPlatformGameZone.appId":{number:true,maxlength:10,required:true},
+					"BPlatformGameZone.gameId":{number:true,maxlength:10,required:true},
 					"BPlatformGameZone.platformId":{digits:true,maxlength:10,required:true},
 					"gameZones":{required:true}
 				}

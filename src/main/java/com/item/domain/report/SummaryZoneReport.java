@@ -5,9 +5,9 @@ import com.item.domain.SZonePlatform;
 
 public class SummaryZoneReport {
 	
-	private Long appId;
+	private Long gameId;
 	
-	private String appname;
+	private String gameName;
 	
 	private String zonename;
 	
@@ -35,20 +35,20 @@ public class SummaryZoneReport {
 	public SummaryZoneReport() {
 	}
 
-	public Long getAppId() {
-		return appId;
+	public Long getGameId() {
+		return gameId;
 	}
 
-	public void setAppId(Long appId) {
-		this.appId = appId;
+	public void setGameId(Long gameId) {
+		this.gameId = gameId;
 	}
 
-	public String getAppname() {
-		return appname;
+	public String getGameName() {
+		return gameName;
 	}
 
-	public void setAppname(String appname) {
-		this.appname = appname;
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
 	}
 	
 	public String getZonename() {

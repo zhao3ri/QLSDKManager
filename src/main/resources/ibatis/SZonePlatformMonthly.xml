@@ -16,8 +16,8 @@
 			<isNotNull prepend="AND" property="clientType">
 				szpm.clientType=#clientType#
 			</isNotNull>
-			<isNotNull prepend="AND" property="appId">
-				szpm.appId=#appId#
+			<isNotNull prepend="AND" property="gameId">
+				szpm.gameId=#gameId#
 			</isNotNull>
 			<isNotNull prepend="AND" property="zoneId">
 				szpm.zoneId=#zoneId#
@@ -46,8 +46,8 @@
 			<isNotNull prepend="AND" property="payUsers">
 				szpm.payUsers=#payUsers#
 			</isNotNull>
-			<isNotNull prepend="AND" property="appName">
-				bg.appName=#appName#
+			<isNotNull prepend="AND" property="gameName">
+				bg.gameName=#gameName#
 			</isNotNull>
 		</dynamic>
 	</sql>
@@ -58,8 +58,8 @@
        SELECT
             szpm.`id` AS id,
             szpm.`clientType` AS clientType,
-            szpm.`appId` AS appId,
-            bg.`appName` AS appName,
+            szpm.gameId AS gameId,
+            bg.gameName AS gameName,
             szpm.`zoneId` AS zoneId,
             bgz.`zoneName` AS zoneName,
             szpm.`platformId` AS platformId,
@@ -74,13 +74,13 @@
 		JOIN 
 		b_game bg
 		ON 
-		bg.id=szpm.appId
+		bg.id=szpm.gameId
 		JOIN 
 		b_game_zone bgz 
 		ON
-		 bgz.appId=szpm.appId AND bgz.zoneId=szpm.zoneId
+		 bgz.gameId=szpm.gameId AND bgz.zoneId=szpm.zoneId
 		 <include refid="SZonePlatformMonthly.where"/>
-		 GROUP BY szpm.zoneId,szpm.appId
+		 GROUP BY szpm.zoneId,szpm.gameId
 		ORDER BY szpm.zoneId
     </select>
     
@@ -95,20 +95,20 @@
 		SUM(szpm.totalRegUser) AS totalRegUser,
 		SUM(szpm.activeUsers) AS activeUsers,
 		szpm.`zoneId` AS zoneId,
-		szpm.`appId` AS appId,
+		szpm.gameId AS gameId,
         szpm.`platformId` AS platformId,
         bgz.`zoneName` AS zoneName,
-		bg.appName AS appName,
+		bg.gameName AS gameName,
 		bp.platformName AS platformName
 		FROM s_zone_platform_monthly szpm
 		JOIN 
 		b_game bg
 		ON 
-		bg.id=szpm.appId
+		bg.id=szpm.gameId
 		JOIN 
 		b_game_zone bgz 
 		ON
-		 bgz.appId=szpm.appId AND bgz.zoneId=szpm.zoneId
+		 bgz.gameId=szpm.gameId AND bgz.zoneId=szpm.zoneId
 		JOIN 
 		b_platform bp 
 		ON 
@@ -129,20 +129,20 @@
 		SUM(szpm.totalRegUser) AS totalRegUser,
 		SUM(szpm.activeUsers) AS activeUsers,
 		szpm.`zoneId` AS zoneId,
-		szpm.`appId` AS appId,
+		szpm.gameId AS gameId,
         szpm.`platformId` AS platformId,
         bgz.`zoneName` AS zoneName,
-		bg.appName AS appName,
+		bg.gameName AS gameName,
 		bp.platformName AS platformName
 		FROM s_zone_platform_monthly szpm
 		JOIN 
 		b_game bg
 		ON 
-		bg.id=szpm.appId
+		bg.id=szpm.gameId
 		JOIN 
 		b_game_zone bgz 
 		ON
-		 bgz.appId=szpm.appId AND bgz.zoneId=szpm.zoneId
+		 bgz.gameId=szpm.gameId AND bgz.zoneId=szpm.zoneId
 		JOIN 
 		b_platform bp 
 		ON 

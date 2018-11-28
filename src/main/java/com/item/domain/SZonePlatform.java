@@ -24,9 +24,9 @@ package com.item.domain;
 	/*
 	 *
 	 */
-	private Long appId;
+	private Long gameId;
 	
-	private String appName;
+	private String gameName;
 	/*
 	 *
 	 */
@@ -174,11 +174,11 @@ package com.item.domain;
 		this.endDate = endDate;
 	}
 	
-	public String getAppName() {
-		return appName;
+	public String getGameName() {
+		return gameName;
 	}
-	public void setAppName(String appName) {
-		this.appName = appName;
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
 	}
 	/**
 	 * @return 
@@ -209,15 +209,15 @@ package com.item.domain;
 	/**
 	 * @return 
 	 */
-	public Long getAppId(){
-		return appId;
+	public Long getGameId(){
+		return gameId;
 	}
 	/**
-	 * 设置 [appId]
-	 * @param appId 
+	 * 设置 [gameId]
+	 * @param gameId
 	 */
-	public void setAppId(Long appId){
-		this.appId=appId;
+	public void setGameId(Long gameId){
+		this.gameId = gameId;
 	}
 	/**
 	 * @return 

@@ -30,7 +30,7 @@ import core.module.orm.Page;
 import core.module.web.Struts2Action;
 
 @Action
-public class BOrderAction extends Struts2Action{
+public class BOrderAction extends Struts2Action {
 
     private static final long serialVersionUID = 197266703365933779L;
 
@@ -43,7 +43,7 @@ public class BOrderAction extends Struts2Action{
     @Autowired
     private BGamezoneService gamezoneService;
 
-    private Page<BOrder> bOrderPage=new Page<BOrder>(10);
+    private Page<BOrder> bOrderPage = new Page<BOrder>(10);
     private String checkedIds;
     private BOrder bOrder;
     private Long id;
@@ -54,86 +54,86 @@ public class BOrderAction extends Struts2Action{
 
     private Double moneyFrom;
     private Double moneyTo;
-	
-    public String list(){
+
+    public String list() {
         MapBean mb = search();
         bOrderPage = bOrderService.page(bOrderPage, mb);
-        
+
         games = bGameService.getGameList();
         platforms = bPlatformService.getCurrentIdentityChannelList();
-        
+
         return "list";
     }
-	
-    public String save(){
-        if(bOrder != null){
-            if(bOrder.getId() != null){
+
+    public String save() {
+        if (bOrder != null) {
+            if (bOrder.getId() != null) {
                 bOrderService.update(bOrder);
                 addActionMessage("修改信息成功");
-            }else{
+            } else {
                 bOrderService.save(bOrder);
                 addActionMessage("保存信息成功");
             }
         }
         return "save";
     }
-	
-    public String handle(){
-        if(id != null){
+
+    public String handle() {
+        if (id != null) {
             bOrder = bOrderService.get(id);
         }
         return "handle";
     }
-    
-    public String view(){
-    	if(id != null){
+
+    public String view() {
+        if (id != null) {
             bOrder = bOrderService.get(id);
-        }else{
-        	addActionMessage("请选择一个ID");
+        } else {
+            addActionMessage("请选择一个ID");
         }
-    	return "view";
+        return "view";
     }
-    
-    public String delete(){
-        if(checkedIds != null){
+
+    public String delete() {
+        if (checkedIds != null) {
             bOrderService.delete(checkedIds);
             addActionMessage("删除数据成功");
-        }else{
+        } else {
             addActionMessage("请选择要删除的数据");
         }
         return "delete";
     }
-    
-    public String reissue(){
-    	bOrder = bOrderService.get(id);
-    	if (bOrder == null) {
-    		addActionMessage("不存在该订单！");
-		}else if (bOrder.getStatus() != 2) {
-    		addActionMessage("该订单还未支付成功,不能补发！");
-		}else {
-			try {
-				RedisClient.lpush("rs_Order", bOrder.getOrderId());
-				
-				BOrder reissue = new BOrder();
-				reissue.setId(id);
-				reissue.setNotifyStatus(4);
-				bOrderService.update(reissue);
-				addActionMessage("补发成功！");
-			} catch (Exception e) {
-				logger.error("补发异常",e);
-				addActionMessage("补发异常！");
-				e.printStackTrace();
-			}
-		}
-    	return "save";
+
+    public String reissue() {
+        bOrder = bOrderService.get(id);
+        if (bOrder == null) {
+            addActionMessage("不存在该订单！");
+        } else if (bOrder.getStatus() != 2) {
+            addActionMessage("该订单还未支付成功,不能补发！");
+        } else {
+            try {
+                RedisClient.lpush("rs_Order", bOrder.getOrderId());
+
+                BOrder reissue = new BOrder();
+                reissue.setId(id);
+                reissue.setNotifyStatus(4);
+                bOrderService.update(reissue);
+                addActionMessage("补发成功！");
+            } catch (Exception e) {
+                logger.error("补发异常", e);
+                addActionMessage("补发异常！");
+                e.printStackTrace();
+            }
+        }
+        return "save";
     }
-    
- 	public void excelExport(){
- 		try{
- 			MapBean mb = search();
- 			List<BOrder> list = bOrderService.list(mb);
-            ExcelExport ee=new ExcelExport();
-            ee.setHead("数据统计报表_"+DateUtils.format(new Date(),"yyyyMMddHHmmss"));
+
+    public void excelExport() {
+        try {
+            MapBean mb = search();
+            List<BOrder> list = bOrderService.list(mb);
+            ExcelExport ee = new ExcelExport();
+            ee.setHead("数据统计报表_" + DateUtils.format(new Date(), "yyyyMMddHHmmss"));
             ee.getEl().add("订单号");
             ee.getEl().add("cp订单号");
             ee.getEl().add("游戏名称");
@@ -145,205 +145,208 @@ public class BOrderAction extends Struts2Action{
             ee.getEl().add("状态");
             ee.getEl().add("通知状态");
             ee.getEl().add("创建时间");
-            
+
             Map<String, Map<String, StateVo>> map = StateContext.getStateConfigs();
             Map<String, StateVo> orderStatus = map.get("orderStatus");
             Map<String, StateVo> orderNotifyStatus = map.get("orderNotifyStatus");
             Map<String, StateVo> clientType = map.get("clientType");
-            
-            for(int i=0; i<list.size(); i++){
-            	List<Excel> e=new ArrayList<Excel>();
-            	e.add(new Excel(list.get(i).getOrderId(),20));
- 	            e.add(new Excel(list.get(i).getCpOrderId(),20));
-	            e.add(new Excel(list.get(i).getAppName(),20));
-	            if (StringUtils.isNotBlank(list.get(i).getZoneName())) {
-	            	e.add(new Excel(list.get(i).getZoneName(),20));
-				}else {
-		            e.add(new Excel(list.get(i).getZoneId(),20));
-				}    
-	            e.add(new Excel(list.get(i).getPlatformName(),20));
-	            e.add(new Excel(list.get(i).getUid(),20));
-	            e.add(new Excel(DecimallFormatUtil.format((double)list.get(i).getAmount()/100),20));
-	            e.add(new Excel(clientType.get(list.get(i).getClientType().toString()).getName(),20));
-	            e.add(new Excel(orderStatus.get(list.get(i).getStatus().toString()).getName(),20));
-	            e.add(new Excel(orderNotifyStatus.get(list.get(i).getNotifyStatus().toString()).getName(),20));
-              	e.add(new Excel(DateUtils.format(list.get(i).getCreateTime(),"yyyy-MM-dd HH:mm:ss"),20));
+
+            for (int i = 0; i < list.size(); i++) {
+                List<Excel> e = new ArrayList<Excel>();
+                e.add(new Excel(list.get(i).getOrderId(), 20));
+                e.add(new Excel(list.get(i).getCpOrderId(), 20));
+                e.add(new Excel(list.get(i).getGameName(), 20));
+                if (StringUtils.isNotBlank(list.get(i).getZoneName())) {
+                    e.add(new Excel(list.get(i).getZoneName(), 20));
+                } else {
+                    e.add(new Excel(list.get(i).getZoneId(), 20));
+                }
+                e.add(new Excel(list.get(i).getPlatformName(), 20));
+                e.add(new Excel(list.get(i).getUid(), 20));
+                e.add(new Excel(DecimallFormatUtil.format((double) list.get(i).getAmount() / 100), 20));
+                e.add(new Excel(clientType.get(list.get(i).getClientType().toString()).getName(), 20));
+                e.add(new Excel(orderStatus.get(list.get(i).getStatus().toString()).getName(), 20));
+                e.add(new Excel(orderNotifyStatus.get(list.get(i).getNotifyStatus().toString()).getName(), 20));
+                e.add(new Excel(DateUtils.format(list.get(i).getCreateTime(), "yyyy-MM-dd HH:mm:ss"), 20));
                 ee.getEll().add(e);
             }
-			ee.setFoot("总共："+list.size()+"条记录");
+            ee.setFoot("总共：" + list.size() + "条记录");
             ee.excelExport();
-      	}catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private MapBean search(){
-        MapBean mb=new MapBean();
+    private MapBean search() {
+        MapBean mb = new MapBean();
         if (moneyFrom != null) {
-			mb.put("moneyFrom", moneyFrom * 100);
-		}
-        if (moneyTo!=null) {
-			mb.put("moneyTo", moneyTo * 100);
-		}
-        
-        if(bOrder!=null){
-        	if (bOrder.getId()!=null){
-                mb.put("id",bOrder.getId());
+            mb.put("moneyFrom", moneyFrom * 100);
+        }
+        if (moneyTo != null) {
+            mb.put("moneyTo", moneyTo * 100);
+        }
+
+        if (bOrder != null) {
+            if (bOrder.getId() != null) {
+                mb.put("id", bOrder.getId());
             }
-        	if (bOrder.getAppId()!=null){
-                mb.put("appId",bOrder.getAppId());
+            if (bOrder.getGameId() != null) {
+                mb.put(MapBean.GAME_ID, bOrder.getGameId());
             }
-        	if (bOrder.getPlatformId()!=null){
-                mb.put("platformId",bOrder.getPlatformId());
+            if (bOrder.getPlatformId() != null) {
+                mb.put(MapBean.PLATFORM_ID, bOrder.getPlatformId());
             }
-        	if (bOrder.getUid()!=null&&!"".equals(bOrder.getUid())){
-                mb.put("uid",bOrder.getUid());
+            if (bOrder.getUid() != null && !"".equals(bOrder.getUid())) {
+                mb.put("uid", bOrder.getUid());
             }
-        	if (bOrder.getZoneId()!=null&&!"".equals(bOrder.getZoneId())){
-                mb.put("zoneId",bOrder.getZoneId());
+            if (bOrder.getZoneId() != null && !"".equals(bOrder.getZoneId())) {
+                mb.put("zoneId", bOrder.getZoneId());
             }
-        	if (bOrder.getRoleId()!=null&&!"".equals(bOrder.getRoleId())){
-                mb.put("roleId",bOrder.getRoleId());
+            if (bOrder.getRoleId() != null && !"".equals(bOrder.getRoleId())) {
+                mb.put("roleId", bOrder.getRoleId());
             }
-        	if (bOrder.getRoleName()!=null&&!"".equals(bOrder.getRoleName())){
-                mb.put("roleName",bOrder.getRoleName());
+            if (bOrder.getRoleName() != null && !"".equals(bOrder.getRoleName())) {
+                mb.put("roleName", bOrder.getRoleName());
             }
-        	if (bOrder.getOrderId()!=null&&!"".equals(bOrder.getOrderId())){
-                mb.put("orderId",bOrder.getOrderId());
+            if (bOrder.getOrderId() != null && !"".equals(bOrder.getOrderId())) {
+                mb.put("orderId", bOrder.getOrderId());
             }
-        	if (bOrder.getCpOrderId()!=null&&!"".equals(bOrder.getCpOrderId())){
-                mb.put("cpOrderId",bOrder.getCpOrderId());
+            if (bOrder.getCpOrderId() != null && !"".equals(bOrder.getCpOrderId())) {
+                mb.put("cpOrderId", bOrder.getCpOrderId());
             }
-        	if (bOrder.getCpExtInfo()!=null&&!"".equals(bOrder.getCpExtInfo())){
-                mb.put("cpExtInfo",bOrder.getCpExtInfo());
+            if (bOrder.getCpExtInfo() != null && !"".equals(bOrder.getCpExtInfo())) {
+                mb.put("cpExtInfo", bOrder.getCpExtInfo());
             }
-        	if (bOrder.getAmount()!=null){
-                mb.put("amount",bOrder.getAmount());
+            if (bOrder.getAmount() != null) {
+                mb.put("amount", bOrder.getAmount());
             }
-        	if (bOrder.getNotifyUrl()!=null&&!"".equals(bOrder.getNotifyUrl())){
-                mb.put("notifyUrl",bOrder.getNotifyUrl());
+            if (bOrder.getNotifyUrl() != null && !"".equals(bOrder.getNotifyUrl())) {
+                mb.put("notifyUrl", bOrder.getNotifyUrl());
             }
-        	if (bOrder.getFixed()!=null){
-                mb.put("fixed",bOrder.getFixed());
+            if (bOrder.getFixed() != null) {
+                mb.put("fixed", bOrder.getFixed());
             }
-        	if (bOrder.getDeviceId()!=null&&!"".equals(bOrder.getDeviceId())){
-                mb.put("deviceId",bOrder.getDeviceId());
+            if (bOrder.getDeviceId() != null && !"".equals(bOrder.getDeviceId())) {
+                mb.put("deviceId", bOrder.getDeviceId());
             }
-        	if (bOrder.getClientType()!=null){
-                mb.put("clientType",bOrder.getClientType());
+            if (bOrder.getClientType() != null) {
+                mb.put(MapBean.CLIENT_TYPE, bOrder.getClientType());
             }
-        	if (bOrder.getErrorMsg()!=null&&!"".equals(bOrder.getErrorMsg())){
-                mb.put("errorMsg",bOrder.getErrorMsg());
+            if (bOrder.getErrorMsg() != null && !"".equals(bOrder.getErrorMsg())) {
+                mb.put("errorMsg", bOrder.getErrorMsg());
             }
-        	if (bOrder.getStatus()!=null){
-                mb.put("status",bOrder.getStatus());
+            if (bOrder.getStatus() != null) {
+                mb.put("status", bOrder.getStatus());
             }
-        	if (bOrder.getNotifyStatus()!=null){
-                mb.put("notifyStatus",bOrder.getNotifyStatus());
+            if (bOrder.getNotifyStatus() != null) {
+                mb.put("notifyStatus", bOrder.getNotifyStatus());
             }
-        	if (bOrder.getCreateTime()!=null){
-                mb.put("createTime",bOrder.getCreateTime());
+            if (bOrder.getCreateTime() != null) {
+                mb.put("createTime", bOrder.getCreateTime());
             }
-        	if (bOrder.getUpdateTime()!=null){
-                mb.put("updateTime",bOrder.getUpdateTime());
+            if (bOrder.getUpdateTime() != null) {
+                mb.put("updateTime", bOrder.getUpdateTime());
             }
-        	if (StringUtils.isNotBlank(selectRange)) {
-        		mb.put("statStartDate",selectRange.split("至")[0]);
-        		mb.put("statEndDate",selectRange.split("至")[1]);
-			}
-            List<Long> ids = getAppIds();
-            if (ids!=null){
-                mb.put("appIds",ids) ;
+            if (StringUtils.isNotBlank(selectRange)) {
+                mb.put("statStartDate", selectRange.split("至")[0]);
+                mb.put("statEndDate", selectRange.split("至")[1]);
+            }
+            List<Long> ids = getGameIds();
+            if (ids != null) {
+                mb.put(MapBean.GAME_IDS, ids);
             }
         }
-        mb.put("orderby","id desc");
+        mb.put("orderby", "id desc");
         return mb;
     }
-    private List<Long> getAppIds(){
-        if (bOrder.getAppName()!=null){
+
+    private List<Long> getGameIds() {
+        if (bOrder.getGameName() != null) {
             MapBean mapBean = new MapBean();
-            mapBean.put("appName",bOrder.getAppName());
+            mapBean.put(MapBean.GAME_NAME, bOrder.getGameName());
             List<Game> gameList = bGameService.getGameByWhere(mapBean);
-            if (gameList==null || gameList.size()==0){
+            if (gameList == null || gameList.size() == 0) {
                 return null;
-            }else{
+            } else {
                 List<Long> ids = new ArrayList<Long>();
                 for (int i = 0; i < gameList.size(); i++) {
                     ids.add(gameList.get(i).getId());
                 }
-                return ids ;
+                return ids;
             }
         }
         return null;
     }
-	public Page<BOrder> getBOrderPage(){
+
+    public Page<BOrder> getBOrderPage() {
         return bOrderPage;
     }
 
-    public void setCheckedIds(String checkedIds){
-        this.checkedIds=checkedIds;
+    public void setCheckedIds(String checkedIds) {
+        this.checkedIds = checkedIds;
     }
 
-    public BOrder getBOrder(){
+    public BOrder getBOrder() {
         return bOrder;
     }
 
-    public void setBOrder(BOrder bOrder){
-        this.bOrder=bOrder;
+    public void setBOrder(BOrder bOrder) {
+        this.bOrder = bOrder;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
-        this.id=id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-	public List<Game> getGames() {
-		return games;
-	}
+    public List<Game> getGames() {
+        return games;
+    }
 
-	public void setGames(List<Game> games) {
-		this.games = games;
-	}
+    public void setGames(List<Game> games) {
+        this.games = games;
+    }
 
-	public List<BPlatform> getPlatforms() {
-		return platforms;
-	}
+    public List<BPlatform> getPlatforms() {
+        return platforms;
+    }
 
-	public void setPlatforms(List<BPlatform> platforms) {
-		this.platforms = platforms;
-	}
+    public void setPlatforms(List<BPlatform> platforms) {
+        this.platforms = platforms;
+    }
 
-	public String getSelectRange() {
-		return selectRange;
-	}
+    public String getSelectRange() {
+        return selectRange;
+    }
 
-	public void setSelectRange(String selectRange) {
-		this.selectRange = selectRange;
-	}
+    public void setSelectRange(String selectRange) {
+        this.selectRange = selectRange;
+    }
 
-	public Double getMoneyFrom() {
-		return moneyFrom;
-	}
+    public Double getMoneyFrom() {
+        return moneyFrom;
+    }
 
-	public void setMoneyFrom(Double moneyFrom) {
-		this.moneyFrom = moneyFrom;
-	}
+    public void setMoneyFrom(Double moneyFrom) {
+        this.moneyFrom = moneyFrom;
+    }
 
-	public Double getMoneyTo() {
-		return moneyTo;
-	}
-	public void setMoneyTo(Double moneyTo) {
-		this.moneyTo = moneyTo;
-	}
+    public Double getMoneyTo() {
+        return moneyTo;
+    }
 
-	public List<Gamezone> getGamezones() {
-		return gamezones;
-	}
+    public void setMoneyTo(Double moneyTo) {
+        this.moneyTo = moneyTo;
+    }
 
-	public void setGamezones(List<Gamezone> gamezones) {
-		this.gamezones = gamezones;
-	}
+    public List<Gamezone> getGamezones() {
+        return gamezones;
+    }
+
+    public void setGamezones(List<Gamezone> gamezones) {
+        this.gamezones = gamezones;
+    }
 }

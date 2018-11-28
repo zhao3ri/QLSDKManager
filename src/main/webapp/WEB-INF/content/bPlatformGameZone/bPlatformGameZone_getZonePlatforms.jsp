@@ -2,7 +2,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ include file="/common/jquerylibs.jsp" %>
 <body class="fix_top_nav_padding">
-	<input type="hidden" id="appId" value="${appId }">
+	<input type="hidden" id="gameId" value="${gameId }">
 	<div class="panel-body ">
 	<div> <label style="float: right">全 选：<input type="checkbox" id="checkedAll"/></label></div>  
 		<div class="table-responsive">

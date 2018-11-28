@@ -14,10 +14,10 @@
         	<form action="sZonePlatformDaily_first.shtml" method="post" id="mainForm">
 	        	<div class="form-inline popover-show panel-body list_toolbar">
 		      		<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-			          	<select class="form-control" name="SZonePlatformDaily.appId"  placeholder="请选择游戏">
+			          	<select class="form-control" name="SZonePlatformDaily.gameId"  placeholder="请选择游戏">
 							<option value="">所有游戏</option>
 							<s:iterator value="gameList" var="item">
-								<option value="${item.id}" <c:if test="${item.id==SZonePlatformDaily.appId }">selected</c:if>>${item.appName }</option>
+								<option value="${item.id}" <c:if test="${item.id==SZonePlatformDaily.gameId }">selected</c:if>>${item.gameName }</option>
 							</s:iterator>
 						</select>
 			        </div>

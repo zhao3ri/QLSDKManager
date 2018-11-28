@@ -34,8 +34,8 @@ public class ReportService {
     public Map<String, Object> online(Long appId, Integer clientType, String channelIds, String compareChannelIds, String zoneIds, String compareZoneIds, Integer groupType, Integer compareGroupType, String selectRange, String compareSelectRange, String... statDate) {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
-        mb.put("clientType", clientType);
-        mb.put("appId", appId);
+        mb.put(MapBean.CLIENT_TYPE, clientType);
+        mb.put(MapBean.GAME_ID, appId);
 
         List<BPlatform> platforms = bPlatformService.getByIds(channelIds);
         List<Gamezone> gamezones = bGamezoneService.getByIds(appId, zoneIds);

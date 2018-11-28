@@ -12,9 +12,9 @@ public class SDataDaily {
 	/*
 	 *
 	 */
-	private Long appId;
+	private Long gameId;
 	
-	private String appName;
+	private String gameName;
 	/*
 	 *
 	 */
@@ -99,20 +99,20 @@ public class SDataDaily {
 		this.clientType = clientType;
 	}
 
-	public Long getAppId() {
-		return appId;
+	public Long getGameId() {
+		return gameId;
 	}
 
-	public void setAppId(Long appId) {
-		this.appId = appId;
+	public void setGameId(Long gameId) {
+		this.gameId = gameId;
 	}
 
-	public String getAppName() {
-		return appName;
+	public String getGameName() {
+		return gameName;
 	}
 
-	public void setAppName(String appName) {
-		this.appName = appName;
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
 	}
 
 	public Integer getZoneId() {
