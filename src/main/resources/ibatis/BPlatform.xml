@@ -66,8 +66,7 @@
 
     <!-- 删除联运平台 -->
     <delete id="BPlatform.delete" parameterClass="Long">
-		DELETE FROM
-		b_platform WHERE id=#id#
+		DELETE bp,sc FROM b_platform bp LEFT JOIN sysIdentityChannel sc ON bp.id = sc.channelId WHERE bp.id =#id#
 	</delete>
 
     <!-- 更新联运平台 -->

@@ -119,6 +119,13 @@ public class BPlatformService {
         bPlatformDao.save("BPlatform.saveChannel", mb);
     }
 
+    public void saveIdentityChannel(Long identityId, Long channelId) {
+        MapBean mb = new MapBean();
+        mb.put("identityId", identityId);
+        mb.put("channelId", channelId);
+        saveIdentityChannel(mb);
+    }
+
     public void saveIdentityChannel(Long identityId, Long[] channelIds) {
         if (null == channelIds) {
             return;

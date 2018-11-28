@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.item.constants.Constants;
 import com.item.domain.SBalance;
+import com.item.service.authority.AuthCacheManager;
 import core.module.utils.Struts2Utils;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,6 +139,13 @@ public class BPlatformAction extends Struts2Action {
         } else {
             bPlatform.setCreateTime(new Date());
             bPlatformService.savePlatform(bPlatform);
+            Long currentIdentityId = AuthCacheManager.getInstance().getUser().getIdentityId();
+            //新增的渠道添加管理者
+            bPlatformService.saveIdentityChannel(currentIdentityId, bPlatform.getId());
+            if (currentIdentityId != Constants.ADMIN_IDENTITY_ID) {
+                //添加超级管理员管理权限
+                bPlatformService.saveIdentityChannel((long) Constants.ADMIN_IDENTITY_ID, bPlatform.getId());
+            }
             addActionMessage("保存信息成功");
         }
         return "save";
