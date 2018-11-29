@@ -21,6 +21,7 @@ public class BPlatform {
     private Integer newversion;
     private String business;
     private String phone;
+    private String verifyUrl;
 
     @JsonIgnore
     private Date createTime;
@@ -116,6 +117,14 @@ public class BPlatform {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getVerifyUrl() {
+        return verifyUrl;
+    }
+
+    public void setVerifyUrl(String verifyUrl) {
+        this.verifyUrl = verifyUrl;
     }
 
     @Override

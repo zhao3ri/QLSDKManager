@@ -9,24 +9,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.item.domain.*;
 import com.item.service.*;
 import com.item.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.item.constants.Constants;
-import com.item.domain.BPlatform;
-import com.item.domain.BPlatformApp;
-import com.item.domain.Game;
-import com.item.domain.Gamezone;
-import com.item.domain.SGame;
-import com.item.domain.SGameMonthly;
-import com.item.domain.SPlatform;
-import com.item.domain.SPlatformMonthly;
-import com.item.domain.SRechargeRank;
-import com.item.domain.SRoleRank;
-import com.item.domain.SZonePlatform;
-import com.item.domain.SZonePlatformMonthly;
+import com.item.domain.BPlatformGame;
 import com.item.domain.report.GameClientMonthlyReport;
 import com.item.domain.report.GameClientReport;
 
@@ -49,7 +39,7 @@ public class ReportAction extends BaseAction {
     @Autowired
     private SZonePlatformService sZonePlatformService;
     @Autowired
-    private BPlatformAppService bPlatformAppService;
+    private BPlatformGameService bPlatformGameService;
     @Autowired
     private BPlatformService bPlatformService;
     @Autowired
@@ -69,7 +59,7 @@ public class ReportAction extends BaseAction {
     private Long gameId;
     private String selectRange;
     private List<Gamezone> gamezones;
-    private List<BPlatformApp> platformApps;
+    private List<BPlatformGame> platformApps;
     private String yearMonthStr;
     private Integer isCompare;
     private String checkedIds;
@@ -233,7 +223,7 @@ public class ReportAction extends BaseAction {
     }
 
     public String getChannelZone() {
-        platformApps = bPlatformAppService.getAllPlatform(gameId);
+        platformApps = bPlatformGameService.getAllPlatform(gameId);
         gamezones = bGameService.getZones(gameId);
         return "getChannelZone";
     }
@@ -563,11 +553,11 @@ public class ReportAction extends BaseAction {
         this.gamezones = gamezones;
     }
 
-    public List<BPlatformApp> getPlatformApps() {
+    public List<BPlatformGame> getPlatformApps() {
         return platformApps;
     }
 
-    public void setPlatformApps(List<BPlatformApp> platformApps) {
+    public void setPlatformApps(List<BPlatformGame> platformApps) {
         this.platformApps = platformApps;
     }
 

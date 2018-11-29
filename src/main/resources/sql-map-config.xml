@@ -19,7 +19,7 @@
 	<sqlMap resource="ibatis/authority/User.xml" />
 	<sqlMap resource="ibatis/BOrder.xml" />
 	<sqlMap resource="ibatis/BPlatform.xml" />
-	<sqlMap resource="ibatis/BPlatformApp.xml" />
+	<sqlMap resource="ibatis/BPlatformGame.xml" />
 	<sqlMap resource="ibatis/BGame.xml" />
 	<!-- <sqlMap resource="ibatis/BAccount.xml" /> -->
 	<sqlMap resource="ibatis/BGamezone.xml" />

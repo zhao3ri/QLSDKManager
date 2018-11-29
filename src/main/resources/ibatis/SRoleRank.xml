@@ -12,7 +12,7 @@
 				a.gameId=#gameId#
 			</isNotNull>
 			<isNotEmpty prepend="AND" property="platformId">
-				a.platformid=#platformId#
+				a.channelId=#platformId#
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="name">
 				a.rolename=#name#
@@ -35,7 +35,7 @@
 			a.roleid,
 			a.clientType,
 			a.uid,
-			a.platformid,
+			a.channelId,
 			a.rolename,
 			a.lastlogin,
 			SUM(a.amount)  AS amount,
@@ -54,7 +54,7 @@
 			a.roleid,
 			a.clientType,
 			a.uid,
-			a.platformid,
+			a.channelId,
 			a.rolename,
 			SUM(a.amount)  AS amount,
 			a.gameId,

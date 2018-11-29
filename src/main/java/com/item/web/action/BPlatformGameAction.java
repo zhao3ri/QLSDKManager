@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.item.domain.BPlatformGame;
 import com.item.service.BPlatformService;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.item.domain.BPlatform;
-import com.item.domain.BPlatformApp;
 import com.item.domain.Game;
 import com.item.service.BGameService;
-import com.item.service.BPlatformAppService;
+import com.item.service.BPlatformGameService;
 import com.item.utils.InitSearchCondition;
 import com.item.utils.JsonUtil;
 import com.item.utils.RedisClient;
@@ -24,20 +24,20 @@ import core.module.utils.Struts2Utils;
 import core.module.web.Struts2Action;
 
 @Action
-public class BPlatformAppAction extends Struts2Action {
+public class BPlatformGameAction extends Struts2Action {
     private static final long serialVersionUID = 1L;
     @Autowired
     private BPlatformService channelService;
     @Autowired
-    private BPlatformAppService bPlatformAppService;
+    private BPlatformGameService bPlatformGameService;
     @Autowired
     private BGameService gameService;
 
-    private Page<BPlatformApp> bPlatformAppPage = new Page<BPlatformApp>(10);
+    private Page<BPlatformGame> bPlatformGamePage = new Page<BPlatformGame>(10);
 
     private Integer keepSearchCondition;
 
-    private BPlatformApp bPlatformApp;
+    private BPlatformGame bPlatformGame;
 
     private Long id;
     private List<BPlatform> bPlatforms;
@@ -48,16 +48,16 @@ public class BPlatformAppAction extends Struts2Action {
         bPlatforms = channelService.getCurrentIdentityChannelList();
         games = gameService.getGameList();
 
-        bPlatformApp = InitSearchCondition.initEntity(bPlatformApp, keepSearchCondition, "bPlatform");
-        bPlatformAppPage = InitSearchCondition.initPage(bPlatformAppPage, keepSearchCondition, "bPlatform");
+        bPlatformGame = InitSearchCondition.initEntity(bPlatformGame, keepSearchCondition, "bPlatform");
+        bPlatformGamePage = InitSearchCondition.initPage(bPlatformGamePage, keepSearchCondition, "bPlatform");
 
         MapBean mb = search();
-        bPlatformAppService.pageBPlatformApp(bPlatformAppPage, mb);
+        bPlatformGameService.pageBPlatformGame(bPlatformGamePage, mb);
         return "list";
     }
 
     public void getGamePlatformsAsync() {
-        List<BPlatformApp> platformApps = bPlatformAppService.getByAppId(id);
+        List<BPlatformGame> platformApps = bPlatformGameService.getByGameId(id);
         try {
             Struts2Utils.getResponse().getWriter().write(JsonUtil.toJsonString(platformApps));
         } catch (IOException e) {
@@ -69,21 +69,21 @@ public class BPlatformAppAction extends Struts2Action {
 
     public MapBean search() {
         MapBean mb = new MapBean();
-        if (bPlatformApp != null) {
-            if (bPlatformApp.getId() != null) {
-                mb.put("id", bPlatformApp.getId());
+        if (bPlatformGame != null) {
+            if (bPlatformGame.getId() != null) {
+                mb.put("id", bPlatformGame.getId());
             }
-            if (bPlatformApp.getGameId() != null) {
-                mb.put(MapBean.GAME_ID, bPlatformApp.getGameId());
+            if (bPlatformGame.getGameId() != null) {
+                mb.put(MapBean.GAME_ID, bPlatformGame.getGameId());
             }
-            if (bPlatformApp.getPlatformId() != null) {
-                mb.put(MapBean.PLATFORM_ID, bPlatformApp.getPlatformId());
+            if (bPlatformGame.getPlatformId() != null) {
+                mb.put(MapBean.PLATFORM_ID, bPlatformGame.getPlatformId());
             }
-            if (bPlatformApp.getConfigParams() != null) {
-                mb.put("configParams", bPlatformApp.getConfigParams());
+            if (bPlatformGame.getConfigParams() != null) {
+                mb.put("configParams", bPlatformGame.getConfigParams());
             }
-            if (bPlatformApp.getCreateTime() != null) {
-                mb.put("createTime", bPlatformApp.getCreateTime());
+            if (bPlatformGame.getCreateTime() != null) {
+                mb.put("createTime", bPlatformGame.getCreateTime());
             }
             List<Long> ids = getGameIds();
             if (ids != null) {
@@ -96,9 +96,9 @@ public class BPlatformAppAction extends Struts2Action {
     }
 
     private List<Long> getGameIds() {
-        if (bPlatformApp.getGameName() != null) {
+        if (bPlatformGame.getGameName() != null) {
             MapBean mapBean = new MapBean();
-            mapBean.put(MapBean.GAME_NAME, bPlatformApp.getGameName());
+            mapBean.put(MapBean.GAME_NAME, bPlatformGame.getGameName());
             List<Game> gameList = gameService.getGameByWhere(mapBean);
             if (gameList == null || gameList.size() == 0) {
                 return null;
@@ -115,16 +115,16 @@ public class BPlatformAppAction extends Struts2Action {
 
     public String delete() {
         if (id != null) {
-            bPlatformApp = bPlatformAppService.getBPlatformAppById(id);
+            bPlatformGame = bPlatformGameService.getBPlatformGameById(id);
         }
-        bPlatformAppService.deleteBPlatformApp(id);
-        RedisClient.del("rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getGameId());
+        bPlatformGameService.deleteBPlatformGame(id);
+        RedisClient.del("rs_pg_" + bPlatformGame.getPlatformId() + "_" + bPlatformGame.getGameId());
         return "delete";
     }
 
     public String handle() {
         if (id != null) {
-            bPlatformApp = bPlatformAppService.getBPlatformAppById(id);
+            bPlatformGame = bPlatformGameService.getBPlatformGameById(id);
         } else {
 //            bPlatforms = channelService.getAllPlatform();
             bPlatforms = channelService.getCurrentIdentityChannelList();
@@ -134,17 +134,17 @@ public class BPlatformAppAction extends Struts2Action {
     }
 
     public String save() {
-        if (bPlatformApp.getId() != null) {
-            bPlatformAppService.updatePlatformApp(bPlatformApp);
+        if (bPlatformGame.getId() != null) {
+            bPlatformGameService.updatePlatformGame(bPlatformGame);
             addActionMessage("修改信息成功");
         } else {
-            bPlatformApp.setCreateTime(new Date());
-            bPlatformAppService.savePlatformApp(bPlatformApp);
+            bPlatformGame.setCreateTime(new Date());
+            bPlatformGameService.savePlatformGame(bPlatformGame);
             addActionMessage("保存信息成功");
         }
-        logger.debug("del " + "rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getGameId());
+        logger.debug("del " + "rs_pg_" + bPlatformGame.getPlatformId() + "_" + bPlatformGame.getGameId());
 
-        RedisClient.del("rs_pg_" + bPlatformApp.getPlatformId() + "_" + bPlatformApp.getGameId());
+        RedisClient.del("rs_pg_" + bPlatformGame.getPlatformId() + "_" + bPlatformGame.getGameId());
         return "save";
     }
 
@@ -164,20 +164,20 @@ public class BPlatformAppAction extends Struts2Action {
         this.bPlatforms = bPlatforms;
     }
 
-    public BPlatformAppService getBPlatformAppService() {
-        return bPlatformAppService;
+    public BPlatformGameService getBPlatformGameService() {
+        return bPlatformGameService;
     }
 
-    public void setBPlatformAppService(BPlatformAppService bPlatformAppService) {
-        this.bPlatformAppService = bPlatformAppService;
+    public void setBPlatformGameService(BPlatformGameService bPlatformGameService) {
+        this.bPlatformGameService = bPlatformGameService;
     }
 
-    public Page<BPlatformApp> getBPlatformAppPage() {
-        return bPlatformAppPage;
+    public Page<BPlatformGame> getBPlatformGamePage() {
+        return bPlatformGamePage;
     }
 
-    public void setBPlatformAppPage(Page<BPlatformApp> bPlatformAppPage) {
-        this.bPlatformAppPage = bPlatformAppPage;
+    public void setBPlatformGamePage(Page<BPlatformGame> bPlatformAppPage) {
+        this.bPlatformGamePage = bPlatformAppPage;
     }
 
     public Integer getKeepSearchCondition() {
@@ -188,12 +188,12 @@ public class BPlatformAppAction extends Struts2Action {
         this.keepSearchCondition = keepSearchCondition;
     }
 
-    public BPlatformApp getBPlatformApp() {
-        return bPlatformApp;
+    public BPlatformGame getBPlatformGame() {
+        return bPlatformGame;
     }
 
-    public void setBPlatformApp(BPlatformApp bPlatformApp) {
-        this.bPlatformApp = bPlatformApp;
+    public void setBPlatformGame(BPlatformGame bPlatformGame) {
+        this.bPlatformGame = bPlatformGame;
     }
 
     public Long getId() {

@@ -1,13 +1,10 @@
 package com.item.service.authority;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.item.constants.Constants;
 import com.item.domain.BPlatform;
-import com.item.service.BPlatformAppService;
 import com.item.service.BPlatformService;
-import core.module.orm.MapBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

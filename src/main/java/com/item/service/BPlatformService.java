@@ -61,11 +61,11 @@ public class BPlatformService {
     }
 
     public List<BPlatform> getAllPlatform() {
-        return bPlatformDao.find("BPlatformApp.getAllPlatform", null);
+        return bPlatformDao.find("BPlatformGame.getAllPlatform", null);
     }
 
-    public List<SBalance> getAllBalance() {
-        return sBalanceDao.find("SBalance.getAllBalance", null);
+    public List<SBalance> getAllBalance(MapBean mb) {
+        return sBalanceDao.find("SBalance.getAllBalance", mb);
     }
 
     public List<BPlatform> getByIds(String channelIds) {
@@ -104,7 +104,7 @@ public class BPlatformService {
             SBalance sBalance = new SBalance();
             sBalance.setAmount(amount);
             sBalance.setCreateTime(new Date());
-            sBalance.setPlatformid(platformid);
+            sBalance.setChannelId(platformid);
             sBalance.setType(type);
             sBalance.setUser(user);
             sBalance.setBalance(platform.getBalance());

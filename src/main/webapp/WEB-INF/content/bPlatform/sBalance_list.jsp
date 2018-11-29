@@ -11,7 +11,7 @@
 	      	<li class="active">加币记录</li>
 	    </ol>
 	    <s:debug></s:debug>
-		<form identity="form" action="bPlatform_list.shtml" method="post" id="mainForm">
+		<form identity="form" action="bPlatform_listbalance.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">加币记录 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
@@ -23,9 +23,9 @@
 	          		<button  type="button" class="btn  btn-primary " onclick="search();"><i class="icon-search"></i> 搜索</button>
 	          		<button  type="button" class="btn  btn-default " onclick="resetSearch();"><i class="icon-eraser"></i> 重置</button>
 	        	</div>
-	    		<div class="form-group width_btn pull-right">
-	          		<button type="button" class="btn btn-success " id="newitem"><i class="icon-plus"></i> 新增</button>
-	        	</div>
+	    		<%--<div class="form-group width_btn pull-right">--%>
+	          		<%--<button type="button" class="btn btn-success " id="newitem"><i class="icon-plus"></i> 新增</button>--%>
+	        	<%--</div>--%>
 	    	</div>
 	      	<div class="panel-body ">
 	      		<div class="table-responsive">
@@ -87,7 +87,7 @@
 			});
 		});
 		function resetSearch(){
-	       location.assign("bPlatform_list.shtml");
+	       location.assign("bPlatform_listbalance.shtml");
 	    }
 	</script>
 </body>

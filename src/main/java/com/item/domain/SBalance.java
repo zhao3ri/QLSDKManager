@@ -11,8 +11,8 @@ public class SBalance {
 
 	private Long id;
 	
-	private Long platformid;
-	private String platfromName ;
+	private Long channelId;
+	private String platformName;
 
 	private int amount ;
 	private Integer type ;
@@ -29,12 +29,12 @@ public class SBalance {
 		this.id = id;
 	}
 
-	public String getPlatfromName() {
-		return platfromName;
+	public String getPlatformName() {
+		return platformName;
 	}
 
-	public void setPlatfromName(String platfromName) {
-		this.platfromName = platfromName;
+	public void setPlatformName(String platformName) {
+		this.platformName = platformName;
 	}
 
 	public Integer getBalance() {
@@ -45,12 +45,12 @@ public class SBalance {
 		this.balance = balance;
 	}
 
-	public Long getPlatformid() {
-		return platformid;
+	public Long getChannelId() {
+		return channelId;
 	}
 
-	public void setPlatformid(Long platformid) {
-		this.platformid = platformid;
+	public void setChannelId(Long channelId) {
+		this.channelId = channelId;
 	}
 
 	public int getAmount() {

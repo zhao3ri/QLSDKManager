@@ -7,13 +7,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.item.domain.BPlatformGame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.item.dao.BPlatformAppDao;
+import com.item.dao.BPlatformGameDao;
 import com.item.dao.BPlatformDao;
-import com.item.domain.BPlatformApp;
 import com.item.utils.RedisClient;
 
 import core.module.orm.MapBean;
@@ -26,9 +26,9 @@ import core.module.orm.Page;
  */
 @Service
 @Transactional
-public class BPlatformAppService {
+public class BPlatformGameService {
     @Autowired
-    private BPlatformAppDao bPlatformAppDao;
+    private BPlatformGameDao bPlatformGameDao;
     @Autowired
     private BPlatformDao bPlatformDao;
     @Resource
@@ -37,7 +37,7 @@ public class BPlatformAppService {
     /*
      * 分页，获取页内的数据量
      */
-    public Page<BPlatformApp> pageBPlatformApp(Page<BPlatformApp> page, MapBean mb) {
+    public Page<BPlatformGame> pageBPlatformGame(Page<BPlatformGame> page, MapBean mb) {
         if (mb == null) {
             mb = new MapBean();
         }
@@ -56,40 +56,40 @@ public class BPlatformAppService {
             mb.put(MapBean.GAME_IDS, gameManagerService.getGameIdsByIdentityId());
         }
 
-        return bPlatformAppDao.find(page, mb, "BPlatformApp.count", "BPlatformApp.page");
+        return bPlatformGameDao.find(page, mb, "BPlatformGame.count", "BPlatformGame.page");
     }
 
     /*
      * 根据id删除相应数据
      */
-    public void deleteBPlatformApp(Long id) {
-        bPlatformAppDao.delete("BPlatformApp.delete", id);
+    public void deleteBPlatformGame(Long id) {
+        bPlatformGameDao.delete("BPlatformGame.delete", id);
     }
 
     /*
      * 根据id获取相应平台游戏关联数据
      */
-    public BPlatformApp getBPlatformAppById(Long id) {
-        return bPlatformAppDao.get("BPlatformApp.getPlatformAppById", id);
+    public BPlatformGame getBPlatformGameById(Long id) {
+        return bPlatformGameDao.get("BPlatformGame.getPlatformAppById", id);
     }
 
     /*
      * 获取某个游戏全部平台
      */
     @SuppressWarnings("unchecked")
-    public List<BPlatformApp> getAllPlatform(Long appId) {
+    public List<BPlatformGame> getAllPlatform(Long appId) {
         RedisClient.del("platform_app_all");
-        Map<String, List<BPlatformApp>> result = (Map<String, List<BPlatformApp>>) RedisClient.get("platform_app_all", Map.class);
+        Map<String, List<BPlatformGame>> result = (Map<String, List<BPlatformGame>>) RedisClient.get("platform_app_all", Map.class);
         if (result == null) {
-            result = new HashMap<String, List<BPlatformApp>>();
-            List<BPlatformApp> bPlatforms = bPlatformAppDao.find("BPlatformApp.list", null);
-            for (BPlatformApp bPlatform : bPlatforms) {
+            result = new HashMap<String, List<BPlatformGame>>();
+            List<BPlatformGame> bPlatforms = bPlatformGameDao.find("BPlatformGame.list", null);
+            for (BPlatformGame bPlatform : bPlatforms) {
                 if (result.get(bPlatform.getGameId().toString()) == null) {
-                    List<BPlatformApp> thisAppbPlatforms = new ArrayList<BPlatformApp>();
+                    List<BPlatformGame> thisAppbPlatforms = new ArrayList<BPlatformGame>();
                     thisAppbPlatforms.add(bPlatform);
                     result.put(bPlatform.getGameId().toString(), thisAppbPlatforms);
                 } else {
-                    List<BPlatformApp> thisAppbPlatforms = result.get(bPlatform.getGameId().toString());
+                    List<BPlatformGame> thisAppbPlatforms = result.get(bPlatform.getGameId().toString());
                     thisAppbPlatforms.add(bPlatform);
                     result.put(bPlatform.getGameId().toString(), thisAppbPlatforms);
                 }
@@ -102,19 +102,19 @@ public class BPlatformAppService {
     /*
      *根据id更新相应平台游戏关联数据
      */
-    public void updatePlatformApp(BPlatformApp bPlatformApp) {
-        bPlatformAppDao.update("BPlatformApp.update", bPlatformApp);
+    public void updatePlatformGame(BPlatformGame bPlatformGame) {
+        bPlatformGameDao.update("BPlatformGame.update", bPlatformGame);
     }
 
     /*
      * 增加平台游戏关联数据
      */
-    public void savePlatformApp(BPlatformApp bPlatformApp) {
-        bPlatformAppDao.save("BPlatformApp.save", bPlatformApp);
+    public void savePlatformGame(BPlatformGame bPlatformGame) {
+        bPlatformGameDao.save("BPlatformGame.save", bPlatformGame);
     }
 
-    public List<BPlatformApp> getByAppId(Long appId) {
-        return bPlatformAppDao.find("BPlatformApp.GetByAppId", appId);
+    public List<BPlatformGame> getByGameId(Long appId) {
+        return bPlatformGameDao.find("BPlatformGame.GetByAppId", appId);
     }
 
 }

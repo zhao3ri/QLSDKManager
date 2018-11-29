@@ -8,7 +8,7 @@
 	    <ol class="breadcrumb row">
 	      <li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
 	      <li class="active">平台管理</li>
-	      <li><a href="${ctx}/bPlatformApp/bPlatformApp_list.shtml">联运游戏关联管理</a></li>
+	      <li><a href="${ctx}/bPlatformGame/bPlatformGame_list.shtml">联运游戏关联管理</a></li>
 	      <s:if test="id==null">
 	      <li class="active">新增平台游戏分区表信息</li>
 	      </s:if>
@@ -46,7 +46,7 @@
 	    		<div class="panel-footer">
 	          		<div class=" text-center">
 						<button type="button" class="btn btn-primary" onclick="submitForm();"><i class="icon-ok"></i> 提交</button>
-						<a class="btn btn-default" href="/bPlatformApp/bPlatformApp_list.shtml"><i class="icon-remove"></i> 取消</a>
+						<a class="btn btn-default" href="/bPlatformGame/bPlatformGame_list.shtml"><i class="icon-remove"></i> 取消</a>
 	          		</div>
             	</div>
           	</form>

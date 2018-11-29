@@ -15,7 +15,7 @@
 				a.gameId=#gameId#
 			</isNotNull>
 			<isNotEmpty prepend="AND" property="platformId">
-				a.platformid=#platformId#
+				a.channelId=#platformId#
 			</isNotEmpty>
 		</dynamic>
 	</sql>
@@ -24,7 +24,7 @@
 		SELECT COUNT(*) FROM (
 			SELECT 1 FROM s_pay_rank AS a
 			<include refid="SRechargeRank.Where" />
-			GROUP BY uid, platformid
+			GROUP BY uid, channelId
 			ORDER BY SUM(amount) DESC 
 			 ) AS c
 	</select>
@@ -33,12 +33,12 @@
 	<select id="SRechargeRank.page" resultClass="SRechargeRank" parameterClass="mb">
 		SELECT 
 			uid,
-			platformid,
+			channelId,
 			lastlogin,
 			SUM(amount) AS amount 
 		FROM s_pay_rank AS a
 		<include refid="SRechargeRank.Where" /> 
-		GROUP BY uid, platformid
+		GROUP BY uid, channelId
 		ORDER BY SUM(amount) DESC
 		LIMIT #firstResult#, #pageSize#
 	</select>
@@ -46,11 +46,11 @@
 	<select id="SRechargeRank.list" resultClass="SRechargeRank" parameterClass="mb">
 		SELECT 
 			uid,
-			platformid,
+			channelId,
 			SUM(amount) AS amount 
 		FROM s_pay_rank AS a
 		<include refid="SRechargeRank.Where" /> 
-		GROUP BY uid, platformid
+		GROUP BY uid, channelId
 		ORDER BY SUM(amount) DESC
 	</select>
 </sqlMap>

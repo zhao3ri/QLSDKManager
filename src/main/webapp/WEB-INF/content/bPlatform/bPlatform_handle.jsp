@@ -56,6 +56,14 @@
 							<label id="platformNameinfo"></label>
 							</div>
 						</div>
+
+						<div class="form-group clearfix" >
+							<label  class="control-label col-sm-3 col-lg-2 text-right">第三方认证地址：</label>
+							<div class=" col-sm-9 col-lg-5">
+								<input class="form-control" type="text" id="bPlatform.verifyUrl" name="BPlatform.verifyUrl"  value="${bPlatform.verifyUrl}" placeholder="请输入渠道认证地址"/>
+								<label id="platformNameinfo"></label>
+							</div>
+						</div>
 					
 	     			</div>
   	    		</div>

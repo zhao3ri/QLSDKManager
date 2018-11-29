@@ -164,7 +164,7 @@
 			    } 
 		    });
 			
-			$.post("/bPlatformApp/bPlatformApp_getGamePlatformsAsync.shtml",{id:gameId},function(data){
+			$.post("/bPlatformGame/bPlatformGame_getGamePlatformsAsync.shtml",{id:gameId},function(data){
 				json = eval(data);
 				$("#platformId").append("<option value=''>==请选择渠道==</option>");
 			    for(var i=0; i<json.length; i++){

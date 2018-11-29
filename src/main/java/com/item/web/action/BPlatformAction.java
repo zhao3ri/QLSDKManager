@@ -54,33 +54,26 @@ public class BPlatformAction extends Struts2Action {
     public String listbalance() {
 //		bPlatforms = bPlatformService.getAllPlatform();
         bPlatforms = bPlatformService.getCurrentIdentityChannelList();
-        MapBean mb = balanceSearch();
+        MapBean mb = search();
         pageb = bPlatformService.pageBalance(pageb, mb);
-        for (SBalance s : pageb.getResult()) {
-            for (BPlatform b : bPlatforms) {
-                if (b.getId().equals(s.getPlatformid())) {
-                    s.setPlatfromName(b.getPlatformName());
-                }
-            }
-        }
 
         logger.info("size :" + pageb.getResult().size());
         return "listbalance";
     }
 
-    private MapBean balanceSearch() {
-        MapBean mb = getParams();
-        if (bPlatform != null) {
-            if (bPlatform.getId() != null) {
-                mb.put("platformid", bPlatform.getId());
-            }
-            if (bPlatform.getCreateTime() != null) {
-                mb.put("createTime", bPlatform.getCreateTime());
-            }
-        }
-        mb.put("orderby", "id desc");
-        return mb;
-    }
+//    private MapBean balanceSearch() {
+//        MapBean mb = getParams();
+//        if (bPlatform != null) {
+//            if (bPlatform.getId() != null) {
+//                mb.put("id", bPlatform.getId());
+//            }
+//            if (bPlatform.getCreateTime() != null) {
+//                mb.put("createTime", bPlatform.getCreateTime());
+//            }
+//        }
+//        mb.put("orderby", "id desc");
+//        return mb;
+//    }
 
     private MapBean search() {
         MapBean mb = getParams();

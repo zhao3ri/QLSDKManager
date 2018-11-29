@@ -1,8 +1,7 @@
 package com.item.dao;
 
+import com.item.domain.BPlatformGame;
 import org.springframework.stereotype.Repository;
-
-import com.item.domain.BPlatformApp;
 
 import core.module.orm.ibatis.SqlMapClientDao;
 
@@ -12,6 +11,6 @@ import core.module.orm.ibatis.SqlMapClientDao;
  * 类说明
  */
 @Repository
-public class BPlatformAppDao extends SqlMapClientDao<BPlatformApp, Long> {
+public class BPlatformGameDao extends SqlMapClientDao<BPlatformGame, Long> {
 
 }

@@ -124,7 +124,7 @@
                 <li class="menuTop <% out.print(getSelected("index")); %>"><a href="${ctx}/index.shtml">首页</a></li>
 
                 <!--渠道管理-->
-                <mt:auths authUrls="bPlatform_list.shtml,bPlatformApp_list.shtml">
+                <mt:auths authUrls="bPlatform_list.shtml,bPlatformGame_list.shtml">
                     <li class="menuTop dropdown <% out.print(getSelected("bPlatform")); %>"><a href="#"
                                                                                                class="dropdown-toggle"
                                                                                                data-toggle="dropdown">渠道统计<b
@@ -133,8 +133,8 @@
                             <mt:auth authUrl="bPlatform_list.shtml">
                                 <li><a href="${ctx}/bPlatform/bPlatform_list.shtml">渠道管理</a></li>
                             </mt:auth>
-                            <mt:auth authUrl="bPlatformApp_list.shtml">
-                                <li><a href="${ctx}/bPlatformApp/bPlatformApp_list.shtml">渠道关联管理</a></li>
+                            <mt:auth authUrl="bPlatformGame_list.shtml">
+                                <li><a href="${ctx}/bPlatformGame/bPlatformGame_list.shtml">渠道关联管理</a></li>
                             </mt:auth>
                             <mt:auth authUrl="bPlatform_listbalance.shtml">
                                 <li><a href="${ctx}/bPlatform/bPlatform_listbalance.shtml">加币记录</a></li>
