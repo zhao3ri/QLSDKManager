@@ -66,7 +66,7 @@
 								<td>
 									<div class="btn-group btn-group-sm pull-right">
 					                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-					                  	<ul class="dropdown-menu" identity="menu">
+					                  	<ul class="dropdown-menu" role="menu">
 											<li><a href="bPlatformGameZone_handle.shtml?id=<s:property value="id"/>">修改</a></li>
 					                  	</ul>
 					                </div>

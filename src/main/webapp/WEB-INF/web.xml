@@ -5,7 +5,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
 
-    <display-name>项目名称</display-name>
+    <display-name>渠道SDK管理后台</display-name>
 
     <!-- Spring ApplicationContext配置文件的路径, 可使用通配符, 多个路径用','分隔 -->
     <context-param>
@@ -83,9 +83,9 @@
     </session-config>
 
     <!-- 首页 -->
-    <!--<welcome-file-list>-->
-        <!--<welcome-file>logview.shtml</welcome-file>-->
-    <!--</welcome-file-list>-->
+    <welcome-file-list>
+        <welcome-file>logview.shtml</welcome-file>
+    </welcome-file-list>
 
     <!-- 出错页面定义 -->
     <error-page>

@@ -66,7 +66,7 @@ pageContext.setAttribute("r", r);
 							<td>
 								<div class="btn-group btn-group-sm pull-right">
 				                  <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-				                  <ul class="dropdown-menu" identity="menu">
+				                  <ul class="dropdown-menu" role="menu">
 				                    <li><a href="identity_update.shtml?identity.id=${tempIdentity.id }">修改</a></li>
                                       <c:if test="${tempIdentity.id!=3}">
                                           <li>

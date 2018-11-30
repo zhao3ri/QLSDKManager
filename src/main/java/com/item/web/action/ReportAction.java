@@ -240,7 +240,7 @@ public class ReportAction extends BaseAction {
 
         MapBean mb = new MapBean();
         boolean isMonStat = setDate(mb);
-        mb.put("gameIds", gameIds);
+        mb.put(MapBean.GAME_IDS, gameIds);
         if (isMonStat) {
             sPlatformMonthliesApp = sPlatformMonthlyService.listApp(mb);
             sPlatformMonthliesPlatform = sPlatformMonthlyService.listPlatform(mb);
@@ -296,7 +296,7 @@ public class ReportAction extends BaseAction {
         }
         MapBean mb = new MapBean();
         setDate(mb);
-        mb.put("gameId", gameId);
+        mb.put(MapBean.GAME_ID, gameId);
 
         if (type == null || type == 1) {                                                //type==1--- 区服总计--
             if (StringUtils.isNotBlank(yearMonthStr)) {
@@ -374,10 +374,10 @@ public class ReportAction extends BaseAction {
 //		platforms = bPlatformService.getAllPlatform();
 
         MapBean mb = new MapBean();
-        mb.put("gameId", gameId);
+        mb.put(MapBean.GAME_ID, gameId);
 //		mb.put("status", 2);
 //		mb.put("notifyStatus", 2);
-        mb.put("platformId", platformId);
+        mb.put(MapBean.PLATFORM_ID, platformId);
 //		mb.put("checkedIds", StringUtils.split(checkedIds, ","));
 //		if (StringUtils.isNotBlank(selectRange)) {
 //			mb.put("startDate", selectRange.split("至")[0] + " 00:00:00");

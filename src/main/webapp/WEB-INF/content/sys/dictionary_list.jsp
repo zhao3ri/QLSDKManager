@@ -109,7 +109,7 @@ pageContext.setAttribute("r", r);
 						<td><s:date name="inserttime" format="yyyy-MM-dd HH:mm:ss"/></td>
 		              <td><div class="btn-group btn-group-sm pull-right">
 		                  <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-		                  <ul class="dropdown-menu" identity="menu">
+		                  <ul class="dropdown-menu" role="menu">
 		                    <li><a href="dictionary_handle.shtml?id=<s:property value="id"/>">修改</a></li>
 		                    <li><a href="javascript:confirmAction('dictionary_updateState.shtml?checkedIds=<s:property value="id"/>&flag=0&dictionary.dtype=${page.dtype }','您确认删除？');">删除</a></li>
 		                    <li identity="presentation" class="divider"></li>

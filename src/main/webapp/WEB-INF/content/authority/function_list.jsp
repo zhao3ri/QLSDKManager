@@ -62,7 +62,7 @@ pageContext.setAttribute("r", r);
 						<td>${tempFunction.functionOrder}</td>
 						<td><div class="btn-group btn-group-sm pull-right">
 						    <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
-						    <ul class="dropdown-menu" identity="menu">
+						    <ul class="dropdown-menu" role="menu">
 						      <li><a href="function_view.shtml?function.id=${tempFunction.id }">修改</a></li>
 						      <li><a href="javascript:confirmAction('function_delete.shtml?checkedIds=${tempFunction.id }','您确认删除？');">删除</a></li>
 						      <li identity="presentation" class="divider"></li>

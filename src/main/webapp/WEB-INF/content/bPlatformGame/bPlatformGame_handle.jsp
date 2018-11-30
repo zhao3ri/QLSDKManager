@@ -139,13 +139,13 @@
                                           id="bPlatformGame.privateKey">${bPlatformGame.privateKey }</textarea>
                             </div>
                         </div>
-                        <div class="form-group clearfix">
-                            <label class="control-label col-sm-3 col-lg-2 text-right"></b>NotifyUrl：</label>
-                            <div class=" col-sm-9 col-lg-5">
-                                <textarea class="form-control" name="BPlatformGame.notifyUrl"
-                                          id="bPlatformGame.notifyUrl">${bPlatformGame.notifyUrl }</textarea>
-                            </div>
-                        </div>
+                        <%--<div class="form-group clearfix">--%>
+                            <%--<label class="control-label col-sm-3 col-lg-2 text-right"></b>NotifyUrl：</label>--%>
+                            <%--<div class=" col-sm-9 col-lg-5">--%>
+                                <%--<textarea class="form-control" name="BPlatformGame.notifyUrl"--%>
+                                          <%--id="bPlatformGame.notifyUrl">${bPlatformGame.notifyUrl }</textarea>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                     </div>
                 </div>
                 <div class="panel-footer">
