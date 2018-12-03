@@ -25,7 +25,8 @@
                                 <input type="hidden" id="zoneIds" name="zoneIds" value="${zoneIds }">
                                 <input type="hidden" id="compareZoneIds" name="compareZoneIds"
                                        value="${compareZoneIds }">
-                                <select class="form-control" name="gameId" id="gameId" placeholder="请选择游戏">
+                                <select class="form-control" name="gameId" id="gameId" placeholder="请选择游戏"
+                                        onchange="window.location.href='reportDaily_online.shtml?gameId=' + this.value">
                                     <s:iterator value="allGames" var="item">
                                         <option value="${item.id }"
                                                 <c:if test="${item.id==gameId }">selected</c:if>>${item.gameName }</option>
@@ -182,7 +183,8 @@
 
                                         <tr>
                                             <td>合计</td>
-                                            <td><fmt:formatNumber value="${allonlineUsers/allSize }" pattern="0"/>(平均)</td>
+                                            <td><fmt:formatNumber value="${allonlineUsers/allSize }" pattern="0"/>(平均)
+                                            </td>
                                             <td>${allroleUsers }</td>
                                             <td>${allnewDevices }</td>
                                             <td><fmt:formatNumber value="${allpayAmount/100 }" pattern="0.00"/></td>
@@ -605,31 +607,31 @@
         $("#zone").addClass("active");
         if ('${result["optionJson"]}' == "") {
             $("#chartData").html("<div align='center'>没有数据！</div>");
-        }else{
-            var myChart = echarts.init(document.getElementById('chartData'),'shine');
+        } else {
+            var myChart = echarts.init(document.getElementById('chartData'), 'shine');
             var option = eval('(${result["optionJson"]})');
             myChart.setOption(option);
         }
     });
 
     <%--require(--%>
-        <%--[--%>
-            <%--'echarts',--%>
-            <%--'echarts/chart/line',--%>
-            <%--'echarts/chart/bar',--%>
-            <%--'echarts/chart/pie',--%>
-            <%--'echarts/chart/funnel'--%>
+    <%--[--%>
+    <%--'echarts',--%>
+    <%--'echarts/chart/line',--%>
+    <%--'echarts/chart/bar',--%>
+    <%--'echarts/chart/pie',--%>
+    <%--'echarts/chart/funnel'--%>
 
-        <%--],--%>
-        <%--function (ec) {--%>
-            <%--if ('${result["optionJson"]}' == "") {--%>
-                <%--$("#chartData").html("<div align='center'>没有数据！</div>");--%>
-                <%--return;--%>
-            <%--}--%>
-            <%--var myChart = ec.init(document.getElementById('chartData'),'shine');--%>
-            <%--var option = eval('(${result["optionJson"]})');--%>
-            <%--myChart.setOption(option);--%>
-        <%--}--%>
+    <%--],--%>
+    <%--function (ec) {--%>
+    <%--if ('${result["optionJson"]}' == "") {--%>
+    <%--$("#chartData").html("<div align='center'>没有数据！</div>");--%>
+    <%--return;--%>
+    <%--}--%>
+    <%--var myChart = ec.init(document.getElementById('chartData'),'shine');--%>
+    <%--var option = eval('(${result["optionJson"]})');--%>
+    <%--myChart.setOption(option);--%>
+    <%--}--%>
     <%--);--%>
 
     function selectChannelZone() {
@@ -672,6 +674,7 @@
             }
         );
     }
+
 </script>
 </body>
 </html>
