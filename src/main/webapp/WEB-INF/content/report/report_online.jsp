@@ -26,7 +26,7 @@
                                 <input type="hidden" id="compareZoneIds" name="compareZoneIds"
                                        value="${compareZoneIds }">
                                 <select class="form-control" name="gameId" id="gameId" placeholder="请选择游戏"
-                                        onchange="window.location.href='reportDaily_online.shtml?gameId=' + this.value">
+                                        onchange="selectGame(this)">
                                     <s:iterator value="allGames" var="item">
                                         <option value="${item.id }"
                                                 <c:if test="${item.id==gameId }">selected</c:if>>${item.gameName }</option>
@@ -675,6 +675,9 @@
         );
     }
 
+    function selectGame(e) {
+        location.assign('reportDaily_online.shtml?gameId=' + e.value);
+    }
 </script>
 </body>
 </html>

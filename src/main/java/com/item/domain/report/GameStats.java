@@ -41,7 +41,7 @@ public class GameStats {
             gameStats.data.put(time, data);
             gameStatsMap.put(gameId + day, gameStats);
         }
-        System.err.println(gameStatsMap.values());
+//        System.err.println(gameStatsMap.values());
         return new ArrayList<>(gameStatsMap.values());
     }
 

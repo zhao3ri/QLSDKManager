@@ -309,7 +309,7 @@ public class ReportService {
         EChartUtil eChartUtil = new EChartUtil("", null);
         String formatter = TOOLTIP_FORMAT;
         String json = eChartUtil.getLineOrBarOption(data, xValue, false, false, false, EChartUtil.TYPE_LINE, formatter);
-        System.err.println(json);
+//        System.err.println(json);
         return json;
     }
 }
