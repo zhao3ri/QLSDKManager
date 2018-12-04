@@ -203,7 +203,7 @@
         if(gameId == ""){
             return;
         }
-        $.post("/bGamezone/bGamezone_getGameZonesAsync.shtml",{gameId : gameId},function(data){
+        $.post("${ctx}/bGamezone/bGamezone_getGameZonesAsync.shtml",{gameId : gameId},function(data){
             json = eval(data);
             $("#zoneId").append("<option value=''>==请选择服务器==</option>");
             for(var i=0; i<json.length; i++){

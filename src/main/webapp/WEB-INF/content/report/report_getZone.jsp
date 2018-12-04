@@ -5,7 +5,7 @@
 	<input type="hidden" id="gameId" value="${gameId }">
 
 	<div class="panel-body ">
-		<button type="button" id="changeZone" class="btn btn-primary " > &nbsp;&nbsp;区&nbsp;服&nbsp;&nbsp;</button>
+		<button type="button" class="btn btn-primary " > &nbsp;&nbsp;区&nbsp;服&nbsp;&nbsp;</button>
         <label style="float: right">全 选：<input type="checkbox" id="checkedAll"/></label>  
 		 
 		<br/>
@@ -31,7 +31,7 @@
 				</tbody>
 			 </table>
 		</div>	
-		<button type="button" id="changeZone" class="btn btn-primary " onclick="sure();"><i class="icon-ok"></i> 确定</button>
+		<button type="button" class="btn btn-primary " onclick="sure();"><i class="icon-ok"></i> 确定</button>
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {

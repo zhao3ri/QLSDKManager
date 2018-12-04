@@ -123,7 +123,7 @@
 		function view(uid, platformId){
 			var gameId = $("#appNameSel").val();
 			var selectRange = $("#selectRange").val();
-			location.assign("/bOrder/bOrder_list.shtml?BOrder.status=2&BOrder.notifyStatus=2&BOrder.uid=" + uid + "&BOrder.platformId=" + platformId + "&BOrder.gameId=" + gameId )
+			location.assign("${ctx}/bOrder/bOrder_list.shtml?BOrder.status=2&BOrder.notifyStatus=2&BOrder.uid=" + uid + "&BOrder.platformId=" + platformId + "&BOrder.gameId=" + gameId )
 		}
 	</script>
 </body>

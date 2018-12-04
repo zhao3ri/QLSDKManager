@@ -100,7 +100,7 @@
 
     //加载操作历史
     function loadHistory() {
-        $("#history_container").load('/history/history_listmain.shtml?t=${r}&history.oid=<s:property value="#session.sessionUserInfo.id"/>');
+        $("#history_container").load('${ctx}/history/history_listmain.shtml?t=${r}&history.oid=<s:property value="#session.sessionUserInfo.id"/>');
     }
 
     //加载系统公告

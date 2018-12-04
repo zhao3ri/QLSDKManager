@@ -113,17 +113,17 @@
 		
 		function online(){
 			$("#selectRange").val("");
-			$("#mainForm").attr("action","/roleReport/roleReport_online.shtml");
+			$("#mainForm").attr("action","${ctx}/roleReport/roleReport_online.shtml");
 			$("#mainForm").submit();
 		}
 		function onlineDaily(){
 			$("#selectRange").val("");
-			$("#mainForm").attr("action","/roleReport/roleReport_onlineDaily.shtml");
+			$("#mainForm").attr("action","${ctx}/roleReport/roleReport_onlineDaily.shtml");
 			$("#mainForm").submit();
 		}
 		function daily(){
 			$("#selectRange").val("");
-			$("#mainForm").attr("action","/roleReport/roleReport_daily.shtml");
+			$("#mainForm").attr("action","${ctx}/roleReport/roleReport_daily.shtml");
 			$("#mainForm").submit();
 		}
 		
@@ -134,7 +134,7 @@
 			var gameId = $("#gameId").val();
 			var platformId = '${platformId}';
 			var zoneId = '${zoneId}';
-			$.post("/bGamezone/bGamezone_getGameZonesAsync.shtml",{gameId:gameId},function(data){
+			$.post("${ctx}/bGamezone/bGamezone_getGameZonesAsync.shtml",{gameId:gameId},function(data){
 				json = eval(data);
 				$("#zoneId").append("<option value=''>==请选择服务器==</option>");
 			    for(var i=0; i<json.length; i++){
@@ -145,7 +145,7 @@
 			    } 
 		    });
 			
-			$.post("/bPlatformGame/bPlatformGame_getGamePlatformsAsync.shtml",{id:gameId},function(data){
+			$.post("${ctx}/bPlatformGame/bPlatformGame_getGamePlatformsAsync.shtml",{id:gameId},function(data){
 				json = eval(data);
 				$("#platformId").append("<option value=''>==请选择渠道==</option>");
 			    for(var i=0; i<json.length; i++){

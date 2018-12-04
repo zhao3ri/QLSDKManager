@@ -74,7 +74,7 @@
 		 $("#checkPlatformName").click(function(){
 			var platformName=$("input[name='BPlatform.platformName']").val();
 			//alert(platformName);
-			var url="/bPlatform/bPlatform_platformNameIsExisted.shtml";
+			var url="${ctx}/bPlatform/bPlatform_platformNameIsExisted.shtml";
 			var params={"cache":"false","BPlatform.platformName":platformName};
 			$("#platformNameinfo").html("");
 			if(platformName!="${bPlatform.platformName}"){
