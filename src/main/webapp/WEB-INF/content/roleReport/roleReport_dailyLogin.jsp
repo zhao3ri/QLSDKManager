@@ -43,8 +43,8 @@
         <div class="panel panel-default">
           <div class="panel-body ">
           	  <ul class="nav nav-tabs " >
-				 <li id="realTime"><a href="javascript:realTimeLogin();" identity="tab">实时统计表</a></li>
-				  <li id="daily"><a href="javascript:dailyLogin();" identity="tab">日统计表</a></li>
+				 <li id="realTime"><a href="javascript:realTimeLogin();" role="tab">实时统计表</a></li>
+				  <li id="daily"><a href="javascript:dailyLogin();" role="tab">日统计表</a></li>
 			  </ul>
 			  <br/>
       		<div class="table-responsive">
@@ -88,7 +88,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#roleReportLeft_1").addClass("active");
+			$("#roleReportLeft_login").addClass("active");
 			$("#daily").addClass("active");
 			changeApp();
 		});

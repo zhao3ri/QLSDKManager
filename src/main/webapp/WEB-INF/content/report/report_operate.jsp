@@ -662,7 +662,7 @@
     <%@ include file="/common/footer.jsp" %>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#reportLeft_3").addClass("active");
+			$("#reportLeft_operate").addClass("active");
 			$("#zone").addClass("active");
 		});
 

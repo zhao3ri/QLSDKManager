@@ -14,7 +14,7 @@
 	      <div class="panel-heading ">
 	        <h3 class="panel-title">修改个人资料</h3>
 	      </div>
-		<form identity="form" id="inputForm" action="user_saveMyInfo.shtml" method="post">
+		<form role="form" id="inputForm" action="user_saveMyInfo.shtml" method="post">
 			<input type="hidden" name="user.id" value="${user.id }" />
 			<div class="panel-body ">
 	          <div class=" tooltip-show form-horizontal">

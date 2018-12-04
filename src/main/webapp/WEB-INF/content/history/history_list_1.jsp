@@ -15,7 +15,7 @@ pageContext.setAttribute("r", rt);
 	      	<li class="active">系统管理</li>
 	      	<li class="active">操作历史记录列表</li>
 	    </ol>
-		<form identity="form" action="history_list1.shtml" method="post" id="mainForm">
+		<form role="form" action="history_list1.shtml" method="post" id="mainForm">
 		<input type="hidden" id="oid" name="history.oid" value="${request.session.sessionUserInfo.id }"/>
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">操作历史记录信息查询 </div>

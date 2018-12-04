@@ -10,7 +10,7 @@
 	      	<li class="active">平台管理</li>
 	      	<li class="active">平台游戏分区表列表</li>
 	    </ol>
-		<form identity="form" action="bPlatformGameZone_list.shtml" method="post" id="mainForm">
+		<form role="form" action="bPlatformGameZone_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">平台游戏分区表列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
@@ -91,7 +91,7 @@
 			            	<input type="checkbox" id="checkedAll">
 			          	</label>
 			          	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="caret"></span> </button>
-			          	<ul class="dropdown-menu text-left" identity="menu">
+			          	<ul class="dropdown-menu text-left" role="menu">
 			          	</ul>
 			        </div>
 	      			<c:set var="p" value="bPlatformGameZonePage"/>

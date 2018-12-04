@@ -33,7 +33,7 @@
                     right: 9px;
                 }
             </style>
-            <form identity="form" id="inputForm" action="identity_save.shtml" method="post">
+            <form role="form" id="inputForm" action="identity_save.shtml" method="post">
                 <div class="panel-body ">
                     <div class=" tooltip-show form-horizontal">
                         <div class="form-group clearfix">

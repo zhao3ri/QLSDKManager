@@ -48,8 +48,8 @@
 		    	</div>
           <div class="panel-body ">
           	  <ul class="nav nav-tabs " >
-				  <li id="playTime"><a href="/roleReport/roleReport_playTime.shtml" identity="tab">单次使用时长表</a></li>
-				  <li id="totalPlayTime"><a href="/roleReport/roleReport_totalPlayTime.shtml" identity="tab">总使用时长表</a></li>
+				  <li id="playTime"><a href="${ctx}/roleReport/roleReport_playTime.shtml" role="tab">单次使用时长表</a></li>
+				  <li id="totalPlayTime"><a href="${ctx}/roleReport/roleReport_totalPlayTime.shtml" role="tab">总使用时长表</a></li>
 			  </ul>
 			  <br/>
       		<div class="table-responsive">
@@ -102,7 +102,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#roleReportLeft_3").addClass("active");
+			$("#roleReportLeft_duration").addClass("active");
 			$("#totalPlayTime").addClass("active");
 			changeApp();
 		});

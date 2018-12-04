@@ -179,7 +179,7 @@
 			$("#resetBtn").click(function(){
 				location.assign("sZonePlatformDaily_translate.shtml"); 
 				});
-			$("#reportLeft_8").addClass("active");
+			$("#reportLeft_loss").addClass("active");
 			$("#excelExport").click(function() {
 				if(confirm("您确认导出Excel？")){
 					$("#mainForm").attr("action","sZonePlatformDaily_excelExport.shtml?chartType=1");

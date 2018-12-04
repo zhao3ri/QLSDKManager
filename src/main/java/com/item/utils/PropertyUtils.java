@@ -56,8 +56,8 @@ public class PropertyUtils {
                 url = String.format("%s/%s", url, absPath);
             }
             URL.append(url);
+            System.out.println("context url == " + URL.toString());
         }
-
         return URL.toString();
     }
 }

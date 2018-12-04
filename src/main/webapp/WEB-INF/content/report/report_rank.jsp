@@ -11,7 +11,7 @@
 	</div>
     <div class=" col-md-11">
         <div class="panel panel-default">
-        	<form identity="form"  action="report_rank.shtml" method="post" id="mainForm">
+        	<form role="form"  action="report_rank.shtml" method="post" id="mainForm">
         	<input type="hidden" id="checkedIds" name="checkedIds" value="${checkedIds }"/>
 	        	<div class="form-inline popover-show panel-body list_toolbar">
 		        	<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">  
@@ -97,7 +97,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#reportLeft_11").addClass("active");
+			$("#reportLeft_rechargeRank").addClass("active");
 			
 			$("#resetBtn").click(function(){
 				location.assign("report_rank.shtml"); 

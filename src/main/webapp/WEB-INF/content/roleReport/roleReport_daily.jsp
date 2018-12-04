@@ -43,9 +43,9 @@
         <div class="panel panel-default">
           <div class="panel-body ">
           	  <ul class="nav nav-tabs " >
-				  <li id="online"><a href="javascript:online();" identity="tab">实时在线趋势图</a></li>
-				  <li id="onlineDaily"><a href="javascript:onlineDaily()" identity="tab">实时在线统计表</a></li>
-				  <li id="daily"><a href="javascript:daily();" identity="tab">日统计趋势图</a></li>
+				  <li id="online"><a href="javascript:online();" role="tab">实时在线趋势图</a></li>
+				  <li id="onlineDaily"><a href="javascript:onlineDaily()" role="tab">实时在线统计表</a></li>
+				  <li id="daily"><a href="javascript:daily();" role="tab">日统计趋势图</a></li>
 				  <div class="statistics">
 				    <div id="online_chart" class="record">
 				    <div class="msg"><P> 当前在线人数：${result['roleOnlines']}</P></div>
@@ -69,7 +69,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#roleReportLeft_2").addClass("active");
+			$("#roleReportLeft_online").addClass("active");
 			$("#daily").addClass("active");
 			changeApp();
 		});

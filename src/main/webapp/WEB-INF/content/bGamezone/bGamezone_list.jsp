@@ -11,7 +11,7 @@
 	      	<li class="active">游戏管理</li>
 	      	<li class="active">游戏分区列表</li>
 	    </ol>
-		<form identity="form" action="bGamezone_list.shtml" method="post" id="mainForm">
+		<form role="form" action="bGamezone_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	    <div class="panel-heading">游戏分区列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
@@ -88,7 +88,7 @@
 			            	<input type="checkbox" id="checkedAll">
 			          	</label>
 			          	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="caret"></span> </button>
-			          	<ul class="dropdown-menu text-left" identity="menu">
+			          	<ul class="dropdown-menu text-left" role="menu">
 			            	<li><a id="delete" href="javascript:void(0);">批量删除</a></li>
 			          	</ul>
 			        </div>

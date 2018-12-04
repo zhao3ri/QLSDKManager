@@ -71,8 +71,8 @@
         <div class="panel panel-default">
           <div class="panel-body ">
               <ul class="nav nav-tabs " >
-				  <li id="dataDaily"><a href="javascript:jumpDaily();" identity="tab">每日数据汇总</a></li>
-				  <li id="dataMonthly"><a href="javascript:void(0);" identity="tab">每月数据汇总</a></li>
+				  <li id="dataDaily"><a href="javascript:jumpDaily();" role="tab">每日数据汇总</a></li>
+				  <li id="dataMonthly"><a href="javascript:void(0);" role="tab">每月数据汇总</a></li>
 			  </ul><br/>
 	          <div class="panel-body " id="chartData"  style="height:400px"> 
 	          	统计图输出
@@ -133,7 +133,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#roleReportLeft_10").addClass("active");
+			$("#roleReportLeft_gather").addClass("active");
 			$("#dataMonthly").addClass("active");
 			changeApp();
 			

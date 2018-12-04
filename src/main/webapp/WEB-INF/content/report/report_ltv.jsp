@@ -270,7 +270,7 @@
 <%@ include file="/common/footer.jsp" %>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#reportLeft_13").addClass("active");
+        $("#reportLeft_ltv").addClass("active");
         $("#zone").addClass("active");
     });
 

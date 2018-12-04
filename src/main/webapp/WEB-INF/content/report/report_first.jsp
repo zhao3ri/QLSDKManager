@@ -301,7 +301,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#reportLeft_6").addClass("active");
+			$("#reportLeft_first").addClass("active");
 			$("#zone").addClass("active");
 		});
 		

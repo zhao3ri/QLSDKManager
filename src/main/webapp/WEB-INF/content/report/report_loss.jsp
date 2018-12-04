@@ -177,7 +177,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#reportLeft_8").addClass("active");
+			$("#reportLeft_loss").addClass("active");
 			$("#zone").addClass("active");
 		});
 		

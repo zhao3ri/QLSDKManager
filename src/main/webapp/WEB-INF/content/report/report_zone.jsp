@@ -14,9 +14,9 @@
           <div class="panel-body ">
           <form name="selected" method="post" action="report_zone.shtml" id="mainForm">
           	  <ul class="nav nav-tabs " >
-				 <li id="summary"><a href="/report/report_summary.shtml" identity="tab">平台分析</a></li>
-				  <li id="platform"><a href="/report/report_platform.shtml" identity="tab">渠道分析</a></li>
-				  <li id="zone"><a href="/report/report_zone.shtml" identity="tab">区服分析</a></li>
+				 <li id="summary"><a href="${ctx}/report/report_summary.shtml" role="tab">平台分析</a></li>
+				  <li id="platform"><a href="${ctx}/report/report_platform.shtml" role="tab">渠道分析</a></li>
+				  <li id="zone"><a href="${ctx}/report/report_zone.shtml" role="tab">区服分析</a></li>
 				  <li style="float:right">
 					   <div class="form-group width_btn">
 <!-- 			          		<button  type="submit" class="btn  btn-primary "><i class="icon-search"></i> 搜索</button> -->
@@ -398,7 +398,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#reportLeft_1").addClass("active");
+			$("#reportLeft_summary").addClass("active");
 			$("#zone").addClass("active");
 			
 			var yearMonth= $("#yearMonth").val();

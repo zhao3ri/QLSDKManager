@@ -16,9 +16,9 @@
           
           <form action="report_platform.shtml" method="post" id="mainForm">
           	  <ul class="nav nav-tabs " >
-				 <li id="summary"><a href="/report/report_summary.shtml" identity="tab">平台分析</a></li>
-				  <li id="platform"><a href="/report/report_platform.shtml" identity="tab">渠道分析</a></li>
-				  <li id="zone"><a href="/report/report_zone.shtml" identity="tab">区服分析</a></li>
+				 <li id="summary"><a href="${ctx}/report/report_summary.shtml" identity="tab">平台分析</a></li>
+				  <li id="platform"><a href="${ctx}/report/report_platform.shtml" identity="tab">渠道分析</a></li>
+				  <li id="zone"><a href="${ctx}/report/report_zone.shtml" identity="tab">区服分析</a></li>
 				  
 				   <li id="reset"  identity="tab" style="float: right;">
 			          <div class="form-group width_btn">
@@ -174,7 +174,7 @@
 			$("#resetBtn").click(function(){
 				location.assign("report_platform.shtml"); 
 				});
-			$("#reportLeft_1").addClass("active");
+			$("#reportLeft_summary").addClass("active");
 			$("#platform").addClass("active");
 			
 		});

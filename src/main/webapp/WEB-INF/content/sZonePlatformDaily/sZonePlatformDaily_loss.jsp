@@ -14,9 +14,9 @@
         <div class="panel panel-default">
         <div class="panel-body ">
           	  <ul class="nav nav-tabs " >
-				  <li id="keep"><a href="/sZonePlatformDaily/sZonePlatformDaily_keep.shtml" identity="tab">留存统计</a></li>
-				  <li id="loss"><a href="/sZonePlatformDaily/sZonePlatformDaily_loss.shtml" identity="tab">流失统计</a></li>
-				  <li id="back"><a href="/sZonePlatformDaily/sZonePlatformDaily_back.shtml" identity="tab">回流统计</a></li>
+				  <li id="keep"><a href="${ctx}/sZonePlatformDaily/sZonePlatformDaily_keep.shtml" role="tab">留存统计</a></li>
+				  <li id="loss"><a href="${ctx}/sZonePlatformDaily/sZonePlatformDaily_loss.shtml" role="tab">流失统计</a></li>
+				  <li id="back"><a href="${ctx}/sZonePlatformDaily/sZonePlatformDaily_back.shtml" role="tab">回流统计</a></li>
 			  </ul>
 			  <br/>
         	<form action="sZonePlatformDaily_loss.shtml" method="post" id="mainForm">
@@ -99,7 +99,7 @@
 			$("#resetBtn").click(function(){
 				location.assign("sZonePlatformDaily_loss.shtml"); 
 				});
-			$("#reportLeft_7").addClass("active");
+			$("#reportLeft_keep").addClass("active");
 			$("#loss").addClass("active");
 			$("#excelExport").click(function() {
 				if(confirm("您确认导出Excel？")){

@@ -10,7 +10,7 @@
             <li class="active">渠道管理</li>
             <li class="active">渠道列表</li>
         </ol>
-        <form identity="form" action="bPlatform_list.shtml" method="post" id="mainForm">
+        <form role="form" action="bPlatform_list.shtml" method="post" id="mainForm">
             <div class="panel panel-default">
                 <div class="panel-heading">渠道列表信息查询</div>
                 <div class="form-inline popover-show panel-body list_toolbar">

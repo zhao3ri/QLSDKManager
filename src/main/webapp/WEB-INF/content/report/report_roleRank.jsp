@@ -11,7 +11,7 @@
 	</div>
     <div class=" col-md-11">
         <div class="panel panel-default">
-        	<form identity="form"  action="report_roleRank.shtml" method="post" id="mainForm">
+        	<form role="form"  action="report_roleRank.shtml" method="post" id="mainForm">
 	        	<div class="form-inline popover-show panel-body list_toolbar" >
 	        		<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏" >
 			          	<select class="form-control" name="gameId"  placeholder="请选择游戏" id="appNameSel">
@@ -104,7 +104,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#reportLeft_12").addClass("active");
+			$("#reportLeft_roleRank").addClass("active");
 			
 			$("#resetBtn").click(function(){
 				location.assign("report_roleRank.shtml"); 

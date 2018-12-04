@@ -84,7 +84,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#roleReportLeft_8").addClass("active");
+			$("#roleReportLeft_activeRecharge").addClass("active");
 			changeApp();
 		});
 		

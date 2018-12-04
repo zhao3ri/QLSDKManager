@@ -10,7 +10,7 @@
 	      	<li class="active">报表管理</li>
 	      	<li class="active">角色列表</li>
 	    </ol>
-		<form identity="form" action="bRole_list.shtml" method="post" id="mainForm">
+		<form role="form" action="bRole_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">角色列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">

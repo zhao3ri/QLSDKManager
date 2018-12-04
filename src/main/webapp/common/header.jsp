@@ -86,7 +86,7 @@
 
 <div class="container">
     <iframe src="/common/refresh.jsp" width="0" height="0" style="display: none"></iframe>
-    <nav class="navbar navbar-default navbar-static-top row" identity="navigation">
+    <nav class="navbar navbar-default navbar-static-top row" role="navigation">
 
         <!-- 小屏幕菜单开始 -->
         <div class="navbar-header">
@@ -230,15 +230,15 @@
                                      <li><a href="${ctx}/data/data_list.shtml">数据权限列表</a></li>
                                  </mt:auth> --%>
                             <mt:auth authUrl="dictionary_list.shtml">
-                                <li identity="presentation" class="divider"></li>
+                                <li role="presentation" class="divider"></li>
                                 <li><a href="${ctx}/dictionary/dictionary_list.shtml">部门列表</a></li>
                             </mt:auth>
                                 <%--  <mt:auth authUrl="history_list1.shtml">
-                                   <li identity="presentation" class="divider"></li>
+                                   <li role="presentation" class="divider"></li>
                                    <li><a href="${ctx}/history/history_list1.shtml?t=${r}&history.oid=<s:property value="#session.sessionUserInfo.id"/>">操作记录</a></li>
                                  </mt:auth> --%>
                             <mt:auth authUrl="systool_cleanCache.shtml">
-                                <li identity="presentation" class="divider"></li>
+                                <li role="presentation" class="divider"></li>
                                 <li><a href="${ctx}/systool/systool_cleanCache.shtml">清除缓存</a></li>
                             </mt:auth>
                         </ul>

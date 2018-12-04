@@ -94,7 +94,7 @@
     <%@ include file="/common/footer.jsp" %>      
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#roleReportLeft_5").addClass("active");
+			$("#roleReportLeft_keep").addClass("active");
 			changeApp();
 		});
 		

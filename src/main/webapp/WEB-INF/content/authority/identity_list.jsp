@@ -73,7 +73,7 @@ pageContext.setAttribute("r", r);
                                               <a href="javascript:confirmAction('identity_delete.shtml?checkedIds=${tempIdentity.id }','您确认删除？');">删除</a>
                                           </li>
                                       </c:if>
-				                    <li identity="presentation" class="divider"></li>
+				                    <li role="presentation" class="divider"></li>
 									<li><mt:modalDialog remote="/history/history_list.shtml?history.rid=${tempIdentity.id}&history.omkey=identity&t=${r}" id="historyWindow${tempIdentity.id}" title="历史记录" role="dialog" name="历史记录" type="link" width="700"/></li>
 				                  </ul>
 				                </div>
@@ -96,7 +96,7 @@ pageContext.setAttribute("r", r);
 	            <input type="checkbox" id="checkedAll">
 	          </label>
 	          <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="caret"></span> </button>
-	          <ul class="dropdown-menu text-left" identity="menu">
+	          <ul class="dropdown-menu text-left" role="menu">
 	            <li><a id="remove" href="#">批量删除</a></li>
 	          </ul>
 	        </div>

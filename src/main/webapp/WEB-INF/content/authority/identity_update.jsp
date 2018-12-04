@@ -34,7 +34,7 @@
                     right: 9px;
                 }
             </style>
-            <form identity="form" id="inputForm" action="identity_save.shtml" method="post">
+            <form role="form" id="inputForm" action="identity_save.shtml" method="post">
                 <input type="hidden" id="roleid" name="identity.id" value="${identity.id }"/>
                 <div class="panel-body ">
                     <div class=" tooltip-show form-horizontal">

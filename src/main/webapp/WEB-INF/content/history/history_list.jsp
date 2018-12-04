@@ -6,7 +6,7 @@
 
 <body class="fix_top_nav_padding">
 	<div id="wrap">
-	<form identity="form" id="mainForm" action="javascript:clickButton();" method="post">
+	<form role="form" id="mainForm" action="javascript:clickButton();" method="post">
 		<input type="hidden" id="rid" name="history.rid" value="${history.rid }"/>
 		<input type="hidden" id="omkey" name="history.omkey" value="${history.omkey }"/>
 		<input type="hidden" id="uniteOmkey" name="history.uniteOmkey" value="${history.uniteOmkey }"/>

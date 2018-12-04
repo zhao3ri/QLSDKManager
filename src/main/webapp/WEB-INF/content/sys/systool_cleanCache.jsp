@@ -34,7 +34,7 @@
     	</div>
     </div>	 -->
     		
-	<form identity="form" id="mainForm" action="systool_doCleanCache.shtml" method="post">
+	<form role="form" id="mainForm" action="systool_doCleanCache.shtml" method="post">
 		
 		
 		<div class="panel panel-default">
@@ -76,7 +76,7 @@
 		            <input type="checkbox" id="checkedAll">
 		          </label>
 		          <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span class="caret"></span> </button>
-		          <ul class="dropdown-menu text-left" identity="menu">
+		          <ul class="dropdown-menu text-left" role="menu">
 		            <li><a id="clean" href="#">批量清除</a></li>
 		          </ul>
 		        </div>

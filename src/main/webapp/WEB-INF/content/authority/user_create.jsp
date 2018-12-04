@@ -15,7 +15,7 @@
 	      <div class="panel-heading ">
 	        <h3 class="panel-title">新增用户</h3>
 	      </div>
-	      <form identity="form" id="inputForm" action="user_save.shtml" method="post">
+	      <form role="form" id="inputForm" action="user_save.shtml" method="post">
 	        <div class="panel-body ">
 	          <div class=" tooltip-show form-horizontal">
 	          	<div class="form-group clearfix col-lg-6" >

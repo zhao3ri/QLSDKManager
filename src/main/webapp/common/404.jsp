@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="links">
-				<a href="/index.shtml" class="l_home">首页</a> <a href="javascript:history.go(-1)" class="l_back">后退</a>
+				<a href="${ctx}/index.shtml" class="l_home">首页</a> <a href="javascript:history.go(-1)" class="l_back">后退</a>
 			</div>
 		</div>
 	</body>

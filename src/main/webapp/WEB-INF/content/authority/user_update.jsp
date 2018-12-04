@@ -15,7 +15,7 @@
 	      <div class="panel-heading ">
 	        <h3 class="panel-title">修改用户</h3>
 	      </div>
-		<form identity="form" id="inputForm" action="user_save.shtml" method="post">
+		<form role="form" id="inputForm" action="user_save.shtml" method="post">
 			<input type="hidden" name="user.id" value="${user.id }" />
 			
 			<div class="panel-body ">
