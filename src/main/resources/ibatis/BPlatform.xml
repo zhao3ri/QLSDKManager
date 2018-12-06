@@ -55,7 +55,7 @@
         <include refid="BPlatform.Where"/>
     </select>
 
-    <!-- 增加联运平台 -->
+    <!-- 增加联运渠道 -->
     <insert id="BPlatform.save" parameterClass="BPlatform">
         INSERT INTO b_platform(platformName,createTime,platformCallbackUrl,business,phone,verifyUrl)
         VALUES(#platformName#,#createTime#,#platformCallbackUrl#,#business#,#phone#,#verifyUrl#)
@@ -65,12 +65,12 @@
         </selectKey>
     </insert>
 
-    <!-- 删除联运平台 -->
+    <!-- 删除联运渠道 -->
     <delete id="BPlatform.delete" parameterClass="Long">
 		DELETE bp,sc FROM b_platform bp LEFT JOIN sysIdentityChannel sc ON bp.id = sc.channelId WHERE bp.id =#id#
 	</delete>
 
-    <!-- 更新联运平台 -->
+    <!-- 更新联运渠道 -->
     <update id="BPlatform.update" parameterClass="BPlatform">
         UPDATE b_platform
         <dynamic prepend="SET">
@@ -102,13 +102,13 @@
         WHERE id=#id#
     </update>
 
-    <!-- 获取联运平台总数 -->
+    <!-- 获取联运渠道总数 -->
     <select id="BPlatform.count" resultClass="Long" parameterClass="mb">
         SELECT COUNT(*) FROM b_platform
         <include refid="BPlatform.Where"/>
     </select>
 
-    <!-- 获取指定id对应的联运平台 -->
+    <!-- 获取指定id对应的联运渠道 -->
     <select id="BPlatform.getPlatformById" parameterClass="Long" resultClass="BPlatform">
 		SELECT * FROM b_platform WHERE id=#id#
 	</select>

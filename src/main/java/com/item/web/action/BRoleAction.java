@@ -77,7 +77,7 @@ public class BRoleAction extends Struts2Action{
             ExcelExport ee=new ExcelExport();
             ee.setHead("数据统计报表_"+DateUtils.format(new Date(),"yyyyMMddHHmmss"));
             ee.getEl().add("游戏名称");
-            ee.getEl().add("平台名称");
+            ee.getEl().add("渠道名称");
             ee.getEl().add("分区");
             ee.getEl().add("角色ID");
             ee.getEl().add("角色名称");

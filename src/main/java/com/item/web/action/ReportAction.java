@@ -478,7 +478,7 @@ public class ReportAction extends BaseAction {
             ExcelExport ee = new ExcelExport();
             ee.setHead("数据统计报表_" + DateUtils.format(new Date(), "yyyyMMddHHmmss"));
             ee.getEl().add("游戏");
-            ee.getEl().add("平台");
+            ee.getEl().add("渠道");
             ee.getEl().add("角色名称");
             ee.getEl().add("充值金额");
             ee.getEl().add("排序");

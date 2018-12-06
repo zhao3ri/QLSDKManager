@@ -23,7 +23,7 @@ public class BOrder extends StatBaseEntity {
 
     private String orderId;
 
-    private String cpOrderId;
+    private String channelOrderId;
 
     private String extInfo;
 
@@ -105,12 +105,12 @@ public class BOrder extends StatBaseEntity {
         this.orderId = orderId;
     }
 
-    public String getCpOrderId() {
-        return cpOrderId;
+    public String getChannelOrderId() {
+        return channelOrderId;
     }
 
-    public void setCpOrderId(String cpOrderId) {
-        this.cpOrderId = cpOrderId;
+    public void setChannelOrderId(String channelOrderId) {
+        this.channelOrderId = channelOrderId;
     }
 
     public String getExtInfo() {

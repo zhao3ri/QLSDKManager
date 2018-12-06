@@ -20,7 +20,7 @@ import core.module.orm.MapBean;
 import core.module.orm.Page;
 
 /*
- * 联运平台service类
+ * 联运渠道service类
  */
 @Service
 @Transactional
@@ -75,7 +75,7 @@ public class BPlatformService {
         return bPlatformDao.find("BPlatform.getByIds", channelIds);
     }
 
-    //根据平台名查询平台名是否唯一
+    //根据渠道名查询渠道名是否唯一
     public Long getPlatformCountByName(MapBean mb) {
         return bPlatformDao.countResult("BPlatform.getPlatformByName", mb);
     }

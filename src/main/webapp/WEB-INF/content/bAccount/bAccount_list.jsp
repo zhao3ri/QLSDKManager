@@ -14,9 +14,9 @@
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">玩家列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
-		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择平台">
-		        	<select class="form-control" name="account.platformId" placeholder="请选择平台">
-						<option value="">==请选择平台==</option>
+		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
+		        	<select class="form-control" name="account.platformId" placeholder="请选择渠道">
+						<option value="">==请选择渠道==</option>
 						<s:iterator value="platforms" var="item">
 							<option value="${item.id }" <c:if test="${item.id == account.platformId }">selected</c:if>>${item.platformName }</option>
 						</s:iterator>
@@ -38,7 +38,7 @@
 	        		<table class="table table-hover table-striped table-bordered table-condensed table-big">
 	          			<thead>
 	            			<tr>
-								<th>平台名称</th>
+								<th>渠道名称</th>
 								<th>uid</th>
 								<th>创建时间</th>
 	            			</tr>

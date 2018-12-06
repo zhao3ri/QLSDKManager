@@ -32,7 +32,7 @@
 			        
 			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择客户端">
 			          	<select class="form-control" name="SZonePlatformDaily.clientType"  placeholder="请选择客户端">
-							<option value="">所有平台</option>
+							<option value="">客户端类型</option>
 							<option value="1" <c:if test="${SZonePlatformDaily.clientType==1 }">selected</c:if>>Android </option>
 							<option value="2" <c:if test="${SZonePlatformDaily.clientType==2 }">selected</c:if>>IOS</option>
 						</select>
@@ -52,7 +52,7 @@
         </div>
         <div class="panel panel-default">
           <div class="panel-heading ">
-            <h3 class="panel-title"> 游乐平台用户流失表
+            <h3 class="panel-title"> 游乐渠道用户流失表
               <button type="button" id="excelExport" class=" badge badge-info btn  pull-right  " data-toggle="modal" data-target="#modal_alert" data-backdrop="static"><i class="icon-table"></i> Excel表导出</button>
             </h3>
           </div>

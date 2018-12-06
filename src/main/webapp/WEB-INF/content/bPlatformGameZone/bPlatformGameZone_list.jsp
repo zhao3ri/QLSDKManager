@@ -7,12 +7,12 @@
 	<div class="container">
 	    <ol class="breadcrumb row">
 			<li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
-	      	<li class="active">平台管理</li>
-	      	<li class="active">平台游戏分区表列表</li>
+	      	<li class="active">渠道管理</li>
+	      	<li class="active">渠道游戏分区表列表</li>
 	    </ol>
 		<form role="form" action="bPlatformGameZone_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
-	      	<div class="panel-heading">平台游戏分区表列表信息查询 </div>
+	      	<div class="panel-heading">渠道游戏分区表列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
 				<select class="form-control" name="BPlatformGameZone.gameId"  data-original-title="" title="">
@@ -23,9 +23,9 @@
 				</select>
 		          	
 		        </div>
-				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择联运平台">
+				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择联运渠道">
 				<select class="form-control" name="BPlatformGameZone.platformId"  data-original-title="" title="">
-									<option value="">==请选择联运平台==</option>
+									<option value="">==请选择联运渠道==</option>
 									<s:iterator value="platforms" var="item">
 										<option value="${item.id}" <c:if test="${item.id==bPlatformGameZone.platformId}">selected</c:if>>${item.platformName }</option>
 									</s:iterator>								

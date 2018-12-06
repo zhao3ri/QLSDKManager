@@ -62,13 +62,13 @@
           			<thead>
             			<tr>
 							<th>区服</th>
-							<th>总创角用户<i class="helpToolTip" data-content="平台所有游戏创角用户数的累加"></i></th>
-							<th>总注册用户<i class="helpToolTip" data-content="平台所有游戏注册用户数的累加"></i></th>
-							<th>注册设备<i class="helpToolTip" data-content="平台所有游戏注册设备的累加"></i></th>
-							<th>活跃用户<i class="helpToolTip" data-content="平台所有游戏活跃用户的累加"></i></th>
-							<th>充值金额<i class="helpToolTip" data-content="平台所有游戏充值总额的累加"></i></th>
-							<th>充值总次数<i class="helpToolTip" data-content="平台所有游戏充值次数的累加"></i></th>
-							<th>付费总人数<i class="helpToolTip" data-content="平台所有游戏充值人数的累加"></i></th>
+							<th>总创角用户<i class="helpToolTip" data-content="渠道所有游戏创角用户数的累加"></i></th>
+							<th>总注册用户<i class="helpToolTip" data-content="渠道所有游戏注册用户数的累加"></i></th>
+							<th>注册设备<i class="helpToolTip" data-content="渠道所有游戏注册设备的累加"></i></th>
+							<th>活跃用户<i class="helpToolTip" data-content="渠道所有游戏活跃用户的累加"></i></th>
+							<th>充值金额<i class="helpToolTip" data-content="渠道所有游戏充值总额的累加"></i></th>
+							<th>充值总次数<i class="helpToolTip" data-content="渠道所有游戏充值次数的累加"></i></th>
+							<th>付费总人数<i class="helpToolTip" data-content="渠道所有游戏充值人数的累加"></i></th>
 							<th>总付费ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的付费总人数"></i></th>
 							<th>注册ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的总注册用户"></i></th>
 							<th>操作</th>
@@ -169,13 +169,13 @@
             			<tr>
 							<th>区服</th>
 							<th>渠道</th>							
-							<th>总创角用户<i class="helpToolTip" data-content="平台所有游戏创角用户数的累加"></i></th>
-							<th>总注册用户<i class="helpToolTip" data-content="平台所有游戏注册用户数的累加"></i></th>
-							<th>注册设备<i class="helpToolTip" data-content="平台所有游戏注册设备的累加"></i></th>
-							<th>活跃用户<i class="helpToolTip" data-content="平台所有游戏活跃用户的累加"></i></th>
-							<th>充值金额<i class="helpToolTip" data-content="平台所有游戏充值总额的累加"></i></th>
-							<th>充值总次数<i class="helpToolTip" data-content="平台所有游戏充值次数的累加"></i></th>
-							<th>付费总人数<i class="helpToolTip" data-content="平台所有游戏充值人数的累加"></i></th>
+							<th>总创角用户<i class="helpToolTip" data-content="渠道所有游戏创角用户数的累加"></i></th>
+							<th>总注册用户<i class="helpToolTip" data-content="渠道所有游戏注册用户数的累加"></i></th>
+							<th>注册设备<i class="helpToolTip" data-content="渠道所有游戏注册设备的累加"></i></th>
+							<th>活跃用户<i class="helpToolTip" data-content="渠道所有游戏活跃用户的累加"></i></th>
+							<th>充值金额<i class="helpToolTip" data-content="渠道所有游戏充值总额的累加"></i></th>
+							<th>充值总次数<i class="helpToolTip" data-content="渠道所有游戏充值次数的累加"></i></th>
+							<th>付费总人数<i class="helpToolTip" data-content="渠道所有游戏充值人数的累加"></i></th>
 							<th>总付费ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的付费总人数"></i></th>
 							<th>注册ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的总注册用户"></i></th>
 							<th>操作<i class="helpToolTip" data-content="提示"></i></th>
@@ -283,13 +283,13 @@
             			<tr>
 							<th>渠道</th>
 							<th>区服</th>	
-							<th>总创角用户<i class="helpToolTip" data-content="平台所有游戏创角用户数的累加"></i></th>
-							<th>总注册用户<i class="helpToolTip" data-content="平台所有游戏注册用户数的累加"></i></th>
-							<th>注册设备<i class="helpToolTip" data-content="平台所有游戏注册设备的累加"></i></th>
-							<th>活跃用户<i class="helpToolTip" data-content="平台所有游戏活跃用户的累加"></i></th>
-							<th>充值金额<i class="helpToolTip" data-content="平台所有游戏充值总额的累加"></i></th>
-							<th>充值总次数<i class="helpToolTip" data-content="平台所有游戏充值次数的累加"></i></th>
-							<th>付费总人数<i class="helpToolTip" data-content="平台所有游戏充值人数的累加"></i></th>
+							<th>总创角用户<i class="helpToolTip" data-content="渠道所有游戏创角用户数的累加"></i></th>
+							<th>总注册用户<i class="helpToolTip" data-content="渠道所有游戏注册用户数的累加"></i></th>
+							<th>注册设备<i class="helpToolTip" data-content="渠道所有游戏注册设备的累加"></i></th>
+							<th>活跃用户<i class="helpToolTip" data-content="渠道所有游戏活跃用户的累加"></i></th>
+							<th>充值金额<i class="helpToolTip" data-content="渠道所有游戏充值总额的累加"></i></th>
+							<th>充值总次数<i class="helpToolTip" data-content="渠道所有游戏充值次数的累加"></i></th>
+							<th>付费总人数<i class="helpToolTip" data-content="渠道所有游戏充值人数的累加"></i></th>
 							<th>总付费ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的付费总人数"></i></th>
 							<th>注册ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的总注册用户"></i></th>
 							<th>操作<i class="helpToolTip" data-content="提示"></i></th>

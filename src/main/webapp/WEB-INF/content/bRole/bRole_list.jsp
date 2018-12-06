@@ -21,9 +21,9 @@
 						</s:iterator>
 					</select>
 		        </div>
-		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择平台">
-		        	<select class="form-control" name="identity.platformId" placeholder="请选择平台">
-						<option value="">==请选择平台==</option>
+		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
+		        	<select class="form-control" name="identity.platformId" placeholder="请选择渠道">
+						<option value="">==请选择渠道==</option>
 						<s:iterator value="platforms" var="item">
 							<option value="${item.id }" <c:if test="${item.id == identity.platformId }">selected</c:if>>${item.platformName }</option>
 						</s:iterator>
@@ -46,7 +46,7 @@
 	          			<thead>
 	            			<tr>
 								<th>游戏名称</th>
-								<th>平台名称</th>
+								<th>渠道名称</th>
 								<th>分区</th>
 								<th>角色id</th>
 								<th>角色名称</th>

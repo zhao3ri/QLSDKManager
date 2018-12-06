@@ -50,13 +50,13 @@
                                 <tr>
                                     <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     <th>渠道</th>
-                                    <th>总创角用户<i class="helpToolTip" data-content="平台所有游戏创角用户（游戏统计维度）数的累加"></i></th>
-                                    <th>总注册用户<i class="helpToolTip" data-content="平台所有游戏注册用户（游戏统计维度）数的累加"></i></th>
-                                    <th>注册设备<i class="helpToolTip" data-content="平台所有游戏注册设备（游戏统计维度）的累加"></i></th>
-                                    <th>活跃用户<i class="helpToolTip" data-content="平台所有游戏活跃用户（游戏统计维度）的累加"></i></th>
-                                    <th>充值金额<i class="helpToolTip" data-content="平台所有游戏充值总额（游戏统计维度）的累加"></i></th>
-                                    <th>充值总次数<i class="helpToolTip" data-content="平台所有游戏充值次数（游戏统计维度）的累加"></i></th>
-                                    <th>付费总人数<i class="helpToolTip" data-content="平台所有游戏充值人数（游戏统计维度）的累加"></i></th>
+                                    <th>总创角用户<i class="helpToolTip" data-content="渠道所有游戏创角用户（游戏统计维度）数的累加"></i></th>
+                                    <th>总注册用户<i class="helpToolTip" data-content="渠道所有游戏注册用户（游戏统计维度）数的累加"></i></th>
+                                    <th>注册设备<i class="helpToolTip" data-content="渠道所有游戏注册设备（游戏统计维度）的累加"></i></th>
+                                    <th>活跃用户<i class="helpToolTip" data-content="渠道所有游戏活跃用户（游戏统计维度）的累加"></i></th>
+                                    <th>充值金额<i class="helpToolTip" data-content="渠道所有游戏充值总额（游戏统计维度）的累加"></i></th>
+                                    <th>充值总次数<i class="helpToolTip" data-content="渠道所有游戏充值次数（游戏统计维度）的累加"></i></th>
+                                    <th>付费总人数<i class="helpToolTip" data-content="渠道所有游戏充值人数（游戏统计维度）的累加"></i></th>
                                     <th>新用户充值人数<i class="helpToolTip" data-content="所选日期内，当天新用户付费总人数"></i></th>
                                     <th>总付费ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的付费总人数"></i></th>
 
@@ -151,13 +151,13 @@
                                 <%--<thead>--%>
                                 <%--<tr>--%>
                                     <%--<th>渠道</th>--%>
-                                    <%--<th>总创角用户<i class="helpToolTip" data-content="平台所有游戏创角用户（游戏统计维度）数的累加"></i></th>--%>
-                                    <%--<th>总注册用户<i class="helpToolTip" data-content="平台所有游戏注册用户（游戏统计维度）数的累加"></i></th>--%>
-                                    <%--<th>注册设备<i class="helpToolTip" data-content="平台所有游戏注册设备（游戏统计维度）的累加"></i></th>--%>
-                                    <%--<th>活跃用户<i class="helpToolTip" data-content="平台所有游戏活跃用户（游戏统计维度）的累加"></i></th>--%>
-                                    <%--<th>充值金额<i class="helpToolTip" data-content="平台所有游戏充值总额（游戏统计维度）的累加"></i></th>--%>
-                                    <%--<th>充值总次数<i class="helpToolTip" data-content="平台所有游戏充值次数（游戏统计维度）的累加"></i></th>--%>
-                                    <%--<th>付费总人数<i class="helpToolTip" data-content="平台所有游戏充值人数（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>总创角用户<i class="helpToolTip" data-content="渠道所有游戏创角用户（游戏统计维度）数的累加"></i></th>--%>
+                                    <%--<th>总注册用户<i class="helpToolTip" data-content="渠道所有游戏注册用户（游戏统计维度）数的累加"></i></th>--%>
+                                    <%--<th>注册设备<i class="helpToolTip" data-content="渠道所有游戏注册设备（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>活跃用户<i class="helpToolTip" data-content="渠道所有游戏活跃用户（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>充值金额<i class="helpToolTip" data-content="渠道所有游戏充值总额（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>充值总次数<i class="helpToolTip" data-content="渠道所有游戏充值次数（游戏统计维度）的累加"></i></th>--%>
+                                    <%--<th>付费总人数<i class="helpToolTip" data-content="渠道所有游戏充值人数（游戏统计维度）的累加"></i></th>--%>
 
                                     <%--<th>新用户充值人数<i class="helpToolTip" data-content="所选日期内，当天新用户付费总人数"></i></th>--%>
                                     <%--<th>总付费ARPU<i class="helpToolTip" data-content="所有游戏的总充值总额/所有游戏的付费总人数"></i></th>--%>

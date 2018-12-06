@@ -97,10 +97,10 @@
 			if(platformName!="${bPlatform.platformName}"){
 			$.post(url, params, function(data){
 				if(data=="0"){			
-					$("#platformNameinfo").html("<font color='green'>该联运平台名称可以使用</font>");	
+					$("#platformNameinfo").html("<font color='green'>该联运渠道名称可以使用</font>");
 					$("#inputForm").submit();
 				}else if (data=="1") {	
-					$("#platformNameinfo").html("<font color='red'>该联运平台名称已存在</font>");					
+					$("#platformNameinfo").html("<font color='red'>该联运渠道名称已存在</font>");
 				}else{
 					$("#platformNameinfo").html("<font color='red'>服务器错误</font>");
 					

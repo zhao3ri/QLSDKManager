@@ -136,10 +136,10 @@ public class BOrderAction extends Struts2Action {
             ExcelExport ee = new ExcelExport();
             ee.setHead("数据统计报表_" + DateUtils.format(new Date(), "yyyyMMddHHmmss"));
             ee.getEl().add("订单号");
-            ee.getEl().add("cp订单号");
+            ee.getEl().add("渠道订单号");
             ee.getEl().add("游戏名称");
             ee.getEl().add("游戏分区");
-            ee.getEl().add("平台名称");
+            ee.getEl().add("渠道名称");
             ee.getEl().add("用户ID");
             ee.getEl().add("金额");
             ee.getEl().add("客户端类型");
@@ -155,7 +155,7 @@ public class BOrderAction extends Struts2Action {
             for (int i = 0; i < list.size(); i++) {
                 List<Excel> e = new ArrayList<Excel>();
                 e.add(new Excel(list.get(i).getOrderId(), 20));
-                e.add(new Excel(list.get(i).getCpOrderId(), 20));
+                e.add(new Excel(list.get(i).getChannelOrderId(), 20));
                 e.add(new Excel(list.get(i).getGameName(), 20));
                 if (StringUtils.isNotBlank(list.get(i).getZoneName())) {
                     e.add(new Excel(list.get(i).getZoneName(), 20));
@@ -212,8 +212,8 @@ public class BOrderAction extends Struts2Action {
             if (bOrder.getOrderId() != null && !"".equals(bOrder.getOrderId())) {
                 mb.put("orderId", bOrder.getOrderId());
             }
-            if (bOrder.getCpOrderId() != null && !"".equals(bOrder.getCpOrderId())) {
-                mb.put("cpOrderId", bOrder.getCpOrderId());
+            if (bOrder.getChannelOrderId() != null && !"".equals(bOrder.getChannelOrderId())) {
+                mb.put("channelOrderId", bOrder.getChannelOrderId());
             }
             if (bOrder.getExtInfo() != null && !"".equals(bOrder.getExtInfo())) {
                 mb.put("extInfo", bOrder.getExtInfo());

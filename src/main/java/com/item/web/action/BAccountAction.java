@@ -50,8 +50,8 @@ public class BAccountAction extends Struts2Action {
 			ExcelExport ee = new ExcelExport();
 			ee.setHead("游戏玩家统计报表_"
 					+ DateUtils.format(new Date(), "yyyyMMddHHmmss"));
-			ee.getEl().add("平台ID");
-			ee.getEl().add("平台名称");
+			ee.getEl().add("渠道ID");
+			ee.getEl().add("渠道名称");
 			ee.getEl().add("UID");
 			ee.getEl().add("创建时间");
 

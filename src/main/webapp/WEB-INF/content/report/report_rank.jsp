@@ -21,8 +21,8 @@
 							</s:iterator>
 						</select>	 
 			        </div>
-			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择平台">
-			             <select class="select2 form-control select2_sample1" placeholder="请选择平台" name="platformId" data-original-title="" title="">
+			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
+			             <select class="select2 form-control select2_sample1" placeholder="请选择渠道" name="platformId" data-original-title="" title="">
 					         <option value=""></option>
 					         <s:iterator value="platforms" var="item">
 						    	 <option value="${item.id}" <c:if test="${item.id==platformId}">selected</c:if>>${item.platformName }</option>

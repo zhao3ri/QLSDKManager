@@ -24,7 +24,7 @@
 			        
 			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择客户端">
 			          	<select class="form-control" name="SZonePlatformDaily.clientType"  placeholder="请选择客户端">
-							<option value="">所有平台</option>
+							<option value="">客户端类型</option>
 							<option value="1" <c:if test="${SZonePlatformDaily.clientType==1 }">selected</c:if>>Android </option>
 							<option value="2" <c:if test="${SZonePlatformDaily.clientType==2 }">selected</c:if>>IOS</option>
 						</select>

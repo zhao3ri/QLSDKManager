@@ -29,7 +29,7 @@
         </dynamic>
     </sql>
 
-    <!-- 增加联运平台 -->
+    <!-- 增加联运渠道 -->
     <insert id="SBalance.save" parameterClass="SBalance">
         INSERT INTO s_balance(channelId,type,amount,user,balance,createTime)
         VALUES(#channelId#,#type#,#amount#,#user#,#balance#,#createTime#)

@@ -28,8 +28,8 @@
     		<isNotNull prepend="and" property="orderId">
     			a.`orderId`=#orderId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="cpOrderId">
-    			a.`cpOrderId`=#cpOrderId#
+    		<isNotNull prepend="and" property="channelOrderId">
+    			a.`channelOrderId`=#channelOrderId#
     		</isNotNull>
     		<isNotNull prepend="and" property="clientType">
     			a.`clientType`=#clientType#

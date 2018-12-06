@@ -33,7 +33,7 @@
 					</div>
 					<div class="clearfix">
 						<div  class="col-lg-6">
-		        			<dt>平台名称：</dt>
+		        			<dt>渠道名称：</dt>
 		        			<dd>
 								<s:property value="bOrder.platformName"/>
 							</dd>
@@ -80,9 +80,9 @@
 					</div>
 					<div class="clearfix">
 					<div  class="col-lg-6">
-		        			<dt>cp订单号：</dt>
+		        			<dt>渠道订单号：</dt>
 		        			<dd>
-								<s:property value="bOrder.cpOrderId"/>
+								<s:property value="bOrder.channelOrderId"/>
 							</dd>
 		        		</div>
 						<div  class="col-lg-6">

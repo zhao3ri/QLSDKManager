@@ -17,8 +17,8 @@
 					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入订单号">
 						<input  class="form-control" type="text"  placeholder="订单号" name="BOrder.orderId" value="${bOrder.orderId }"/>
 					</div>
-					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入CP订单号">
-						<input  class="form-control" type="text"  placeholder="CP订单号" name="BOrder.cpOrderId" value="${bOrder.cpOrderId }"/>
+					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入渠道订单号">
+						<input  class="form-control" type="text"  placeholder="渠道订单号" name="BOrder.channelOrderId" value="${bOrder.channelOrderId }"/>
 					</div>
 					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
 						<select class="form-control" name="BOrder.gameId" id="gameId" onchange="changeGame();" placeholder="请选择游戏">
@@ -38,9 +38,9 @@
                              <option value="">==请选择服务器==</option>
                          </select>
                      </div> -->
-					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入平台ID">
-						<select class="form-control" name="BOrder.platformId" placeholder="请选择平台">
-							<option value="">==请选择平台==</option>
+					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入渠道ID">
+						<select class="form-control" name="BOrder.platformId" placeholder="请选择渠道">
+							<option value="">==请选择渠道==</option>
 							<s:iterator value="platforms" var="item">
 								<option value="${item.id }" <c:if test="${item.id == bOrder.platformId }">selected</c:if>>${item.platformName }</option>
 							</s:iterator>

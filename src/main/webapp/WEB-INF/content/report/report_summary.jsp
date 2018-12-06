@@ -40,11 +40,11 @@
                                 </li>
                                 <li id="os" style="float: right;right: 10px">
                                     <div class="form-group width_input" data-toggle="popover" data-placement="top"
-                                         data-content="请选择平台">
+                                         data-content="请选择客户端类型">
                                         <select class="form-control" name="clientType" id="clientType"
                                                 onchange="select()"
-                                                placeholder="请选择平台">
-                                            <option value="">==请选择平台==</option>
+                                                placeholder="请选择客户端类型">
+                                            <option value="">==客户端类型==</option>
                                             <option value="1">Android</option>
                                             <option value="2">IOS</option>
                                         </select>

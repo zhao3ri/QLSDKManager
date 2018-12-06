@@ -7,18 +7,18 @@
 	<div class="container">
 	    <ol class="breadcrumb row">
 	      <li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
-	      <li class="active">平台管理</li>
+	      <li class="active">渠道管理</li>
 	      <li><a href="${ctx}/bPlatformGame/bPlatformGame_list.shtml">联运游戏关联管理</a></li>
 	      <s:if test="id==null">
-	      <li class="active">新增平台游戏分区表信息</li>
+	      <li class="active">新增渠道游戏分区表信息</li>
 	      </s:if>
 	      <s:else>
-	      <li class="active">修改平台游戏分区表信息</li>
+	      <li class="active">修改渠道游戏分区表信息</li>
 	      </s:else>
 	    </ol>
 	    <div class="panel panel-default">
 	      	<div class="panel-heading ">
-	        	<h3 class="panel-title">${id==null?"新增":"修改"}平台游戏分区表信息</h3>
+	        	<h3 class="panel-title">${id==null?"新增":"修改"}渠道游戏分区表信息</h3>
 	      	</div>
 	      	<form role="form" id="inputForm" action="bPlatformGameZone_save.shtml" method="post">
 	        	<div class="panel-body ">
