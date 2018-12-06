@@ -25,7 +25,7 @@ public class BOrder extends StatBaseEntity {
 
     private String cpOrderId;
 
-    private String cpExtInfo;
+    private String extInfo;
 
     private Integer amount;
 
@@ -113,12 +113,12 @@ public class BOrder extends StatBaseEntity {
         this.cpOrderId = cpOrderId;
     }
 
-    public String getCpExtInfo() {
-        return cpExtInfo;
+    public String getExtInfo() {
+        return extInfo;
     }
 
-    public void setCpExtInfo(String cpExtInfo) {
-        this.cpExtInfo = cpExtInfo;
+    public void setExtInfo(String extInfo) {
+        this.extInfo = extInfo;
     }
 
     public Integer getAmount() {

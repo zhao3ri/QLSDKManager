@@ -86,9 +86,9 @@
 							</dd>
 		        		</div>
 						<div  class="col-lg-6">
-		        			<dt>CP自定义参数：</dt>
+		        			<dt>自定义参数：</dt>
 		        			<dd>
-								<s:property value="bOrder.cpExtInfo"/>
+								<s:property value="bOrder.extInfo"/>
 							</dd>
 		        		</div>
 					</div>
@@ -100,7 +100,7 @@
 							</dd>
 		        		</div>
 						<div  class="col-lg-6">
-		        			<dt>CP支付结果通知地址：</dt>
+		        			<dt>支付结果通知地址：</dt>
 		        			<dd>
 								<s:property value="bOrder.notifyUrl"/>
 							</dd>

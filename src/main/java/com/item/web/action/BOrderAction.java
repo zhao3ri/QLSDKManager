@@ -215,8 +215,8 @@ public class BOrderAction extends Struts2Action {
             if (bOrder.getCpOrderId() != null && !"".equals(bOrder.getCpOrderId())) {
                 mb.put("cpOrderId", bOrder.getCpOrderId());
             }
-            if (bOrder.getCpExtInfo() != null && !"".equals(bOrder.getCpExtInfo())) {
-                mb.put("cpExtInfo", bOrder.getCpExtInfo());
+            if (bOrder.getExtInfo() != null && !"".equals(bOrder.getExtInfo())) {
+                mb.put("extInfo", bOrder.getExtInfo());
             }
             if (bOrder.getAmount() != null) {
                 mb.put("amount", bOrder.getAmount());
