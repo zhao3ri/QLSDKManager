@@ -38,8 +38,6 @@ public class BPlatformGame {
 
     private String privateKey;
 
-    private String notifyUrl;
-
     public Integer getStatus() {
         return status;
     }
@@ -162,11 +160,4 @@ public class BPlatformGame {
         this.privateKey = privateKey;
     }
 
-    public String getNotifyUrl() {
-        return notifyUrl;
-    }
-
-    public void setNotifyUrl(String notifyUrl) {
-        this.notifyUrl = notifyUrl;
-    }
 }

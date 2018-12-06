@@ -73,7 +73,7 @@
                                     class="color_red">*</b>是否停充值：</label>
                             <div class=" col-sm-9 col-lg-5">
                                 <mt:selectState name="BPlatformGame.status" showType="select" stateType="yesNo"
-                                                value="${BPlatformGame.status}" clazz="form-control"
+                                                value="${bPlatformGame.status}" clazz="form-control"
                                                 emptyString="--是否停充值--"/>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                     class="color_red">*</b>是否停新增：</label>
                             <div class=" col-sm-9 col-lg-5">
                                 <mt:selectState name="BPlatformGame.registStatus" showType="select" stateType="yesNo"
-                                                value="${BPlatformGame.registStatus}" clazz="form-control"
+                                                value="${bPlatformGame.registStatus}" clazz="form-control"
                                                 emptyString="--是否停新增--"/>
                             </div>
                         </div>
@@ -96,26 +96,18 @@
                             </div>
                         </div>
 
-                        <%--<div class="form-group clearfix">--%>
-                        <%--<label class="control-label col-sm-3 col-lg-2 text-right"><b--%>
-                        <%--class="color_red">*</b>配置参数：</label>--%>
-                        <%--<div class=" col-sm-9 col-lg-5">--%>
-                        <%--<textarea class="form-control" name="BPlatformGame.configParams"--%>
-                        <%--id="bPlatformGame.configParams">${bPlatformGame.configParams }</textarea>--%>
-                        <%--</div>--%>
-                        <%--</div>--%>
                         <div class="form-group clearfix">
                             <label class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>第三方平台AppKey：</label>
                             <div class=" col-sm-9 col-lg-5">
-                                <textarea class="form-control" name="BPlatformGame.appKey"
-                                          id="bPlatformGame.appKey">${bPlatformGame.appKey }</textarea>
+                                <input class="form-control" name="BPlatformGame.appKey"
+                                       id="${bPlatformGame.appKey }">
                             </div>
                         </div>
                         <div class="form-group clearfix">
                             <label class="control-label col-sm-3 col-lg-2 text-right"></b>第三方平台AppID：</label>
                             <div class=" col-sm-9 col-lg-5">
-                                <textarea class="form-control" name="BPlatformGame.appID"
-                                          id="bPlatformGame.appID">${bPlatformGame.appID }</textarea>
+                                <input class="form-control" name="BPlatformGame.appID"
+                                       id="${bPlatformGame.appID }">
                             </div>
                         </div>
                         <div class="form-group clearfix">
@@ -139,12 +131,20 @@
                                           id="bPlatformGame.privateKey">${bPlatformGame.privateKey }</textarea>
                             </div>
                         </div>
+                        <div class="form-group clearfix">
+                            <label class="control-label col-sm-3 col-lg-2 text-right">其他配置参数：</label>
+                            <div class=" col-sm-9 col-lg-5">
+                                <textarea class="form-control" name="BPlatformGame.configParams"
+                                          id="bPlatformGame.configParams"
+                                          placeholder="填入格式为：paramName1=value1;paramName2=value2;paramName3=value3;">${bPlatformGame.configParams }</textarea>
+                            </div>
+                        </div>
                         <%--<div class="form-group clearfix">--%>
-                            <%--<label class="control-label col-sm-3 col-lg-2 text-right"></b>NotifyUrl：</label>--%>
-                            <%--<div class=" col-sm-9 col-lg-5">--%>
-                                <%--<textarea class="form-control" name="BPlatformGame.notifyUrl"--%>
-                                          <%--id="bPlatformGame.notifyUrl">${bPlatformGame.notifyUrl }</textarea>--%>
-                            <%--</div>--%>
+                        <%--<label class="control-label col-sm-3 col-lg-2 text-right"></b>NotifyUrl：</label>--%>
+                        <%--<div class=" col-sm-9 col-lg-5">--%>
+                        <%--<textarea class="form-control" name="BPlatformGame.notifyUrl"--%>
+                        <%--id="bPlatformGame.notifyUrl">${bPlatformGame.notifyUrl }</textarea>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
                     </div>
                 </div>

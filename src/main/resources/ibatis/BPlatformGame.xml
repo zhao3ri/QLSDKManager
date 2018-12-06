@@ -127,8 +127,8 @@
 
     <insert id="BPlatformGame.save" parameterClass="BPlatformGame">
         INSERT INTO
-        b_platform_game(platformId,gameId,configParams,createTime,status,registStatus,discount,appKey,secretKey,appID,privateKey,publicKey,notifyUrl)
-        VALUES(#platformId#,#gameId#,#configParams#,#createTime#,#status#,#registStatus#,#discount#,#appKey#,#secretKey#,#appID#,#privateKey#,#publicKey#,#notifyUrl#)
+        b_platform_game(platformId,gameId,configParams,createTime,status,registStatus,discount,appKey,secretKey,appID,privateKey,publicKey)
+        VALUES(#platformId#,#gameId#,#configParams#,#createTime#,#status#,#registStatus#,#discount#,#appKey#,#secretKey#,#appID#,#privateKey#,#publicKey#)
         <selectKey resultClass="Long" keyProperty="id">
             select @@IDENTITY as `id`
         </selectKey>

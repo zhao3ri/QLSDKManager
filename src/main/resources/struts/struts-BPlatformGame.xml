@@ -8,6 +8,7 @@
 			<result name="delete" type="redirect">${ctx}/bPlatformGame/bPlatformGame_list.shtml?keepSearchCondition=1</result>
 			<result name="save" type="redirect">${ctx}/bPlatformGame/bPlatformGame_list.shtml?keepSearchCondition=1</result>
 			<result name="handle">/WEB-INF/content/bPlatformGame/bPlatformGame_handle.jsp</result>
+			<result name="view">/WEB-INF/content/bPlatformGame/bPlatformGame_view.jsp</result>
 		</action>
 	</package>
 </struts>

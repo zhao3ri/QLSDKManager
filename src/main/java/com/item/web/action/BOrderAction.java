@@ -2,6 +2,7 @@ package com.item.web.action;
 
 import com.item.application.StateContext;
 import com.item.application.StateVo;
+import com.item.constants.Constants;
 import com.item.domain.BOrder;
 import com.item.domain.BPlatform;
 import com.item.domain.Game;
@@ -108,7 +109,7 @@ public class BOrderAction extends Struts2Action {
         bOrder = bOrderService.get(id);
         if (bOrder == null) {
             addActionMessage("不存在该订单！");
-        } else if (bOrder.getStatus() != 2) {
+        } else if (bOrder.getStatus() != Constants.ORDER_STATUS_PAYMENT_SUCCESS) {
             addActionMessage("该订单还未支付成功,不能补发！");
         } else {
             try {
@@ -116,7 +117,7 @@ public class BOrderAction extends Struts2Action {
 
                 BOrder reissue = new BOrder();
                 reissue.setId(id);
-                reissue.setNotifyStatus(4);
+                reissue.setNotifyStatus(Constants.ORDER_NOTIFY_STATUS_RESEND);
                 bOrderService.update(reissue);
                 addActionMessage("补发成功！");
             } catch (Exception e) {

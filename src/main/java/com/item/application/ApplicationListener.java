@@ -34,7 +34,7 @@ public class ApplicationListener implements ServletContextListener {
             PropertyUtils.loadFile(appFile);
 
 
-            Constants.CONTEXT_PATH = PropertyUtils.getPath();
+            Constants.CONTEXT_PATH.append(PropertyUtils.getPath());
 
             logger.info("平台 context_path: {}", Constants.CONTEXT_PATH);
 

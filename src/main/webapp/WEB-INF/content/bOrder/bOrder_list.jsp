@@ -15,10 +15,10 @@
 				<div class="panel-heading">充值列表信息查询 </div>
 				<div class="form-inline popover-show panel-body list_toolbar">
 					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入订单号">
-						<input  class="form-control" type="text"  placeholder="订单号" name="BOrder.orderId" value="${BOrder.orderId }"/>
+						<input  class="form-control" type="text"  placeholder="订单号" name="BOrder.orderId" value="${bOrder.orderId }"/>
 					</div>
 					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入CP订单号">
-						<input  class="form-control" type="text"  placeholder="CP订单号" name="BOrder.cpOrderId" value="${BOrder.cpOrderId }"/>
+						<input  class="form-control" type="text"  placeholder="CP订单号" name="BOrder.cpOrderId" value="${bOrder.cpOrderId }"/>
 					</div>
 					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
 						<select class="form-control" name="BOrder.gameId" id="gameId" onchange="changeGame();" placeholder="请选择游戏">

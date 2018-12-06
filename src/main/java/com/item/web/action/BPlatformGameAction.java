@@ -133,6 +133,12 @@ public class BPlatformGameAction extends Struts2Action {
         return "handle";
     }
 
+    public String view() {
+        if (id != null)
+            bPlatformGame = bPlatformGameService.getBPlatformGameById(id);
+        return "view";
+    }
+
     public String save() {
         if (bPlatformGame.getId() != null) {
             bPlatformGameService.updatePlatformGame(bPlatformGame);

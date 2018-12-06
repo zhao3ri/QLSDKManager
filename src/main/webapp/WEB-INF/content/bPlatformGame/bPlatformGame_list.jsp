@@ -54,12 +54,12 @@
 								<th style="width: 100px;">渠道</th>
 								<th style="width: 100px;">游戏</th>
 								<th style="width: 100px;">分成比例</th>
-								<%--<th>配置参数</th>--%>
 								<th>AppKey</th>
 								<th>AppID</th>
 								<th>SecretKey</th>
-								<th>PublicKey</th>
-								<th>PrivateKey</th>
+								<%--<th>PublicKey</th>--%>
+								<%--<th>PrivateKey</th>--%>
+								<%--<th>其他配置参数</th>--%>
 								<th style="width: 150px;">创建时间</th>
 								<th style="width: 80px;">操作</th>
 	            			</tr>
@@ -76,20 +76,21 @@
                                 <td><s:property value="appID"/></td>
                                 <td style="overflow: scroll;white-space: nowrap;"
                                     title="<s:property value="secretKey"/>"><s:property value="secretKey"/></td>
-                                <td style="overflow: scroll;white-space: nowrap;"
-                                    title="<s:property value="publicKey"/>"><s:property value="publicKey"/></td>
-                                <td style="overflow: scroll;white-space: nowrap;"
-                                    title="<s:property value="privateKey"/>"><s:property
-                                        value="privateKey"/></td>
+                                <%--<td style="overflow: scroll;white-space: nowrap;"--%>
+                                    <%--title="<s:property value="publicKey"/>"><s:property value="publicKey"/></td>--%>
+                                <%--<td style="overflow: scroll;white-space: nowrap;"--%>
+                                    <%--title="<s:property value="privateKey"/>"><s:property--%>
+                                        <%--value="privateKey"/></td>--%>
 								<%--<td style="overflow: scroll;white-space: nowrap;" title="<s:property value="configParams"/>"><s:property value="configParams"/></td>--%>
 								<td><s:date name="#page.createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>
 									<div class="btn-group btn-group-sm pull-right">
 					                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
 					                  	<ul class="dropdown-menu" role="menu">
+											<li><a href="bPlatformGame_view.shtml?id=<s:property value="id"/>">查看详情</a></li>
 											<li><a href="bPlatformGame_handle.shtml?id=<s:property value="id"/>">修改</a></li>
 											<li><a href="javascript:confirmAction('bPlatformGame_delete.shtml?id=<s:property value="id"/>','您确认删除？');">删除</a></li>
-					                  		<li><a href="/bPlatformGameZone/bPlatformGameZone_handle.shtml?BPlatformGameZone.gameId=${gameId }&BPlatformGameZone.platformId=${platformId}">分区管理</a></li>
+					                  		<li><a href="${ctx}/bPlatformGameZone/bPlatformGameZone_handle.shtml?BPlatformGameZone.gameId=${gameId }&BPlatformGameZone.platformId=${platformId}">分区管理</a></li>
 					                  	</ul>
 					                </div>
 								</td>
