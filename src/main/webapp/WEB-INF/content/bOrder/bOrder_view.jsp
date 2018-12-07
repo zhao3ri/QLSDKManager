@@ -35,7 +35,7 @@
 						<div  class="col-lg-6">
 		        			<dt>渠道名称：</dt>
 		        			<dd>
-								<s:property value="bOrder.platformName"/>
+								<s:property value="bOrder.channelName"/>
 							</dd>
 		        		</div>
 						<div  class="col-lg-6">

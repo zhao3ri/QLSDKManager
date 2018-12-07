@@ -1,10 +1,10 @@
 package com.item.web.action;
 
-import com.item.domain.BPlatform;
+import com.item.domain.BChannel;
 import com.item.domain.BRole;
 import com.item.domain.Game;
 import com.item.service.BGameService;
-import com.item.service.BPlatformService;
+import com.item.service.BChannelService;
 import com.item.service.BRoleService;
 import com.item.utils.CookieUtils;
 import com.item.utils.Excel;
@@ -35,12 +35,12 @@ public class BRoleAction extends Struts2Action{
     @Autowired
     private BGameService bGameService;
     @Autowired
-    private BPlatformService platformService;
+    private BChannelService platformService;
 
     private Page<BRole> rolePage = new Page<BRole>(10);
     private BRole role;
     private List<Game> games;
-    private List<BPlatform> platforms;
+    private List<BChannel> platforms;
     private String selectRange;
 	
     public String list(){
@@ -86,7 +86,7 @@ public class BRoleAction extends Struts2Action{
             for(int i=0; i<list.size(); i++){
             	List<Excel> e=new ArrayList<Excel>();
  	            e.add(new Excel(list.get(i).getGameName(), 20));
-	            e.add(new Excel(list.get(i).getPlatformName(), 20));
+	            e.add(new Excel(list.get(i).getChannelName(), 20));
 	            e.add(new Excel(list.get(i).getZoneId(), 20));
 	            e.add(new Excel(list.get(i).getRoleId(), 20));
 	            e.add(new Excel(list.get(i).getRoleName(), 20));
@@ -109,8 +109,8 @@ public class BRoleAction extends Struts2Action{
         	if (role.getGameId() != null){
                 mb.put(MapBean.GAME_ID, role.getGameId());
             }
-        	if (role.getPlatformId() != null){
-                mb.put(MapBean.PLATFORM_ID, role.getPlatformId());
+        	if (role.getChannelId() != null){
+                mb.put(MapBean.CHANNEL_ID, role.getChannelId());
             }
         	if (StringUtils.isNotBlank(role.getZoneId())){
                 mb.put("zoneId", role.getZoneId());
@@ -156,11 +156,11 @@ public class BRoleAction extends Struts2Action{
 		this.games = games;
 	}
 
-	public List<BPlatform> getPlatforms() {
+	public List<BChannel> getPlatforms() {
 		return platforms;
 	}
 
-	public void setPlatforms(List<BPlatform> platforms) {
+	public void setPlatforms(List<BChannel> platforms) {
 		this.platforms = platforms;
 	}
 

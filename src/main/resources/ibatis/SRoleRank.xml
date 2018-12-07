@@ -11,8 +11,8 @@
 			<isNotNull prepend="AND" property="gameId">
 				a.gameId=#gameId#
 			</isNotNull>
-			<isNotEmpty prepend="AND" property="platformId">
-				a.channelId=#platformId#
+			<isNotEmpty prepend="AND" property="channelId">
+				a.channelId=#channelId#
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="name">
 				a.rolename=#name#

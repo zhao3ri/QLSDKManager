@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.item.domain.BChannel;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.item.domain.BAccount;
-import com.item.domain.BPlatform;
 import com.item.service.BAccountService;
-import com.item.service.BPlatformService;
+import com.item.service.BChannelService;
 import com.item.utils.DateUtils;
 import com.item.utils.Excel;
 import com.item.utils.ExcelExport;
@@ -26,11 +26,11 @@ public class BAccountAction extends Struts2Action {
 	@Autowired
 	private BAccountService bAccountService;
 	@Autowired
-	private BPlatformService platformService;
+	private BChannelService platformService;
 
 	private Page<BAccount> accountPage = new Page<BAccount>(10);
 	private BAccount account;
-	private List<BPlatform> platforms;
+	private List<BChannel> platforms;
 
 	public String list() {
 		MapBean mb = search();
@@ -101,11 +101,11 @@ public class BAccountAction extends Struts2Action {
 		this.account = account;
 	}
 
-	public List<BPlatform> getPlatforms() {
+	public List<BChannel> getPlatforms() {
 		return platforms;
 	}
 
-	public void setPlatforms(List<BPlatform> platforms) {
+	public void setPlatforms(List<BChannel> platforms) {
 		this.platforms = platforms;
 	}
 }

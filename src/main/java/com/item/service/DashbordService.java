@@ -1,7 +1,7 @@
 package com.item.service;
 
 
-import com.item.domain.BPlatform;
+import com.item.domain.BChannel;
 import com.item.domain.Dashbord;
 import com.item.domain.Game;
 import com.item.domain.SGame;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class DashbordService {
     @Resource
     BGameService bApplicationService;
     @Resource
-    BPlatformService bPlatformService;
+    BChannelService bChannelService;
     @Resource
     SGameRealtimeService sGameRealtimeService;
     @Resource
@@ -52,11 +51,11 @@ public class DashbordService {
         List<Game> gameList = bApplicationService.getGameList();
         AuthCacheManager.getInstance().setIdentityPermissionGameList(gameList);
         List<Long> gameIds = AuthCacheManager.getInstance().getGameIds();
-        List<BPlatform> platformList = bPlatformService.getCurrentIdentityChannelList();
+        List<BChannel> platformList = bChannelService.getCurrentIdentityChannelList();
         String date = DateUtils.format(new Date(), "yyyy-MM-dd");
         for (Game bApplication : gameList) {
-            for (BPlatform bPlatform : platformList) {
-                String payKey = redisPayPre + date + REDIS_SEPARATOR + bApplication.getId() + REDIS_SEPARATOR + bPlatform.getId();
+            for (BChannel bChannel : platformList) {
+                String payKey = redisPayPre + date + REDIS_SEPARATOR + bApplication.getId() + REDIS_SEPARATOR + bChannel.getId();
                 Object redisTemp = RedisClient.get(payKey);
                 if (redisTemp != null) {
                     int gamePay = Integer.parseInt(RedisClient.get(payKey).toString());

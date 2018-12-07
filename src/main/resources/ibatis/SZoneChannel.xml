@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SZoneChannel">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    
+    <typeAlias alias="sZoneChannel" type="com.item.domain.SZoneChannel" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SZoneChannel.Where">
+    	<dynamic prepend="WHERE">
+    		<isNotNull prepend="AND" property="id">
+    			szp.`id`=#id#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="clientType">
+    			szp.`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="gameId">
+    			szp.`gameId`=#gameId#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="zoneId">
+    			szp.`zoneId`=#zoneId#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="channelId">
+    			szp.`channelId`=#channelId#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="gameName">
+    			szp.`gameName`=#gameName#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="zoneName">
+    			szp.`zoneName`=#zoneName#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="channelName">
+    			szp.`channelName`=#channelName#
+    		</isNotNull> 		
+    		<isNotNull prepend="AND" property="statDate">
+    			szp.`statDate`=#statDate#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="roleUsers">
+    			szp.`roleUsers`=#roleUsers#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="regUsers">
+    			szp.`regUsers`=#regUsers#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="newDevices">
+    			szp.`newDevices`=#newDevices#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="payAmount">
+    			szp.`payAmount`=#payAmount#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="payTimes">
+    			szp.`payTimes`=#payTimes#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="payUsers">
+    			szp.`payUsers`=#payUsers#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="yearMonth">
+    		   szp.`yearMonth`=#yearMonth#
+    		</isNotNull>
+    		<isNotNull prepend="AND" property="activeUsers">
+    			szp.`activeUsers`=#activeUsers#
+    		</isNotNull>
+    	</dynamic>
+    </sql>
+    
+    <!-- 区服分析 ：区服总计-->
+    <select id="SZoneChannel.zoneSummary" resultClass="sZoneChannel" parameterClass="mb">
+	    SELECT 
+	        szp.`id` AS id,
+	        szp.`clientType` AS clientType,
+	        szp.gameId AS gameId,
+	        bg.gameName AS gameName,
+	        szp.`zoneId` AS zoneId,
+	        bgz.`zoneName` AS zoneName,
+	        szp.channelId AS channelId,
+			SUM(szp.totalRoleUser) AS totalRoledUser,
+			SUM(szp.totalRegUser) AS totalRegUser,
+			SUM(szp.activeUsers) AS activeUsers,
+			SUM(szp.devices) AS devices,
+			SUM(szp.payAmount) AS payAmount,
+			SUM(szp.payTimes) AS payTimes,
+			SUM(szp.payUsers) AS payUsers
+	   	FROM s_zone_platform_history szp 
+	    JOIN b_game bg ON bg.id=szp.gameId
+		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
+		<include refid="SZoneChannel.Where"/>
+	    GROUP BY szp.zoneId,szp.gameId
+    </select>
+    
+    <!-- 区服分析 ：区服详细-->
+  	<select id="SZoneChannel.zoneDetail" resultClass="sZoneChannel" parameterClass="mb">
+		SELECT
+	        SUM(szp.devices) AS devices,
+			SUM(szp.payAmount) AS payAmount,
+			SUM(szp.payTimes) AS payTimes,
+			SUM(szp.payUsers) AS payUsers,
+			SUM(szp.totalRoleUser) AS totalRoledUser,
+			SUM(szp.totalRegUser) AS totalRegUser,
+			SUM(szp.activeUsers) AS activeUsers,
+			szp.`zoneId` AS zoneId,
+			szp.gameId AS gameId,
+	        szp.channelId AS channelId,
+	        bgz.`zoneName` AS zoneName,
+			bg.gameName AS gameName,
+			bp.channelName AS channelName
+		FROM s_zone_platform_history szp
+		JOIN b_game bg ON bg.id=szp.gameId
+		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
+		JOIN b_channel bp ON szp.channelId=bp.id
+		<include refid="SZoneChannel.Where"/>
+       	GROUP BY bgz.`zoneName`,bp.channelName ORDER BY szp.zoneId
+	</select>
+    
+    <!-- 区服分析：渠道详细 -->
+   	<select id="SZoneChannel.channelDetail" resultClass="sZoneChannel" parameterClass="mb">
+		SELECT
+			SUM(szp.devices) AS devices,
+			SUM(szp.payAmount) AS payAmount,
+			SUM(szp.payTimes) AS payTimes,
+			SUM(szp.payUsers) AS payUsers,
+			SUM(szp.totalRoleUser) AS totalRoledUser,
+			SUM(szp.totalRegUser) AS totalRegUser,
+			SUM(szp.activeUsers) AS activeUsers,
+			szp.`zoneId` AS zoneId,
+			szp.gameId AS gameId,
+	        szp.channelId AS channelId,
+	        bgz.`zoneName` AS zoneName,
+			bg.gameName AS gameName,
+			bp.channelName AS channelName
+		FROM s_zone_platform_history szp
+		JOIN b_game bg ON bg.id=szp.gameId
+		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
+		JOIN b_channel bp ON szp.channelId=bp.id
+		<include refid="SZoneChannel.Where"/>
+       	GROUP BY bgz.`zoneName`,bp.channelName ORDER BY szp.channelId
+	</select>
+    
+</sqlMap>

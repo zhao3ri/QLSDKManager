@@ -75,11 +75,11 @@
             			</tr>
           			</thead>
           			<tbody>
-          			<s:if test="sZonePlatforms.size>0  ||  sZonePlatformMonthlies.size>0">	
-	          			<s:if test="sZonePlatforms.size>0  && sZonePlatformMonthlies.size==0">
-	          				<s:set value="sZonePlatforms" var="valueList"></s:set>
+          			<s:if test="sZoneChannels.size>0  ||  sZonePlatformMonthlies.size>0">
+	          			<s:if test="sZoneChannels.size>0  && sZonePlatformMonthlies.size==0">
+	          				<s:set value="sZoneChannels" var="valueList"></s:set>
 	          			</s:if>
-	          			<s:if test="sZonePlatforms.size==0  && sZonePlatformMonthlies.size>0">
+	          			<s:if test="sZoneChannels.size==0  && sZonePlatformMonthlies.size>0">
 	          				<s:set value="sZonePlatformMonthlies" var="valueList"></s:set>
 	          			</s:if>
 	          			<s:set value="0" var="allRoledUser"></s:set>
@@ -216,7 +216,7 @@
 		          				<td rowspan=<s:property value="#item.value.size"/>><s:property value="#item.key"/></td>
 		          				</s:else>
 		          				</c:if>
-		          				<td><s:property value="#itemVal.platformName"/></td>
+		          				<td><s:property value="#itemVal.channelName"/></td>
 	          			        <td><s:property value="#itemVal.totalRoledUser"/></td>				
 			                    <td><s:property value="#itemVal.totalRegUser"/></td>
 								<td><s:property value="#itemVal.devices"/></td>
@@ -238,7 +238,7 @@
 										<c:if test="${itemVal.totalRegUser>0}">					
 										<td><fmt:formatNumber  value="${itemVal.payAmount/100/itemVal.totalRegUser }" pattern="0.00" /></td>
 								</c:if>	
-								<td><a class="basic" href="${ctx}/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=1&channelIds=${itemVal.platformId}&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
+								<td><a class="basic" href="${ctx}/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=1&channelIds=${itemVal.channelId}&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
 		          			</tr>
 	          			</s:iterator>
 	          			<s:if test="#item.value.size >1">
@@ -349,7 +349,7 @@
 										<c:if test="${itemVal.totalRegUser>0}">					
 										<td><fmt:formatNumber  value="${itemVal.payAmount/100/itemVal.totalRegUser }" pattern="0.00" /></td>
 								        </c:if>	
-										<td><a class="basic" href="${ctx}/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=1&channelIds=${itemVal.platformId}&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
+										<td><a class="basic" href="${ctx}/report/reportDaily_basic.shtml?gameId=${itemVal.gameId}&groupType=1&channelIds=${itemVal.channelId}&zoneIds=${itemVal.zoneId}&selectRange=${selectRange}">查看</a></td>
 				          			</tr>
 			          			</s:iterator>
 			          			<s:if test="#item.value.size>1">

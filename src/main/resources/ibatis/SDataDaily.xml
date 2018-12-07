@@ -17,8 +17,8 @@
     		<isNotEmpty prepend="and" property="zoneId">
     			a.`zoneId`=#zoneId#
     		</isNotEmpty>
-    		<isNotNull prepend="and" property="platformId">
-    			a.`platformId`=#platformId#
+    		<isNotNull prepend="and" property="channelId">
+    			a.`channelId`=#channelId#
     		</isNotNull>
     		<isNotNull prepend="and" property="statDate">
     			a.statDate=#statDate#
@@ -43,7 +43,7 @@
             a.gameId AS gameId,
             bg.gameName AS gameName,
             a.`zoneId` AS zoneId,
-            a.`platformId` AS platformId,
+            a.channelId AS channelId,
 			SUM(a.regUsers) AS regUsers,
 			SUM(a.roleDevices)/SUM(a.regDevices) AS conversionRate,
 			SUM(b.roleLogins) AS activeUsers,
@@ -66,7 +66,7 @@
 		JOIN 
 		s_role_daily b 
 		ON
-		 a.gameId=b.gameId AND a.zoneId=b.zoneId AND a.platformId=b.platformId AND a.clientType=b.clientType AND a.statDate=b.statDate
+		 a.gameId=b.gameId AND a.zoneId=b.zoneId AND a.channelId=b.channelId AND a.clientType=b.clientType AND a.statDate=b.statDate
         <include refid="SDataDaily.Where"/>
          GROUP BY 
          	a.`statDate`

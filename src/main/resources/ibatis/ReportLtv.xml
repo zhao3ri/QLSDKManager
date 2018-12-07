@@ -3,7 +3,7 @@
 
 <sqlMap namespace="ReportLTV">
 
-    <typeAlias alias="reportLtv" type="com.item.domain.report.LTVGamePlatform" />
+    <typeAlias alias="reportLtv" type="com.item.domain.report.LTVGameChannel" />
     <typeAlias alias="mb" type="core.module.orm.MapBean" />
 
     <sql id="ReportLtv.Where">
@@ -15,7 +15,7 @@
     			`gameId`=#gameId#
     		</isNotNull>
     		<isNotNull prepend="and" property="channelIds">
-    			platformId IN
+    			channelId IN
 	    		<iterate property="channelIds" open="(" close=")" conjunction=",">
 			      #channelIds[]#
 			    </iterate>
@@ -48,7 +48,7 @@
      <select id="ReportLtv.list" resultClass="reportLtv" parameterClass="mb">
         SELECT
 			gameId,
-			`platformId`,
+			channelId,
 			`statDate`,
 		 SUM(`ltv1`) AS ltv1,
 		 SUM(`ltv2`) AS ltv2,
@@ -94,7 +94,7 @@
     <select id="ReportLtv.listZone" resultClass="reportDaily" parameterClass="mb">
         SELECT
 			gameId,
-			`platformId`,
+			channelId,
 			`zoneId`,
 			`statDate`,
 			SUM(`roleUsers`) AS roleUsers,

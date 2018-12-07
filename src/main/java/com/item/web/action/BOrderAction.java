@@ -3,14 +3,14 @@ package com.item.web.action;
 import com.item.application.StateContext;
 import com.item.application.StateVo;
 import com.item.constants.Constants;
+import com.item.domain.BChannel;
 import com.item.domain.BOrder;
-import com.item.domain.BPlatform;
 import com.item.domain.Game;
 import com.item.domain.Gamezone;
 import com.item.service.BGameService;
 import com.item.service.BGamezoneService;
 import com.item.service.BOrderService;
-import com.item.service.BPlatformService;
+import com.item.service.BChannelService;
 import com.item.utils.DecimallFormatUtil;
 import com.item.utils.Excel;
 import com.item.utils.DateUtils;
@@ -40,7 +40,7 @@ public class BOrderAction extends Struts2Action {
     @Autowired
     private BGameService bGameService;
     @Autowired
-    private BPlatformService bPlatformService;
+    private BChannelService bChannelService;
     @Autowired
     private BGamezoneService gamezoneService;
 
@@ -49,7 +49,7 @@ public class BOrderAction extends Struts2Action {
     private BOrder bOrder;
     private Long id;
     private List<Game> games;
-    private List<BPlatform> platforms;
+    private List<BChannel> platforms;
     private List<Gamezone> gamezones;
     private String selectRange;
 
@@ -61,7 +61,7 @@ public class BOrderAction extends Struts2Action {
         bOrderPage = bOrderService.page(bOrderPage, mb);
 
         games = bGameService.getGameList();
-        platforms = bPlatformService.getCurrentIdentityChannelList();
+        platforms = bChannelService.getCurrentIdentityChannelList();
 
         return "list";
     }
@@ -162,7 +162,7 @@ public class BOrderAction extends Struts2Action {
                 } else {
                     e.add(new Excel(list.get(i).getZoneId(), 20));
                 }
-                e.add(new Excel(list.get(i).getPlatformName(), 20));
+                e.add(new Excel(list.get(i).getChannelName(), 20));
                 e.add(new Excel(list.get(i).getUid(), 20));
                 e.add(new Excel(DecimallFormatUtil.format((double) list.get(i).getAmount() / 100), 20));
                 e.add(new Excel(clientType.get(list.get(i).getClientType().toString()).getName(), 20));
@@ -194,8 +194,8 @@ public class BOrderAction extends Struts2Action {
             if (bOrder.getGameId() != null) {
                 mb.put(MapBean.GAME_ID, bOrder.getGameId());
             }
-            if (bOrder.getPlatformId() != null) {
-                mb.put(MapBean.PLATFORM_ID, bOrder.getPlatformId());
+            if (bOrder.getChannelId() != null) {
+                mb.put(MapBean.CHANNEL_ID, bOrder.getChannelId());
             }
             if (bOrder.getUid() != null && !"".equals(bOrder.getUid())) {
                 mb.put("uid", bOrder.getUid());
@@ -311,11 +311,11 @@ public class BOrderAction extends Struts2Action {
         this.games = games;
     }
 
-    public List<BPlatform> getPlatforms() {
+    public List<BChannel> getPlatforms() {
         return platforms;
     }
 
-    public void setPlatforms(List<BPlatform> platforms) {
+    public void setPlatforms(List<BChannel> platforms) {
         this.platforms = platforms;
     }
 

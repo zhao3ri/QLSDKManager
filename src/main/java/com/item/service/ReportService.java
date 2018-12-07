@@ -23,11 +23,11 @@ public class ReportService {
     @Autowired
     private SGameRealtimeService sGameRealtimeService;
     @Autowired
-    private SPlatformRealtimeService sPlatformRealtimeService;
+    private SChannelRealtimeService sChannelRealtimeService;
     @Autowired
-    private SZonePlatformRealtimeService sZonePlatformRealtimeService;
+    private SZoneChannelRealtimeService sZoneChannelRealtimeService;
     @Autowired
-    private BPlatformService bPlatformService;
+    private BChannelService bChannelService;
     @Autowired
     private BGamezoneService bGamezoneService;
 
@@ -37,9 +37,9 @@ public class ReportService {
         mb.put(MapBean.CLIENT_TYPE, clientType);
         mb.put(MapBean.GAME_ID, appId);
 
-        List<BPlatform> platforms = bPlatformService.getByIds(channelIds);
+        List<BChannel> platforms = bChannelService.getByIds(channelIds);
         List<Gamezone> gamezones = bGamezoneService.getByIds(appId, zoneIds);
-        List<BPlatform> comparePlatforms = bPlatformService.getByIds(compareChannelIds);
+        List<BChannel> comparePlatforms = bChannelService.getByIds(compareChannelIds);
         List<Gamezone> compareGamezones = bGamezoneService.getByIds(appId, compareZoneIds);
         result.put("platforms", platforms);
         result.put("gamezones", gamezones);
@@ -139,20 +139,20 @@ public class ReportService {
             if (StringUtils.isNotBlank(compareChannelIds) || StringUtils.isNotBlank(compareZoneIds)) {   //有渠道或者分区对比
                 mb.put("channelIds", channelIds);
                 mb.put("zoneIds", zoneIds);
-                List<SPlatformRealtime> zonePlatformRealtimes = sPlatformRealtimeService.listGroupBy(mb);
+                List<SChannelRealtime> zonePlatformRealtimes = sChannelRealtimeService.listGroupBy(mb);
                 result.put("data", zonePlatformRealtimes);
 
                 mb.put("channelIds", compareChannelIds);
                 mb.put("zoneIds", compareZoneIds);
-                List<SZonePlatformRealtime> compareZonePlatformRealtimes = sZonePlatformRealtimeService.listGroupBy(mb);
+                List<SZoneChannelRealtime> compareZonePlatformRealtimes = sZoneChannelRealtimeService.listGroupBy(mb);
                 result.put("compareData", compareZonePlatformRealtimes);
 
                 String optionJson = getOnlineOptionJson(zonePlatformRealtimes, compareZonePlatformRealtimes);
                 result.put("optionJson", optionJson);
                 result.put("isCompare", 1);
 				
-				/*List<BPlatform> platforms = bPlatformService.getByIds(channelIds);
-				List<BPlatform> comparePlatforms = bPlatformService.getByIds(compareChannelIds);
+				/*List<BChannel> platforms = bPlatformService.getByIds(channelIds);
+				List<BChannel> comparePlatforms = bPlatformService.getByIds(compareChannelIds);
 				List<Gamezone> gamezones = bGamezoneService.getByIds(appId,zoneIds);
 				List<Gamezone> compareGamezones = bGamezoneService.getByIds(appId,compareZoneIds);
 				result.put("platforms", platforms);
@@ -162,17 +162,17 @@ public class ReportService {
             } else if (StringUtils.isBlank(compareSelectRange)) {  //无对比
                 mb.put("channelIds", channelIds);
                 mb.put("zoneIds", zoneIds);
-                List<SPlatformRealtime> zonePlatformRealtimes = sPlatformRealtimeService.listGroupBy(mb);
+                List<SChannelRealtime> zonePlatformRealtimes = sChannelRealtimeService.listGroupBy(mb);
                 String optionJson = getOnlineOptionJson(zonePlatformRealtimes, null);
                 result.put("optionJson", optionJson);
                 result.put("isCompare", 2);
 
                 mb.put("groupType", groupType);
-                List<SPlatformRealtime> zonePlatformRealtimesGroupByZone = sPlatformRealtimeService.listGroupBy(mb);
+                List<SChannelRealtime> zonePlatformRealtimesGroupByZone = sChannelRealtimeService.listGroupBy(mb);
 				/*List<Gamezone> gamezones = bGamezoneService.getByIds(appId,zoneIds);
-				List<BPlatform> platforms = bPlatformService.getByIds(channelIds);*/
+				List<BChannel> platforms = bPlatformService.getByIds(channelIds);*/
                 if (groupType == 1) {
-                    for (SPlatformRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
+                    for (SChannelRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
                         for (Gamezone gamezone : gamezones) {
 //							if (gamezone.getZoneId().equals(sZonePlatformRealtime.getZoneId())) {
 //								sZonePlatformRealtime.setZoneName(gamezone.getZoneName());
@@ -181,36 +181,36 @@ public class ReportService {
                         }
                     }
                 } else if (groupType == 2) {
-                    for (SPlatformRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
-                        for (BPlatform bPlatform : platforms) {
-                            if (bPlatform.getId().toString().equals(sZonePlatformRealtime.getPlatformId().toString())) {
-//								sZonePlatformRealtime.setPlatformName(bPlatform.getPlatformName());
+                    for (SChannelRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
+                        for (BChannel bChannel : platforms) {
+                            if (bChannel.getId().toString().equals(sZonePlatformRealtime.getChannelId().toString())) {
+//								sZonePlatformRealtime.setChannelName(bChannel.getChannelName());
                                 continue;
                             }
                         }
                     }
                 }
 
-                Map<String, List<SPlatformRealtime>> dataMap = new LinkedHashMap<String, List<SPlatformRealtime>>();
-                for (SPlatformRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
+                Map<String, List<SChannelRealtime>> dataMap = new LinkedHashMap<String, List<SChannelRealtime>>();
+                for (SChannelRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
                     if (dataMap.get(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss")) == null) {
-                        List<SPlatformRealtime> list = new ArrayList<SPlatformRealtime>();
+                        List<SChannelRealtime> list = new ArrayList<SChannelRealtime>();
                         list.add(sZonePlatformRealtime);
                         dataMap.put(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss"), list);
                     } else {
-                        List<SPlatformRealtime> list = dataMap.get(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss"));
+                        List<SChannelRealtime> list = dataMap.get(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss"));
                         list.add(sZonePlatformRealtime);
                         dataMap.put(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss"), list);
                     }
                 }
                 result.put("data", dataMap);
             } else {                                                                                                    //有时间对比
-                List<SZonePlatformRealtime> sGameRealtimes = sZonePlatformRealtimeService.listGroupBy(mb);
+                List<SZoneChannelRealtime> sGameRealtimes = sZoneChannelRealtimeService.listGroupBy(mb);
                 result.put("data", sGameRealtimes);
 
                 mb.put("statStartDate", compareSelectRange.split("至")[0]);
                 mb.put("statEndDate", compareSelectRange.split("至")[1]);
-                List<SZonePlatformRealtime> compareGameRealtimes = sZonePlatformRealtimeService.listGroupBy(mb);
+                List<SZoneChannelRealtime> compareGameRealtimes = sZoneChannelRealtimeService.listGroupBy(mb);
                 result.put("compareData", compareGameRealtimes);
                 String optionJson = getOnlineOptionJson(sGameRealtimes, compareGameRealtimes);
                 result.put("optionJson", optionJson);

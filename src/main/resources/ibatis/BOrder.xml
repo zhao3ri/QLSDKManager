@@ -13,8 +13,8 @@
     		<isNotNull prepend="and" property="gameId">
     			a.`gameId`=#gameId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="platformId">
-    			a.`platformId`=#platformId#
+    		<isNotNull prepend="and" property="channelId">
+    			a.`channelId`=#channelId#
     		</isNotNull>
     		<isNotNull prepend="and" property="uid">
     			a.`uid`=#uid#
@@ -74,11 +74,11 @@
         SELECT
 	   		a.*,
 	   		b.gameName,
-	   		c.platformName,
+	   		c.channelName,
 	   		d.zoneName
 		FROM b_order AS a 
 		LEFT JOIN b_game AS b ON a.gameId = b.id
-		LEFT JOIN b_platform AS c ON a.platformId = c.id
+		LEFT JOIN b_channel AS c ON a.channelId = c.id
 		LEFT JOIN b_game_zone AS d ON a.gameId = d.gameId AND a.zoneId = d.zoneId
         <include refid="BOrder.Where"/>
         <isNotNull property="orderby">
@@ -91,7 +91,7 @@
         SELECT COUNT(1)
 		FROM b_order AS a
 		LEFT JOIN b_game AS b ON a.gameId = b.id
-		LEFT JOIN b_platform AS c ON a.platformId = c.id
+		LEFT JOIN b_channel AS c ON a.channelId = c.id
 		LEFT JOIN b_game_zone AS d ON a.gameId = d.gameId AND a.zoneId = d.zoneId
         <include refid="BOrder.Where"/>
     </select>
@@ -100,11 +100,11 @@
         SELECT
 	   		a.*,
 	   		b.gameName,
-	   		c.platformName,
+	   		c.channelName,
 	   		d.zoneName
 		FROM b_order AS a 
 		LEFT JOIN b_game AS b ON a.gameId = b.id
-		LEFT JOIN b_platform AS c ON a.platformId = c.id
+		LEFT JOIN b_channel AS c ON a.channelId = c.id
 		LEFT JOIN b_game_zone AS d ON a.gameId = d.gameId AND a.zoneId = d.zoneId
         <include refid="BOrder.Where"/>
         <isNotNull property="orderby">
@@ -119,11 +119,11 @@
         SELECT
 	   		a.*,
 	   		b.gameName,
-	   		c.platformName,
+	   		c.channelName,
 	   		d.zoneName
 		FROM b_order AS a 
 		LEFT JOIN b_game AS b ON a.gameId = b.id
-		LEFT JOIN b_platform AS c ON a.platformId = c.id
+		LEFT JOIN b_channel AS c ON a.channelId = c.id
 		LEFT JOIN b_game_zone AS d ON a.gameId = d.gameId AND a.zoneId = d.zoneId
 		WHERE
 	  		a.`id`=#id# 

@@ -15,7 +15,7 @@
                 `gameId`=#gameId#
             </isNotNull>
             <isNotNull prepend="and" property="channelIds">
-                platformId IN
+                channelId IN
                 <iterate property="channelIds" open="(" close=")" conjunction=",">
                     #channelIds[]#
                 </iterate>
@@ -89,7 +89,7 @@
     <select id="ReportDaily.listPlatform" resultClass="reportDaily" parameterClass="mb">
         SELECT
         gameId,
-        `platformId`,
+        channelId,
         `statDate`,
         SUM(`roleUsers`) AS roleUsers,
         SUM(`regUsers`) AS regUsers,
@@ -131,7 +131,7 @@
     <select id="ReportDaily.listZone" resultClass="reportDaily" parameterClass="mb">
         SELECT
         gameId,
-        `platformId`,
+        channelId,
         `zoneId`,
         `statDate`,
         SUM(`roleUsers`) AS roleUsers,

@@ -1,18 +1,18 @@
 package com.item.domain.report;
 
+import com.item.domain.SChannel;
 import com.item.domain.SGame;
-import com.item.domain.SPlatform;
 
 public class SummaryClientReport {
 	private int gameCount;
 	
 	private SGame iosCps;
 	
-	private SPlatform iosCpa;
+	private SChannel iosCpa;
 	
 	private SGame androidCps;
 	
-	private SPlatform androidCpa;
+	private SChannel androidCpa;
 
 	public int getGameCount() {
 		return gameCount;
@@ -30,11 +30,11 @@ public class SummaryClientReport {
 		this.iosCps = iosCps;
 	}
 
-	public SPlatform getIosCpa() {
+	public SChannel getIosCpa() {
 		return iosCpa;
 	}
 
-	public void setIosCpa(SPlatform iosCpa) {
+	public void setIosCpa(SChannel iosCpa) {
 		this.iosCpa = iosCpa;
 	}
 
@@ -46,11 +46,11 @@ public class SummaryClientReport {
 		this.androidCps = androidCps;
 	}
 
-	public SPlatform getAndroidCpa() {
+	public SChannel getAndroidCpa() {
 		return androidCpa;
 	}
 
-	public void setAndroidCpa(SPlatform androidCpa) {
+	public void setAndroidCpa(SChannel androidCpa) {
 		this.androidCpa = androidCpa;
 	}
 	
@@ -59,7 +59,7 @@ public class SummaryClientReport {
 	
 	private SGame cpsIosData;
 	
-	private SPlatform cpaData;*/
+	private SChannel cpaData;*/
 
 	
 
@@ -79,11 +79,11 @@ public class SummaryClientReport {
 		this.cpsIosData = cpsIosData;
 	}
 
-	public SPlatform getCpaData() {
+	public SChannel getCpaData() {
 		return cpaData;
 	}
 
-	public void setCpaData(SPlatform cpaData) {
+	public void setCpaData(SChannel cpaData) {
 		this.cpaData = cpaData;
 	}*/
 	

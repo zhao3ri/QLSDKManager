@@ -5,14 +5,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import java.util.Date;
 
 /*
- *联运平台 实体类
+ *联运渠道 实体类
  */
 public class SBalance {
 
 	private Long id;
 	
 	private Long channelId;
-	private String platformName;
+	private String channelName;
 
 	private int amount ;
 	private Integer type ;
@@ -29,12 +29,12 @@ public class SBalance {
 		this.id = id;
 	}
 
-	public String getPlatformName() {
-		return platformName;
+	public String getChannelName() {
+		return channelName;
 	}
 
-	public void setPlatformName(String platformName) {
-		this.platformName = platformName;
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 
 	public Integer getBalance() {

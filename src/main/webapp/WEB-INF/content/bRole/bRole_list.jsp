@@ -22,10 +22,10 @@
 					</select>
 		        </div>
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
-		        	<select class="form-control" name="identity.platformId" placeholder="请选择渠道">
+		        	<select class="form-control" name="identity.channelId" placeholder="请选择渠道">
 						<option value="">==请选择渠道==</option>
-						<s:iterator value="platforms" var="item">
-							<option value="${item.id }" <c:if test="${item.id == identity.platformId }">selected</c:if>>${item.platformName }</option>
+						<s:iterator value="channels" var="item">
+							<option value="${item.id }" <c:if test="${item.id == identity.channelId }">selected</c:if>>${item.channelName }</option>
 						</s:iterator>
 					</select>
 				</div>
@@ -58,7 +58,7 @@
 								<s:iterator value="rolePage.result" var="page">
 									<tr>
 										<td><s:property value="gameName"/></td>
-										<td><s:property value="platformName"/></td>
+										<td><s:property value="channelName"/></td>
 										<td><s:property value="zoneId"/></td>
 										<td><s:property value="identityId"/></td>
 										<td><s:property value="name"/></td>

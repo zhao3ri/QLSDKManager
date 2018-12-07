@@ -16,8 +16,8 @@ public class SRoleRank {
     private Integer clientType;
     private String gameName;
     private Integer amount;
-    private Integer platformid;
-    private String platformName;
+    private Integer channelId;
+    private String channelName;
     private Date lastlogin;
     private String startDate;
     private String endDate;
@@ -111,18 +111,18 @@ public class SRoleRank {
     }
 
     public Integer getPlatformId() {
-        return platformid;
+        return channelId;
     }
 
     public void setPlatformId(Integer platformId) {
-        this.platformid = platformId;
+        this.channelId = platformId;
     }
 
-    public String getPlatformName() {
-        return platformName;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setPlatformName(String platformName) {
-        this.platformName = platformName;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 }

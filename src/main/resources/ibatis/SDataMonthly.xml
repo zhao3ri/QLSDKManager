@@ -17,8 +17,8 @@
     		<isNotEmpty prepend="and" property="zoneId">
     			a.`zoneId`=#zoneId#
     		</isNotEmpty>
-    		<isNotNull prepend="and" property="platformId">
-    			a.`platformId`=#platformId#
+    		<isNotNull prepend="and" property="channelId">
+    			a.`channelId`=#channelId#
     		</isNotNull>
     		<isNotNull prepend="and" property="statDate">
     			a.`yearMonth`=#statDate#
@@ -43,7 +43,7 @@
             a.gameId AS gameId,
             bg.gameName AS gameName,
             a.`zoneId` AS zoneId,
-            a.`platformId` AS platformId,
+            a.channelId AS channelId,
 			SUM(a.totalRegUser) AS regUsers,
 			SUM(a.totalRoleUser)/SUM(a.totalRegUser) AS conversionRate,
 			SUM(a.monthLoginRoles) AS monthLoginRoles,

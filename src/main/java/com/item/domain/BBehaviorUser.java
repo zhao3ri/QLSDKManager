@@ -23,7 +23,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 	@JsonIgnore
 	private String uid;
 	@JsonIgnore
-    private Integer platformId;
+    private Integer channelId;
 	@JsonIgnore
     private Long gameId;
 	@JsonIgnore
@@ -49,11 +49,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public Integer getPlatformId() {
-		return platformId;
+	public Integer getChannelId() {
+		return channelId;
 	}
-	public void setPlatformId(Integer platformId) {
-		this.platformId = platformId;
+	public void setChannelId(Integer channelId) {
+		this.channelId = channelId;
 	}
 	public Long getGameId() {
 		return gameId;

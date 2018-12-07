@@ -17,14 +17,14 @@
             <isNotNull prepend="AND" property="createTime">
                 sb.createTime=#createTime#
             </isNotNull>
-            <isNotEmpty prepend="and" property="platformIds">
+            <isNotEmpty prepend="and" property="channelIds">
                 sb.channelId IN
-                <iterate property="platformIds" open="(" close=")" conjunction=",">
-                    #platformIds[]#
+                <iterate property="channelIds" open="(" close=")" conjunction=",">
+                    #channelIds[]#
                 </iterate>
             </isNotEmpty>
-            <isNotNull prepend="AND" property="platformName">
-                bp.`platformName` like '%$platformName$%'
+            <isNotNull prepend="AND" property="channelName">
+                bp.`channelName` like '%$channelName$%'
             </isNotNull>
         </dynamic>
     </sql>
@@ -41,14 +41,14 @@
 
     <!-- 获取加币记录总数 -->
     <select id="SBalance.count" resultClass="Long" parameterClass="mb">
-        SELECT COUNT(1) FROM s_balance sb RIGHT JOIN b_platform bp ON
+        SELECT COUNT(1) FROM s_balance sb RIGHT JOIN b_channel bp ON
         sb.channelId=bp.id
         <include refid="SBalance.Where"/>
     </select>
 
     <!--根据pageSize获取一页的数据量 -->
     <select id="SBalance.page" parameterClass="mb" resultClass="SBalance">
-        SELECT sb.*,bp.`platformName` FROM s_balance sb RIGHT JOIN b_platform bp ON
+        SELECT sb.*,bp.channelName FROM s_balance sb RIGHT JOIN b_channel bp ON
         sb.channelId=bp.id
         <include refid="SBalance.Where"/>
         <isNotNull property="orderby">
@@ -59,8 +59,8 @@
 
     <select id="SBalance.getAllBalance" parameterClass="mb" resultClass="SBalance">
         SELECT
-        sb.*,bp.`platformName`
-        FROM s_balance sb JOIN b_platform bp ON sb.channelId=bp.id
+        sb.*,bp.channelName
+        FROM s_balance sb JOIN b_channel bp ON sb.channelId=bp.id
         <include refid="SBalance.Where"/>
     </select>
 

@@ -17,8 +17,8 @@
     		<isNotEmpty prepend="and" property="zoneId">
     			`zoneId`=#zoneId#
     		</isNotEmpty>
-    		<isNotNull prepend="and" property="platformId">
-    			`platformId`=#platformId#
+    		<isNotNull prepend="and" property="channelId">
+    			`channelId`=#channelId#
     		</isNotNull>
     		<isNotNull prepend="and" property="statDate">
     			DATE(`statDate`)=#statDate#

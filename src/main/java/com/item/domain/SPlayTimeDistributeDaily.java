@@ -27,7 +27,7 @@ package com.item.domain;
 	/*
 	 *
 	 */
-	private Integer platformId;
+	private Integer channelId;
 	/*
 	 *
 	 */
@@ -142,15 +142,15 @@ package com.item.domain;
 	/**
 	 * @return 
 	 */
-	public Integer getPlatformId(){
-		return platformId;
+	public Integer getChannelId(){
+		return channelId;
 	}
 	/**
-	 * 设置 [platformId]
-	 * @param platformId 
+	 * 设置 [channelId]
+	 * @param channelId
 	 */
-	public void setPlatformId(Integer platformId){
-		this.platformId=platformId;
+	public void setChannelId(Integer channelId){
+		this.channelId = channelId;
 	}
 	/**
 	 * @return 

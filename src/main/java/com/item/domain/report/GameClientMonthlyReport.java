@@ -1,19 +1,18 @@
 package com.item.domain.report;
 
-import com.item.domain.SGame;
-import com.item.domain.SGameMonthly;
-import com.item.domain.SPlatform;
-import com.item.domain.SPlatformMonthly;
+import com.item.domain.*;
+import com.item.domain.SChannel;
+import com.item.domain.SChannelMonthly;
 
 public class GameClientMonthlyReport extends GameClientReport {
 
     private SGameMonthly iosCps;
 
-    private SPlatformMonthly iosCpa;
+    private SChannelMonthly iosCpa;
 
     private SGameMonthly androidCps;
 
-    private SPlatformMonthly androidCpa;
+    private SChannelMonthly androidCpa;
 
     @Override
     public SGameMonthly getIosCps() {
@@ -29,14 +28,14 @@ public class GameClientMonthlyReport extends GameClientReport {
     }
 
     @Override
-    public SPlatformMonthly getIosCpa() {
+    public SChannelMonthly getIosCpa() {
         return iosCpa;
     }
 
     @Override
-    public void setIosCpa(SPlatform iosCpa) {
-        if (iosCpa instanceof SPlatformMonthly)
-            this.iosCpa = (SPlatformMonthly) iosCpa;
+    public void setIosCpa(SChannel iosCpa) {
+        if (iosCpa instanceof SChannelMonthly)
+            this.iosCpa = (SChannelMonthly) iosCpa;
         else
             super.setIosCpa(iosCpa);
     }
@@ -55,14 +54,14 @@ public class GameClientMonthlyReport extends GameClientReport {
     }
 
     @Override
-    public SPlatformMonthly getAndroidCpa() {
+    public SChannelMonthly getAndroidCpa() {
         return androidCpa;
     }
 
     @Override
-    public void setAndroidCpa(SPlatform androidCpa) {
-        if (androidCpa instanceof SPlatformMonthly)
-            this.androidCpa = (SPlatformMonthly) androidCpa;
+    public void setAndroidCpa(SChannel androidCpa) {
+        if (androidCpa instanceof SChannelMonthly)
+            this.androidCpa = (SChannelMonthly) androidCpa;
         else
             super.setAndroidCpa(androidCpa);
     }

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SChannelRealtime">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+
+    <typeAlias alias="sChannelRealtime" type="com.item.domain.SChannelRealtime" />
+    <typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+    <sql id="SChannelRealtime.Where">
+    	<dynamic prepend="where">
+    		<isNotNull prepend="and" property="id">
+    			`id`=#id#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="clientType">
+    			`clientType`=#clientType#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="gameId">
+    			`gameId`=#gameId#
+    		</isNotNull>
+    		<isNotNull prepend="and" property="channelId">
+    			`channelId`=#channelId#
+    		</isNotNull>
+    		<isNotEmpty prepend="and" property="statDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')=date_format(#statDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="channelIds">
+    			`channelId` IN ($channelIds$)
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statStartDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')>=date_format(#statStartDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="statEndDate">
+    			<![CDATA[
+	 	 	  	 date_format(`statDate`,'%Y-%m-%d')<=date_format(#statEndDate#,'%Y-%m-%d') 
+	 	 		]]>
+    		</isNotEmpty>
+    	</dynamic>
+    </sql>
+
+    <select id="SChannelRealtime.page" parameterClass="mb" resultClass="sChannelRealtime">
+        SELECT
+	  		`id`,
+			`clientType`,
+			gameId,
+			channelId,
+			`statDate`,
+			`onlineUsers`,
+			`roleUsers`,
+			`newDevices`,
+			`payAmount`,
+			`activeUsers`,
+			`newUsers`
+		FROM s_platform_realtime
+        <include refid="SChannelRealtime.Where"/>
+        <isNotNull property="orderby">
+        	ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="SChannelRealtime.count" resultClass="Long" parameterClass="mb">
+        SELECT COUNT(1)
+		FROM s_platform_realtime
+        <include refid="SChannelRealtime.Where"/>
+    </select>
+
+    <select id="SChannelRealtime.list" resultClass="sChannelRealtime" parameterClass="mb">
+        SELECT
+	 		`id`,
+			`clientType`,
+			gameId,
+			channelId,
+			`statDate`,
+			`onlineUsers`,
+			`roleUsers`,
+			`newDevices`,
+			`payAmount`,
+			`activeUsers`,
+		    `newUsers`
+		FROM s_platform_realtime
+        <include refid="SPlatformRealtime.Where"/>
+        <isNotNull property="orderby">
+             ORDER BY $orderby$
+        </isNotNull>
+        <isNotNull property="pageSize">
+       	     LIMIT 0, #pageSize#
+        </isNotNull>
+    </select>
+
+    <select id="SChannelRealtime.listGroupBy" resultClass="sChannelRealtime" parameterClass="mb">
+        SELECT
+			`statDate`,
+			gameId,
+	        channelId,
+			SUM(`onlineUsers`) AS onlineUsers,
+			SUM(`roleUsers`) AS roleUsers,
+			SUM(`newDevices`) AS newDevices,
+			SUM(`payAmount`) AS payAmount,
+			SUM(`activeUsers`) AS activeUsers
+		FROM s_platform_realtime
+        <include refid="SChannelRealtime.Where"/>
+        GROUP BY
+        <isEmpty property="groupDateType">
+       	 	date_format(`statDate`,'%H:%i:00')
+       	</isEmpty>
+       	<isEqual property="groupDateType" compareValue="1">
+       	 	statDate
+       	</isEqual>
+        <isEqual property="groupType" compareValue="2">
+         	,channelId
+        </isEqual>
+        ORDER BY statDate ASC
+    </select>
+
+    <select id="SChannelRealtime.get" resultClass="sChannelRealtime" parameterClass="Long">
+        SELECT
+	   		`id`,
+			`clientType`,
+			gameId,
+			channelId,
+			`statDate`,
+			`onlineUsers`,
+			`roleUsers`,
+			`newDevices`,
+			`payAmount`,
+			`activeUsers`,
+			`newUsers`
+		FROM s_platform_realtime
+		WHERE
+	  		`id`=#id# 
+    </select>
+
+    <insert id="SChannelRealtime.save" parameterClass="sChannelRealtime">
+        INSERT INTO s_platform_realtime(
+        	`clientType`,
+			gameId,
+			channelId,
+			`statDate`,
+			`onlineUsers`,
+			`roleUsers`,
+			`newDevices`,
+			`payAmount`,
+			`activeUsers`,
+		    `newUsers`
+        )VALUES(
+        	#clientType#,
+			#gameId#,
+			#channelId#,
+			#statDate#,
+			#onlineUsers#,
+			#roleUsers#,
+			#newDevices#,
+			#payAmount#,
+			#activeUsers#,
+			#newUsers#
+        )
+        <selectKey resultClass="Long" keyProperty="id">
+	       select @@IDENTITY as `id`
+        </selectKey>
+    </insert>
+
+    <update id="SChannelRealtime.update" parameterClass="sChannelRealtime">
+    	UPDATE s_platform_realtime
+	    	<dynamic prepend="set">
+	    		<isNotNull prepend="," property="clientType">
+					`clientType`=#clientType#
+				</isNotNull>
+	    		<isNotNull prepend="," property="gameId">
+					`gameId`=#gameId#
+				</isNotNull>
+	    		<isNotNull prepend="," property="channelId">
+					`channelId`=#channelId#
+				</isNotNull>
+	    		<isNotNull prepend="," property="statDate">
+					`statDate`=#statDate#
+				</isNotNull>
+	    		<isNotNull prepend="," property="onlineUsers">
+					`onlineUsers`=#onlineUsers#
+				</isNotNull>
+	    		<isNotNull prepend="," property="roleUsers">
+					`roleUsers`=#roleUsers#
+				</isNotNull>
+	    		<isNotNull prepend="," property="newDevices">
+					`newDevices`=#newDevices#
+				</isNotNull>
+	    		<isNotNull prepend="," property="payAmount">
+					`payAmount`=#payAmount#
+				</isNotNull>
+				<isNotNull prepend="," property="activeUsers">
+					`activeUsers`=#activeUsers#
+				</isNotNull>
+                <isNotNull prepend="," property="activeUsers">
+                    `newUsers`=#newUsers#
+                </isNotNull>
+	    	</dynamic>
+    	WHERE
+    		`id`=#id#
+    </update>
+
+    <delete id="SChannelRealtime.delete" parameterClass="Long">
+		DELETE FROM s_platform_realtime
+		WHERE
+			`id`=#id# 
+    </delete>
+</sqlMap>

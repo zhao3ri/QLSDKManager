@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.item.domain.BChannel;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.util.CollectionUtils;
 
 import com.item.dao.ReportDailyDao;
 import com.item.dao.ReportHistoryDailyDao;
-import com.item.domain.BPlatform;
 import com.item.domain.Game;
 import com.item.domain.Gamezone;
 import com.item.domain.report.ReportDaily;
@@ -40,7 +40,7 @@ public class ReportDailyService {
     @Autowired
     private BGamezoneService bGamezoneService;
     @Autowired
-    private BPlatformService bPlatformService;
+    private BChannelService bChannelService;
     @Autowired
     private BGameService bGameService;
 
@@ -94,9 +94,9 @@ public class ReportDailyService {
             mb.put("statStartDate", DateUtils.format(calendar.getTime(), "yyyy-MM-dd"));
             result.put("selectRange", mb.get("statStartDate") + " 至 " + mb.get("statEndDate"));
         }
-        List<BPlatform> platforms = bPlatformService.getByIds(channelIds);
+        List<BChannel> platforms = bChannelService.getByIds(channelIds);
         List<Gamezone> gamezones = bGamezoneService.getByIds(gameId, zoneIds);
-        List<BPlatform> comparePlatforms = bPlatformService.getByIds(compareChannelIds);
+        List<BChannel> comparePlatforms = bChannelService.getByIds(compareChannelIds);
         List<Gamezone> compareGamezones = bGamezoneService.getByIds(gameId, compareZoneIds);
         result.put("platforms", platforms);
         result.put("gamezones", gamezones);
@@ -192,9 +192,9 @@ public class ReportDailyService {
                         data.put(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"), list);
                     }
 
-                    for (BPlatform bPlatform : platforms) {
-                        if (bPlatform.getId().toString().equals(reportDaily.getPlatformId().toString())) {
-                            reportDaily.setPlatformName(bPlatform.getPlatformName());
+                    for (BChannel bChannel : platforms) {
+                        if (bChannel.getId().toString().equals(reportDaily.getChannelId().toString())) {
+                            reportDaily.setChannelName(bChannel.getChannelName());
                             break;
                         }
                     }

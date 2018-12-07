@@ -49,7 +49,7 @@ public class RoleReportService {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 
         if (StringUtils.isNotBlank(selectRange)) {
@@ -67,7 +67,7 @@ public class RoleReportService {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
         mb.put("orderby", "`statDate`");
 
@@ -90,7 +90,7 @@ public class RoleReportService {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 
         SRoleTwentyMinute history = sRoleTwentyMinuteService.historyTopOnlines(mb);
@@ -122,7 +122,7 @@ public class RoleReportService {
         Game game = bGameService.getGameById(appId);
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
         if (StringUtils.isNotBlank(selectRange)) {
             mb.put("statDate", selectRange);
@@ -164,7 +164,7 @@ public class RoleReportService {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 
         SRoleTwentyMinute history = sRoleTwentyMinuteService.historyTopOnlines(mb);
@@ -203,7 +203,7 @@ public class RoleReportService {
         Game game = bGameService.getGameById(appId);
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
         if (StringUtils.isNotBlank(selectRange)) {
             mb.put("statStartDate", selectRange.split("至")[0]);
@@ -232,7 +232,7 @@ public class RoleReportService {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 
         SRoleTwentyMinute history = sRoleTwentyMinuteService.historyTopOnlines(mb);
@@ -273,7 +273,7 @@ public class RoleReportService {
 
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
         if (StringUtils.isNotBlank(selectRange)) {
             mb.put("statStartDate", selectRange.split("至")[0]);
@@ -318,7 +318,7 @@ public class RoleReportService {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 
         if (StringUtils.isNotBlank(selectRange)) {
@@ -338,7 +338,7 @@ public class RoleReportService {
         Map<String, Object> result = new HashMap<String, Object>();
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, appId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
         mb.put("roleName", StringUtils.isBlank(roleName) ? null : roleName);
         mb.put("uid", StringUtils.isBlank(uid) ? null : uid);

@@ -79,7 +79,7 @@
                                         <s:iterator value="#item.value" var="itemVal" status="st">
                                             <tr>
                                                 <c:if test="${st.index == 0 }"><td rowspan=<s:property value="#item.value.size"/>><s:property value="#item.key.gameName"/></td></c:if>
-                                                <td><s:property value="#itemVal.platformName"/></td>
+                                                <td><s:property value="#itemVal.channelName"/></td>
                                                 <td><s:property value="#itemVal.totalRoleUser"/></td>
                                                 <td><s:property value="#itemVal.totalRegUser"/></td>
                                                 <td><s:property value="#itemVal.devices"/></td>
@@ -170,16 +170,16 @@
                                 <%--</tr>--%>
                                 <%--</thead>--%>
                                 <%--<tbody>--%>
-                                <%--<s:if test="sPlatformsPlatform.size>0  || sPlatformMonthliesPlatform.size>0">--%>
-                                    <%--<s:if test="sPlatformsPlatform.size>0  &&  sPlatformMonthliesPlatform.size==0">--%>
-                                        <%--<s:set value="sPlatformsPlatform" var="valueList"></s:set>--%>
+                                <%--<s:if test="sPlatformsChannel.size>0  || sPlatformMonthliesPlatform.size>0">--%>
+                                    <%--<s:if test="sPlatformsChannel.size>0  &&  sPlatformMonthliesPlatform.size==0">--%>
+                                        <%--<s:set value="sPlatformsChannel" var="valueList"></s:set>--%>
                                     <%--</s:if>--%>
-                                    <%--<s:if test="sPlatformMonthliesPlatform.size>0  &&  sPlatformsPlatform.size==0">--%>
+                                    <%--<s:if test="sPlatformMonthliesPlatform.size>0  &&  sPlatformsChannel.size==0">--%>
                                         <%--<s:set value="sPlatformMonthliesPlatform" var="valueList"></s:set>--%>
                                     <%--</s:if>--%>
                                     <%--<s:iterator value="valueList" var="itemVal">--%>
                                         <%--<tr>--%>
-                                            <%--<td><s:property value="#itemVal.platformName"/></td>--%>
+                                            <%--<td><s:property value="#itemVal.channelName"/></td>--%>
                                             <%--<td><s:property value="#itemVal.totalRoleUser"/></td>--%>
                                             <%--<td><s:property value="#itemVal.totalRegUser"/></td>--%>
                                             <%--<td><s:property value="#itemVal.devices"/></td>--%>

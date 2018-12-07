@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SChannelMonthly">
+
+	<!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+	<typeAlias alias="sZoneChannelMonthly" type="com.item.domain.SZoneChannelMonthly" />
+	<typeAlias alias="mb" type="core.module.orm.MapBean" />
+
+	<sql id="SZoneChannelMonthly.where">
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				szpm.id=#id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="clientType">
+				szpm.clientType=#clientType#
+			</isNotNull>
+			<isNotNull prepend="AND" property="gameId">
+				szpm.gameId=#gameId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="zoneId">
+				szpm.zoneId=#zoneId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="yearMonth">
+				szpm.yearMonth=#yearMonth#
+			</isNotNull>
+			<isNotNull prepend="AND" property="channelId">
+				szpm.channelId=#channelId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="totalRoledUser">
+				szpm.totalRoledUser=#totalRoledUser#
+			</isNotNull>
+			<isNotNull prepend="AND" property="totalRegUser">
+				szpm.totalRegUser=#totalRegUser#
+			</isNotNull>
+			<isNotNull prepend="AND" property="devices">
+				szpm.devices=#devices#
+			</isNotNull>
+			<isNotNull prepend="AND" property="payAmount">
+				szpm.payAmount=#payAmount#
+			</isNotNull>
+			<isNotNull prepend="AND" property="payTimes">
+				szpm.payTimes=#payTimes#
+			</isNotNull>
+			<isNotNull prepend="AND" property="payUsers">
+				szpm.payUsers=#payUsers#
+			</isNotNull>
+			<isNotNull prepend="AND" property="gameName">
+				bg.gameName=#gameName#
+			</isNotNull>
+		</dynamic>
+	</sql>
+	
+	
+	<!-- 区服分析 ：区服总计 按月-->
+    <select id="sZoneChannelMonthly.zoneSummary" resultClass="sZoneChannelMonthly" parameterClass="mb">
+       SELECT
+            szpm.`id` AS id,
+            szpm.`clientType` AS clientType,
+            szpm.gameId AS gameId,
+            bg.gameName AS gameName,
+            szpm.`zoneId` AS zoneId,
+            bgz.`zoneName` AS zoneName,
+            szpm.channelId AS channelId,
+			SUM(szpm.totalRoleUser) AS totalRoledUser,
+			SUM(szpm.totalRegUser) AS totalRegUser,
+			SUM(szpm.activeUsers) AS activeUsers,
+			SUM(szpm.devices) AS devices,
+			SUM(szpm.payAmount) AS payAmount,
+			SUM(szpm.payTimes) AS payTimes,
+			SUM(szpm.payUsers) AS payUsers
+		FROM s_zone_platform_monthly szpm 
+		JOIN 
+		b_game bg
+		ON 
+		bg.id=szpm.gameId
+		JOIN 
+		b_game_zone bgz 
+		ON
+		 bgz.gameId=szpm.gameId AND bgz.zoneId=szpm.zoneId
+		 <include refid="SZoneChannelMonthly.where"/>
+		 GROUP BY szpm.zoneId,szpm.gameId
+		ORDER BY szpm.zoneId
+    </select>
+    
+    <!-- 区服分析 ：区服详细 按月-->
+    <select id="sZoneChannelMonthly.zoneDetail" resultClass="sZoneChannelMonthly" parameterClass="mb">
+        SELECT
+        SUM(szpm.devices) AS devices,
+		SUM(szpm.payAmount) AS payAmount,
+		SUM(szpm.payTimes) AS payTimes,
+		SUM(szpm.payUsers) AS payUsers,
+		SUM(szpm.totalRoleUser) AS totalRoledUser,
+		SUM(szpm.totalRegUser) AS totalRegUser,
+		SUM(szpm.activeUsers) AS activeUsers,
+		szpm.`zoneId` AS zoneId,
+		szpm.gameId AS gameId,
+        szpm.channelId AS channelId,
+        bgz.`zoneName` AS zoneName,
+		bg.gameName AS gameName,
+		bp.channelName AS channelName
+		FROM s_zone_platform_monthly szpm
+		JOIN 
+		b_game bg
+		ON 
+		bg.id=szpm.gameId
+		JOIN 
+		b_game_zone bgz 
+		ON
+		 bgz.gameId=szpm.gameId AND bgz.zoneId=szpm.zoneId
+		JOIN 
+		b_channel bp
+		ON 
+		szpm.channelId=bp.id
+		<include refid="SZoneChannelMonthly.where"/>
+		GROUP BY bgz.`zoneName`,bp.channelName
+		ORDER BY szpm.zoneId
+    </select>
+    
+     <!-- 区服分析 ：渠道详细 按月-->
+    <select id="sZoneChannelMonthly.channelDetail" resultClass="sZoneChannelMonthly" parameterClass="mb">
+        SELECT
+	    SUM(szpm.devices) AS devices,
+		SUM(szpm.payAmount) AS payAmount,
+		SUM(szpm.payTimes) AS payTimes,
+		SUM(szpm.payUsers) AS payUsers,
+		SUM(szpm.totalRoleUser) AS totalRoledUser,
+		SUM(szpm.totalRegUser) AS totalRegUser,
+		SUM(szpm.activeUsers) AS activeUsers,
+		szpm.`zoneId` AS zoneId,
+		szpm.gameId AS gameId,
+        szpm.channelId AS channelId,
+        bgz.`zoneName` AS zoneName,
+		bg.gameName AS gameName,
+		bp.channelName AS channelName
+		FROM s_zone_platform_monthly szpm
+		JOIN 
+		b_game bg
+		ON 
+		bg.id=szpm.gameId
+		JOIN 
+		b_game_zone bgz 
+		ON
+		 bgz.gameId=szpm.gameId AND bgz.zoneId=szpm.zoneId
+		JOIN 
+		b_channel bp
+		ON 
+		szpm.channelId=bp.id
+		<include refid="SZoneChannelMonthly.where"/>
+		GROUP BY bgz.`zoneName`,bp.channelName
+		ORDER BY szpm.zoneId
+    </select>
+
+</sqlMap>

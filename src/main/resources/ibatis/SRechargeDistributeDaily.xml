@@ -26,8 +26,8 @@
 			`statDate`
 		FROM s_recharge_distribute_daily
 		WHERE gameId = #gameId#
-		<isNotNull property="platformId">
-   			AND `platformId`=#platformId#
+		<isNotNull property="channelId">
+   			AND channelId=#channelId#
    		</isNotNull>
     	<isNotEmpty property="zoneId">
    			AND `zoneId`=#zoneId#

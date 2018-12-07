@@ -18,7 +18,7 @@
     			a.`zoneId` IN ($zoneIds$)
     		</isNotNull>
     		<isNotNull prepend="and" property="channelIds">
-    			a.`platformId` IN ($channelIds$)
+    			a.`channelId` IN ($channelIds$)
     		</isNotNull>
     		<isEmpty property="statStartDate">
     			<isEmpty prepend="and" property="statEndDate">
@@ -98,7 +98,7 @@
      <select id="ReportHistoryDaily.listPlatform" resultClass="reportHistoryDaily" parameterClass="mb">
          SELECT * FROM (SELECT
 			a.gameId,
-			a.`platformId`,
+			a.channelId,
 			a.`statDate`,
 			SUM(a.`roleUsers`) AS roleUsers,
 			SUM(a.`regUsers`) AS regUsers,
@@ -144,7 +144,7 @@
 			s_platform_daily AS a JOIN s_platform_history AS b 
 			ON a.clientType = b.clientType 
 			AND a.gameId = b.gameId
-			AND a.platformId = b.platformId 
+			AND a.channelId = b.channelId
 			AND a.statDate = b.statDate
         <include refid="ReportHistoryDaily.Where"/>
         <isNotEmpty property="groupby">
@@ -156,7 +156,7 @@
     <select id="ReportHistoryDaily.listZone" resultClass="reportHistoryDaily" parameterClass="mb">
          SELECT * FROM (SELECT
 			a.gameId,
-			a.`platformId`,
+			a.channelId,
 			a.`zoneId`,
 			a.`statDate`,
 			SUM(a.`roleUsers`) AS roleUsers,
@@ -203,7 +203,7 @@
 			s_zone_platform_daily AS a JOIN s_zone_platform_history AS b
 			ON a.clientType = b.clientType 
 			AND a.gameId = b.gameId
-			AND a.platformId = b.platformId 
+			AND a.channelId = b.channelId
 			AND a.statDate = b.statDate
 			AND a.zoneId = b.zoneId
         <include refid="ReportHistoryDaily.Where"/>
@@ -215,8 +215,8 @@
 	<select id="ReportHistoryDaily.listPlatformSummary" resultClass="reportHistoryDaily" parameterClass="mb">
 		SELECT * FROM (SELECT
 		a.gameId,
-		a.`platformId`,
-		c.`platformName`,
+		a.channelId,
+		c.channelName,
 		a.`statDate`,
 		SUM(a.`roleUsers`) AS roleUsers,
 		SUM(a.`regUsers`) AS regUsers,
@@ -259,12 +259,12 @@
 		b.payUsers AS totalPayUsers,
 		b.activeUsers AS totalActiveUsers
 		FROM
-		b_platform AS c, s_platform_daily AS a JOIN s_platform_history AS b
+		b_channel AS c, s_platform_daily AS a JOIN s_platform_history AS b
 		ON a.clientType = b.clientType
 		AND a.gameId = b.gameId
-		AND a.platformId = b.platformId
+		AND a.channelId = b.channelId
 		AND a.statDate = b.statDate
-        AND a.platformId=c.id
+        AND a.channelId=c.id
 		<include refid="ReportHistoryDaily.Where"/>
 		<isNotEmpty property="groupby">
 			GROUP BY $groupby$

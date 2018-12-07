@@ -8,8 +8,8 @@
 
 	<sql id="BAccount.Where">
 		<dynamic prepend="where">
-			<isNotNull prepend="and" property="platformId">
-				a.`platformId`=#platformId#
+			<isNotNull prepend="and" property="channelId">
+				a.`channelId`=#channelId#
 			</isNotNull>
 			<isNotNull prepend="and" property="uid">
 				a.`uid`=#uid#
@@ -18,8 +18,8 @@
 	</sql>
 
 	<select id="BAccount.page" parameterClass="mb" resultClass="bAccount">
-		SELECT a.id,a.platformId,a.uid,a.createTime,b.platformName FROM
-		b_account AS a join b_platform AS b on a.platformId = b.id
+		SELECT a.id,a.channelId,a.uid,a.createTime,b.channelName FROM
+		b_account AS a join b_channel AS b on a.channelId = b.id
 		<include refid="BAccount.Where" />
 		<isNotNull property="orderby">
 			ORDER BY $orderby$
@@ -28,15 +28,15 @@
 	</select>
 
 	<select id="BAccount.count" resultClass="Long" parameterClass="mb">
-		SELECT COUNT(*) FROM b_account AS a join b_platform AS b on
-		a.platformId = b.id
+		SELECT COUNT(*) FROM b_account AS a join b_channel AS b on
+		a.channelId = b.id
 		<include refid="BAccount.Where" />
 	</select>
 
 	<select id="BAccount.list" resultClass="bAccount"
 		parameterClass="mb">
-		SELECT a.id,a.platformId,a.uid,a.createTime,b.platformName FROM
-		b_account AS a join b_platform AS b on a.platformId = b.id
+		SELECT a.id,a.channelId,a.uid,a.createTime,b.channelName FROM
+		b_account AS a join b_channel AS b on a.channelId = b.id
 		<include refid="BAccount.Where" />
 		<isNotNull property="orderby">
 			ORDER BY $orderby$

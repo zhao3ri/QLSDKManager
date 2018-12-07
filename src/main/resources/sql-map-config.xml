@@ -18,20 +18,20 @@
 	<sqlMap resource="ibatis/authority/Module.xml" />
 	<sqlMap resource="ibatis/authority/User.xml" />
 	<sqlMap resource="ibatis/BOrder.xml" />
-	<sqlMap resource="ibatis/BPlatform.xml" />
-	<sqlMap resource="ibatis/BPlatformGame.xml" />
+	<sqlMap resource="ibatis/BChannel.xml" />
+	<sqlMap resource="ibatis/BChannelGame.xml" />
 	<sqlMap resource="ibatis/BGame.xml" />
 	<!-- <sqlMap resource="ibatis/BAccount.xml" /> -->
 	<sqlMap resource="ibatis/BGamezone.xml" />
-	<sqlMap resource="ibatis/SZonePlatformRealtime.xml" />
-	<sqlMap resource="ibatis/SZonePlatform.xml" />
-	<sqlMap resource="ibatis/SPlatformMonthly.xml" />
-	<sqlMap resource="ibatis/SZonePlatformMonthly.xml" />
-	<sqlMap resource="ibatis/SPlatform.xml" />
+	<sqlMap resource="ibatis/SZoneChannelRealtime.xml" />
+	<sqlMap resource="ibatis/SZoneChannel.xml" />
+	<sqlMap resource="ibatis/SChannelMonthly.xml" />
+	<sqlMap resource="ibatis/SZoneChannelMonthly.xml" />
+	<sqlMap resource="ibatis/SChannel.xml" />
 	<sqlMap resource="ibatis/SGameRealtime.xml" />
 	<sqlMap resource="ibatis/SGame.xml" />
 	<sqlMap resource="ibatis/SGameMonthly.xml" />
-	<sqlMap resource="ibatis/BPlatformGameZone.xml" />
+	<sqlMap resource="ibatis/BChannelGameZone.xml" />
 	<sqlMap resource="ibatis/SRechargeRank.xml" />
 	<sqlMap resource="ibatis/SRoleRank.xml" />
 	<sqlMap resource="ibatis/ReportDaily.xml" />
@@ -48,6 +48,6 @@
 	<sqlMap resource="ibatis/SDataMonthly.xml" />
 	<sqlMap resource="ibatis/BRole.xml" />
 	<sqlMap resource="ibatis/ReportLtv.xml"></sqlMap>
-	<sqlMap resource="ibatis/SPlatformRealtime.xml"></sqlMap>
+	<sqlMap resource="ibatis/SChannelRealtime.xml"></sqlMap>
 	<sqlMap resource="ibatis/SBalance.xml"></sqlMap>
 </sqlMapConfig>

@@ -8,7 +8,7 @@ public class BAccount {
 	 * */
 	private Long id;
 	/**
-	 * 平台ID
+	 * 渠道ID
 	 * */
 	private Long platformId;
 	/**
@@ -20,7 +20,7 @@ public class BAccount {
 	 * */
 	private Date createTime;
 	/**
-	 * 平台名称
+	 * 渠道名称
 	 * */
 	private String platformName;
 

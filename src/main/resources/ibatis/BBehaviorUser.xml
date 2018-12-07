@@ -12,7 +12,7 @@
 		FROM b_behavior_user
         WHERE 
         uid = #uid#
-        AND platformId = #platformId#
+        AND channelId = #channelId#
         <isNotNull property="gameId">
 			AND gameId=#gameId#
 		</isNotNull>

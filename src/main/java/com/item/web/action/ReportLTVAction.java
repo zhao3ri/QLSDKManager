@@ -1,22 +1,17 @@
 package com.item.web.action;
 
-import com.item.domain.BPlatform;
+import com.item.domain.BChannel;
 import com.item.domain.Game;
-import com.item.domain.authority.User;
-import com.item.domain.report.LTVGamePlatform;
+import com.item.domain.report.LTVGameChannel;
 import com.item.service.*;
 import com.item.utils.*;
 import core.module.orm.MapBean;
-import core.module.utils.Struts2Utils;
-import core.module.web.Struts2Action;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,7 +49,7 @@ public class ReportLTVAction extends BaseAction {
     @Autowired
     private BGamezoneService gamezoneService;
     @Autowired
-    private BPlatformService platformService;
+    private BChannelService platformService;
     @Resource
     private SysGameManagerService gameManagerService;
 
@@ -62,7 +57,7 @@ public class ReportLTVAction extends BaseAction {
         MapBean mb = new MapBean();
         if (StringUtils.isNotBlank(channelName)) {
             mb.put("platformName", channelName);
-            BPlatform platform = platformService.get(mb);
+            BChannel platform = platformService.get(mb);
             channelIds = platform.getId().toString();
         }
         if (StringUtils.isNotBlank(zoneName)) {
@@ -161,7 +156,7 @@ public class ReportLTVAction extends BaseAction {
         //result = reportDailyService.operate(gameId,clientType,channelIds,zoneIds,selectRange);
         result = reportLtvService.listLtv(gameId, clientType, channelIds, zoneIds, selectRange, 1);
 //		List<ReportHistoryDaily> dailies = (List<ReportHistoryDaily>)result.get("data");
-        List<LTVGamePlatform> ltvDetail = (List<LTVGamePlatform>) result.get("data");
+        List<LTVGameChannel> ltvDetail = (List<LTVGameChannel>) result.get("data");
 
         ExcelExport ee = new ExcelExport();
         ee.setHead("LTV报统计报表_" + DateUtils.format(new Date(), "yyyyMMddHHmmss"));

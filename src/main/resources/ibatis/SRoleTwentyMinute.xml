@@ -19,8 +19,8 @@
     		<isNotNull prepend="and" property="zoneId">
     			`zoneId`=#zoneId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="platformId">
-    			`platformId`=#platformId#
+    		<isNotNull prepend="and" property="channelId">
+    			`channelId`=#channelId#
     		</isNotNull>
     		<isNotNull prepend="and" property="statDate">
     			date_format(`statDate`,'%Y-%m-%d') = date_format(#statDate#,'%Y-%m-%d') 
@@ -43,7 +43,7 @@
     		`clientType`,
     		gameId,
     		`zoneId`,
-    		`platformId`,
+    		channelId,
     		`statDate`,
     		sum(`roleEstablishs`) as roleEstablishs,
     		sum(`roleLogins`) as roleLogins,

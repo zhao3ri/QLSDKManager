@@ -1,7 +1,7 @@
 package com.item.domain.report;
 
+import com.item.domain.SChannel;
 import com.item.domain.SGame;
-import com.item.domain.SPlatform;
 
 public class GameClientReport {
 
@@ -11,11 +11,11 @@ public class GameClientReport {
 
     private SGame iosCps;
 
-    private SPlatform iosCpa;
+    private SChannel iosCpa;
 
     private SGame androidCps;
 
-    private SPlatform androidCpa;
+    private SChannel androidCpa;
 
     public Long getGameId() {
         return gameId;
@@ -41,11 +41,11 @@ public class GameClientReport {
         this.iosCps = iosCps;
     }
 
-    public SPlatform getIosCpa() {
+    public SChannel getIosCpa() {
         return iosCpa;
     }
 
-    public void setIosCpa(SPlatform iosCpa) {
+    public void setIosCpa(SChannel iosCpa) {
         this.iosCpa = iosCpa;
     }
 
@@ -57,11 +57,11 @@ public class GameClientReport {
         this.androidCps = androidCps;
     }
 
-    public SPlatform getAndroidCpa() {
+    public SChannel getAndroidCpa() {
         return androidCpa;
     }
 
-    public void setAndroidCpa(SPlatform androidCpa) {
+    public void setAndroidCpa(SChannel androidCpa) {
         this.androidCpa = androidCpa;
     }
 

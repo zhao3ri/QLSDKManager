@@ -44,9 +44,9 @@
             	            <!-- 渠道 -->
 	      		  <c:if test="${groupType == 1 }">
       				<c:if test="${not empty channelIds}">
-      				<s:if test="result['platforms'].size>0">
-      					<s:iterator value="result['platforms']" var="item" >
-      						${platformName }&nbsp;&nbsp;
+      				<s:if test="result['channels'].size>0">
+      					<s:iterator value="result[pplatforms" var="item" >
+      						${channelName }&nbsp;&nbsp;
       					</s:iterator>
       				</s:if>
       				</c:if>
@@ -62,7 +62,7 @@
       				<c:if test="${not empty compareChannelIds}"><br>对比<br>
       				<s:if test="result['comparePlatforms'].size>0">
       					<s:iterator value="result['comparePlatforms']" var="item" >
-      						${platformName }&nbsp;&nbsp;
+      						${channelName }&nbsp;&nbsp;
       					</s:iterator>
       					</s:if>
       				</c:if>
@@ -137,7 +137,7 @@
 					          					<td><s:property value="#itemVal.gameName"/></td>
 					          				</c:if>
 					          				<c:if test="${result['group'] == 'platform'}">
-					          					<td><s:property value="#itemVal.platformName"/></td>
+					          					<td><s:property value="#itemVal.channelName"/></td>
 					          				</c:if>
 					          				<c:if test="${result['group'] == 'zone'}">
 					          					<td><s:property value="#itemVal.zoneName"/></td>

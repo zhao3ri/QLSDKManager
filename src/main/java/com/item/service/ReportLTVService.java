@@ -2,9 +2,9 @@ package com.item.service;
 
 import com.item.dao.ReportHistoryDailyDao;
 import com.item.dao.ReportLTVDao;
-import com.item.domain.BPlatform;
+import com.item.domain.BChannel;
 import com.item.domain.Gamezone;
-import com.item.domain.report.LTVGamePlatform;
+import com.item.domain.report.LTVGameChannel;
 import com.item.domain.report.ReportDaily;
 import com.item.domain.report.ReportHistoryDaily;
 import com.item.utils.DateUtils;
@@ -31,17 +31,17 @@ public class ReportLTVService {
 	@Autowired
 	private BGamezoneService bGamezoneService;
 	@Autowired
-	private BPlatformService bPlatformService;
+	private BChannelService bChannelService;
 	@Autowired
 	private BGameService bGameService;
 	
-	public List<LTVGamePlatform> list(MapBean mb){
+	public List<LTVGameChannel> list(MapBean mb){
 		if ("game".equals(mb.get("dimension"))) {
-//			return reportDailyDao.find("LTVGamePlatform.listGame", mb);
+//			return reportDailyDao.find("LTVGameChannel.listGame", mb);
 		}else if ("platform".equals(mb.get("dimension"))) {
-//			return reportDailyDao.find("LTVGamePlatform.listPlatform", mb);
+//			return reportDailyDao.find("LTVGameChannel.listPlatform", mb);
 		}else if ("zone".equals(mb.get("dimension"))) {
-//			return reportDailyDao.find("LTVGamePlatform.listZone", mb);
+//			return reportDailyDao.find("LTVGameChannel.listZone", mb);
 		}else {
 			return null;
 		}
@@ -56,7 +56,7 @@ public class ReportLTVService {
 		mb.put(MapBean.CLIENT_TYPE, clientType);
 		mb.put("channelIds", StringUtils.isBlank(channelIds) ? null : StringUtils.split(channelIds,","));
 		mb.put("zoneIds", StringUtils.isBlank(zoneIds) ? null : StringUtils.split(zoneIds,","));
-		List<BPlatform> platforms = bPlatformService.getByIds(channelIds);
+		List<BChannel> platforms = bChannelService.getByIds(channelIds);
 		List<Gamezone> gamezones = bGamezoneService.getByIds(appId,zoneIds);
 		result.put("platforms", platforms);
 		result.put("gamezones", gamezones);
@@ -80,14 +80,14 @@ public class ReportLTVService {
 			result.put("selectRange", mb.get("statStartDate")+" 至 "+mb.get("statEndDate"));
 		}
 		mb.put("groupby", "statDate");
-		List<LTVGamePlatform> list = reportLtvDao.find("ReportLtv.list",mb);
+		List<LTVGameChannel> list = reportLtvDao.find("ReportLtv.list",mb);
 
         //兼容2个ibatise写法不一样 。实在是坑人啊
 		mb.put("channelIds", StringUtils.isBlank(channelIds) ? null : channelIds);
 		mb.put("zoneIds", StringUtils.isBlank(zoneIds) ? null : zoneIds);
 
         List<ReportHistoryDaily> dailyList= reportDailyService.listOperate(mb);
-		for (LTVGamePlatform ltv:list){
+		for (LTVGameChannel ltv:list){
 			for (ReportDaily daily:dailyList){
 				if (ltv.getGameId().equals(daily.getGameId())&&ltv.getStatDate().equals(daily.getStatDate())){
 					ltv.setRegistUser(daily.getRegUsers());
@@ -101,7 +101,7 @@ public class ReportLTVService {
 	}
 
 
-	public void calculateLtv(LTVGamePlatform ltv){
+	public void calculateLtv(LTVGameChannel ltv){
 		int[] ltvs = ltvListToIntArray(ltv);
 		int i=1;
 		while (i<=ltvs[0]){
@@ -115,20 +115,20 @@ public class ReportLTVService {
 		arrayToLtv(ltvs,ltv);
 	}
 
-	private void arrayToLtv(int[] array,LTVGamePlatform ltvGamePlatform){
-		ltvGamePlatform.setLtv1(array[1]);
-		ltvGamePlatform.setLtv2(array[2]);
-		ltvGamePlatform.setLtv3(array[3]);
-		ltvGamePlatform.setLtv4(array[4]);
-		ltvGamePlatform.setLtv5(array[5]);
-		ltvGamePlatform.setLtv6(array[6]);
-		ltvGamePlatform.setLtv7(array[7]);
-		ltvGamePlatform.setLtv14(array[8]);
-		ltvGamePlatform.setLtv30(array[9]);
-		ltvGamePlatform.setLtv60(array[10]);
-		ltvGamePlatform.setLtv90(array[11]);
+	private void arrayToLtv(int[] array, LTVGameChannel ltvGameChannel){
+		ltvGameChannel.setLtv1(array[1]);
+		ltvGameChannel.setLtv2(array[2]);
+		ltvGameChannel.setLtv3(array[3]);
+		ltvGameChannel.setLtv4(array[4]);
+		ltvGameChannel.setLtv5(array[5]);
+		ltvGameChannel.setLtv6(array[6]);
+		ltvGameChannel.setLtv7(array[7]);
+		ltvGameChannel.setLtv14(array[8]);
+		ltvGameChannel.setLtv30(array[9]);
+		ltvGameChannel.setLtv60(array[10]);
+		ltvGameChannel.setLtv90(array[11]);
 	}
-	private  int [] ltvListToIntArray(LTVGamePlatform ltv){
+	private  int [] ltvListToIntArray(LTVGameChannel ltv){
 		int flag = (int) DateUtils.getInterval(new Date(),ltv.getStatDate());
 		if (flag>7&&flag<=14){
 			flag=8 ;
@@ -189,9 +189,9 @@ public class ReportLTVService {
 //			mb.put("statStartDate", DateUtils.format(calendar.getTime() , "yyyy-MM-dd"));
 //			result.put("selectRange", mb.get("statStartDate")+" 至 "+mb.get("statEndDate"));
 //		}
-//		List<BPlatform> platforms = bPlatformService.getByIds(channelIds);
+//		List<BChannel> platforms = bPlatformService.getByIds(channelIds);
 //		List<Gamezone> gamezones = bGamezoneService.getByIds(appId,zoneIds);
-//		List<BPlatform> comparePlatforms = bPlatformService.getByIds(compareChannelIds);
+//		List<BChannel> comparePlatforms = bPlatformService.getByIds(compareChannelIds);
 //		List<Gamezone> compareGamezones = bGamezoneService.getByIds(appId,compareZoneIds);
 //		result.put("platforms", platforms);
 //		result.put("gamezones", gamezones);
@@ -208,11 +208,11 @@ public class ReportLTVService {
 //
 //		if (StringUtils.isNotBlank(compareChannelIds) || StringUtils.isNotBlank(compareZoneIds)) {		//渠道区服对比
 //			mb.put("groupby", "statDate");
-//			List<LTVGamePlatform> reportDailies = list(mb);
+//			List<LTVGameChannel> reportDailies = list(mb);
 //
 //			mb.put("channelIds", StringUtils.isBlank(compareChannelIds) ? null : StringUtils.split(compareChannelIds,","));
 //			mb.put("zoneIds", StringUtils.isBlank(compareZoneIds) ? null : StringUtils.split(compareZoneIds,","));
-//			List<LTVGamePlatform> compareReportDailies = list(mb);
+//			List<LTVGameChannel> compareReportDailies = list(mb);
 //
 //			result.put("data", reportDailies);
 //			result.put("compareData", compareReportDailies);
@@ -221,7 +221,7 @@ public class ReportLTVService {
 //			result.put("optionJson", getOptionJson(reportDailies, compareReportDailies, false, type));
 //		}else if (StringUtils.isNotBlank(compareSelectRange)) {											//时间对比
 //			mb.put("groupby", "statDate");
-//			List<LTVGamePlatform> reportDailies = list(mb);
+//			List<LTVGameChannel> reportDailies = list(mb);
 //			Date startTime = DateUtils.parse(mb.getString("statStartDate"), "yyyy-MM-dd");
 //			Date endTime = DateUtils.parse(mb.getString("statEndDate"), "yyyy-MM-dd");
 //			int day = DateUtils.getIntervalDays(startTime, endTime);
@@ -237,7 +237,7 @@ public class ReportLTVService {
 //			calendar.add(Calendar.DATE, day);
 //			endTime = calendar.getTime();
 //			mb.put("statEndDate", DateUtils.format(endTime, "yyyy-MM-dd"));
-//			List<LTVGamePlatform> compareReportDailies = list(mb);
+//			List<LTVGameChannel> compareReportDailies = list(mb);
 //
 //			mb.put("groupby", null);
 //			result.put("compareData", list(mb));
@@ -245,15 +245,15 @@ public class ReportLTVService {
 //		}else {																							//无对比
 //			if (null != groupType && 1 == groupType) {																		//有选多分区
 //				mb.put("groupby", "appId,zoneId,statDate");
-//				List<LTVGamePlatform> reportDailies = list(mb);
-//				Map<String, List<LTVGamePlatform>> data = new LinkedHashMap<String, List<LTVGamePlatform>>();
-//				for (LTVGamePlatform reportDaily : reportDailies) {
+//				List<LTVGameChannel> reportDailies = list(mb);
+//				Map<String, List<LTVGameChannel>> data = new LinkedHashMap<String, List<LTVGameChannel>>();
+//				for (LTVGameChannel reportDaily : reportDailies) {
 //					if (data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd")) == null) {
-//						List<LTVGamePlatform> list = new ArrayList<LTVGamePlatform>();
+//						List<LTVGameChannel> list = new ArrayList<LTVGameChannel>();
 //						list.add(reportDaily);
 //						data.put(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"), list);
 //					}else {
-//						List<LTVGamePlatform> list = data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"));
+//						List<LTVGameChannel> list = data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"));
 //						list.add(reportDaily);
 //						data.put(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"), list);
 //					}
@@ -273,23 +273,23 @@ public class ReportLTVService {
 //				result.put("optionJson", getOptionJson(list(mb), null, false, type));
 //			}else if (null != groupType && 2 == groupType) {																	//有选多渠道
 //				mb.put("groupby", "appId,platformId,statDate");
-//				List<LTVGamePlatform> reportDailies = list(mb);
+//				List<LTVGameChannel> reportDailies = list(mb);
 //
-//				Map<String, List<LTVGamePlatform>> data = new LinkedHashMap<String, List<LTVGamePlatform>>();
-//				for (LTVGamePlatform reportDaily : reportDailies) {
+//				Map<String, List<LTVGameChannel>> data = new LinkedHashMap<String, List<LTVGameChannel>>();
+//				for (LTVGameChannel reportDaily : reportDailies) {
 //					if (data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd")) == null) {
-//						List<LTVGamePlatform> list = new ArrayList<LTVGamePlatform>();
+//						List<LTVGameChannel> list = new ArrayList<LTVGameChannel>();
 //						list.add(reportDaily);
 //						data.put(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"), list);
 //					}else {
-//						List<LTVGamePlatform> list = data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"));
+//						List<LTVGameChannel> list = data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"));
 //						list.add(reportDaily);
 //						data.put(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"), list);
 //					}
 //
-//					for (BPlatform bPlatform : platforms) {
-//						if (bPlatform.getId().toString().equals(reportDaily.getPlatformId().toString())) {
-//							reportDaily.setPlatformName(bPlatform.getPlatformName());
+//					for (BChannel bPlatform : platforms) {
+//						if (bPlatform.getId().toString().equals(reportDaily.getChannelId().toString())) {
+//							reportDaily.setChannelName(bPlatform.getChannelName());
 //							break;
 //						}
 //					}
@@ -302,16 +302,16 @@ public class ReportLTVService {
 //				result.put("optionJson", getOptionJson(list(mb), null, false, type));
 //			}else {
 //				mb.put("groupby", "appId,statDate");
-//				List<LTVGamePlatform> reportDailies = list(mb);
+//				List<LTVGameChannel> reportDailies = list(mb);
 //				List<Game> games = bGameService.list();
-//				Map<String, List<LTVGamePlatform>> data = new LinkedHashMap<String, List<LTVGamePlatform>>();
-//				for (LTVGamePlatform reportDaily : reportDailies) {
+//				Map<String, List<LTVGameChannel>> data = new LinkedHashMap<String, List<LTVGameChannel>>();
+//				for (LTVGameChannel reportDaily : reportDailies) {
 //					if (data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd")) == null) {
-//						List<LTVGamePlatform> list = new ArrayList<LTVGamePlatform>();
+//						List<LTVGameChannel> list = new ArrayList<LTVGameChannel>();
 //						list.add(reportDaily);
 //						data.put(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"), list);
 //					}else {
-//						List<LTVGamePlatform> list = data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"));
+//						List<LTVGameChannel> list = data.get(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"));
 //						list.add(reportDaily);
 //						data.put(DateUtils.format(reportDaily.getStatDate(), "yyyy-MM-dd"), list);
 //					}

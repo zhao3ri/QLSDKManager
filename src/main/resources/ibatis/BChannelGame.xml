@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BChannelGame">
+    <typeAlias alias="BChannelGame" type="com.item.domain.BChannelGame"/>
+    <typeAlias alias="BChannel" type="com.item.domain.BChannel"/>
+    <typeAlias alias="Game" type="com.item.domain.Game"/>
+    <typeAlias alias="mb" type="core.module.orm.MapBean"/>
+
+    <sql id="BChannelGame.Where">
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="id">
+                bpg.id=#id#
+            </isNotNull>
+            <isNotNull prepend="AND" property="channelId">
+                bpg.channelId=#channelId#
+            </isNotNull>
+            <isNotNull prepend="AND" property="gameId">
+                bpg.gameId=#gameId#
+            </isNotNull>
+            <isNotNull prepend="AND" property="configParams">
+                bpg.configParams=#configParams#
+            </isNotNull>
+            <isNotNull prepend="AND" property="createTime">
+                bpg.createTime=#createTime#
+            </isNotNull>
+            <isNotEmpty prepend="AND" property="gameIds">
+                bpg.gameId IN
+                <iterate property="gameIds" open="(" close=")" conjunction=",">
+                    #gameIds[]#
+                </iterate>
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="channelIds">
+                bpg.channelId IN
+                <iterate property="channelIds" open="(" close=")" conjunction=",">
+                    #channelIds[]#
+                </iterate>
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <select id="BChannelGame.count" resultClass="Long"
+            parameterClass="mb">
+        SELECT COUNT(*) FROM b_platform_game bpg
+        JOIN b_channel bp ON bpg.channelId=bp.id
+        JOIN b_game bg ON bpg.gameId=bg.id
+        <include refid="BChannelGame.Where"/>
+    </select>
+
+    <select id="BChannelGame.page" resultClass="BChannelGame"
+            parameterClass="mb">
+        SELECT
+        bpg.id,bp.channelName,bg.gameName,bpg.configParams,bpg.createTime,bpg.gameId,bpg.channelId,bpg.discount
+        FROM b_platform_game bpg
+        JOIN b_channel bp ON bpg.channelId=bp.id
+        JOIN b_game bg ON bpg.gameId=bg.id
+        <include refid="BChannelGame.Where"/>
+        <isNotNull property="orderby">
+            ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="BChannelGame.list" resultClass="BChannelGame" parameterClass="mb">
+        SELECT
+        bpg.*,bp.channelName,bg.gameName
+        FROM b_platform_game bpg
+        JOIN b_channel bp ON bpg.channelId=bp.id
+        JOIN b_game bg ON bpg.gameId=bg.id
+        <include refid="BChannelGame.Where"/>
+    </select>
+
+    <delete id="BChannelGame.delete" parameterClass="Long">
+		DELETE FROM b_platform_game WHERE id=#id#
+	</delete>
+
+    <select id="BChannelGame.GetByAppId" resultClass="BChannelGame" parameterClass="Long">
+		SELECT 
+			a.channelId,
+			b.channelName
+		FROM b_platform_game AS a 
+		JOIN b_channel AS b ON a.channelId = b.id
+		WHERE a.gameId = #gameId#
+	</select>
+
+    <select id="BChannelGame.getChannelAppById" parameterClass="Long"
+            resultClass="BChannelGame">
+		SELECT bp.channelName,bg.gameName,bg.id as gameId,bpg.*
+		FROM b_platform_game bpg
+		JOIN b_channel bp ON bpg.channelId=bp.id
+		JOIN b_game bg ON bpg.gameId=bg.id
+		WHERE bpg.id=#id#
+	</select>
+
+    <select id="BChannelGame.getAllChannel" resultClass="BChannel">
+		SELECT * FROM b_channel
+	</select>
+
+    <select id="BChannelGame.getAllApp" resultClass="Game">
+		SELECT * FROM b_game
+	</select>
+
+    <update id="BChannelGame.update" parameterClass="BChannelGame">
+        UPDATE b_platform_game
+        <dynamic prepend="SET">
+            <isNotNull prepend="," property="channelId">
+                channelId=#channelId#
+            </isNotNull>
+            <isNotNull prepend="," property="gameId">
+                gameId=#gameId#
+            </isNotNull>
+            <isNotNull prepend="," property="configParams">
+                configParams=#configParams#
+            </isNotNull>
+            <isNotNull prepend="," property="status">
+                status=#status#
+            </isNotNull>
+            <isNotNull prepend="," property="registStatus">
+                registStatus=#registStatus#
+            </isNotNull>
+            <isNotNull prepend="," property="discount">
+                discount=#discount#
+            </isNotNull>
+        </dynamic>
+        WHERE id=#id#
+    </update>
+
+    <insert id="BChannelGame.save" parameterClass="BChannelGame">
+        INSERT INTO
+        b_platform_game(channelId,gameId,configParams,createTime,status,registStatus,discount,appKey,secretKey,appID,privateKey,publicKey)
+        VALUES(#channelId#,#gameId#,#configParams#,#createTime#,#status#,#registStatus#,#discount#,#appKey#,#secretKey#,#appID#,#privateKey#,#publicKey#)
+        <selectKey resultClass="Long" keyProperty="id">
+            select @@IDENTITY as `id`
+        </selectKey>
+    </insert>
+
+</sqlMap>

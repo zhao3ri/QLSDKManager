@@ -9,8 +9,8 @@ public class BRole extends StatBaseEntity {
     private Integer clientType;
     private Long gameId;
     private String gameName;
-    private Integer platformId;
-    private String platformName;
+    private Integer channelId;
+    private String channelName;
     private String zoneId;
     private String roleId;
     private String roleName;
@@ -40,12 +40,12 @@ public class BRole extends StatBaseEntity {
         this.gameId = gameId;
     }
 
-    public Integer getPlatformId() {
-        return platformId;
+    public Integer getChannelId() {
+        return channelId;
     }
 
-    public void setPlatformId(Integer platformId) {
-        this.platformId = platformId;
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
     }
 
     public String getZoneId() {
@@ -88,12 +88,12 @@ public class BRole extends StatBaseEntity {
         this.gameName = gameName;
     }
 
-    public String getPlatformName() {
-        return platformName;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setPlatformName(String platformName) {
-        this.platformName = platformName;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
     @Override

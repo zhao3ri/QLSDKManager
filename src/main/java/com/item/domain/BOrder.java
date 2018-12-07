@@ -7,9 +7,9 @@ public class BOrder extends StatBaseEntity {
 
     private String gameName;
 
-    private Integer platformId;
+    private Integer channelId;
 
-    private String platformName;
+    private String channelName;
 
     private String uid;
 
@@ -65,12 +65,12 @@ public class BOrder extends StatBaseEntity {
         this.gameId = gameId;
     }
 
-    public Integer getPlatformId() {
-        return platformId;
+    public Integer getChannelId() {
+        return channelId;
     }
 
-    public void setPlatformId(Integer platformId) {
-        this.platformId = platformId;
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
     }
 
     public String getUid() {
@@ -209,12 +209,12 @@ public class BOrder extends StatBaseEntity {
         this.gameName = gameName;
     }
 
-    public String getPlatformName() {
-        return platformName;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setPlatformName(String platformName) {
-        this.platformName = platformName;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
     public String getZoneName() {

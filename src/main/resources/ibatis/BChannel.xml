@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BChannel">
+    <typeAlias alias="BChannel" type="com.item.domain.BChannel"/>
+    <typeAlias alias="mb" type="core.module.orm.MapBean"/>
+
+    <!-- 动态条件 -->
+    <sql id="BChannel.Where">
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="id">
+                id=#id#
+            </isNotNull>
+            <isNotNull prepend="AND" property="channelName">
+                channelName=#channelName#
+            </isNotNull>
+            <isNotNull prepend="AND" property="createTime">
+                createTime=#createTime#
+            </isNotNull>
+            <isNotNull prepend="AND" property="version">
+                version=#version#
+            </isNotNull>
+            <isNotEmpty prepend="and" property="channelIds">
+                id IN
+                <iterate property="channelIds" open="(" close=")" conjunction=",">
+                    #channelIds[]#
+                </iterate>
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <!--根据pageSize获取一页的数据量 -->
+    <select id="BChannel.page" parameterClass="mb" resultClass="BChannel">
+        SELECT id,channelName,createTime,channelCallbackUrl,balance,verifyUrl FROM b_channel
+        <include refid="BChannel.Where"/>
+        <isNotNull property="orderby">
+            ORDER BY $orderby$
+        </isNotNull>
+        LIMIT #firstResult#, #pageSize#
+    </select>
+
+    <select id="BChannel.get" parameterClass="mb" resultClass="BChannel">
+        SELECT
+        id,
+        channelName,
+        createTime,
+        channelCallbackUrl,
+        verifyUrl,
+        balance,
+        version,
+        business,
+        phone
+        FROM
+        b_channel
+        <include refid="BChannel.Where"/>
+    </select>
+
+    <!-- 增加联运渠道 -->
+    <insert id="BChannel.save" parameterClass="BChannel">
+        INSERT INTO b_channel(channelName,createTime,channelCallbackUrl,business,phone,verifyUrl)
+        VALUES(#channelName#,#createTime#,#channelCallbackUrl#,#business#,#phone#,#verifyUrl#)
+        <selectKey resultClass="Long" keyProperty="id">
+            select @@IDENTITY
+            as `id`
+        </selectKey>
+    </insert>
+
+    <!-- 删除联运渠道 -->
+    <delete id="BChannel.delete" parameterClass="Long">
+		DELETE bp,sc FROM b_channel bp LEFT JOIN sysIdentityChannel sc ON bp.id = sc.channelId WHERE bp.id =#id#
+	</delete>
+
+    <!-- 更新联运渠道 -->
+    <update id="BChannel.update" parameterClass="BChannel">
+        UPDATE b_channel
+        <dynamic prepend="SET">
+            <isNotNull prepend="," property="channelName">
+                channelName=#channelName#
+            </isNotNull>
+            <isNotNull prepend="," property="createTime">
+                createTime=#createTime#
+            </isNotNull>
+            <isNotNull prepend="," property="channelCallbackUrl">
+                channelCallbackUrl=#channelCallbackUrl#
+            </isNotNull>
+            <isNotNull prepend="," property="balance">
+                balance=#balance#
+            </isNotNull>
+            <isNotNull prepend="," property="newversion">
+                version=#newversion#
+            </isNotNull>
+            <isNotNull prepend="," property="business">
+                business=#business#
+            </isNotNull>
+            <isNotNull prepend="," property="phone">
+                phone=#phone#
+            </isNotNull>
+            <isNotNull prepend="," property="verifyUrl">
+                verifyUrl=#verifyUrl#
+            </isNotNull>
+        </dynamic>
+        WHERE id=#id#
+    </update>
+
+    <!-- 获取联运渠道总数 -->
+    <select id="BChannel.count" resultClass="Long" parameterClass="mb">
+        SELECT COUNT(*) FROM b_channel
+        <include refid="BChannel.Where"/>
+    </select>
+
+    <!-- 获取指定id对应的联运渠道 -->
+    <select id="BChannel.getChannelById" parameterClass="Long" resultClass="BChannel">
+		SELECT * FROM b_channel WHERE id=#id#
+	</select>
+
+    <select id="BChannel.getByIds" parameterClass="String" resultClass="BChannel">
+		SELECT 
+			* 
+		FROM b_channel WHERE id IN ($channelIds$)
+	</select>
+
+    <select id="BChannel.getChannelByName" resultClass="Long" parameterClass="mb">
+	SELECT COUNT(*) FROM b_channel WHERE channelName=#channelName#
+	</select>
+
+    <select id="BChannel.getChannelList" parameterClass="Long" resultClass="BChannel">
+		SELECT bp.*
+		FROM sysIdentityChannel si,b_channel bp
+		WHERE si.channelId=bp.id
+		AND identityId=#identity#
+	</select>
+
+    <insert id="BChannel.saveChannel" parameterClass="mb">
+		INSERT INTO sysIdentityChannel(
+			identityId,channelId
+		)VALUES(
+			#identityId#,#channelId#
+		)
+	</insert>
+
+    <delete id="BChannel.deleteIdentityChannel" parameterClass="Long">
+		DELETE FROM sysIdentityChannel WHERE identityId=#identityId#
+	</delete>
+</sqlMap>

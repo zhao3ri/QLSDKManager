@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SChannelMonthly">
+
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+    <typeAlias alias="sChannelMonthly" type="com.item.domain.SChannelMonthly"/>
+    <typeAlias alias="mb" type="core.module.orm.MapBean"/>
+
+    <sql id="SChannelMonthly.where">
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="id">
+                spm.id=#id#
+            </isNotNull>
+            <isNotNull prepend="AND" property="clientType">
+                spm.clientType=#clientType#
+            </isNotNull>
+            <isNotNull prepend="AND" property="gameId">
+                spm.gameId=#gameId#
+            </isNotNull>
+            <isNotNull prepend="AND" property="yearMonth">
+                spm.yearMonth=#yearMonth#
+            </isNotNull>
+            <isNotEmpty prepend="AND" property="gameIds">
+                <![CDATA[ spm.gameId in ]]>
+                <iterate property="gameIds" conjunction="," open="(" close=")">
+                    #gameIds[]#
+                </iterate>
+            </isNotEmpty>
+
+            <isNotNull prepend="AND" property="channelId">
+                spm.channelId=#channelId#
+            </isNotNull>
+            <isNotNull prepend="AND" property="totalRoledUser">
+                spm.totalRoledUser=#totalRoledUser#
+            </isNotNull>
+            <isNotNull prepend="AND" property="totalRegUser">
+                spm.totalRegUser=#totalRegUser#
+            </isNotNull>
+            <isNotNull prepend="AND" property="devices">
+                spm.devices=#devices#
+            </isNotNull>
+            <isNotNull prepend="AND" property="payAmount">
+                spm.payAmount=#payAmount#
+            </isNotNull>
+            <isNotNull prepend="AND" property="payTimes">
+                spm.payTimes=#payTimes#
+            </isNotNull>
+            <isNotNull prepend="AND" property="payUsers">
+                spm.payUsers=#payUsers#
+            </isNotNull>
+            <isNotNull prepend="AND" property="gameName">
+                bg.gameName=#gameName#
+            </isNotNull>
+            <isNotNull prepend="AND" property="activeUsers">
+                spm.activeUsers=#activeUsers#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <select id="SChannelMonthly.listApp" resultClass="sChannelMonthly" parameterClass="mb">
+        SELECT
+        SUM(spm.devices) as devices,
+        SUM(spm.payAmount) as payAmount,
+        SUM(spm.payTimes) as payTimes,
+        SUM(spm.payUsers) as payUsers,
+        SUM(spm.totalRegUser) as totalRegUser,
+        SUM(spm.totalRoleUser) as totalRoleUser,
+        SUM(spm.activeUsers) as activeUsers,
+        bp.channelName as channelName,
+        bg.gameName as gameName
+        FROM s_platform_monthly spm
+        JOIN b_channel bp ON spm.channelId=bp.id
+        JOIN b_game bg ON spm.gameId=bg.id
+        <include refid="SChannelMonthly.where"/>
+        GROUP BY bp.channelName,bg.gameName
+        ORDER BY bg.gameName,bp.channelName,spm.clientType
+    </select>
+
+
+    <select id="SChannelMonthly.listChannel" resultClass="sChannelMonthly" parameterClass="mb">
+        SELECT
+        bp.channelName as channelName,
+        SUM(spm.activeUsers) as activeUsers,
+        SUM(spm.devices) as devices,
+        SUM(spm.payAmount) as payAmount,
+        SUM(spm.payTimes) as payTimes,
+        SUM(spm.payUsers) as payUsers,
+        SUM(spm.totalRegUser) as totalRegUser,
+        SUM(spm.totalRoleUser) as totalRoleUser
+        FROM s_platform_monthly spm
+        JOIN b_channel bp ON spm.channelId=bp.id
+        JOIN b_game bg ON spm.gameId=bg.id
+        <include refid="SChannelMonthly.where"/>
+        GROUP BY bp.channelName
+        ORDER BY bp.channelName
+    </select>
+
+    <select id="SChannelMonthly.getByMap" resultClass="sChannelMonthly" parameterClass="mb">
+        SELECT
+        gameId AS gameId,
+        clientType AS clientType,
+        totalRoleUser AS totalRoleUser,
+        totalRegUser AS totalRegUser,
+        devices AS devices,
+        activeUsers AS activeUsers,
+        payAmount AS payAmount,
+        payTimes AS payTimes,
+        payUsers AS payUsers
+        FROM s_platform_monthly spm
+        <include refid="SChannelMonthly.where"/>
+    </select>
+
+    <select id="SChannelMonthly.stat" resultClass="sChannelMonthly" parameterClass="mb">
+        SELECT
+        sd.gameId as gameId,
+        sd.clientType as clientType,
+        sd.channelId as channelId,
+        SUM(sd.roleUsers) as totalRoleUser,
+        SUM(sd.regUsers) as totalRegUser,
+        SUM(sd.regDevices) as devices,
+        SUM(sd.activeUsers) as activeUsers,
+        SUM(sd.payAmount) as payAmount,
+        SUM(sd.payTimes) as payTimes,
+        SUM(sd.payUsers) as payUsers,
+        SUM(sd.newUserPays) AS totalNewPayUser
+        FROM
+        s_platform_daily sd
+        <dynamic prepend="where">
+            <isNotNull prepend="and" property="clientType">
+                sd.clientType=#clientType#
+            </isNotNull>
+            <isNotNull prepend="and" property="gameId">
+                sd.gameId=#gameId#
+            </isNotNull>
+            <isNotEmpty prepend="and" property="statDate">
+                sd.statDate=#statDate#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="channelId">
+                sd.channelId=#channelId#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="month">
+                sd.statDate LIKE '$month$%'
+            </isNotEmpty>
+        </dynamic>
+        <isNotEmpty property="groupby">
+            GROUP BY $groupby$
+        </isNotEmpty>
+    </select>
+
+</sqlMap>

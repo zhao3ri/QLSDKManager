@@ -6,9 +6,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.item.domain.BPlatform;
+import com.item.domain.BChannel;
 import com.item.domain.authority.Identity;
-import com.item.service.BPlatformService;
+import com.item.service.BChannelService;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -51,7 +51,7 @@ public class IdentityAction extends Struts2Action {
     @Resource
     private BGameService gameService;
     @Autowired
-    private BPlatformService channelService;
+    private BChannelService channelService;
 
     private Identity identity;
     private Identity searchIdentity;
@@ -66,7 +66,7 @@ public class IdentityAction extends Struts2Action {
     private String name;
     private Long id;
     private List<String> datasetLevels;
-    private List<BPlatform> channelList;
+    private List<BChannel> channelList;
 
     /**
      * 获取身份列表
@@ -105,7 +105,7 @@ public class IdentityAction extends Struts2Action {
     public String create() {
         moduleList = ms.getModuleListWithHtml(null);
         games = gameService.getGameList();
-        channelList = channelService.getAllPlatform();
+        channelList = channelService.getAllChannel();
         return SUCCESS;
     }
 
@@ -330,11 +330,11 @@ public class IdentityAction extends Struts2Action {
         this.channelIds = channelIds;
     }
 
-    public List<BPlatform> getChannelList() {
+    public List<BChannel> getChannelList() {
         return channelList;
     }
 
-    public void setChannelList(List<BPlatform> channelList) {
+    public void setChannelList(List<BChannel> channelList) {
         this.channelList = channelList;
     }
 }

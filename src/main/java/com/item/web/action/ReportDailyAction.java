@@ -1,31 +1,26 @@
 package com.item.web.action;
 
-import java.io.IOException;
 import java.util.*;
 
 import javax.annotation.Resource;
 
+import com.item.domain.BChannel;
 import com.item.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 
-import com.item.domain.BPlatform;
 import com.item.domain.Game;
-import com.item.domain.authority.User;
 import com.item.domain.report.ReportHistoryDaily;
 import com.item.service.BGameService;
 import com.item.service.BGamezoneService;
-import com.item.service.BPlatformService;
+import com.item.service.BChannelService;
 import com.item.service.ReportDailyService;
 import com.item.service.ReportService;
 import com.item.service.SysGameManagerService;
 
 import core.module.orm.MapBean;
-import core.module.utils.Struts2Utils;
-import core.module.web.Struts2Action;
 
 public class ReportDailyAction extends BaseAction {
     private static final long serialVersionUID = 5645405406052360424L;
@@ -60,7 +55,7 @@ public class ReportDailyAction extends BaseAction {
     @Autowired
     private BGamezoneService gamezoneService;
     @Autowired
-    private BPlatformService platformService;
+    private BChannelService platformService;
     @Resource
     private SysGameManagerService gameManagerService;
 
@@ -82,7 +77,7 @@ public class ReportDailyAction extends BaseAction {
         MapBean mb = new MapBean();
         if (StringUtils.isNotBlank(channelName)) {
             mb.put("platformName", channelName);
-            BPlatform platform = platformService.get(mb);
+            BChannel platform = platformService.get(mb);
             channelIds = platform.getId().toString();
         }
         if (StringUtils.isNotBlank(zoneName)) {

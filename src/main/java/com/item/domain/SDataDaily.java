@@ -24,9 +24,9 @@ public class SDataDaily {
 	/*
 	 *
 	 */
-	private Integer platformId;
+	private Integer channelId;
 	
-	private String platformName;
+	private String channelName;
 	/*
 	 *
 	 */
@@ -131,20 +131,20 @@ public class SDataDaily {
 		this.zoneName = zoneName;
 	}
 
-	public Integer getPlatformId() {
-		return platformId;
+	public Integer getChannelId() {
+		return channelId;
 	}
 
-	public void setPlatformId(Integer platformId) {
-		this.platformId = platformId;
+	public void setChannelId(Integer channelId) {
+		this.channelId = channelId;
 	}
 
-	public String getPlatformName() {
-		return platformName;
+	public String getChannelName() {
+		return channelName;
 	}
 
-	public void setPlatformName(String platformName) {
-		this.platformName = platformName;
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 
 	public java.util.Date getStatDate() {

@@ -24,7 +24,7 @@ public class SRoleRankService {
 		page = sRoleRankDao.find(page, mb, "SRoleRank.count", "SRoleRank.page");
 //		for (SRoleRank rank : page.getResult()) {
 //			mb.put("uid", rank.getUid());
-//			mb.put("platformId", rank.getPlatformId());
+//			mb.put("platformId", rank.getChannelId());
 //			mb.put("clientType", rank.getClientType());
 //			mb.put("appId", rank.getGameId());
 //			logger.info("Set last Login Time");

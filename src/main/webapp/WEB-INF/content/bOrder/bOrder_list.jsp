@@ -39,10 +39,10 @@
                          </select>
                      </div> -->
 					<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入渠道ID">
-						<select class="form-control" name="BOrder.platformId" placeholder="请选择渠道">
+						<select class="form-control" name="BOrder.channelId" placeholder="请选择渠道">
 							<option value="">==请选择渠道==</option>
-							<s:iterator value="platforms" var="item">
-								<option value="${item.id }" <c:if test="${item.id == bOrder.platformId }">selected</c:if>>${item.platformName }</option>
+							<s:iterator value="channels" var="item">
+								<option value="${item.id }" <c:if test="${item.id == bOrder.channelId }">selected</c:if>>${item.channelName }</option>
 							</s:iterator>
 						</select>
 					</div>
@@ -117,7 +117,7 @@
 										<c:if test="${!empty page.zoneName}">
 											<td><s:property value="zoneName"/></td>
 										</c:if>
-										<td><s:property value="platformName"/></td>
+										<td><s:property value="channelName"/></td>
 										<td><s:property value="uid"/></td>
 										<td><s:property value="name"/></td>
 										<td><fmt:formatNumber  value="${amount/100 }" pattern="0.00" /></td>

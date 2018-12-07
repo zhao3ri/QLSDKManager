@@ -13,7 +13,8 @@ public class MapBean extends HashMap<String, Object> {
     public static final String GAME_IDS = "gameIds";
     public static final String GAME_NAME = "gameName";
     public static final String CLIENT_TYPE = "clientType";
-    public static final String PLATFORM_ID = "platformId";
+    public static final String CHANNEL_ID = "channelId";
+    public static final String CHANNEL_IDS = "channelIds";
     public static final String STAT_DATE = "statDate";
 
     private static final long serialVersionUID = 1775432731349180989L;

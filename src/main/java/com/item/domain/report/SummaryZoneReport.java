@@ -1,7 +1,7 @@
 package com.item.domain.report;
 
 import com.item.domain.Gamezone;
-import com.item.domain.SZonePlatform;
+import com.item.domain.SZoneChannel;
 
 public class SummaryZoneReport {
 	
@@ -11,7 +11,7 @@ public class SummaryZoneReport {
 	
 	private String zonename;
 	
-	private SZonePlatform szoneplatform;
+	private SZoneChannel szoneplatform;
 	
 	private Gamezone gamezone;
 
@@ -24,11 +24,11 @@ public class SummaryZoneReport {
 		this.gamezone = gamezone;
 	}
 
-	public SZonePlatform getSzoneplatform() {
+	public SZoneChannel getSzoneplatform() {
 		return szoneplatform;
 	}
 
-	public void setSzoneplatform(SZonePlatform szoneplatform) {
+	public void setSzoneplatform(SZoneChannel szoneplatform) {
 		this.szoneplatform = szoneplatform;
 	}
 

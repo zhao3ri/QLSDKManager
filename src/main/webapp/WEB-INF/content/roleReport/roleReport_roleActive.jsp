@@ -22,7 +22,7 @@
 						</select>
 			        </div>
 			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
-						<select class="form-control" name="platformId" id="platformId" placeholder="请选择渠道">
+						<select class="form-control" name="channelId" id="channelId" placeholder="请选择渠道">
 							<option value="">==请选择渠道==</option>
 						</select>
 			        </div>
@@ -90,10 +90,10 @@
 		
 		function changeApp(){
 			$("#zoneId").empty();
-			$("#platformId").empty();
+			$("#channelId").empty();
 			
 			var gameId = $("#gameId").val();
-			var platformId = '${platformId}';
+			var channelId = '${channelId}';
 			var zoneId = '${zoneId}';
 			$.post("${ctx}/bGamezone/bGamezone_getGameZonesAsync.shtml",{gameId:gameId},function(data){
 				json = eval(data);
@@ -106,14 +106,14 @@
 			    } 
 		    });
 			
-			$.post("${ctx}/bPlatformGame/bPlatformGame_getGamePlatformsAsync.shtml",{id:gameId},function(data){
+			$.post("${ctx}/bChannelGame/bPlatformGame_getGamePlatformsAsync.shtml",{id:gameId},function(data){
 				json = eval(data);
-				$("#platformId").append("<option value=''>==请选择渠道==</option>");
+				$("#channelId").append("<option value=''>==请选择渠道==</option>");
 			    for(var i=0; i<json.length; i++){
-			    	if(json[i].platformId == platformId)
-			    		$("#platformId").append("<option selected value='" + json[i].platformId + "'>" + json[i].platformName + "</option>");
+			    	if(json[i].channelId == channelId)
+			    		$("#channelId").append("<option selected value='" + json[i].channelId + "'>" + json[i].channelName + "</option>");
 			    	else
-			    		$("#platformId").append("<option value='" + json[i].platformId + "'>" + json[i].platformName + "</option>");
+			    		$("#channelId").append("<option value='" + json[i].channelId + "'>" + json[i].channelName + "</option>");
 			    } 
 		    });
 		}

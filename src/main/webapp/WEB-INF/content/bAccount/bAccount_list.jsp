@@ -15,10 +15,10 @@
 	      	<div class="panel-heading">玩家列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
-		        	<select class="form-control" name="account.platformId" placeholder="请选择渠道">
+		        	<select class="form-control" name="account.channelId" placeholder="请选择渠道">
 						<option value="">==请选择渠道==</option>
-						<s:iterator value="platforms" var="item">
-							<option value="${item.id }" <c:if test="${item.id == account.platformId }">selected</c:if>>${item.platformName }</option>
+						<s:iterator value="channels" var="item">
+							<option value="${item.id }" <c:if test="${item.id == account.channelId }">selected</c:if>>${item.channelName }</option>
 						</s:iterator>
 					</select>
 				</div>
@@ -47,7 +47,7 @@
 	            			<s:if test="accountPage.result.size>0">
 								<s:iterator value="accountPage.result" var="page">
 									<tr>
-										<td><s:property value="platformName"/></td>
+										<td><s:property value="channelName"/></td>
 										<td><s:property value="uid"/></td>
 										<td><s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
 									</tr>

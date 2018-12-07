@@ -16,8 +16,8 @@
     		<isNotNull prepend="and" property="gameId">
     			a.`gameId`=#gameId#
     		</isNotNull>
-    		<isNotNull prepend="and" property="platformId">
-    			a.`platformId`=#platformId#
+    		<isNotNull prepend="and" property="channelId">
+    			a.`channelId`=#channelId#
     		</isNotNull>
     		<isNotNull prepend="and" property="zoneId">
     			a.`zoneId`=#zoneId#
@@ -45,10 +45,10 @@
         SELECT
 	   		a.*,
 	   		b.gameName,
-	   		c.platformName
+	   		c.channelName
 		FROM b_role AS a 
 		JOIN b_game AS b ON a.gameId = b.id
-		JOIN b_platform AS c ON a.platformId = c.id
+		JOIN b_channel AS c ON a.channelId = c.id
         <include refid="BRole.Where"/>
         <isNotNull property="orderby">
         	ORDER BY $orderby$
@@ -61,7 +61,7 @@
         	COUNT(1)
 		FROM b_role AS a
 		JOIN b_game AS b ON a.gameId = b.id
-		JOIN b_platform AS c ON a.platformId = c.id
+		JOIN b_channel AS c ON a.channelId = c.id
         <include refid="BRole.Where"/>
     </select>
 
@@ -69,10 +69,10 @@
         SELECT
 	   		a.*,
 	   		b.gameName,
-	   		c.platformName
+	   		c.channelName
 		FROM b_role AS a 
 		JOIN b_game AS b ON a.gameId = b.id
-		JOIN b_platform AS c ON a.platformId = c.id
+		JOIN b_channel AS c ON a.channelId = c.id
         <include refid="BRole.Where"/>
         <isNotNull property="orderby">
              ORDER BY $orderby$

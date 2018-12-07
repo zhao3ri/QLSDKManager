@@ -213,7 +213,7 @@ public class RoleReportAction extends BaseAction {
 
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, gameId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", zoneId);
         mb.put("statDate", selectRange);
         rechargeHourlies = rechargeHourlyService.list(mb);
@@ -233,7 +233,7 @@ public class RoleReportAction extends BaseAction {
 
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, gameId);
-        mb.put(MapBean.PLATFORM_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, platformId);
         mb.put("zoneId", zoneId);
         mb.put("statStartDate", selectRange.split("至")[0].trim());
         mb.put("statEndDate", selectRange.split("至")[1].trim());

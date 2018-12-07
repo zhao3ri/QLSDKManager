@@ -13,18 +13,18 @@
 		<br/>
 		<br/>
 		<div class="table-responsive" style="min-height: 200px">
-	 		<table class="table table-hover table-striped table-bordered table-condensed table-big" style="display:none" id="platforms">	
+	 		<table class="table table-hover table-striped table-bordered table-condensed table-big" style="display:none" id="channels">
 	   			<tbody>
 	   			<!-- <tr><td><label>全 选：</label><input type="checkbox" id="checkedAll"/></td></tr> -->
 					<c:forEach begin="0" end="${fn:length(platformApps)/4 }" varStatus="index">
 						<tr>
 							<c:forEach items="${platformApps }" var="item" begin="${index.index * 4 }" end="${(index.index+1)*4-1 }">
-							<c:if test="${not empty item.platformId}" >
-							<c:if test="${not empty item.platformName }">
-								<td><input class="platformId" type="checkbox" value="${item.platformId }">${item.platformName }&nbsp;&nbsp;&nbsp;</td>
+							<c:if test="${not empty item.channelId}" >
+							<c:if test="${not empty item.channelName }">
+								<td><input class="channelId" type="checkbox" value="${item.channelId }">${item.channelName }&nbsp;&nbsp;&nbsp;</td>
 							</c:if>
-							<c:if test="${empty item.platformName }">
-							<td><input class="platformId" type="checkbox" value="${item.platformId }">${item.platformId }&nbsp;&nbsp;&nbsp;</td>
+							<c:if test="${empty item.channelName }">
+							<td><input class="channelId" type="checkbox" value="${item.channelId }">${item.channelId }&nbsp;&nbsp;&nbsp;</td>
 							</c:if>
 							</c:if>
 							</c:forEach>
@@ -61,8 +61,8 @@
 			$("#zones").show();
 			$("#checkedAll").click(function(){
 				
-				if($("#platforms").is(":visible")){		
-				$(".platformId").each(function() {
+				if($("#channels").is(":visible")){
+				$(".channelId").each(function() {
 					if($("#checkedAll").prop("checked")==true){
 						this.checked = true;
 					}else{
@@ -83,7 +83,7 @@
 						}
 					});
 					//渠道不选 
-					$(".platformId").each(function() {					
+					$(".channelId").each(function() {
 							this.checked = false;
 					});
 					
@@ -92,15 +92,15 @@
 		});
 		
 		function change(){
-			if($("#platforms").is(":visible")){
-				if($(".platformId").prop("checked") ){
+			if($("#channels").is(":visible")){
+				if($(".channelId").prop("checked") ){
 					$("#checkedAll").prop("checked",false);
 				}else{
 					$("#checkedAll").prop("checked",true);
 				}
 				
 				$("#zones").show();
-				$("#platforms").hide();
+				$("#channels").hide();
 				
 				$("#changeZone").addClass("btn-primary");
 				$("#changePlatform").removeClass("btn-primary");
@@ -112,7 +112,7 @@
 				}
 				
 				$("#zones").hide();
-				$("#platforms").show();
+				$("#channels").show();
 				
 				$("#changeZone").removeClass("btn-primary");
 				$("#changePlatform").addClass("btn-primary");
@@ -122,10 +122,10 @@
 		function sure(){
 			var isCompare = '${isCompare}';
 			//渠道
-			if($("#platforms").is(":visible")){
+			if($("#channels").is(":visible")){
 				var checkedIds = new Array();
 				var i = 0;
-				$(".platformId").each(function() {
+				$(".channelId").each(function() {
 					if(this.checked == true) {
 						checkedIds[i] = this.value;
 						i++;
@@ -180,10 +180,10 @@
 			var gameId = $("#gameId").val();
 			var isCompare = '${isCompare}';
 			//渠道可见 
-			if($("#platforms").is(":visible")){
+			if($("#channels").is(":visible")){
 				var checkedIds = new Array();
 				var i = 0;
-				$(".platformId").each(function() {
+				$(".channelId").each(function() {
 					if(this.checked == true) {
 						checkedIds[i] = this.value;
 						i++;
@@ -201,7 +201,7 @@
 						$("#compareZoneIds", window.parent.document).val("");
 						$("#compareType", window.parent.document).val(2);
 					}
-					document.location.href="${ctx}/bPlatformGameZone/bPlatformGameZone_getPlatformZones.shtml?gameId="+gameId+"&platformIds="+checkedIds+"&isCompare="+isCompare;
+					document.location.href="${ctx}/bChannelGameZone/bPlatformGameZone_getPlatformZones.shtml?gameId="+gameId+"&channelIds="+checkedIds+"&isCompare="+isCompare;
 				}else{
 					parent.errorTip("请选择渠道！");
 				}
@@ -228,7 +228,7 @@
 						$("#compareChannelIds", window.parent.document).val("");
 						$("#compareType", window.parent.document).val(1);
 					}
-					document.location.href="${ctx}/bPlatformGameZone/bPlatformGameZone_getZonePlatforms.shtml?gameId="+${gameId}+"&zoneIds="+checkedIds+"&isCompare="+isCompare;
+					document.location.href="${ctx}/bChannelGameZone/bPlatformGameZone_getZonePlatforms.shtml?gameId="+${gameId}+"&zoneIds="+checkedIds+"&isCompare="+isCompare;
 				}else{
 					parent.errorTip("请选择分区！");
 				}

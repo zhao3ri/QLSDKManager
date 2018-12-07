@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.item.dao.SDataDailyDao;
-import com.item.domain.BPlatform;
+import com.item.domain.BChannel;
 import com.item.domain.Game;
 import com.item.domain.Gamezone;
 import com.item.domain.SDataDaily;
@@ -39,7 +39,7 @@ public class SDataDailyService {
 	private BGameService gameService;
 	
 	@Resource
-	private BPlatformService platformService;
+	private BChannelService platformService;
 	
 	@Resource
 	private BGamezoneService gamezoneService;
@@ -51,7 +51,7 @@ public class SDataDailyService {
 		MapBean mb = new MapBean();
 		mb.put(MapBean.GAME_ID, appId);
 		mb.put(MapBean.CLIENT_TYPE, clientType);
-		mb.put(MapBean.PLATFORM_ID, platformId);
+		mb.put(MapBean.CHANNEL_ID, platformId);
 		mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 		
 		mb.put("statStartDate", selectRange.split("至")[0]);
@@ -157,7 +157,7 @@ public class SDataDailyService {
         MapBean mb = new MapBean();
 		mb.put(MapBean.GAME_ID, appId);
 		mb.put(MapBean.CLIENT_TYPE, clientType);
-		mb.put(MapBean.PLATFORM_ID, platformId);
+		mb.put(MapBean.CHANNEL_ID, platformId);
 		mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 		if (StringUtils.isNotBlank(selectRange)){
 			mb.put("statStartDate", selectRange.split("至")[0]);
@@ -169,7 +169,7 @@ public class SDataDailyService {
 		
 		List<SDataDaily> dataDailyList = dao.find("SDataDaily.list", mb);
         for(int i=0; i<dataDailyList.size(); i++){
-            BPlatform platform = platformService.getPlatformById(dataDailyList.get(i).getPlatformId()+0L);
+            BChannel platform = platformService.getChannelById(dataDailyList.get(i).getChannelId()+0L);
             MapBean mb2 = new MapBean();
     		mb2.put(MapBean.GAME_ID, appId);
     		mb2.put("zoneId", dataDailyList.get(i).getZoneId()+"");
@@ -178,7 +178,7 @@ public class SDataDailyService {
         	e.add(new Excel(game.getGameName(),20));
         	e.add(new Excel(appId,20));
         	e.add(new Excel(dataDailyList.get(i).getClientType()==1?"android":"ios", 20));
-        	e.add(new Excel(platform.getPlatformName(),20));
+        	e.add(new Excel(platform.getChannelName(),20));
         	e.add(new Excel(gamezone==null?"":gamezone.getZoneName(),20));
         	e.add(new Excel(DateUtils.format(dataDailyList.get(i).getStatDate(), "yyyy-MM-dd"), 20));
         	e.add(new Excel(dataDailyList.get(i).getRegUsers(), 20));

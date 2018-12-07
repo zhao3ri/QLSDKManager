@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.item.domain.BChannel;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.item.dao.SDataMonthlyDao;
-import com.item.domain.BPlatform;
 import com.item.domain.Game;
 import com.item.domain.Gamezone;
 import com.item.domain.SDataMonthly;
@@ -40,7 +40,7 @@ public class SDataMonthlyService {
 	private BGameService gameService;
 	
 	@Resource
-	private BPlatformService platformService;
+	private BChannelService platformService;
 	
 	@Resource
 	private BGamezoneService gamezoneService;
@@ -52,7 +52,7 @@ public class SDataMonthlyService {
 		MapBean mb = new MapBean();
 		mb.put(MapBean.GAME_ID, appId);
 		mb.put(MapBean.CLIENT_TYPE, clientType);
-		mb.put(MapBean.PLATFORM_ID, platformId);
+		mb.put(MapBean.CHANNEL_ID, platformId);
 		mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 		
 		mb.put("statStartDate", yearMonthStr.replace("-", ""));
@@ -159,7 +159,7 @@ public class SDataMonthlyService {
         MapBean mb = new MapBean();
 		mb.put(MapBean.GAME_ID, appId);
 		mb.put(MapBean.CLIENT_TYPE, clientType);
-		mb.put(MapBean.PLATFORM_ID, platformId);
+		mb.put(MapBean.CHANNEL_ID, platformId);
 		mb.put("zoneId", StringUtils.isBlank(zoneId) ? null : zoneId);
 		if (StringUtils.isNotBlank(yearMonthStr)){
 			mb.put("statStartDate", yearMonthStr.replace("-", ""));
@@ -170,7 +170,7 @@ public class SDataMonthlyService {
 		
 		List<SDataMonthly> dataMonthlyList = dao.find("SDataMonthly.list", mb);
         for(int i=0; i<dataMonthlyList.size(); i++){
-            BPlatform platform = platformService.getPlatformById(dataMonthlyList.get(i).getPlatformId()+0L);
+            BChannel platform = platformService.getChannelById(dataMonthlyList.get(i).getChannelId()+0L);
             MapBean mb2 = new MapBean();
     		mb2.put(MapBean.GAME_ID, appId);
     		mb2.put("zoneId", dataMonthlyList.get(i).getZoneId()+"");
@@ -179,7 +179,7 @@ public class SDataMonthlyService {
         	e.add(new Excel(game.getGameName(),20));
         	e.add(new Excel(appId,20));
         	e.add(new Excel(dataMonthlyList.get(i).getClientType()==1?"android":"ios", 20));
-        	e.add(new Excel(platform.getPlatformName(),20));
+        	e.add(new Excel(platform.getChannelName(),20));
         	e.add(new Excel(gamezone==null?"":gamezone.getZoneName(),20));
         	String date = dataMonthlyList.get(i).getYearMonth()+"";
         	e.add(new Excel(date.substring(0, 4)+"-"+date.substring(4, 6), 20));

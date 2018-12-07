@@ -11,8 +11,8 @@ public class ReportDaily {
     private String gameName;
     private String zoneId;
     private String zoneName;
-    private Integer platformId;
-    private String platformName;
+    private Integer channelId;
+    private String channelName;
     private java.util.Date statDate;
     private Integer roleUsers;
     private Integer regUsers;
@@ -86,20 +86,20 @@ public class ReportDaily {
         this.zoneName = zoneName;
     }
 
-    public Integer getPlatformId() {
-        return platformId;
+    public Integer getChannelId() {
+        return channelId;
     }
 
-    public void setPlatformId(Integer platformId) {
-        this.platformId = platformId;
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
     }
 
-    public String getPlatformName() {
-        return platformName;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setPlatformName(String platformName) {
-        this.platformName = platformName;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
     public java.util.Date getStatDate() {

@@ -70,9 +70,9 @@
                             <!-- 渠道 -->
                             <c:if test="${groupType == 1 }">
                                 <c:if test="${not empty channelIds}">
-                                    <s:if test="result['platforms'].size>0">
-                                        <s:iterator value="result['platforms']" var="item">
-                                            ${platformName }&nbsp;&nbsp;
+                                    <s:if test="result['channels'].size>0">
+                                        <s:iterator value="result[channels]" var="item">
+                                            ${channelName }&nbsp;&nbsp;
                                         </s:iterator>
                                     </s:if>
                                 </c:if>
@@ -88,7 +88,7 @@
                                 <c:if test="${not empty compareChannelIds}"><br>对比<br>
                                     <s:if test="result['comparePlatforms'].size>0">
                                         <s:iterator value="result['comparePlatforms']" var="item">
-                                            ${platformName }&nbsp;&nbsp;
+                                            ${channelName }&nbsp;&nbsp;
                                         </s:iterator>
                                     </s:if>
                                 </c:if>
@@ -449,7 +449,7 @@
                                                                 <s:property value="#item.key"/></td>
                                                         </s:else>
                                                     </c:if>
-                                                    <td><s:property value="#itemVal.platformName"/></td>
+                                                    <td><s:property value="#itemVal.channelName"/></td>
                                                     <td><s:property value="#itemVal.onlineUsers"/></td>
                                                     <td><s:property value="#itemVal.roleUsers"/></td>
                                                     <td><s:property value="#itemVal.newDevices"/></td>
@@ -492,9 +492,9 @@
                                                         </s:if>
                                                     </c:if>
                                                     <c:if test="${groupType == 2 }">
-                                                        <s:if test="result['platforms'].size > 0">
-                                                            <s:iterator value="result['platforms']" var="item">
-                                                                ${item.platformName }&nbsp;
+                                                        <s:if test="result['channels'].size > 0">
+                                                            <s:iterator value="result[pplatforms" var="item">
+                                                                ${item.channelName }&nbsp;
                                                             </s:iterator>
                                                         </s:if>
                                                     </c:if>
@@ -518,7 +518,7 @@
                                                     <c:if test="${groupType == 2 }">
                                                         <s:if test="result['comparePlatforms'].size > 0">
                                                             <s:iterator value="result['comparePlatforms']" var="item">
-                                                                ${item.platformName }&nbsp;
+                                                                ${item.channelName }&nbsp;
                                                             </s:iterator>
                                                         </s:if>
                                                     </c:if>

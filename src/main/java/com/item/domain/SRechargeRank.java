@@ -12,8 +12,8 @@ public class SRechargeRank {
     private String uid;
     private Integer gameId;
     private String gameName;
-    private Integer platformid;
-    private String platformName;
+    private Integer channelId;
+    private String channelName;
     private Integer amount;
     private Date lastlogin;
     private String startDate;
@@ -68,11 +68,11 @@ public class SRechargeRank {
     }
 
     public Integer getPlatformId() {
-        return platformid;
+        return channelId;
     }
 
     public void setPlatformId(Integer platformId) {
-        this.platformid = platformId;
+        this.channelId = platformId;
     }
 
     public Integer getId() {
@@ -83,12 +83,12 @@ public class SRechargeRank {
         this.id = id;
     }
 
-    public String getPlatformName() {
-        return platformName;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setPlatformName(String platformName) {
-        this.platformName = platformName;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
     public Date getLastLoginDate() {

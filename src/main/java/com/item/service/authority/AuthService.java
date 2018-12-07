@@ -3,8 +3,8 @@ package com.item.service.authority;
 import java.util.List;
 
 import com.item.constants.Constants;
-import com.item.domain.BPlatform;
-import com.item.service.BPlatformService;
+import com.item.domain.BChannel;
+import com.item.service.BChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +28,7 @@ public class AuthService {
     @Autowired
     private FunctionService fs;
     @Autowired
-    private BPlatformService channelService;
+    private BChannelService channelService;
 
     /**
      * 取所有权限
@@ -116,19 +116,19 @@ public class AuthService {
     public String getChannelHtml(Long moduleId, Long identityId) {
         int count = 0;
         StringBuffer sb = new StringBuffer();
-        List<BPlatform> allChannel = channelService.getAllPlatform();
-        List<BPlatform> identityChannel = null;
+        List<BChannel> allChannel = channelService.getAllChannel();
+        List<BChannel> identityChannel = null;
         if (identityId != null)
             identityChannel = channelService.getIdentityChannelList(identityId);
         sb.append("<fieldset>");
         sb.append("<legend> <input type=\"checkbox\" id=\"checkChannelAll\" onclick=\"selectAll(this,'channel')\"/>全选 </legend>");
-        for (BPlatform channel : allChannel) {
+        for (BChannel channel : allChannel) {
             String check = " ";
             if (identityChannel != null && identityChannel.contains(channel)) {
                 check = " checked ";
             }
             sb.append("<input type=\"checkbox\" " + check + " name=\"channelIds\" value=\"" + channel.getId() + "\" lang=\"channel\"/>");
-            sb.append(channel.getPlatformName() + "\n");
+            sb.append(channel.getChannelName() + "\n");
             count++;
             if (10 == count) {
                 sb.append("<br/>");

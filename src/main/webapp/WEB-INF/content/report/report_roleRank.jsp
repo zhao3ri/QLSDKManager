@@ -21,10 +21,10 @@
 						</select>	 
 			        </div>
 			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
-			             <select class="select2 form-control select2_sample1" placeholder="请选择渠道" name="platformId" data-original-title="" title="">
+			             <select class="select2 form-control select2_sample1" placeholder="请选择渠道" name="channelId" data-original-title="" title="">
 					         <option value=""></option>
-					         <s:iterator value="platforms" var="item">
-						    	 <option value="${item.id}" <c:if test="${item.id==platformId}">selected</c:if>>${item.platformName }</option>
+					         <s:iterator value="channels" var="item">
+						    	 <option value="${item.id}" <c:if test="${item.id==channelId}">selected</c:if>>${item.channelName }</option>
 					         </s:iterator>								
 			             </select>
 			        </div>
@@ -66,12 +66,12 @@
 						<s:iterator value="pageRoleRank.result" var="item" status="st">
 						<tr>
 						    <td><s:property value="gameName"/></td>
-						    <td><s:property value="platformName"/></td>
+						    <td><s:property value="channelName"/></td>
 						    <td><s:property value="name"/></td>
 							<td><fmt:formatNumber  value="${amount/100 }" pattern="0.00" /></td>
 							<td><s:property value="#st.count + firstResult"/></td>
 							<td><s:date name="lastLoginDate" format="yyyy-MM-dd HH:mm:ss"/></td>
-							<td><a href="javascript:view('${uid }', ${platformId })">查看订单</a></td>
+							<td><a href="javascript:view('${uid }', ${channelId })">查看订单</a></td>
 						</tr>
 						</s:iterator>
 						</s:if>
@@ -120,10 +120,10 @@
 		});
 		
 		
-		function view(uid, platformId){
+		function view(uid, channelId){
 			var gameId = $("#appNameSel").val();
 			var selectRange = $("#selectRange").val();
-			location.assign("${ctx}/bOrder/bOrder_list.shtml?BOrder.status=2&BOrder.notifyStatus=2&BOrder.uid=" + uid + "&BOrder.platformId=" + platformId + "&BOrder.gameId=" + gameId )
+			location.assign("${ctx}/bOrder/bOrder_list.shtml?BOrder.status=2&BOrder.notifyStatus=2&BOrder.uid=" + uid + "&BOrder.channelId=" + channelId + "&BOrder.gameId=" + gameId )
 		}
 	</script>
 </body>
