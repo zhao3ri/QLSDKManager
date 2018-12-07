@@ -8,7 +8,7 @@
 	    <ol class="breadcrumb row">
 	      <li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
 	      <li class="active">渠道管理</li>
-	      <li><a href="${ctx}/bChannelGame/bPlatformGame_list.shtml">联运游戏关联管理</a></li>
+	      <li><a href="${ctx}/bChannelGame/bChannelGame_list.shtml">联运游戏关联管理</a></li>
 	      <s:if test="id==null">
 	      <li class="active">新增渠道游戏分区表信息</li>
 	      </s:if>
@@ -20,12 +20,12 @@
 	      	<div class="panel-heading ">
 	        	<h3 class="panel-title">${id==null?"新增":"修改"}渠道游戏分区表信息</h3>
 	      	</div>
-	      	<form role="form" id="inputForm" action="bPlatformGameZone_save.shtml" method="post">
+	      	<form role="form" id="inputForm" action="bChannelGameZone_save.shtml" method="post">
 	        	<div class="panel-body ">
 	          		<div class=" tooltip-show form-horizontal">
 	    				<input type="hidden" name="zoneIds" id="zoneIds"/>
-	    				<input type="hidden" name="BPlatformGameZone.gameId" value="${BPlatformGameZone.gameId }"/>
-	    				<input type="hidden" name="BPlatformGameZone.channelId" value="${BPlatformGameZone.channelId }"/>
+	    				<input type="hidden" name="BChannelGameZone.gameId" value="${bChannelGameZone.gameId }"/>
+	    				<input type="hidden" name="BChannelGameZone.channelId" value="${bChannelGameZone.channelId }"/>
 						
 						<div class="form-group clearfix" >
 							<label  class="control-label col-sm-3 col-lg-2 text-right"><b class="color_red">*</b>分区：</label>
@@ -46,7 +46,7 @@
 	    		<div class="panel-footer">
 	          		<div class=" text-center">
 						<button type="button" class="btn btn-primary" onclick="submitForm();"><i class="icon-ok"></i> 提交</button>
-						<a class="btn btn-default" href="/bChannelGame/bPlatformGame_list.shtml"><i class="icon-remove"></i> 取消</a>
+						<a class="btn btn-default" href="/bChannelGame/bChannelGame_list.shtml"><i class="icon-remove"></i> 取消</a>
 	          		</div>
             	</div>
           	</form>
@@ -58,8 +58,8 @@
 		$(document).ready(function() {
 			$("#inputForm").validate({
 				rules: {
-					"BPlatformGameZone.gameId":{number:true,maxlength:10,required:true},
-					"BPlatformGameZone.channelId":{digits:true,maxlength:10,required:true},
+					"BChannelGameZone.gameId":{number:true,maxlength:10,required:true},
+					"BChannelGameZone.channelId":{digits:true,maxlength:10,required:true},
 					"gameZones":{required:true}
 				}
 			});

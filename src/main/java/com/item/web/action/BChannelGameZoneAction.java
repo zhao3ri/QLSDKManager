@@ -46,7 +46,7 @@ public class BChannelGameZoneAction extends Struts2Action {
     @Autowired
     private BGamezoneService bGamezoneService;
 
-    private Page<BChannelGameZone> bPlatformGameZonePage = new Page<BChannelGameZone>(10);
+    private Page<BChannelGameZone> bChannelGameZonePage = new Page<BChannelGameZone>(10);
     private String checkedIds;
     private BChannelGameZone bChannelGameZone;
     private String channelIds;
@@ -58,32 +58,32 @@ public class BChannelGameZoneAction extends Struts2Action {
     private Long id;
     private Integer isCompare;
     private List<Gamezone> gamezones;
-    private Long platformId;
+    private Long channelId;
 
     public String list() {
         MapBean mb = search();
-        bPlatformGameZonePage = bChannelGameZoneService.page(bPlatformGameZonePage, mb);
+        bChannelGameZonePage = bChannelGameZoneService.page(bChannelGameZonePage, mb);
         games = bGameService.getGameList();
         channels = bChannelService.getCurrentIdentityChannelList();
-        bPlatformGameZonePage = bChannelGameZoneService.page(bPlatformGameZonePage, mb);
+        bChannelGameZonePage = bChannelGameZoneService.page(bChannelGameZonePage, mb);
         return "list";
     }
 
 
-    public String getPlatformZones() {
+    public String getChannelZones() {
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, gameId);
         mb.put(MapBean.CHANNEL_IDS, channelIds.split(","));
         channelGameZones = bChannelGameZoneService.getChannelZones(mb);
-        return "getPlatformZones";
+        return "getChannelZones";
     }
 
-    public String getZonePlatforms() {
+    public String getZoneChannels() {
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, gameId);
-        mb.put("zoneIds", zoneIds.split(","));
+        mb.put(MapBean.ZONE_IDS, zoneIds.split(","));
         channelGameZones = bChannelGameZoneService.getZoneChannels(mb);
-        return "getZonePlatforms";
+        return "getZoneChannels";
     }
 
 
@@ -154,26 +154,26 @@ public class BChannelGameZoneAction extends Struts2Action {
                 mb.put(MapBean.GAME_ID, bChannelGameZone.getGameId());
             }
             if (bChannelGameZone.getZoneId() != null && !"".equals(bChannelGameZone.getZoneId())) {
-                mb.put("zoneId", bChannelGameZone.getZoneId());
+                mb.put(MapBean.ZONE_ID, bChannelGameZone.getZoneId());
             }
         }
         mb.put("orderby", "id desc");
         return mb;
     }
 
-    public Page<BChannelGameZone> getBPlatformGameZonePage() {
-        return bPlatformGameZonePage;
+    public Page<BChannelGameZone> getBChannelGameZonePage() {
+        return bChannelGameZonePage;
     }
 
     public void setCheckedIds(String checkedIds) {
         this.checkedIds = checkedIds;
     }
 
-    public BChannelGameZone getBPlatformGameZone() {
+    public BChannelGameZone getBChannelGameZone() {
         return bChannelGameZone;
     }
 
-    public void setBPlatformGameZone(BChannelGameZone bChannelGameZone) {
+    public void setBChannelGameZone(BChannelGameZone bChannelGameZone) {
         this.bChannelGameZone = bChannelGameZone;
     }
 
@@ -251,11 +251,11 @@ public class BChannelGameZoneAction extends Struts2Action {
         this.gamezones = gamezones;
     }
 
-    public Long getPlatformId() {
-        return platformId;
+    public Long getChannelId() {
+        return channelId;
     }
 
-    public void setPlatformId(Long platformId) {
-        this.platformId = platformId;
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
     }
 }

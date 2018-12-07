@@ -26,7 +26,7 @@ public class BAccountAction extends Struts2Action {
 	@Autowired
 	private BAccountService bAccountService;
 	@Autowired
-	private BChannelService platformService;
+	private BChannelService channelService;
 
 	private Page<BAccount> accountPage = new Page<BAccount>(10);
 	private BAccount account;
@@ -34,7 +34,7 @@ public class BAccountAction extends Struts2Action {
 
 	public String list() {
 		MapBean mb = search();
-		platforms = platformService.getCurrentIdentityChannelList();
+		platforms = channelService.getCurrentIdentityChannelList();
 
 		if (account == null) {
 			account = new BAccount();
@@ -57,8 +57,8 @@ public class BAccountAction extends Struts2Action {
 
 			for (int i = 0; i < list.size(); i++) {
 				List<Excel> e = new ArrayList<Excel>();
-				e.add(new Excel(list.get(i).getPlatformId(), 20));
-				e.add(new Excel(list.get(i).getPlatformName(), 20));
+				e.add(new Excel(list.get(i).getChannelId(), 20));
+				e.add(new Excel(list.get(i).getChannelName(), 20));
 				e.add(new Excel(list.get(i).getUid(), 20));
 				e.add(new Excel(DateUtils.format(list.get(i).getCreateTime()),
 						20));
@@ -74,8 +74,8 @@ public class BAccountAction extends Struts2Action {
 	private MapBean search() {
 		MapBean mb = new MapBean();
 		if (account != null) {
-			if (account.getPlatformId() != null) {
-				mb.put("platformId", account.getPlatformId());
+			if (account.getChannelId() != null) {
+				mb.put(MapBean.CHANNEL_ID, account.getChannelId());
 			}
 			if (StringUtils.isNotBlank(account.getUid())) {
 				mb.put("uid", account.getUid());

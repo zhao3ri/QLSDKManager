@@ -70,7 +70,7 @@
         SUM(spm.activeUsers) as activeUsers,
         bp.channelName as channelName,
         bg.gameName as gameName
-        FROM s_platform_monthly spm
+        FROM s_channel_monthly spm
         JOIN b_channel bp ON spm.channelId=bp.id
         JOIN b_game bg ON spm.gameId=bg.id
         <include refid="SChannelMonthly.where"/>
@@ -89,7 +89,7 @@
         SUM(spm.payUsers) as payUsers,
         SUM(spm.totalRegUser) as totalRegUser,
         SUM(spm.totalRoleUser) as totalRoleUser
-        FROM s_platform_monthly spm
+        FROM s_channel_monthly spm
         JOIN b_channel bp ON spm.channelId=bp.id
         JOIN b_game bg ON spm.gameId=bg.id
         <include refid="SChannelMonthly.where"/>
@@ -108,7 +108,7 @@
         payAmount AS payAmount,
         payTimes AS payTimes,
         payUsers AS payUsers
-        FROM s_platform_monthly spm
+        FROM s_channel_monthly spm
         <include refid="SChannelMonthly.where"/>
     </select>
 
@@ -126,7 +126,7 @@
         SUM(sd.payUsers) as payUsers,
         SUM(sd.newUserPays) AS totalNewPayUser
         FROM
-        s_platform_daily sd
+        s_channel_daily sd
         <dynamic prepend="where">
             <isNotNull prepend="and" property="clientType">
                 sd.clientType=#clientType#

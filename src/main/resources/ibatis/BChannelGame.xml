@@ -41,7 +41,7 @@
 
     <select id="BChannelGame.count" resultClass="Long"
             parameterClass="mb">
-        SELECT COUNT(*) FROM b_platform_game bpg
+        SELECT COUNT(*) FROM b_channel_game bpg
         JOIN b_channel bp ON bpg.channelId=bp.id
         JOIN b_game bg ON bpg.gameId=bg.id
         <include refid="BChannelGame.Where"/>
@@ -51,7 +51,7 @@
             parameterClass="mb">
         SELECT
         bpg.id,bp.channelName,bg.gameName,bpg.configParams,bpg.createTime,bpg.gameId,bpg.channelId,bpg.discount
-        FROM b_platform_game bpg
+        FROM b_channel_game bpg
         JOIN b_channel bp ON bpg.channelId=bp.id
         JOIN b_game bg ON bpg.gameId=bg.id
         <include refid="BChannelGame.Where"/>
@@ -64,29 +64,29 @@
     <select id="BChannelGame.list" resultClass="BChannelGame" parameterClass="mb">
         SELECT
         bpg.*,bp.channelName,bg.gameName
-        FROM b_platform_game bpg
+        FROM b_channel_game bpg
         JOIN b_channel bp ON bpg.channelId=bp.id
         JOIN b_game bg ON bpg.gameId=bg.id
         <include refid="BChannelGame.Where"/>
     </select>
 
     <delete id="BChannelGame.delete" parameterClass="Long">
-		DELETE FROM b_platform_game WHERE id=#id#
+		DELETE FROM b_channel_game WHERE id=#id#
 	</delete>
 
-    <select id="BChannelGame.GetByAppId" resultClass="BChannelGame" parameterClass="Long">
+    <select id="BChannelGame.GetByGameId" resultClass="BChannelGame" parameterClass="Long">
 		SELECT 
 			a.channelId,
 			b.channelName
-		FROM b_platform_game AS a 
+		FROM b_channel_game AS a
 		JOIN b_channel AS b ON a.channelId = b.id
 		WHERE a.gameId = #gameId#
 	</select>
 
-    <select id="BChannelGame.getChannelAppById" parameterClass="Long"
+    <select id="BChannelGame.getChannelGameById" parameterClass="Long"
             resultClass="BChannelGame">
 		SELECT bp.channelName,bg.gameName,bg.id as gameId,bpg.*
-		FROM b_platform_game bpg
+		FROM b_channel_game bpg
 		JOIN b_channel bp ON bpg.channelId=bp.id
 		JOIN b_game bg ON bpg.gameId=bg.id
 		WHERE bpg.id=#id#
@@ -96,12 +96,12 @@
 		SELECT * FROM b_channel
 	</select>
 
-    <select id="BChannelGame.getAllApp" resultClass="Game">
+    <select id="BChannelGame.getAllGame" resultClass="Game">
 		SELECT * FROM b_game
 	</select>
 
     <update id="BChannelGame.update" parameterClass="BChannelGame">
-        UPDATE b_platform_game
+        UPDATE b_channel_game
         <dynamic prepend="SET">
             <isNotNull prepend="," property="channelId">
                 channelId=#channelId#
@@ -127,7 +127,7 @@
 
     <insert id="BChannelGame.save" parameterClass="BChannelGame">
         INSERT INTO
-        b_platform_game(channelId,gameId,configParams,createTime,status,registStatus,discount,appKey,secretKey,appID,privateKey,publicKey)
+        b_channel_game(channelId,gameId,configParams,createTime,status,registStatus,discount,appKey,secretKey,appID,privateKey,publicKey)
         VALUES(#channelId#,#gameId#,#configParams#,#createTime#,#status#,#registStatus#,#discount#,#appKey#,#secretKey#,#appID#,#privateKey#,#publicKey#)
         <selectKey resultClass="Long" keyProperty="id">
             select @@IDENTITY as `id`

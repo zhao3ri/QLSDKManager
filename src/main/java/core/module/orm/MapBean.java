@@ -15,6 +15,10 @@ public class MapBean extends HashMap<String, Object> {
     public static final String CLIENT_TYPE = "clientType";
     public static final String CHANNEL_ID = "channelId";
     public static final String CHANNEL_IDS = "channelIds";
+    public static final String CHANNEL_NAME = "channelName";
+    public static final String ZONE_ID = "zoneId";
+    public static final String ZONE_IDS = "zoneIds";
+    public static final String ZONE_NAME = "zoneName";
     public static final String STAT_DATE = "statDate";
 
     private static final long serialVersionUID = 1775432731349180989L;

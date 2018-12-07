@@ -40,7 +40,7 @@ public class SZoneChannelService {
   		return sZoneChannelDao.find("SZoneChannel.zoneDetail", mb);
   	}
     //渠道详细表
-    public List<SZoneChannel> platformDetail(MapBean mb) {
-  		return sZoneChannelDao.find("SZoneChannel.platformDetail", mb);
+    public List<SZoneChannel> channelDetail(MapBean mb) {
+  		return sZoneChannelDao.find("SZoneChannel.channelDetail", mb);
   	}
 }

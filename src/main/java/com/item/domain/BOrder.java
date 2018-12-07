@@ -49,6 +49,12 @@ public class BOrder extends StatBaseEntity {
 
     private Integer gold;
 
+    private String goodsName;
+
+    private int goodsCount;
+
+    private String goodsId;
+
     public Long getId() {
         return id;
     }
@@ -239,5 +245,29 @@ public class BOrder extends StatBaseEntity {
 
     public void setGold(Integer gold) {
         this.gold = gold;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public int getGoodsCount() {
+        return goodsCount;
+    }
+
+    public void setGoodsCount(int goodsCount) {
+        this.goodsCount = goodsCount;
+    }
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 }

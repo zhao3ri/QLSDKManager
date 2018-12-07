@@ -26,7 +26,7 @@ public class DataReportAction extends BaseAction {
     private List<Game> games;
     private Long gameId;
     private Integer clientType;
-    private Integer platformId;
+    private Integer channelId;
     private String zoneId;
     private String selectRange;
     private String optionJson;
@@ -53,7 +53,7 @@ public class DataReportAction extends BaseAction {
             calendar.add(Calendar.DATE, -1);
             selectRange = DateUtils.format(calendar.getTime(), "yyyy-MM-dd") + " 至 " + DateUtils.format(calendar.getTime(), "yyyy-MM-dd");
         }
-        result = dataDailyService.dataDaily(gameId, clientType, platformId, zoneId, selectRange);
+        result = dataDailyService.dataDaily(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -89,7 +89,7 @@ public class DataReportAction extends BaseAction {
             this.setYearMonthStr(year3 / 100 + "-" + (year3 % 100 < 10 ? "0" + year3 % 100 : year3 % 100));
         }
 
-        result = dataMonthlyService.dataMonthly(gameId, clientType, platformId, zoneId, yearMonthStr, yearMonthStr2);
+        result = dataMonthlyService.dataMonthly(gameId, clientType, channelId, zoneId, yearMonthStr, yearMonthStr2);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -99,7 +99,7 @@ public class DataReportAction extends BaseAction {
     public void excelExportDaily() {
         try {
             ExcelExport ee = new ExcelExport();
-            dataDailyService.excelExportDaily(ee, gameId, clientType, platformId, zoneId, selectRange);
+            dataDailyService.excelExportDaily(ee, gameId, clientType, channelId, zoneId, selectRange);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,7 +117,7 @@ public class DataReportAction extends BaseAction {
                 yearMonthStr2 = DateUtils.format(calendar.getTime(), "yyyy-MM");
             }
             ExcelExport ee = new ExcelExport();
-            dataMonthlyService.excelExportMonthly(ee, gameId, clientType, platformId, zoneId, yearMonthStr, yearMonthStr2);
+            dataMonthlyService.excelExportMonthly(ee, gameId, clientType, channelId, zoneId, yearMonthStr, yearMonthStr2);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -158,12 +158,12 @@ public class DataReportAction extends BaseAction {
         this.clientType = clientType;
     }
 
-    public Integer getPlatformId() {
-        return platformId;
+    public Integer getChannelId() {
+        return channelId;
     }
 
-    public void setPlatformId(Integer platformId) {
-        this.platformId = platformId;
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
     }
 
     public String getZoneId() {

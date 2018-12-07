@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2010-2020 liuxh.
- * [Project:RealeaseSdkManage,Id:SZonePlatformService.java  2014-12-25 17:12:36 zhouxb ]
+ * [Project:RealeaseSdkManage,Id:SZoneChannelService.java  2014-12-25 17:12:36 zhouxb ]
  */
 package com.item.service;
 
@@ -32,15 +32,15 @@ public class SZoneChannelMonthlyService {
     
     //区服分析总计--按月
     public List<SZoneChannelMonthly> zoneSummary(MapBean mb) {
-		return sZoneChannelMonthlyDao.find("sZonePlatformMonthly.zoneSummary", mb);
+		return sZoneChannelMonthlyDao.find("sZoneChannelMonthly.zoneSummary", mb);
 	}
   
     //区服详细表--按月
     public List<SZoneChannelMonthly> zoneDetail(MapBean mb) {
-		return sZoneChannelMonthlyDao.find("sZonePlatformMonthly.zoneDetail", mb);
+		return sZoneChannelMonthlyDao.find("sZoneChannelMonthly.zoneDetail", mb);
 	}
     //渠道详细表
-    public List<SZoneChannelMonthly> platformDetail(MapBean mb) {
-		return sZoneChannelMonthlyDao.find("sZonePlatformMonthly.platformDetail", mb);
+    public List<SZoneChannelMonthly> channelDetail(MapBean mb) {
+		return sZoneChannelMonthlyDao.find("sZoneChannelMonthly.channelDetail", mb);
 	}
 }

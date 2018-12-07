@@ -170,7 +170,7 @@ public class SDataMonthlyService {
 		
 		List<SDataMonthly> dataMonthlyList = dao.find("SDataMonthly.list", mb);
         for(int i=0; i<dataMonthlyList.size(); i++){
-            BChannel platform = platformService.getChannelById(dataMonthlyList.get(i).getChannelId()+0L);
+            BChannel channel = platformService.getChannelById(dataMonthlyList.get(i).getChannelId()+0L);
             MapBean mb2 = new MapBean();
     		mb2.put(MapBean.GAME_ID, appId);
     		mb2.put("zoneId", dataMonthlyList.get(i).getZoneId()+"");
@@ -179,7 +179,7 @@ public class SDataMonthlyService {
         	e.add(new Excel(game.getGameName(),20));
         	e.add(new Excel(appId,20));
         	e.add(new Excel(dataMonthlyList.get(i).getClientType()==1?"android":"ios", 20));
-        	e.add(new Excel(platform.getChannelName(),20));
+        	e.add(new Excel(channel.getChannelName(),20));
         	e.add(new Excel(gamezone==null?"":gamezone.getZoneName(),20));
         	String date = dataMonthlyList.get(i).getYearMonth()+"";
         	e.add(new Excel(date.substring(0, 4)+"-"+date.substring(4, 6), 20));

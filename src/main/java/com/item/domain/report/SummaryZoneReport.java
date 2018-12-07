@@ -11,7 +11,7 @@ public class SummaryZoneReport {
 	
 	private String zonename;
 	
-	private SZoneChannel szoneplatform;
+	private SZoneChannel szoneChannel;
 	
 	private Gamezone gamezone;
 
@@ -24,12 +24,12 @@ public class SummaryZoneReport {
 		this.gamezone = gamezone;
 	}
 
-	public SZoneChannel getSzoneplatform() {
-		return szoneplatform;
+	public SZoneChannel getSzoneChannel() {
+		return szoneChannel;
 	}
 
-	public void setSzoneplatform(SZoneChannel szoneplatform) {
-		this.szoneplatform = szoneplatform;
+	public void setSzoneChannel(SZoneChannel szoneChannel) {
+		this.szoneChannel = szoneChannel;
 	}
 
 	public SummaryZoneReport() {

@@ -124,20 +124,20 @@
                 <li class="menuTop <% out.print(getSelected("index")); %>"><a href="${ctx}/index.shtml">首页</a></li>
 
                 <!--渠道管理-->
-                <mt:auths authUrls="bPlatform_list.shtml,bPlatformGame_list.shtml">
+                <mt:auths authUrls="bChannel_list.shtml,bChannelGame_list.shtml">
                     <li class="menuTop dropdown <% out.print(getSelected("bChannel")); %>"><a href="#"
                                                                                                class="dropdown-toggle"
                                                                                                data-toggle="dropdown">渠道统计<b
                             class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <mt:auth authUrl="bPlatform_list.shtml">
-                                <li><a href="${ctx}/bChannel/bPlatform_list.shtml">渠道管理</a></li>
+                            <mt:auth authUrl="bChannel_list.shtml">
+                                <li><a href="${ctx}/bChannel/bChannel_list.shtml">渠道管理</a></li>
                             </mt:auth>
-                            <mt:auth authUrl="bPlatformGame_list.shtml">
-                                <li><a href="${ctx}/bChannelGame/bPlatformGame_list.shtml">渠道关联管理</a></li>
+                            <mt:auth authUrl="bChannelGame_list.shtml">
+                                <li><a href="${ctx}/bChannelGame/bChannelGame_list.shtml">渠道关联管理</a></li>
                             </mt:auth>
-                            <mt:auth authUrl="bPlatform_listbalance.shtml">
-                                <li><a href="${ctx}/bChannel/bPlatform_listbalance.shtml">加币记录</a></li>
+                            <mt:auth authUrl="bChannel_listbalance.shtml">
+                                <li><a href="${ctx}/bChannel/bChannel_listbalance.shtml">加币记录</a></li>
                             </mt:auth>
                         </ul>
                     </li>

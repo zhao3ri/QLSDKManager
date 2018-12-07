@@ -10,7 +10,7 @@ public class BAccount {
 	/**
 	 * 渠道ID
 	 * */
-	private Long platformId;
+	private Long channelId;
 	/**
 	 * uid
 	 * */
@@ -22,7 +22,7 @@ public class BAccount {
 	/**
 	 * 渠道名称
 	 * */
-	private String platformName;
+	private String channelName;
 
 	public Long getId() {
 		return id;
@@ -40,12 +40,12 @@ public class BAccount {
 		this.createTime = createTime;
 	}
 
-	public Long getPlatformId() {
-		return platformId;
+	public Long getChannelId() {
+		return channelId;
 	}
 
-	public void setPlatformId(Long platformId) {
-		this.platformId = platformId;
+	public void setChannelId(Long channelId) {
+		this.channelId = channelId;
 	}
 
 	public String getUid() {
@@ -56,12 +56,12 @@ public class BAccount {
 		this.uid = uid;
 	}
 
-	public String getPlatformName() {
-		return platformName;
+	public String getChannelName() {
+		return channelName;
 	}
 
-	public void setPlatformName(String platformName) {
-		this.platformName = platformName;
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 
 }

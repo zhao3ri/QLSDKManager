@@ -46,12 +46,12 @@
 			payUsers,
 			activeUsers,
 			statDate
-		FROM s_platform_history sp
+		FROM s_channel_history sp
 		<include refid="SChannel.where" />
 		GROUP BY clientType
 	</select>
 
-	<select id="SChannel.maxDateDataApp" resultClass="sChannel"
+	<select id="SChannel.maxDateDataGame" resultClass="sChannel"
 		parameterClass="mb">	
 		SELECT
 			SUM(sp.payAmount) as payAmount,
@@ -63,7 +63,7 @@
 			SUM(sp.activeUsers) as activeUsers,
 			bp.channelName as channelName,
 			bg.gameName as gameName
-		FROM s_platform_history sp
+		FROM s_channel_history sp
 		JOIN b_channel bp ON sp.channelId=bp.id
 		JOIN b_game bg ON sp.gameId=bg.id
 		<include refid="SChannel.where" />
@@ -83,14 +83,14 @@
 			SUM(sp.totalRoleUser) as totalRoleUser,
 			SUM(sp.devices) as devices,
 			SUM(sp.activeUsers) as activeUsers
-		FROM s_platform_history sp
+		FROM s_channel_history sp
 		JOIN b_channel bp ON sp.channelId=bp.id
 		JOIN b_game bg ON sp.gameId=bg.id
 		<include refid="SChannel.where" />
 		GROUP BY bp.channelName
 	</select>
 
-	<select id="SChannel.getLastDayAppData" resultClass="sChannel"
+	<select id="SChannel.getLastDayGameData" resultClass="sChannel"
 			parameterClass="mb">
 		SELECT
 		sp.gameId as gameId,
@@ -105,8 +105,8 @@
 		SUM(sp.activeUsers) as activeUsers,
 		bp.channelName as channelName,
 		bg.gameName as gameName
-		FROM s_platform_history sp
-		JOIN s_platform_daily sd ON sp.channelId=sd.channelId
+		FROM s_channel_history sp
+		JOIN s_channel_daily sd ON sp.channelId=sd.channelId
 		JOIN b_channel bp ON sp.channelId=bp.id
 		JOIN b_game bg ON sp.gameId=bg.id
 		<dynamic prepend="WHERE">
@@ -148,8 +148,8 @@
 		SUM(sp.totalRoleUser) as totalRoleUser,
 		SUM(sp.devices) as devices,
 		SUM(sp.activeUsers) as activeUsers
-		FROM s_platform_history sp
-		JOIN s_platform_daily sd ON sp.channelId=sd.channelId
+		FROM s_channel_history sp
+		JOIN s_channel_daily sd ON sp.channelId=sd.channelId
 		JOIN b_channel bp ON sp.channelId=bp.id
 		JOIN b_game bg ON sp.gameId=bg.id
 		<dynamic prepend="WHERE">

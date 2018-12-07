@@ -33,7 +33,7 @@ public class BChannelGameAction extends Struts2Action {
     @Autowired
     private BGameService gameService;
 
-    private Page<BChannelGame> bPlatformGamePage = new Page<BChannelGame>(10);
+    private Page<BChannelGame> bChannelGamePage = new Page<BChannelGame>(10);
 
     private Integer keepSearchCondition;
 
@@ -48,15 +48,15 @@ public class BChannelGameAction extends Struts2Action {
         bChannels = channelService.getCurrentIdentityChannelList();
         games = gameService.getGameList();
 
-        bChannelGame = InitSearchCondition.initEntity(bChannelGame, keepSearchCondition, "bPlatform");
-        bPlatformGamePage = InitSearchCondition.initPage(bPlatformGamePage, keepSearchCondition, "bPlatform");
+        bChannelGame = InitSearchCondition.initEntity(bChannelGame, keepSearchCondition, "bChannel");
+        bChannelGamePage = InitSearchCondition.initPage(bChannelGamePage, keepSearchCondition, "bChannel");
 
         MapBean mb = search();
-        bChannelGameService.pageBChannelGame(bPlatformGamePage, mb);
+        bChannelGameService.pageBChannelGame(bChannelGamePage, mb);
         return "list";
     }
 
-    public void getGamePlatformsAsync() {
+    public void getGameChannelsAsync() {
         List<BChannelGame> platformApps = bChannelGameService.getByGameId(id);
         try {
             Struts2Utils.getResponse().getWriter().write(JsonUtil.toJsonString(platformApps));
@@ -162,28 +162,28 @@ public class BChannelGameAction extends Struts2Action {
         this.games = games;
     }
 
-    public List<BChannel> getBPlatforms() {
+    public List<BChannel> getBChannels() {
         return bChannels;
     }
 
-    public void setBPlatforms(List<BChannel> bChannels) {
+    public void setBChannels(List<BChannel> bChannels) {
         this.bChannels = bChannels;
     }
 
-    public BChannelGameService getBPlatformGameService() {
+    public BChannelGameService getBChannelGameService() {
         return bChannelGameService;
     }
 
-    public void setBPlatformGameService(BChannelGameService bChannelGameService) {
+    public void setBChannelGameService(BChannelGameService bChannelGameService) {
         this.bChannelGameService = bChannelGameService;
     }
 
-    public Page<BChannelGame> getBPlatformGamePage() {
-        return bPlatformGamePage;
+    public Page<BChannelGame> getBChannelGamePage() {
+        return bChannelGamePage;
     }
 
-    public void setBPlatformGamePage(Page<BChannelGame> bPlatformAppPage) {
-        this.bPlatformGamePage = bPlatformAppPage;
+    public void setBChannelGamePage(Page<BChannelGame> page) {
+        this.bChannelGamePage = page;
     }
 
     public Integer getKeepSearchCondition() {
@@ -194,11 +194,11 @@ public class BChannelGameAction extends Struts2Action {
         this.keepSearchCondition = keepSearchCondition;
     }
 
-    public BChannelGame getBPlatformGame() {
+    public BChannelGame getBChannelGame() {
         return bChannelGame;
     }
 
-    public void setBPlatformGame(BChannelGame bChannelGame) {
+    public void setBChannelGame(BChannelGame bChannelGame) {
         this.bChannelGame = bChannelGame;
     }
 

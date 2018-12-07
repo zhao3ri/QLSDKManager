@@ -6,7 +6,7 @@
 
 	<div class="panel-body ">
 		<button type="button" id="changeZone" class="btn btn-primary " onclick="change();"> &nbsp;&nbsp;区&nbsp;服&nbsp;&nbsp;</button>
-		<button id="changePlatform"  type="button" class="btn" onclick="change();"> &nbsp;&nbsp;渠&nbsp;道&nbsp;&nbsp;</button>
+		<button id="changeChannel"  type="button" class="btn" onclick="change();"> &nbsp;&nbsp;渠&nbsp;道&nbsp;&nbsp;</button>
         <label style="float: right">全 选：<input type="checkbox" id="checkedAll"/></label>  
 
 		 
@@ -16,9 +16,9 @@
 	 		<table class="table table-hover table-striped table-bordered table-condensed table-big" style="display:none" id="channels">
 	   			<tbody>
 	   			<!-- <tr><td><label>全 选：</label><input type="checkbox" id="checkedAll"/></td></tr> -->
-					<c:forEach begin="0" end="${fn:length(platformApps)/4 }" varStatus="index">
+					<c:forEach begin="0" end="${fn:length(channelGames)/4 }" varStatus="index">
 						<tr>
-							<c:forEach items="${platformApps }" var="item" begin="${index.index * 4 }" end="${(index.index+1)*4-1 }">
+							<c:forEach items="${channelGames }" var="item" begin="${index.index * 4 }" end="${(index.index+1)*4-1 }">
 							<c:if test="${not empty item.channelId}" >
 							<c:if test="${not empty item.channelName }">
 								<td><input class="channelId" type="checkbox" value="${item.channelId }">${item.channelName }&nbsp;&nbsp;&nbsp;</td>
@@ -103,7 +103,7 @@
 				$("#channels").hide();
 				
 				$("#changeZone").addClass("btn-primary");
-				$("#changePlatform").removeClass("btn-primary");
+				$("#changeChannel").removeClass("btn-primary");
 			}else {
 				if($(".zoneId").prop("checked")){ 
 					$("#checkedAll").prop("checked",false);
@@ -115,7 +115,7 @@
 				$("#channels").show();
 				
 				$("#changeZone").removeClass("btn-primary");
-				$("#changePlatform").addClass("btn-primary");
+				$("#changeChannel").addClass("btn-primary");
 			}
 		}
 		
@@ -201,7 +201,7 @@
 						$("#compareZoneIds", window.parent.document).val("");
 						$("#compareType", window.parent.document).val(2);
 					}
-					document.location.href="${ctx}/bChannelGameZone/bPlatformGameZone_getPlatformZones.shtml?gameId="+gameId+"&channelIds="+checkedIds+"&isCompare="+isCompare;
+					document.location.href="${ctx}/bChannelGameZone/bChannelGameZone_getChannelZones.shtml?gameId="+gameId+"&channelIds="+checkedIds+"&isCompare="+isCompare;
 				}else{
 					parent.errorTip("请选择渠道！");
 				}
@@ -228,7 +228,7 @@
 						$("#compareChannelIds", window.parent.document).val("");
 						$("#compareType", window.parent.document).val(1);
 					}
-					document.location.href="${ctx}/bChannelGameZone/bPlatformGameZone_getZonePlatforms.shtml?gameId="+${gameId}+"&zoneIds="+checkedIds+"&isCompare="+isCompare;
+					document.location.href="${ctx}/bChannelGameZone/bChannelGameZone_getZoneChannels.shtml?gameId="+${gameId}+"&zoneIds="+checkedIds+"&isCompare="+isCompare;
 				}else{
 					parent.errorTip("请选择分区！");
 				}

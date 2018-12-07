@@ -59,37 +59,37 @@ public class ReportAction extends BaseAction {
     private Long gameId;
     private String selectRange;
     private List<Gamezone> gamezones;
-    private List<BChannelGame> platformApps;
+    private List<BChannelGame> channelGames;
     private String yearMonthStr;
     private Integer isCompare;
     private String checkedIds;
-    private String platformId;
-    private List<BChannel> platforms;
+    private String channelId;
+    private List<BChannel> channels;
     private List<Long> gameIds;
     // 渠道分析总数Map
-    private Map<Game, List<SChannel>> iteratePlatformsMap = new HashMap<>();
+    private Map<Game, List<SChannel>> iterateChannelsMap = new HashMap<>();
     // 渠道分析月份Map
-    private Map<String, List<SChannelMonthly>> iteratePlatformsMonthlyMap = new HashMap<String, List<SChannelMonthly>>();
+    private Map<String, List<SChannelMonthly>> iterateChannelsMonthlyMap = new HashMap<String, List<SChannelMonthly>>();
 
     // 渠道分析报表--游戏数据汇总
-    private List<SChannel> sPlatformsApp;
+    private List<SChannel> gameSummaryList;
     // 渠道分析报表--渠道数据汇总
-    private List<SChannel> sPlatformsChannel = new ArrayList<SChannel>();
+    private List<SChannel> channelSummaryList = new ArrayList<SChannel>();
     // 渠道分析月报表--游戏数据汇总
-    private List<SChannelMonthly> sPlatformMonthliesApp;
+    private List<SChannelMonthly> gameMonthlyList;
     // 渠道分析月报表--渠道数据汇总
-    private List<SChannelMonthly> sPlatformMonthliesPlatform = new ArrayList<SChannelMonthly>();
+    private List<SChannelMonthly> channelMonthlyList = new ArrayList<SChannelMonthly>();
     /*
      * 1.区服总计 2.区服详细 3.渠道详细
      */
     private Long type;
 
     private List<SZoneChannel> sZoneChannels = new ArrayList<SZoneChannel>();
-    private List<SZoneChannelMonthly> sZonePlatformMonthlies = new ArrayList<SZoneChannelMonthly>();
+    private List<SZoneChannelMonthly> sZoneChannelMonthlies = new ArrayList<SZoneChannelMonthly>();
     // 区服总数Map
-    private Map<String, List<SZoneChannel>> iterateZonePlatformsMap = new HashMap<String, List<SZoneChannel>>();
+    private Map<String, List<SZoneChannel>> iterateZoneChannelMap = new HashMap<String, List<SZoneChannel>>();
     // 区服月份Map
-    private Map<String, List<SZoneChannelMonthly>> iterateZonePlatformsMonthlyMap = new HashMap<String, List<SZoneChannelMonthly>>();
+    private Map<String, List<SZoneChannelMonthly>> iterateZoneChannelMonthlyMap = new HashMap<String, List<SZoneChannelMonthly>>();
 
     private Page<SRechargeRank> pageRechargeRank = new Page<SRechargeRank>(10);
     private Page<SRoleRank> pageRoleRank = new Page<SRoleRank>(10);
@@ -166,13 +166,13 @@ public class ReportAction extends BaseAction {
         //CPS
         SGameMonthly sGame = sGameMonthlyService.getGameMonthly(mb);
         //CPA
-        SChannelMonthly cpapPlatform = sChannelMonthlyService.statMonthly(mb);
-        if (cpapPlatform == null)
-            cpapPlatform = new SChannelMonthly();
+        SChannelMonthly cpapChannel = sChannelMonthlyService.statMonthly(mb);
+        if (cpapChannel == null)
+            cpapChannel = new SChannelMonthly();
         if (sGame == null)
             sGame = new SGameMonthly();
 
-        setCPAAndCPS(gameClientReport, os, cpapPlatform, sGame);
+        setCPAAndCPS(gameClientReport, os, cpapChannel, sGame);
     }
 
     private void setOSReport(MapBean mb, int os, GameClientReport gameClientReport) {
@@ -181,13 +181,13 @@ public class ReportAction extends BaseAction {
         //CPS
         SGame sGame = sGameService.stat(mb);
         //CPA
-        SChannel cpapPlatform = sChannelService.getByMap(mb);
-        if (cpapPlatform == null)
-            cpapPlatform = new SChannel();
+        SChannel cpapChannel = sChannelService.getByMap(mb);
+        if (cpapChannel == null)
+            cpapChannel = new SChannel();
         if (sGame == null)
             sGame = new SGame();
 
-        setCPAAndCPS(gameClientReport, os, cpapPlatform, sGame);
+        setCPAAndCPS(gameClientReport, os, cpapChannel, sGame);
     }
 
     private void setCPAAndCPS(GameClientReport gameClientReport, int os, SChannel sChannel, SGame sGame) {
@@ -223,7 +223,7 @@ public class ReportAction extends BaseAction {
     }
 
     public String getChannelZone() {
-        platformApps = bChannelGameService.getAllChannel(gameId);
+        channelGames = bChannelGameService.getAllChannel(gameId);
         gamezones = bGameService.getZones(gameId);
         return "getChannelZone";
     }
@@ -233,7 +233,7 @@ public class ReportAction extends BaseAction {
         return "getZone";
     }
 
-    public String platform() {
+    public String channel() {
         if (!initData()) {
             return null;
         }
@@ -242,43 +242,43 @@ public class ReportAction extends BaseAction {
         boolean isMonStat = setDate(mb);
         mb.put(MapBean.GAME_IDS, gameIds);
         if (isMonStat) {
-            sPlatformMonthliesApp = sChannelMonthlyService.listApp(mb);
-            sPlatformMonthliesPlatform = sChannelMonthlyService.listPlatform(mb);
+            gameMonthlyList = sChannelMonthlyService.listApp(mb);
+            channelMonthlyList = sChannelMonthlyService.listPlatform(mb);
 
-            for (SChannelMonthly sPlatformMonthly : sPlatformMonthliesApp) {
-                if (iteratePlatformsMonthlyMap.get(sPlatformMonthly.getGameName()) == null) {
+            for (SChannelMonthly sPlatformMonthly : gameMonthlyList) {
+                if (iterateChannelsMonthlyMap.get(sPlatformMonthly.getGameName()) == null) {
                     List<SChannelMonthly> thisSPlatformsMonthliesList = new ArrayList<SChannelMonthly>();
                     thisSPlatformsMonthliesList.add(sPlatformMonthly);
-                    iteratePlatformsMonthlyMap.put(sPlatformMonthly.getGameName(), thisSPlatformsMonthliesList);
+                    iterateChannelsMonthlyMap.put(sPlatformMonthly.getGameName(), thisSPlatformsMonthliesList);
                 } else {
-                    List<SChannelMonthly> thisSPlatformsMonthliesList = iteratePlatformsMonthlyMap.get(sPlatformMonthly.getGameName());
+                    List<SChannelMonthly> thisSPlatformsMonthliesList = iterateChannelsMonthlyMap.get(sPlatformMonthly.getGameName());
                     thisSPlatformsMonthliesList.add(sPlatformMonthly);
-                    iteratePlatformsMonthlyMap.put(sPlatformMonthly.getGameName(), thisSPlatformsMonthliesList);
+                    iterateChannelsMonthlyMap.put(sPlatformMonthly.getGameName(), thisSPlatformsMonthliesList);
                 }
             }
         } else {
             mb.put("statDate", String.format("'%s'", mb.getString("statDate")));
 //            mb.put("statDate", String.format("'%s'", "2018-10-30"));
-            sPlatformsApp = sChannelService.getLastDayAppData(mb);
-            sPlatformsChannel = sChannelService.getLastDayPlatformData(mb);
-            updatePlatformStat();
+            gameSummaryList = sChannelService.getLastDayAppData(mb);
+            channelSummaryList = sChannelService.getLastDayPlatformData(mb);
+            updateChannelStat();
         }
-        return "platform";
+        return "channel";
     }
 
-    private void updatePlatformStat() {
+    private void updateChannelStat() {
         //初始化页面游戏数据
         for (Game game : allGames) {
-            for (SChannel sChannel : sPlatformsApp) {
+            for (SChannel sChannel : gameSummaryList) {
                 if (game.getGameName().equals(sChannel.getGameName())) {
                     List<SChannel> list;
-                    if (iteratePlatformsMap.get(game) == null) {
+                    if (iterateChannelsMap.get(game) == null) {
                         list = new ArrayList<>();
                     } else {
-                        list = iteratePlatformsMap.get(game);
+                        list = iterateChannelsMap.get(game);
                     }
                     list.add(sChannel);
-                    iteratePlatformsMap.put(game, list);
+                    iterateChannelsMap.put(game, list);
                     continue;
                 }
             }
@@ -300,66 +300,66 @@ public class ReportAction extends BaseAction {
 
         if (type == null || type == 1) {                                                //type==1--- 区服总计--
             if (StringUtils.isNotBlank(yearMonthStr)) {
-                sZonePlatformMonthlies = sZoneChannelMonthlyService.zoneSummary(mb);
+                sZoneChannelMonthlies = sZoneChannelMonthlyService.zoneSummary(mb);
             } else {
                 sZoneChannels = sZoneChannelService.zoneSummary(mb);
             }
         } else if (type == 2) {                                                            //type==2--- 渠道详细（使用map（string,list）)
             if (StringUtils.isNotBlank(yearMonthStr)) {
-                sZonePlatformMonthlies = sZoneChannelMonthlyService.zoneDetail(mb);
-                for (SZoneChannelMonthly sZoneChannelMonthly : sZonePlatformMonthlies) {
-                    if (iterateZonePlatformsMonthlyMap.get(sZoneChannelMonthly.getZoneName()) == null) {
+                sZoneChannelMonthlies = sZoneChannelMonthlyService.zoneDetail(mb);
+                for (SZoneChannelMonthly sZoneChannelMonthly : sZoneChannelMonthlies) {
+                    if (iterateZoneChannelMonthlyMap.get(sZoneChannelMonthly.getZoneName()) == null) {
                         List<SZoneChannelMonthly> thisList = new ArrayList<SZoneChannelMonthly>();
                         thisList.add(sZoneChannelMonthly);
-                        iterateZonePlatformsMonthlyMap.put(sZoneChannelMonthly.getZoneName(), thisList);
+                        iterateZoneChannelMonthlyMap.put(sZoneChannelMonthly.getZoneName(), thisList);
                     } else {
-                        List<SZoneChannelMonthly> thisList = iterateZonePlatformsMonthlyMap.get(sZoneChannelMonthly.getZoneName());
+                        List<SZoneChannelMonthly> thisList = iterateZoneChannelMonthlyMap.get(sZoneChannelMonthly.getZoneName());
                         thisList.add(sZoneChannelMonthly);
 
-                        iterateZonePlatformsMonthlyMap.put(sZoneChannelMonthly.getZoneName(), thisList);
+                        iterateZoneChannelMonthlyMap.put(sZoneChannelMonthly.getZoneName(), thisList);
                     }
                 }
             } else {
                 sZoneChannels = sZoneChannelService.zoneDetail(mb);
                 for (SZoneChannel sZoneChannel : sZoneChannels) {
-                    if (iterateZonePlatformsMap.get(sZoneChannel.getZoneName()) == null) {
+                    if (iterateZoneChannelMap.get(sZoneChannel.getZoneName()) == null) {
                         List<SZoneChannel> thisList = new ArrayList<SZoneChannel>();
                         thisList.add(sZoneChannel);
 
-                        iterateZonePlatformsMap.put(sZoneChannel.getZoneName(), thisList);
+                        iterateZoneChannelMap.put(sZoneChannel.getZoneName(), thisList);
                     } else {
-                        List<SZoneChannel> thisList = iterateZonePlatformsMap.get(sZoneChannel.getZoneName());
+                        List<SZoneChannel> thisList = iterateZoneChannelMap.get(sZoneChannel.getZoneName());
                         thisList.add(sZoneChannel);
 
-                        iterateZonePlatformsMap.put(sZoneChannel.getZoneName(), thisList);
+                        iterateZoneChannelMap.put(sZoneChannel.getZoneName(), thisList);
                     }
                 }
             }
         } else {                                                                                    //type==3--- 区服详细（使用map（string,list））
             if (StringUtils.isNotBlank(yearMonthStr)) {
-                sZonePlatformMonthlies = sZoneChannelMonthlyService.platformDetail(mb);
-                for (SZoneChannelMonthly sZoneChannelMonthly : sZonePlatformMonthlies) {
-                    if (iterateZonePlatformsMonthlyMap.get(sZoneChannelMonthly.getChannelName()) == null) {
+                sZoneChannelMonthlies = sZoneChannelMonthlyService.channelDetail(mb);
+                for (SZoneChannelMonthly sZoneChannelMonthly : sZoneChannelMonthlies) {
+                    if (iterateZoneChannelMonthlyMap.get(sZoneChannelMonthly.getChannelName()) == null) {
                         List<SZoneChannelMonthly> thisList = new ArrayList<SZoneChannelMonthly>();
                         thisList.add(sZoneChannelMonthly);
-                        iterateZonePlatformsMonthlyMap.put(sZoneChannelMonthly.getChannelName(), thisList);
+                        iterateZoneChannelMonthlyMap.put(sZoneChannelMonthly.getChannelName(), thisList);
                     } else {
-                        List<SZoneChannelMonthly> thisList = iterateZonePlatformsMonthlyMap.get(sZoneChannelMonthly.getChannelName());
+                        List<SZoneChannelMonthly> thisList = iterateZoneChannelMonthlyMap.get(sZoneChannelMonthly.getChannelName());
                         thisList.add(sZoneChannelMonthly);
-                        iterateZonePlatformsMonthlyMap.put(sZoneChannelMonthly.getChannelName(), thisList);
+                        iterateZoneChannelMonthlyMap.put(sZoneChannelMonthly.getChannelName(), thisList);
                     }
                 }
             } else {
-                sZoneChannels = sZoneChannelService.platformDetail(mb);
+                sZoneChannels = sZoneChannelService.channelDetail(mb);
                 for (SZoneChannel sZoneChannel : sZoneChannels) {
-                    if (iterateZonePlatformsMap.get(sZoneChannel.getChannelName()) == null) {
+                    if (iterateZoneChannelMap.get(sZoneChannel.getChannelName()) == null) {
                         List<SZoneChannel> thisList = new ArrayList<SZoneChannel>();
                         thisList.add(sZoneChannel);
-                        iterateZonePlatformsMap.put(sZoneChannel.getChannelName(), thisList);
+                        iterateZoneChannelMap.put(sZoneChannel.getChannelName(), thisList);
                     } else {
-                        List<SZoneChannel> thisList = iterateZonePlatformsMap.get(sZoneChannel.getChannelName());
+                        List<SZoneChannel> thisList = iterateZoneChannelMap.get(sZoneChannel.getChannelName());
                         thisList.add(sZoneChannel);
-                        iterateZonePlatformsMap.put(sZoneChannel.getChannelName(), thisList);
+                        iterateZoneChannelMap.put(sZoneChannel.getChannelName(), thisList);
                     }
                 }
             }
@@ -371,13 +371,13 @@ public class ReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-//		platforms = bPlatformService.getAllChannel();
+//		channels = bPlatformService.getAllChannel();
 
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, gameId);
 //		mb.put("status", 2);
 //		mb.put("notifyStatus", 2);
-        mb.put(MapBean.CHANNEL_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, channelId);
 //		mb.put("checkedIds", StringUtils.split(checkedIds, ","));
 //		if (StringUtils.isNotBlank(selectRange)) {
 //			mb.put("startDate", selectRange.split("至")[0] + " 00:00:00");
@@ -393,10 +393,10 @@ public class ReportAction extends BaseAction {
     public void rankExcelExport() {
         try {
             MapBean mb = new MapBean();
-            mb.put("gameId", gameId);
+            mb.put(MapBean.GAME_ID, gameId);
             mb.put("status", 2);
             mb.put("notifyStatus", 2);
-            mb.put("platformId", platformId);
+            mb.put(MapBean.CHANNEL_ID, channelId);
             mb.put("checkedIds", checkedIds);
             if (StringUtils.isNotBlank(selectRange)) {
                 mb.put("startDate", selectRange.split("至")[0] + " 00:00:00");
@@ -432,17 +432,17 @@ public class ReportAction extends BaseAction {
             return null;
         }
         Map<String, String> idToName = new HashMap<String, String>();
-        platforms = bChannelService.getCurrentIdentityChannelList();
-        for (BChannel bChannel : platforms) {
+        channels = bChannelService.getCurrentIdentityChannelList();
+        for (BChannel bChannel : channels) {
             idToName.put(String.valueOf(bChannel.getId()), bChannel.getChannelName());
         }
 
         MapBean mb = new MapBean();
-        mb.put("gameId", gameId);
+        mb.put(MapBean.GAME_ID, gameId);
         mb.put("roleName", checkedIds);
 //		mb.put("status", 2);
 //		mb.put("notifyStatus", 2);
-        mb.put("platformId", platformId);
+        mb.put(MapBean.CHANNEL_ID, channelId);
 //		if (StringUtils.isNotBlank(selectRange)) {
 //			mb.put("startDate", selectRange.split("至")[0] + " 00:00:00");
 //			mb.put("endDate", selectRange.split("至")[1] +" 23:59:59");
@@ -451,7 +451,7 @@ public class ReportAction extends BaseAction {
         pageRoleRank = sRoleRankService.page(pageRoleRank, mb);
         firstResult = pageRoleRank.getFirstResult();
         for (SRoleRank rank : pageRoleRank.getResult()) {
-            rank.setChannelName(idToName.get(String.valueOf(rank.getPlatformId())));
+            rank.setChannelName(idToName.get(String.valueOf(rank.getChannelId())));
         }
         return "roleRank";
     }
@@ -459,17 +459,17 @@ public class ReportAction extends BaseAction {
     public void roleRankExcelExport() {
         try {
             Map<String, String> idToName = new HashMap<String, String>();
-            platforms = bChannelService.getCurrentIdentityChannelList();
-            for (BChannel bChannel : platforms) {
+            channels = bChannelService.getCurrentIdentityChannelList();
+            for (BChannel bChannel : channels) {
                 idToName.put(String.valueOf(bChannel.getId()), bChannel.getChannelName());
             }
 
             MapBean mb = new MapBean();
-            mb.put("gameId", gameId);
+            mb.put(MapBean.GAME_ID, gameId);
             mb.put("roleName", checkedIds);
             mb.put("status", 2);
             mb.put("notifyStatus", 2);
-            mb.put("platformId", platformId);
+            mb.put(MapBean.CHANNEL_ID, channelId);
             if (StringUtils.isNotBlank(selectRange)) {
                 mb.put("startDate", selectRange.split("至")[0] + " 00:00:00");
                 mb.put("endDate", selectRange.split("至")[1] + " 23:59:59");
@@ -490,7 +490,7 @@ public class ReportAction extends BaseAction {
             for (SRoleRank item : ranks) {
                 List<Excel> e = new ArrayList<Excel>();
                 e.add(new Excel(item.getGameName(), 30));
-                e.add(new Excel(idToName.get(String.valueOf(item.getPlatformId())), 30));
+                e.add(new Excel(idToName.get(String.valueOf(item.getChannelId())), 30));
                 e.add(new Excel(item.getRoleName(), 30));
                 e.add(new Excel(DecimallFormatUtil.format((double) item.getAmount() / 100), 20));
                 e.add(new Excel(i++, 20));
@@ -553,12 +553,12 @@ public class ReportAction extends BaseAction {
         this.gamezones = gamezones;
     }
 
-    public List<BChannelGame> getPlatformApps() {
-        return platformApps;
+    public List<BChannelGame> getChannelGames() {
+        return channelGames;
     }
 
-    public void setPlatformApps(List<BChannelGame> platformApps) {
-        this.platformApps = platformApps;
+    public void setChannelGames(List<BChannelGame> channelGames) {
+        this.channelGames = channelGames;
     }
 
     public String getYearMonthStr() {
@@ -569,56 +569,56 @@ public class ReportAction extends BaseAction {
         this.yearMonthStr = yearMonthStr;
     }
 
-    public Map<Game, List<SChannel>> getIteratePlatformsMap() {
-        return iteratePlatformsMap;
+    public Map<Game, List<SChannel>> getIterateChannelsMap() {
+        return iterateChannelsMap;
     }
 
-    public void setIteratePlatformsMap(
-            Map<Game, List<SChannel>> iteratePlatformsMap) {
-        this.iteratePlatformsMap = iteratePlatformsMap;
+    public void setIterateChannelsMap(
+            Map<Game, List<SChannel>> iterateChannelsMap) {
+        this.iterateChannelsMap = iterateChannelsMap;
     }
 
-    public Map<String, List<SChannelMonthly>> getIteratePlatformsMonthlyMap() {
-        return iteratePlatformsMonthlyMap;
+    public Map<String, List<SChannelMonthly>> getIterateChannelsMonthlyMap() {
+        return iterateChannelsMonthlyMap;
     }
 
-    public void setIteratePlatformsMonthlyMap(
-            Map<String, List<SChannelMonthly>> iteratePlatformsMonthlyMap) {
-        this.iteratePlatformsMonthlyMap = iteratePlatformsMonthlyMap;
+    public void setIterateChannelsMonthlyMap(
+            Map<String, List<SChannelMonthly>> iterateChannelsMonthlyMap) {
+        this.iterateChannelsMonthlyMap = iterateChannelsMonthlyMap;
     }
 
-    public List<SChannel> getSPlatformsApp() {
-        return sPlatformsApp;
+    public List<SChannel> getGameSummaryList() {
+        return gameSummaryList;
     }
 
-    public void setSPlatformsApp(List<SChannel> sPlatformsApp) {
-        this.sPlatformsApp = sPlatformsApp;
+    public void setGameSummaryList(List<SChannel> list) {
+        this.gameSummaryList = list;
     }
 
-    public List<SChannel> getSPlatformsPlatform() {
-        return sPlatformsChannel;
+    public List<SChannel> getChannelSummaryList() {
+        return channelSummaryList;
     }
 
-    public void setSPlatformsPlatform(List<SChannel> sPlatformsChannel) {
-        this.sPlatformsChannel = sPlatformsChannel;
+    public void setChannelSummaryList(List<SChannel> list) {
+        this.channelSummaryList = list;
     }
 
-    public List<SChannelMonthly> getSPlatformMonthliesApp() {
-        return sPlatformMonthliesApp;
+    public List<SChannelMonthly> getGameMonthlyList() {
+        return gameMonthlyList;
     }
 
-    public void setSPlatformMonthliesApp(
-            List<SChannelMonthly> sPlatformMonthliesApp) {
-        this.sPlatformMonthliesApp = sPlatformMonthliesApp;
+    public void setGameMonthlyList(
+            List<SChannelMonthly> list) {
+        this.gameMonthlyList = list;
     }
 
-    public List<SChannelMonthly> getSPlatformMonthliesPlatform() {
-        return sPlatformMonthliesPlatform;
+    public List<SChannelMonthly> getChannelMonthlyList() {
+        return channelMonthlyList;
     }
 
-    public void setSPlatformMonthliesPlatform(
+    public void setChannelMonthlyList(
             List<SChannelMonthly> sPlatformMonthliesPlatform) {
-        this.sPlatformMonthliesPlatform = sPlatformMonthliesPlatform;
+        this.channelMonthlyList = sPlatformMonthliesPlatform;
     }
 
     public Long getType() {
@@ -637,22 +637,22 @@ public class ReportAction extends BaseAction {
         this.sZoneChannels = sZoneChannels;
     }
 
-    public Map<String, List<SZoneChannel>> getIterateZonePlatformsMap() {
-        return iterateZonePlatformsMap;
+    public Map<String, List<SZoneChannel>> getIterateZoneChannelMap() {
+        return iterateZoneChannelMap;
     }
 
-    public void setIterateZonePlatformsMap(
-            Map<String, List<SZoneChannel>> iterateZonePlatformsMap) {
-        this.iterateZonePlatformsMap = iterateZonePlatformsMap;
+    public void setIterateZoneChannelMap(
+            Map<String, List<SZoneChannel>> iterateZoneChannelMap) {
+        this.iterateZoneChannelMap = iterateZoneChannelMap;
     }
 
-    public Map<String, List<SZoneChannelMonthly>> getIterateZonePlatformsMonthlyMap() {
-        return iterateZonePlatformsMonthlyMap;
+    public Map<String, List<SZoneChannelMonthly>> getIterateZoneChannelMonthlyMap() {
+        return iterateZoneChannelMonthlyMap;
     }
 
-    public void setIterateZonePlatformsMonthlyMap(
-            Map<String, List<SZoneChannelMonthly>> iterateZonePlatformsMonthlyMap) {
-        this.iterateZonePlatformsMonthlyMap = iterateZonePlatformsMonthlyMap;
+    public void setIterateZoneChannelMonthlyMap(
+            Map<String, List<SZoneChannelMonthly>> iterateZoneChannelMonthlyMap) {
+        this.iterateZoneChannelMonthlyMap = iterateZoneChannelMonthlyMap;
     }
 
     public Page<SRechargeRank> getPageRechargeRank() {
@@ -672,11 +672,11 @@ public class ReportAction extends BaseAction {
     }
 
     public List<SZoneChannelMonthly> getSZonePlatformMonthlies() {
-        return sZonePlatformMonthlies;
+        return sZoneChannelMonthlies;
     }
 
     public void setSZonePlatformMonthlies(List<SZoneChannelMonthly> sZonePlatformMonthlies) {
-        this.sZonePlatformMonthlies = sZonePlatformMonthlies;
+        this.sZoneChannelMonthlies = sZonePlatformMonthlies;
     }
 
     public Integer getIsCompare() {
@@ -711,19 +711,19 @@ public class ReportAction extends BaseAction {
         return gameIds;
     }
 
-    public String getPlatformId() {
-        return platformId;
+    public String getChannelId() {
+        return channelId;
     }
 
-    public void setPlatformId(String platformId) {
-        this.platformId = platformId;
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
     }
 
-    public List<BChannel> getPlatforms() {
-        return platforms;
+    public List<BChannel> getChannels() {
+        return channels;
     }
 
-    public void setPlatforms(List<BChannel> platforms) {
-        this.platforms = platforms;
+    public void setChannels(List<BChannel> channels) {
+        this.channels = channels;
     }
 }

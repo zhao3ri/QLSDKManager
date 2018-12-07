@@ -47,7 +47,7 @@ public class ReportDailyService {
     public List<ReportDaily> list(MapBean mb) {
         if ("game".equals(mb.get("dimension"))) {
             return reportDailyDao.find("ReportDaily.listGame", mb);
-        } else if ("platform".equals(mb.get("dimension"))) {
+        } else if ("channel".equals(mb.get("dimension"))) {
             return reportDailyDao.find("ReportDaily.listPlatform", mb);
         } else if ("zone".equals(mb.get("dimension"))) {
             return reportDailyDao.find("ReportDaily.listZone", mb);
@@ -64,7 +64,7 @@ public class ReportDailyService {
         logger.info("--------------" + mb.get("dimension"));
         if ("game".equals(mb.get("dimension"))) {
             return reportHistoryDailyDao.find("ReportHistoryDaily.listGame", mb);
-        } else if ("platform".equals(mb.get("dimension"))) {
+        } else if ("channel".equals(mb.get("dimension"))) {
             return reportHistoryDailyDao.find("ReportHistoryDaily.listPlatform", mb);
         } else if ("zone".equals(mb.get("dimension"))) {
             return reportHistoryDailyDao.find("ReportHistoryDaily.listZone", mb);
@@ -106,7 +106,7 @@ public class ReportDailyService {
         if (StringUtils.isBlank(channelIds) && StringUtils.isBlank(compareChannelIds) && StringUtils.isBlank(zoneIds) && StringUtils.isBlank(compareZoneIds)) {
             mb.put("dimension", "game");
         } else if (StringUtils.isBlank(zoneIds) && StringUtils.isBlank(compareZoneIds)) {
-            mb.put("dimension", "platform");
+            mb.put("dimension", "channel");
         } else {
             mb.put("dimension", "zone");
         }
@@ -201,7 +201,7 @@ public class ReportDailyService {
                 }
                 result.put("data", data);
                 result.put("type", 2);
-                result.put("group", "platform");
+                result.put("group", "channel");
 
                 mb.put("groupby", "statDate");
                 result.put("optionJson", getOptionJson(list(mb), null, false, type));
@@ -580,7 +580,7 @@ public class ReportDailyService {
         if (StringUtils.isBlank(channelIds) && StringUtils.isBlank(zoneIds)) {
             mb.put("dimension", "game");
         } else if (StringUtils.isBlank(zoneIds)) {
-            mb.put("dimension", "platform");
+            mb.put("dimension", "channel");
         } else {
             mb.put("dimension", "zone");
         }

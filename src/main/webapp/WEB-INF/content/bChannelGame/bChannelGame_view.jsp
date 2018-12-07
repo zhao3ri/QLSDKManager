@@ -20,7 +20,7 @@
         <ol class="breadcrumb row">
             <li><i class="icon-home"></i> <a href="${ctx}/index.shtml">首页</a></li>
             <li class="active">渠道管理</li>
-            <li><a href="${ctx}/bChannelGame/bPlatformGame_list.shtml">渠道关联列表</a></li>
+            <li><a href="${ctx}/bChannelGame/bChannelGame_list.shtml">渠道关联列表</a></li>
             <li class="active">查看渠道关联信息</li>
         </ol>
         <div class="panel panel-default">

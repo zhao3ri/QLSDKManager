@@ -52,7 +52,7 @@
 			SUM(a.newUserPays) AS incPayUsers,
 			SUM(a.payUsers) AS payUsers,
 			`yearMonth`
-		FROM s_zone_platform_monthly a
+		FROM s_zone_channel_monthly a
 		JOIN 
 		b_game bg
 		ON 

@@ -10,13 +10,13 @@
 	      	<li class="active">渠道关联管理</li>
 	      	<li class="active">渠道关联列表</li>
 	    </ol>
-		<form role="form" action="bPlatformGame_list.shtml" method="post" id="mainForm">
+		<form role="form" action="bChannelGame_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">渠道关联列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 
 		      <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择渠道">
-		          	<select class="form-control" name="BPlatformGame.channelId"  data-original-title="" title="">
+		          	<select class="form-control" name="BChannelGame.channelId"  data-original-title="" title="">
 									<option value="">==请选择渠道==</option>
 									<s:iterator value="bChannels" var="item">
 										<option value="${item.id}" <c:if test="${item.id==bChannelGame.channelId}">selected</c:if>>${item.channelName }</option>
@@ -25,11 +25,11 @@
 		        </div>
 
 		       <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请输入游戏">
-               				    <input  class="form-control" type="text"  placeholder="游戏名称" name="BPlatformGame.gameName" value="${BPlatformGame.gameName}"/>
+               				    <input  class="form-control" type="text"  placeholder="游戏名称" name="BChannelGame.gameName" value="${BChannelGame.gameName}"/>
                		        </div>
 
 		        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-		          	<select class="form-control" name="BPlatformGame.gameId"  data-original-title="" title="">
+		          	<select class="form-control" name="BChannelGame.gameId"  data-original-title="" title="">
 									<option value="">==请选择游戏==</option>
 									<s:iterator value="games" var="item">
 										<option value="${item.id}" <c:if test="${item.id==bChannelGame.gameId}">selected</c:if>>${item.gameName }</option>
@@ -65,8 +65,8 @@
 	            			</tr>
 	          			</thead>
 	          			<tbody>
-	            			<s:if test="bPlatformGamePage.result.size>0">
-							<s:iterator value="bPlatformGamePage.result" var="page">
+	            			<s:if test="bChannelGamePage.result.size>0">
+							<s:iterator value="bChannelGamePage.result" var="page">
 							<tr>
 								<td><s:property value="id"/></td>
 								<td><s:property value="channelName"/></td>
@@ -87,10 +87,10 @@
 									<div class="btn-group btn-group-sm pull-right">
 					                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
 					                  	<ul class="dropdown-menu" role="menu">
-											<li><a href="bPlatformGame_view.shtml?id=<s:property value="id"/>">查看详情</a></li>
-											<li><a href="bPlatformGame_handle.shtml?id=<s:property value="id"/>">修改</a></li>
-											<li><a href="javascript:confirmAction('bPlatformGame_delete.shtml?id=<s:property value="id"/>','您确认删除？');">删除</a></li>
-					                  		<li><a href="${ctx}/bChannelGameZone/bPlatformGameZone_handle.shtml?BPlatformGameZone.gameId=${gameId }&BPlatformGameZone.channelId=${channelId}">分区管理</a></li>
+											<li><a href="bChannelGame_view.shtml?id=<s:property value="id"/>">查看详情</a></li>
+											<li><a href="bChannelGame_handle.shtml?id=<s:property value="id"/>">修改</a></li>
+											<li><a href="javascript:confirmAction('bChannelGame_delete.shtml?id=<s:property value="id"/>','您确认删除？');">删除</a></li>
+					                  		<li><a href="${ctx}/bChannelGameZone/bChannelGameZone_handle.shtml?BChannelGameZone.gameId=${gameId }&BChannelGameZone.channelId=${channelId}">分区管理</a></li>
 					                  	</ul>
 					                </div>
 								</td>
@@ -105,9 +105,9 @@
 						</tbody>
 	        		</table>
 	      		</div>
-	      		<s:if test="bPlatformGamePage.result.size>0">
+	      		<s:if test="bChannelGamePage.result.size>0">
 	      		<div class="table_page dropup">
-	      			<c:set var="p" value="bPlatformGamePage"/>
+	      			<c:set var="p" value="bChannelGamePage"/>
 			        <%@ include file="/common/pagination.jsp" %>
 			    </div>
 	      		</s:if>
@@ -120,11 +120,11 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#newitem").click(function() {
-				location.assign("bPlatformGame_handle.shtml");
+				location.assign("bChannelGame_handle.shtml");
 			});
 		});
 		function resetSearch(){
-	       location.assign("bPlatformGame_list.shtml");
+	       location.assign("bChannelGame_list.shtml");
 	    }
 	</script>
 </body>

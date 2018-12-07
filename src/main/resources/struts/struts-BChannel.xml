@@ -3,17 +3,17 @@
         "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="bChannel" extends="base" namespace="/bChannel">
-		<action name="bPlatform_*" method="{1}" class="com.item.web.action.BChannelAction">
-			<result name="list">/WEB-INF/content/bChannel/bPlatform_list.jsp</result>
-			<result name="delete" type="redirect">${ctx}/bChannel/bPlatform_list.shtml?keepSearchCondition=1</result>
-			<result name="save" type="redirect">${ctx}/bChannel/bPlatform_list.shtml?keepSearchCondition=1</result>
-			<result name="handle">/WEB-INF/content/bChannel/bPlatform_handle.jsp</result>
-			<result name="balance">/WEB-INF/content/bChannel/bPlatform_balance.jsp</result>
+		<action name="bChannel_*" method="{1}" class="com.item.web.action.BChannelAction">
+			<result name="list">/WEB-INF/content/bChannel/bChannel_list.jsp</result>
+			<result name="delete" type="redirect">${ctx}/bChannel/bChannel_list.shtml?keepSearchCondition=1</result>
+			<result name="save" type="redirect">${ctx}/bChannel/bChannel_list.shtml?keepSearchCondition=1</result>
+			<result name="handle">/WEB-INF/content/bChannel/bChannel_handle.jsp</result>
+			<result name="balance">/WEB-INF/content/bChannel/bChannel_balance.jsp</result>
 			 <result type="stream" name="channelNameIsExisted">
                    <param name="contentType">text/html</param>
                    <param name="inputName">channelNameIsExisted</param>
              </result>
-			<result name="savebalance" type="redirect">${ctx}/bChannel/bPlatform_listbalance.shtml</result>
+			<result name="savebalance" type="redirect">${ctx}/bChannel/bChannel_listbalance.shtml</result>
 			<result name="listbalance">/WEB-INF/content/bChannel/sBalance_list.jsp</result>
 		</action>
 	</package>

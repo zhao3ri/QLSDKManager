@@ -110,11 +110,11 @@ public class SRoleRank {
         this.gameId = appId;
     }
 
-    public Integer getPlatformId() {
+    public Integer getChannelId() {
         return channelId;
     }
 
-    public void setPlatformId(Integer platformId) {
+    public void setChannelId(Integer platformId) {
         this.channelId = platformId;
     }
 

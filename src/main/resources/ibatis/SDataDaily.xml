@@ -58,7 +58,7 @@
 			SUM(a.newUserPays) AS incPayUsers,
 			SUM(a.payUsers) AS payUsers,
 			a.`statDate`
-		FROM s_zone_platform_daily a
+		FROM s_zone_channel_daily a
 		JOIN 
 		b_game bg
 		ON 

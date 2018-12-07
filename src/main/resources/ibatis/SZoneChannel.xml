@@ -81,7 +81,7 @@
 			SUM(szp.payAmount) AS payAmount,
 			SUM(szp.payTimes) AS payTimes,
 			SUM(szp.payUsers) AS payUsers
-	   	FROM s_zone_platform_history szp 
+	   	FROM s_zone_channel_history szp
 	    JOIN b_game bg ON bg.id=szp.gameId
 		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
 		<include refid="SZoneChannel.Where"/>
@@ -104,7 +104,7 @@
 	        bgz.`zoneName` AS zoneName,
 			bg.gameName AS gameName,
 			bp.channelName AS channelName
-		FROM s_zone_platform_history szp
+		FROM s_zone_channel_history szp
 		JOIN b_game bg ON bg.id=szp.gameId
 		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
 		JOIN b_channel bp ON szp.channelId=bp.id
@@ -128,7 +128,7 @@
 	        bgz.`zoneName` AS zoneName,
 			bg.gameName AS gameName,
 			bp.channelName AS channelName
-		FROM s_zone_platform_history szp
+		FROM s_zone_channel_history szp
 		JOIN b_game bg ON bg.id=szp.gameId
 		JOIN b_game_zone bgz ON bgz.gameId=szp.gameId AND bgz.zoneId=szp.zoneId
 		JOIN b_channel bp ON szp.channelId=bp.id

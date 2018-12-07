@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="SZonePlatformRealtime">
+<sqlMap namespace="SZoneChannelRealtime">
 
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
     
@@ -62,8 +62,8 @@
 			`newDevices`,
 			`payAmount`,
 			`activeUsers`
-		FROM s_zone_platform_realtime
-        <include refid="SZonePlatformRealtime.Where"/>
+		FROM s_zone_channel_realtime
+        <include refid="SZoneChannelRealtime.Where"/>
         <isNotNull property="orderby">
         	ORDER BY $orderby$
         </isNotNull>
@@ -72,7 +72,7 @@
 
     <select id="SZoneChannelRealtime.count" resultClass="Long" parameterClass="mb">
         SELECT COUNT(1)
-		FROM s_zone_platform_realtime
+		FROM s_zone_channel_realtime
         <include refid="SZoneChannelRealtime.Where"/>
     </select>
 
@@ -89,7 +89,7 @@
 			`newDevices`,
 			`payAmount`,
 			`activeUsers`
-		FROM s_zone_platform_realtime
+		FROM s_zone_channel_realtime
         <include refid="SZoneChannelRealtime.Where"/>
         <isNotNull property="orderby">
              ORDER BY $orderby$
@@ -110,7 +110,7 @@
 			SUM(`newDevices`) AS newDevices,
 			SUM(`payAmount`) AS payAmount,
 			SUM(`activeUsers`) AS activeUsers
-		FROM s_zone_platform_realtime
+		FROM s_zone_channel_realtime
         <include refid="SZoneChannelRealtime.Where"/>
         GROUP BY 
         <isEmpty property="groupDateType">
@@ -141,13 +141,13 @@
 			`newDevices`,
 			`payAmount`,
 			`activeUsers`
-		FROM s_zone_platform_realtime
+		FROM s_zone_channel_realtime
 		WHERE
 	  		`id`=#id# 
     </select>
 
     <insert id="SZoneChannelRealtime.save" parameterClass="sZoneChannelRealtime">
-        INSERT INTO s_zone_platform_realtime(
+        INSERT INTO s_zone_channel_realtime(
         	`clientType`,
 			gameId,
 			`zoneId`,
@@ -176,7 +176,7 @@
     </insert>
 
     <update id="SZoneChannelRealtime.update" parameterClass="sZoneChannelRealtime">
-    	UPDATE s_zone_platform_realtime
+    	UPDATE s_zone_channel_realtime
 	    	<dynamic prepend="set">
 	    		<isNotNull prepend="," property="clientType">
 					`clientType`=#clientType#
@@ -214,7 +214,7 @@
     </update>
 
     <delete id="SZoneChannelRealtime.delete" parameterClass="Long">
-		DELETE FROM s_zone_platform_realtime
+		DELETE FROM s_zone_channel_realtime
 		WHERE
 			`id`=#id# 
     </delete>

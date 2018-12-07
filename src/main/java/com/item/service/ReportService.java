@@ -37,13 +37,13 @@ public class ReportService {
         mb.put(MapBean.CLIENT_TYPE, clientType);
         mb.put(MapBean.GAME_ID, appId);
 
-        List<BChannel> platforms = bChannelService.getByIds(channelIds);
+        List<BChannel> channels = bChannelService.getByIds(channelIds);
         List<Gamezone> gamezones = bGamezoneService.getByIds(appId, zoneIds);
-        List<BChannel> comparePlatforms = bChannelService.getByIds(compareChannelIds);
+        List<BChannel> compareChannels = bChannelService.getByIds(compareChannelIds);
         List<Gamezone> compareGamezones = bGamezoneService.getByIds(appId, compareZoneIds);
-        result.put("platforms", platforms);
+        result.put(MapBean.CHANNEL_IDS, channels);
         result.put("gamezones", gamezones);
-        result.put("comparePlatforms", comparePlatforms);
+        result.put("compareChannels", compareChannels);
         result.put("compareGamezones", compareGamezones);
 
         if (StringUtils.isNotBlank(selectRange))
@@ -137,21 +137,21 @@ public class ReportService {
             }
         } else {
             if (StringUtils.isNotBlank(compareChannelIds) || StringUtils.isNotBlank(compareZoneIds)) {   //有渠道或者分区对比
-                mb.put("channelIds", channelIds);
-                mb.put("zoneIds", zoneIds);
-                List<SChannelRealtime> zonePlatformRealtimes = sChannelRealtimeService.listGroupBy(mb);
-                result.put("data", zonePlatformRealtimes);
+                mb.put(MapBean.CHANNEL_IDS, channelIds);
+                mb.put(MapBean.ZONE_IDS, zoneIds);
+                List<SChannelRealtime> zoneChannelRealtimes = sChannelRealtimeService.listGroupBy(mb);
+                result.put("data", zoneChannelRealtimes);
 
-                mb.put("channelIds", compareChannelIds);
-                mb.put("zoneIds", compareZoneIds);
-                List<SZoneChannelRealtime> compareZonePlatformRealtimes = sZoneChannelRealtimeService.listGroupBy(mb);
-                result.put("compareData", compareZonePlatformRealtimes);
+                mb.put(MapBean.CHANNEL_IDS, compareChannelIds);
+                mb.put(MapBean.ZONE_IDS, compareZoneIds);
+                List<SZoneChannelRealtime> compareZoneChannelRealtimes = sZoneChannelRealtimeService.listGroupBy(mb);
+                result.put("compareData", compareZoneChannelRealtimes);
 
-                String optionJson = getOnlineOptionJson(zonePlatformRealtimes, compareZonePlatformRealtimes);
+                String optionJson = getOnlineOptionJson(zoneChannelRealtimes, compareZoneChannelRealtimes);
                 result.put("optionJson", optionJson);
                 result.put("isCompare", 1);
 				
-				/*List<BChannel> platforms = bPlatformService.getByIds(channelIds);
+				/*List<BChannel> Channels = bPlatformService.getByIds(channelIds);
 				List<BChannel> comparePlatforms = bPlatformService.getByIds(compareChannelIds);
 				List<Gamezone> gamezones = bGamezoneService.getByIds(appId,zoneIds);
 				List<Gamezone> compareGamezones = bGamezoneService.getByIds(appId,compareZoneIds);
@@ -160,31 +160,31 @@ public class ReportService {
 				result.put("gamezones", gamezones);
 				result.put("compareGamezones", compareGamezones);*/
             } else if (StringUtils.isBlank(compareSelectRange)) {  //无对比
-                mb.put("channelIds", channelIds);
-                mb.put("zoneIds", zoneIds);
-                List<SChannelRealtime> zonePlatformRealtimes = sChannelRealtimeService.listGroupBy(mb);
-                String optionJson = getOnlineOptionJson(zonePlatformRealtimes, null);
+                mb.put(MapBean.CHANNEL_IDS, channelIds);
+                mb.put(MapBean.ZONE_IDS, zoneIds);
+                List<SChannelRealtime> zoneChannelRealtimes = sChannelRealtimeService.listGroupBy(mb);
+                String optionJson = getOnlineOptionJson(zoneChannelRealtimes, null);
                 result.put("optionJson", optionJson);
                 result.put("isCompare", 2);
 
                 mb.put("groupType", groupType);
-                List<SChannelRealtime> zonePlatformRealtimesGroupByZone = sChannelRealtimeService.listGroupBy(mb);
+                List<SChannelRealtime> zoneChannelRealtimesGroupByZone = sChannelRealtimeService.listGroupBy(mb);
 				/*List<Gamezone> gamezones = bGamezoneService.getByIds(appId,zoneIds);
-				List<BChannel> platforms = bPlatformService.getByIds(channelIds);*/
+				List<BChannel> Channels = bChannelService.getByIds(channelIds);*/
                 if (groupType == 1) {
-                    for (SChannelRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
+                    for (SChannelRealtime sZoneChannelRealtime : zoneChannelRealtimesGroupByZone) {
                         for (Gamezone gamezone : gamezones) {
-//							if (gamezone.getZoneId().equals(sZonePlatformRealtime.getZoneId())) {
-//								sZonePlatformRealtime.setZoneName(gamezone.getZoneName());
+//							if (gamezone.getZoneId().equals(sZoneChannelRealtime.getZoneId())) {
+//								sZoneChannelRealtime.setZoneName(gamezone.getZoneName());
                             continue;
 //							}
                         }
                     }
                 } else if (groupType == 2) {
-                    for (SChannelRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
-                        for (BChannel bChannel : platforms) {
-                            if (bChannel.getId().toString().equals(sZonePlatformRealtime.getChannelId().toString())) {
-//								sZonePlatformRealtime.setChannelName(bChannel.getChannelName());
+                    for (SChannelRealtime sZoneChannelRealtime : zoneChannelRealtimesGroupByZone) {
+                        for (BChannel bChannel : channels) {
+                            if (bChannel.getId().toString().equals(sZoneChannelRealtime.getChannelId().toString())) {
+//								sZoneChannelRealtime.setChannelName(bChannel.getChannelName());
                                 continue;
                             }
                         }
@@ -192,15 +192,15 @@ public class ReportService {
                 }
 
                 Map<String, List<SChannelRealtime>> dataMap = new LinkedHashMap<String, List<SChannelRealtime>>();
-                for (SChannelRealtime sZonePlatformRealtime : zonePlatformRealtimesGroupByZone) {
-                    if (dataMap.get(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss")) == null) {
+                for (SChannelRealtime sZoneChannelRealtime : zoneChannelRealtimesGroupByZone) {
+                    if (dataMap.get(DateUtils.format(sZoneChannelRealtime.getStatDate(), "HH:mm:ss")) == null) {
                         List<SChannelRealtime> list = new ArrayList<SChannelRealtime>();
-                        list.add(sZonePlatformRealtime);
-                        dataMap.put(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss"), list);
+                        list.add(sZoneChannelRealtime);
+                        dataMap.put(DateUtils.format(sZoneChannelRealtime.getStatDate(), "HH:mm:ss"), list);
                     } else {
-                        List<SChannelRealtime> list = dataMap.get(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss"));
-                        list.add(sZonePlatformRealtime);
-                        dataMap.put(DateUtils.format(sZonePlatformRealtime.getStatDate(), "HH:mm:ss"), list);
+                        List<SChannelRealtime> list = dataMap.get(DateUtils.format(sZoneChannelRealtime.getStatDate(), "HH:mm:ss"));
+                        list.add(sZoneChannelRealtime);
+                        dataMap.put(DateUtils.format(sZoneChannelRealtime.getStatDate(), "HH:mm:ss"), list);
                     }
                 }
                 result.put("data", dataMap);

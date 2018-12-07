@@ -35,12 +35,12 @@ public class BRoleAction extends Struts2Action{
     @Autowired
     private BGameService bGameService;
     @Autowired
-    private BChannelService platformService;
+    private BChannelService channelService;
 
     private Page<BRole> rolePage = new Page<BRole>(10);
     private BRole role;
     private List<Game> games;
-    private List<BChannel> platforms;
+    private List<BChannel> channels;
     private String selectRange;
 	
     public String list(){
@@ -48,7 +48,7 @@ public class BRoleAction extends Struts2Action{
         
         games = bGameService.getGameList();
         
-        platforms = platformService.getCurrentIdentityChannelList();
+        channels = channelService.getCurrentIdentityChannelList();
         
         if (null == mb.get(MapBean.GAME_ID) && !CollectionUtils.isEmpty(games)){
 			Long gameId = games.get(0).getId();
@@ -113,7 +113,7 @@ public class BRoleAction extends Struts2Action{
                 mb.put(MapBean.CHANNEL_ID, role.getChannelId());
             }
         	if (StringUtils.isNotBlank(role.getZoneId())){
-                mb.put("zoneId", role.getZoneId());
+                mb.put(MapBean.ZONE_ID, role.getZoneId());
             }
         	if (StringUtils.isNotBlank(role.getRoleId())){
                 mb.put("roleId", role.getRoleId());
@@ -156,12 +156,12 @@ public class BRoleAction extends Struts2Action{
 		this.games = games;
 	}
 
-	public List<BChannel> getPlatforms() {
-		return platforms;
+	public List<BChannel> getChannels() {
+		return channels;
 	}
 
-	public void setPlatforms(List<BChannel> platforms) {
-		this.platforms = platforms;
+	public void setChannels(List<BChannel> channels) {
+		this.channels = channels;
 	}
 
 	public String getSelectRange() {

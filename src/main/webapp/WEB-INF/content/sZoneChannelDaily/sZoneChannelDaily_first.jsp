@@ -11,22 +11,22 @@
 	</div>
     <div class=" col-md-10">
         <div class="panel panel-default">
-        	<form action="sZonePlatformDaily_first.shtml" method="post" id="mainForm">
+        	<form action="sZoneChannelDaily_first.shtml" method="post" id="mainForm">
 	        	<div class="form-inline popover-show panel-body list_toolbar">
 		      		<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-			          	<select class="form-control" name="SZonePlatformDaily.gameId"  placeholder="请选择游戏">
+			          	<select class="form-control" name="SZoneChannelDaily.gameId"  placeholder="请选择游戏">
 							<option value="">所有游戏</option>
 							<s:iterator value="gameList" var="item">
-								<option value="${item.id}" <c:if test="${item.id==SZonePlatformDaily.gameId }">selected</c:if>>${item.gameName }</option>
+								<option value="${item.id}" <c:if test="${item.id==SZoneChannelDaily.gameId }">selected</c:if>>${item.gameName }</option>
 							</s:iterator>
 						</select>
 			        </div>
 			        
 			        <div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择客户端">
-			          	<select class="form-control" name="SZonePlatformDaily.clientType"  placeholder="请选择客户端">
+			          	<select class="form-control" name="SZoneChannelDaily.clientType"  placeholder="请选择客户端">
 							<option value="">客户端类型</option>
-							<option value="1" <c:if test="${SZonePlatformDaily.clientType==1 }">selected</c:if>>Android </option>
-							<option value="2" <c:if test="${SZonePlatformDaily.clientType==2 }">selected</c:if>>IOS</option>
+							<option value="1" <c:if test="${SZoneChannelDaily.clientType==1 }">selected</c:if>>Android </option>
+							<option value="2" <c:if test="${SZoneChannelDaily.clientType==2 }">selected</c:if>>IOS</option>
 						</select>
 			        </div>
 			        
@@ -34,7 +34,7 @@
 			        
 			        <div class="form-group   width_input" >
 							<div class="input-group  input-append date form_date "  data-date-format="yyyy-mm-dd" >
-								<input  class="form-control " type="text" name="SZonePlatformDaily.startDate" value="${sZonePlatformDaily.startDate}"  readonly  placeholder="开始日期" data-toggle="popover"  data-placement="top" data-content="请选择开始日期"/>
+								<input  class="form-control " type="text" name="SZoneChannelDaily.startDate" value="${sZoneChannelDaily.startDate}"  readonly  placeholder="开始日期" data-toggle="popover"  data-placement="top" data-content="请选择开始日期"/>
 								<span class="add-on input-group-addon"><i class="icon-remove"></i></span> 
 								<span class="add-on input-group-addon"><i class="icon-calendar"></i></span>
 			                </div>
@@ -42,7 +42,7 @@
 			          	至
 			          <div class="form-group   width_input" >
 							<div class="input-group  input-append date form_date "  data-date-format="yyyy-mm-dd" >
-								<input  class="form-control " name="SZonePlatformDaily.endDate" value="${sZonePlatformDaily.endDate}"  type="text"  readonly  placeholder="结束日期" data-toggle="popover"  data-placement="top" data-content="请选择结束日期"/>
+								<input  class="form-control " name="SZoneChannelDaily.endDate" value="${sZoneChannelDaily.endDate}"  type="text"  readonly  placeholder="结束日期" data-toggle="popover"  data-placement="top" data-content="请选择结束日期"/>
 								<span class="add-on input-group-addon"><i class="icon-remove"></i></span> 
 								<span class="add-on input-group-addon"><i class="icon-calendar"></i></span>
 			                </div>
@@ -79,7 +79,7 @@
             <h3 class="panel-title"> 统计图</h3>
           </div>
           <div class="panel-body " > 
-          <s:if test="sZonePlatformDailies.size>0">
+          <s:if test="sZoneChannelDailies.size>0">
 			  <div id="chartData"  style="height:400px"></div>
 		  </s:if>
 		  <s:else>
@@ -111,8 +111,8 @@
             			</tr>
           			</thead>
           			<tbody>
-            			<s:if test="sZonePlatformDailies.size>0">
-						<s:iterator value="sZonePlatformDailies" var="item">
+            			<s:if test="sZoneChannelDailies.size>0">
+						<s:iterator value="sZoneChannelDailies" var="item">
 						<tr>
 							<td><s:date name="#item.statDate" format="yyyy-MM-dd"/></td>
 							<td><s:property value="zoneName"/></td>
@@ -171,14 +171,14 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#resetBtn").click(function(){
-				location.assign("sZonePlatformDaily_first.shtml"); 
+				location.assign("sZoneChannelDaily_first.shtml");
 				});
 			$("#reportLeft_first").addClass("active");
 			$("#excelExport").click(function() {
 				if(confirm("您确认导出Excel？")){
-					$("#mainForm").attr("action","sZonePlatformDaily_excelExport.shtml?chartType=2");
+					$("#mainForm").attr("action","sZoneChannelDaily_excelExport.shtml?chartType=2");
 					$("#mainForm").submit();
-					$("#mainForm").attr("action","sZonePlatformDaily_first.shtml");
+					$("#mainForm").attr("action","sZoneChannelDaily_first.shtml");
 				}
 			});
 		});

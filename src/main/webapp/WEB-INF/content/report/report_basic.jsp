@@ -361,7 +361,7 @@
                                                         <c:if test="${result['group'] == 'game'}">
                                                             <td><s:property value="#itemVal.gameName"/></td>
                                                         </c:if>
-                                                        <c:if test="${result['group'] == 'platform'}">
+                                                        <c:if test="${result['group'] == 'channel'}">
                                                             <td><s:property value="#itemVal.channelName"/></td>
                                                         </c:if>
                                                         <c:if test="${result['group'] == 'zone'}">

@@ -49,7 +49,7 @@ public class BOrderAction extends Struts2Action {
     private BOrder bOrder;
     private Long id;
     private List<Game> games;
-    private List<BChannel> platforms;
+    private List<BChannel> channels;
     private List<Gamezone> gamezones;
     private String selectRange;
 
@@ -61,7 +61,7 @@ public class BOrderAction extends Struts2Action {
         bOrderPage = bOrderService.page(bOrderPage, mb);
 
         games = bGameService.getGameList();
-        platforms = bChannelService.getCurrentIdentityChannelList();
+        channels = bChannelService.getCurrentIdentityChannelList();
 
         return "list";
     }
@@ -201,7 +201,7 @@ public class BOrderAction extends Struts2Action {
                 mb.put("uid", bOrder.getUid());
             }
             if (bOrder.getZoneId() != null && !"".equals(bOrder.getZoneId())) {
-                mb.put("zoneId", bOrder.getZoneId());
+                mb.put(MapBean.ZONE_ID, bOrder.getZoneId());
             }
             if (bOrder.getRoleId() != null && !"".equals(bOrder.getRoleId())) {
                 mb.put("roleId", bOrder.getRoleId());
@@ -311,12 +311,12 @@ public class BOrderAction extends Struts2Action {
         this.games = games;
     }
 
-    public List<BChannel> getPlatforms() {
-        return platforms;
+    public List<BChannel> getChannels() {
+        return channels;
     }
 
-    public void setPlatforms(List<BChannel> platforms) {
-        this.platforms = platforms;
+    public void setChannels(List<BChannel> channels) {
+        this.channels = channels;
     }
 
     public String getSelectRange() {

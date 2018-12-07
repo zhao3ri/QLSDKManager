@@ -70,14 +70,14 @@ public class BChannelGameService {
      * 根据id获取相应平台游戏关联数据
      */
     public BChannelGame getBChannelGameById(Long id) {
-        return bChannelGameDao.get("BChannelGame.getChannelAppById", id);
+        return bChannelGameDao.get("BChannelGame.getChannelGameById", id);
     }
 
     /*
      * 获取某个游戏全部平台
      */
     @SuppressWarnings("unchecked")
-    public List<BChannelGame> getAllChannel(Long appId) {
+    public List<BChannelGame> getAllChannel(Long gameId) {
         RedisClient.del("channel_game_all");
         Map<String, List<BChannelGame>> result = (Map<String, List<BChannelGame>>) RedisClient.get("channel_game_all", Map.class);
         if (result == null) {
@@ -85,18 +85,18 @@ public class BChannelGameService {
             List<BChannelGame> bChannels = bChannelGameDao.find("BChannelGame.list", null);
             for (BChannelGame bChannel : bChannels) {
                 if (result.get(bChannel.getGameId().toString()) == null) {
-                    List<BChannelGame> thisAppbChannels = new ArrayList<BChannelGame>();
-                    thisAppbChannels.add(bChannel);
-                    result.put(bChannel.getGameId().toString(), thisAppbChannels);
+                    List<BChannelGame> thisGameChannels = new ArrayList<BChannelGame>();
+                    thisGameChannels.add(bChannel);
+                    result.put(bChannel.getGameId().toString(), thisGameChannels);
                 } else {
-                    List<BChannelGame> thisAppbChannels = result.get(bChannel.getGameId().toString());
-                    thisAppbChannels.add(bChannel);
-                    result.put(bChannel.getGameId().toString(), thisAppbChannels);
+                    List<BChannelGame> thisGameChannels = result.get(bChannel.getGameId().toString());
+                    thisGameChannels.add(bChannel);
+                    result.put(bChannel.getGameId().toString(), thisGameChannels);
                 }
             }
             RedisClient.set("channel_game_all", result);
         }
-        return result.get(appId.toString());
+        return result.get(gameId.toString());
     }
 
     /*
@@ -114,7 +114,7 @@ public class BChannelGameService {
     }
 
     public List<BChannelGame> getByGameId(Long appId) {
-        return bChannelGameDao.find("BChannelGame.GetByAppId", appId);
+        return bChannelGameDao.find("BChannelGame.GetByGameId", appId);
     }
 
 }

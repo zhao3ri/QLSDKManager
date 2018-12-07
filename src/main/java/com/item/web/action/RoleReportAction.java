@@ -56,7 +56,7 @@ public class RoleReportAction extends BaseAction {
     private List<Game> games;
     private List<SRechargeHourly> rechargeHourlies;
     private Long gameId;
-    private Integer platformId;
+    private Integer channelId;
     private String zoneId;
     private String uid;
     private String roleName;
@@ -70,7 +70,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.realTimeLogin(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.realTimeLogin(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -81,7 +81,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -92,7 +92,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.online(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.online(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -102,7 +102,7 @@ public class RoleReportAction extends BaseAction {
     public void excelExportOnline() {
         try {
             ExcelExport ee = new ExcelExport();
-            roleReportService.excelExportOnline(ee, gameId, clientType, platformId, zoneId, selectRange);
+            roleReportService.excelExportOnline(ee, gameId, clientType, channelId, zoneId, selectRange);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +113,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.onlineDaily(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.onlineDaily(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -123,7 +123,7 @@ public class RoleReportAction extends BaseAction {
     public void excelExportOnlineDaily() {
         try {
             ExcelExport ee = new ExcelExport();
-            roleReportService.excelExportOnlineDaily(ee, gameId, clientType, platformId, zoneId, selectRange);
+            roleReportService.excelExportOnlineDaily(ee, gameId, clientType, channelId, zoneId, selectRange);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,7 +134,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.daily(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.daily(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -144,7 +144,7 @@ public class RoleReportAction extends BaseAction {
     public void excelExportDaily() {
         try {
             ExcelExport ee = new ExcelExport();
-            roleReportService.excelExportDaily(ee, gameId, clientType, platformId, zoneId, selectRange);
+            roleReportService.excelExportDaily(ee, gameId, clientType, channelId, zoneId, selectRange);
             ee.excelExport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -155,7 +155,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.playTime(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.playTime(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -166,7 +166,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData()) {
             return null;
         }
-        result = roleReportService.totalPlayTime(page, gameId, clientType, platformId, zoneId, selectRange, roleName, uid);
+        result = roleReportService.totalPlayTime(page, gameId, clientType, channelId, zoneId, selectRange, roleName, uid);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -183,8 +183,8 @@ public class RoleReportAction extends BaseAction {
             selectRange = DateUtils.format(calendar.getTime(), "yyyy-MM-dd") + " 至 " + DateUtils.format(calendar.getTime(), "yyyy-MM-dd");
         }
         MapBean mb = new MapBean();
-        mb.put("gameId", gameId);
-        mb.put("platformId", platformId);
+        mb.put(MapBean.GAME_ID, gameId);
+        mb.put(MapBean.CHANNEL_ID, channelId);
         mb.put("zoneId", zoneId);
         mb.put("startDate", selectRange.split("至")[0].trim());
         mb.put("endDate", selectRange.split("至")[1].trim());
@@ -197,7 +197,7 @@ public class RoleReportAction extends BaseAction {
             return null;
         }
 
-        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -213,7 +213,7 @@ public class RoleReportAction extends BaseAction {
 
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, gameId);
-        mb.put(MapBean.CHANNEL_ID, platformId);
+        mb.put(MapBean.CHANNEL_ID, channelId);
         mb.put("zoneId", zoneId);
         mb.put("statDate", selectRange);
         rechargeHourlies = rechargeHourlyService.list(mb);
@@ -233,8 +233,8 @@ public class RoleReportAction extends BaseAction {
 
         MapBean mb = new MapBean();
         mb.put(MapBean.GAME_ID, gameId);
-        mb.put(MapBean.CHANNEL_ID, platformId);
-        mb.put("zoneId", zoneId);
+        mb.put(MapBean.CHANNEL_ID, channelId);
+        mb.put(MapBean.ZONE_ID, zoneId);
         mb.put("statStartDate", selectRange.split("至")[0].trim());
         mb.put("statEndDate", selectRange.split("至")[1].trim());
         List<SRoleDaily> roleDailies = sRoleDailyService.listDailyLogin(mb);
@@ -254,7 +254,7 @@ public class RoleReportAction extends BaseAction {
             return null;
         }
 
-        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange")) {
             selectRange = result.get("selectRange").toString();
         }
@@ -265,7 +265,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData())
             return null;
 
-        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange"))
             selectRange = result.get("selectRange").toString();
         return "keepRoles";
@@ -275,7 +275,7 @@ public class RoleReportAction extends BaseAction {
         if (!initData())
             return null;
 
-        result = roleReportService.dailyLogin(gameId, clientType, platformId, zoneId, selectRange);
+        result = roleReportService.dailyLogin(gameId, clientType, channelId, zoneId, selectRange);
         if (!CollectionUtils.isEmpty(result) && result.containsKey("selectRange"))
             selectRange = result.get("selectRange").toString();
         return "lossRoles";
@@ -309,12 +309,12 @@ public class RoleReportAction extends BaseAction {
         this.gameId = gameId;
     }
 
-    public Integer getPlatformId() {
-        return platformId;
+    public Integer getChannelId() {
+        return channelId;
     }
 
-    public void setPlatformId(Integer platformId) {
-        this.platformId = platformId;
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
     }
 
     public String getZoneId() {

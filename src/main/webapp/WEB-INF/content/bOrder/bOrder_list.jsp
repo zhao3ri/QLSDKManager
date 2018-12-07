@@ -89,7 +89,7 @@
 								<th>订单号</th>
 								<th>游戏名称</th>
 								<th>游戏分区</th>
-								<th>平台名称</th>
+								<th>渠道名称</th>
 								<th>用户ID</th>
 								<th>角色名称</th>
 								<th>金额</th>
@@ -119,7 +119,7 @@
 										</c:if>
 										<td><s:property value="channelName"/></td>
 										<td><s:property value="uid"/></td>
-										<td><s:property value="name"/></td>
+										<td><s:property value="roleName"/></td>
 										<td><fmt:formatNumber  value="${amount/100 }" pattern="0.00" /></td>
 										<td><s:property value="gold"/></td>
 										<td><mt:selectState showType="label" value="${clientType}" stateType="clientType"/></td>
@@ -150,7 +150,7 @@
 							<s:else>
 								<tr>
 									<td></td>
-									<td colspan="10" style="text-align: center;">当前列表没有数据！</td>
+									<td colspan="11" style="text-align: center;">当前列表没有数据！</td>
 									<td></td>
 								</tr>
 							</s:else>

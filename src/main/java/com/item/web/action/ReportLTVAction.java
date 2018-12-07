@@ -49,20 +49,20 @@ public class ReportLTVAction extends BaseAction {
     @Autowired
     private BGamezoneService gamezoneService;
     @Autowired
-    private BChannelService platformService;
+    private BChannelService channelService;
     @Resource
     private SysGameManagerService gameManagerService;
 
     public String ltv() {
         MapBean mb = new MapBean();
         if (StringUtils.isNotBlank(channelName)) {
-            mb.put("platformName", channelName);
-            BChannel platform = platformService.get(mb);
-            channelIds = platform.getId().toString();
+            mb.put(MapBean.CHANNEL_NAME, channelName);
+            BChannel channel = channelService.get(mb);
+            channelIds = channel.getId().toString();
         }
         if (StringUtils.isNotBlank(zoneName)) {
-            mb.put("zoneName", zoneName);
-            mb.put("gameId", gameId);
+            mb.put(MapBean.ZONE_NAME, zoneName);
+            mb.put(MapBean.GAME_ID, gameId);
             zoneIds = gamezoneService.get(mb).getZoneId();
         }
 

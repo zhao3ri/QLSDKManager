@@ -10,12 +10,12 @@
 	      	<li class="active">渠道管理</li>
 	      	<li class="active">渠道游戏分区表列表</li>
 	    </ol>
-		<form role="form" action="bPlatformGameZone_list.shtml" method="post" id="mainForm">
+		<form role="form" action="bChannelGameZone_list.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">渠道游戏分区表列表信息查询 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择游戏">
-				<select class="form-control" name="BPlatformGameZone.gameId"  data-original-title="" title="">
+				<select class="form-control" name="BChannelGameZone.gameId"  data-original-title="" title="">
 									<option value="">==请选择游戏==</option>
 									<s:iterator value="games" var="item">
 										<option value="${item.id}" <c:if test="${item.id==bChannelGameZone.gameId}">selected</c:if>>${item.gameName }</option>
@@ -24,7 +24,7 @@
 		          	
 		        </div>
 				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="请选择联运渠道">
-				<select class="form-control" name="BPlatformGameZone.channelId"  data-original-title="" title="">
+				<select class="form-control" name="BChannelGameZone.channelId"  data-original-title="" title="">
 									<option value="">==请选择联运渠道==</option>
 									<s:iterator value="channels" var="item">
 										<option value="${item.id}" <c:if test="${item.id==bChannelGameZone.channelId}">selected</c:if>>${item.channelName }</option>
@@ -55,8 +55,8 @@
 	            			</tr>
 	          			</thead>
 	          			<tbody>
-	            			<s:if test="bPlatformGameZonePage.result.size>0">
-							<s:iterator value="bPlatformGameZonePage.result" var="page">
+	            			<s:if test="bChannelGameZonePage.result.size>0">
+							<s:iterator value="bChannelGameZonePage.result" var="page">
 							<tr>
 								<th><input name="checkedIds" class="checkedIds" value="<s:property value="id"/>" type="checkbox"/></th>
 								<td><s:property value="id"/></td>
@@ -67,7 +67,7 @@
 									<div class="btn-group btn-group-sm pull-right">
 					                  	<button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown"> 操作 <span class="caret"></span> </button>
 					                  	<ul class="dropdown-menu" role="menu">
-											<li><a href="bPlatformGameZone_handle.shtml?id=<s:property value="id"/>">修改</a></li>
+											<li><a href="bChannelGameZone_handle.shtml?id=<s:property value="id"/>">修改</a></li>
 					                  	</ul>
 					                </div>
 								</td>
@@ -84,7 +84,7 @@
 						</tbody>
 	        		</table>
 	      		</div>
-	      		<s:if test="bPlatformGameZonePage.result.size>0">
+	      		<s:if test="bChannelGameZonePage.result.size>0">
 	      		<div class="table_page dropup">
 			        <div class="btn-group btn-group-sm pull-left">
 			          	<label  class="btn btn-default  table_select_all">&nbsp;
@@ -94,7 +94,7 @@
 			          	<ul class="dropdown-menu text-left" role="menu">
 			          	</ul>
 			        </div>
-	      			<c:set var="p" value="bPlatformGameZonePage"/>
+	      			<c:set var="p" value="bChannelGameZonePage"/>
 			        <%@ include file="/common/pagination.jsp" %>
 			    </div>
 	      		</s:if>
@@ -116,11 +116,11 @@
 				});
 			});
 			$("#newitem").click(function() {
-				location.assign("bPlatformGameZone_handle.shtml");
+				location.assign("bChannelGameZone_handle.shtml");
 			});
 		});
 		function resetSearch(){
-	       location.assign("bPlatformGameZone_list.shtml");
+	       location.assign("bChannelGameZone_list.shtml");
 	    }
 	</script>
 </body>

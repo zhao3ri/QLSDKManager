@@ -11,12 +11,12 @@
 	      	<li class="active">加币记录</li>
 	    </ol>
 	    <s:debug></s:debug>
-		<form role="form" action="bPlatform_listbalance.shtml" method="post" id="mainForm">
+		<form role="form" action="bChannel_listbalance.shtml" method="post" id="mainForm">
 	    <div class="panel panel-default">
 	      	<div class="panel-heading">加币记录 </div>
 	      	<div class="form-inline popover-show panel-body list_toolbar">
 				<div class="form-group width_input"  data-toggle="popover"  data-placement="top" data-content="渠道">
-		          	<input  class="form-control" type="text"  placeholder="请输入渠道名称" name="BPlatform.channelName" value="${bChannel.channelName }"/>
+		          	<input  class="form-control" type="text"  placeholder="请输入渠道名称" name="BChannel.channelName" value="${bChannel.channelName }"/>
 		        </div>
 		        
 	      		 <div class="form-group width_btn">
@@ -83,11 +83,11 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#newitem").click(function() {
-				location.assign("bPlatform_handle.shtml");
+				location.assign("bChannel_handle.shtml");
 			});
 		});
 		function resetSearch(){
-	       location.assign("bPlatform_listbalance.shtml");
+	       location.assign("bChannel_listbalance.shtml");
 	    }
 	</script>
 </body>

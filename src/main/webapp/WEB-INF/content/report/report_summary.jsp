@@ -15,7 +15,7 @@
                         <form action="report_summary.shtml" method="post" id="mainForm">
                             <ul class="nav nav-tabs ">
                                 <li id="summary"><a href="${ctx}/report/report_summary.shtml" role="tab">平台分析</a></li>
-                                <li id="platform"><a href="${ctx}/report/report_platform.shtml" role="tab">渠道分析</a></li>
+                                <li id="channel"><a href="${ctx}/report/report_channel.shtml" role="tab">渠道分析</a></li>
                                 <li id="zone"><a href="${ctx}/report/report_zone.shtml" role="tab">区服分析</a></li>
                                 <li id="reset" role="tab" style="float: right;">
                                     <div class="form-group width_btn">

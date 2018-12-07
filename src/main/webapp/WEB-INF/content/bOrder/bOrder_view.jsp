@@ -58,25 +58,39 @@
 							</dd>
 		        		</div>
 						<div  class="col-lg-6">
-		        			<dt>角色Id：</dt>
-		        			<dd>
-								<s:property value="bOrder.identityId"/>
+							<dt>订单号：</dt>
+							<dd>
+								<s:property value="bOrder.orderId"/>
 							</dd>
-		        		</div>
+						</div>
 					</div>
 					<div class="clearfix">
 						<div  class="col-lg-6">
-		        			<dt>角色名称：</dt>
-		        			<dd>
-								<s:property value="bOrder.name"/>
+							<dt>角色Id：</dt>
+							<dd>
+								<s:property value="bOrder.roleId"/>
 							</dd>
-		        		</div>
-		        		<div  class="col-lg-6">
-		        			<dt>订单号：</dt>
-		        			<dd>
-								<s:property value="bOrder.orderId"/>
+						</div>
+						<div  class="col-lg-6">
+							<dt>角色名称：</dt>
+							<dd>
+						<s:property value="bOrder.roleName"/>
+						</dd>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div  class="col-lg-6">
+							<dt>商品编号：</dt>
+							<dd>
+								<s:property value="bOrder.goodsId"/>
 							</dd>
-		        		</div>
+						</div>
+						<div  class="col-lg-6">
+							<dt>商品名称：</dt>
+							<dd>
+								<s:property value="bOrder.goodsName"/>
+							</dd>
+						</div>
 					</div>
 					<div class="clearfix">
 					<div  class="col-lg-6">
@@ -161,6 +175,7 @@
 								<s:date name="bOrder.updateTime" format="yyyy-MM-dd HH:mm:ss"/>
 							</dd>
 		        		</div>
+					</div>
 				</dl>
 	    	</div>
 	    	 <div class="panel-footer text-center">

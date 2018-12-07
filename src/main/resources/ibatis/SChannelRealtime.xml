@@ -56,7 +56,7 @@
 			`payAmount`,
 			`activeUsers`,
 			`newUsers`
-		FROM s_platform_realtime
+		FROM s_channel_realtime
         <include refid="SChannelRealtime.Where"/>
         <isNotNull property="orderby">
         	ORDER BY $orderby$
@@ -66,7 +66,7 @@
 
     <select id="SChannelRealtime.count" resultClass="Long" parameterClass="mb">
         SELECT COUNT(1)
-		FROM s_platform_realtime
+		FROM s_channel_realtime
         <include refid="SChannelRealtime.Where"/>
     </select>
 
@@ -83,8 +83,8 @@
 			`payAmount`,
 			`activeUsers`,
 		    `newUsers`
-		FROM s_platform_realtime
-        <include refid="SPlatformRealtime.Where"/>
+		FROM s_channel_realtime
+        <include refid="SChannelRealtime.Where"/>
         <isNotNull property="orderby">
              ORDER BY $orderby$
         </isNotNull>
@@ -103,7 +103,7 @@
 			SUM(`newDevices`) AS newDevices,
 			SUM(`payAmount`) AS payAmount,
 			SUM(`activeUsers`) AS activeUsers
-		FROM s_platform_realtime
+		FROM s_channel_realtime
         <include refid="SChannelRealtime.Where"/>
         GROUP BY
         <isEmpty property="groupDateType">
@@ -131,13 +131,13 @@
 			`payAmount`,
 			`activeUsers`,
 			`newUsers`
-		FROM s_platform_realtime
+		FROM s_channel_realtime
 		WHERE
 	  		`id`=#id# 
     </select>
 
     <insert id="SChannelRealtime.save" parameterClass="sChannelRealtime">
-        INSERT INTO s_platform_realtime(
+        INSERT INTO s_channel_realtime(
         	`clientType`,
 			gameId,
 			channelId,
@@ -166,7 +166,7 @@
     </insert>
 
     <update id="SChannelRealtime.update" parameterClass="sChannelRealtime">
-    	UPDATE s_platform_realtime
+    	UPDATE s_channel_realtime
 	    	<dynamic prepend="set">
 	    		<isNotNull prepend="," property="clientType">
 					`clientType`=#clientType#
@@ -204,7 +204,7 @@
     </update>
 
     <delete id="SChannelRealtime.delete" parameterClass="Long">
-		DELETE FROM s_platform_realtime
+		DELETE FROM s_channel_realtime
 		WHERE
 			`id`=#id# 
     </delete>

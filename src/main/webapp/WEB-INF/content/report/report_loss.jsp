@@ -45,7 +45,7 @@
 	      		  <c:if test="${groupType == 1 }">
       				<c:if test="${not empty channelIds}">
       				<s:if test="result['channels'].size>0">
-      					<s:iterator value="result[pplatforms" var="item" >
+      					<s:iterator value="result['channels']" var="item" >
       						${channelName }&nbsp;&nbsp;
       					</s:iterator>
       				</s:if>
@@ -60,8 +60,8 @@
       				</c:if>
       				
       				<c:if test="${not empty compareChannelIds}"><br>对比<br>
-      				<s:if test="result['comparePlatforms'].size>0">
-      					<s:iterator value="result['comparePlatforms']" var="item" >
+      				<s:if test="result['compareChannels'].size>0">
+      					<s:iterator value="result['compareChannels']" var="item" >
       						${channelName }&nbsp;&nbsp;
       					</s:iterator>
       					</s:if>
@@ -136,7 +136,7 @@
 					          				<c:if test="${result['group'] == 'game'}">
 					          					<td><s:property value="#itemVal.gameName"/></td>
 					          				</c:if>
-					          				<c:if test="${result['group'] == 'platform'}">
+					          				<c:if test="${result['group'] == 'channel'}">
 					          					<td><s:property value="#itemVal.channelName"/></td>
 					          				</c:if>
 					          				<c:if test="${result['group'] == 'zone'}">

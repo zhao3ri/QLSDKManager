@@ -126,7 +126,7 @@
 			SUM(`regDevices`) AS regDevices,
 			SUM(`roleDevices`) AS roleDevices
 		FROM 
-			s_zone_platform_daily
+			s_zone_channel_daily
         <include refid="ReportLtv.Where"/>
         <isNotEmpty property="groupby">
         	GROUP BY $groupby$

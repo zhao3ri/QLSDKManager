@@ -85,8 +85,8 @@
                                 </c:if>
 
                                 <c:if test="${not empty compareChannelIds}"><br>对比<br>
-                                    <s:if test="result['comparePlatforms'].size>0">
-                                        <s:iterator value="result['comparePlatforms']" var="item">
+                                    <s:if test="result['compareChannels'].size>0">
+                                        <s:iterator value="result['compareChannels']" var="item">
                                             ${channelName }&nbsp;&nbsp;
                                         </s:iterator>
                                     </s:if>
@@ -235,7 +235,7 @@
                                                     <c:if test="${result['group'] == 'game'}">
                                                         <td><s:property value="#itemVal.gameName"/></td>
                                                     </c:if>
-                                                    <c:if test="${result['group'] == 'platform'}">
+                                                    <c:if test="${result['group'] == 'channel'}">
                                                         <td><s:property value="#itemVal.channelName"/></td>
                                                     </c:if>
                                                     <c:if test="${result['group'] == 'zone'}">
@@ -433,8 +433,8 @@
                                                         </s:iterator>
                                                     </c:if>
                                                     <c:if test="${result['group'] == 2 }">
-                                                        <s:iterator value="result[channels]" var="platformItem">
-                                                            ${platformItem.channelName }&nbsp;
+                                                        <s:iterator value="result[channels]" var="channelItem">
+                                                            ${channelItem.channelName }&nbsp;
                                                         </s:iterator>
                                                     </c:if>
                                                 </td>
@@ -528,9 +528,9 @@
                                                         </s:iterator>
                                                     </c:if>
                                                     <c:if test="${result['group'] == 2 }">
-                                                        <s:iterator value="result['comparePlatforms']"
-                                                                    var="platformItem">
-                                                            ${platformItem.channelName }&nbsp;
+                                                        <s:iterator value="result['compareChannels']"
+                                                                    var="channelItem">
+                                                            ${channelItem.channelName }&nbsp;
                                                         </s:iterator>
                                                     </c:if>
                                                 </td>

@@ -70,7 +70,7 @@
 			SUM(szpm.payAmount) AS payAmount,
 			SUM(szpm.payTimes) AS payTimes,
 			SUM(szpm.payUsers) AS payUsers
-		FROM s_zone_platform_monthly szpm 
+		FROM s_zone_channel_monthly szpm
 		JOIN 
 		b_game bg
 		ON 
@@ -100,7 +100,7 @@
         bgz.`zoneName` AS zoneName,
 		bg.gameName AS gameName,
 		bp.channelName AS channelName
-		FROM s_zone_platform_monthly szpm
+		FROM s_zone_channel_monthly szpm
 		JOIN 
 		b_game bg
 		ON 
@@ -134,7 +134,7 @@
         bgz.`zoneName` AS zoneName,
 		bg.gameName AS gameName,
 		bp.channelName AS channelName
-		FROM s_zone_platform_monthly szpm
+		FROM s_zone_channel_monthly szpm
 		JOIN 
 		b_game bg
 		ON 

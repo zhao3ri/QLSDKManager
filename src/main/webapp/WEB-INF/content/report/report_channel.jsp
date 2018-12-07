@@ -14,10 +14,10 @@
                 <div class="panel panel-default">
                     <div class="panel-body ">
 
-                        <form action="report_platform.shtml" method="post" id="mainForm">
+                        <form action="report_channel.shtml" method="post" id="mainForm">
                             <ul class="nav nav-tabs ">
                                 <li id="summary"><a href="${ctx}/report/report_summary.shtml" role="tab">平台分析</a></li>
-                                <li id="platform"><a href="${ctx}/report/report_platform.shtml" role="tab">渠道分析</a></li>
+                                <li id="channel"><a href="${ctx}/report/report_channel.shtml" role="tab">渠道分析</a></li>
                                 <li id="zone"><a href="${ctx}/report/report_zone.shtml" role="tab">区服分析</a></li>
 
                                 <li id="reset" role="tab" style="float: right;">
@@ -68,12 +68,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <s:if test="iteratePlatformsMap.size>0  ||  iteratePlatformsMonthlyMap.size>0">
-                                    <s:if test="iteratePlatformsMap.size>0  &&  iteratePlatformsMonthlyMap.size==0">
-                                        <s:set value="iteratePlatformsMap"  var="valueMap"></s:set>
+                                <s:if test="iterateChannelsMap.size>0  ||  iterateChannelsMonthlyMap.size>0">
+                                    <s:if test="iterateChannelsMap.size>0  &&  iterateChannelsMonthlyMap.size==0">
+                                        <s:set value="iterateChannelsMap"  var="valueMap"></s:set>
                                     </s:if>
-                                    <s:if test="iteratePlatformsMonthlyMap.size>0  &&  iteratePlatformsMap.size==0">
-                                        <s:set value="iteratePlatformsMonthlyMap" var="valueMap"></s:set>
+                                    <s:if test="iterateChannelsMonthlyMap.size>0  &&  iterateChannelsMap.size==0">
+                                        <s:set value="iterateChannelsMonthlyMap" var="valueMap"></s:set>
                                     </s:if>
                                     <s:iterator value="valueMap" var="item" >
                                         <s:iterator value="#item.value" var="itemVal" status="st">
@@ -253,10 +253,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#resetBtn").click(function () {
-            location.assign("report_platform.shtml");
+            location.assign("report_channel.shtml");
         });
         $("#reportLeft_summary").addClass("active");
-        $("#platform").addClass("active");
+        $("#channel").addClass("active");
 
     });
 </script>

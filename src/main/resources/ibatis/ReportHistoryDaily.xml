@@ -141,7 +141,7 @@
 			b.payUsers AS totalPayUsers,
 			b.activeUsers AS totalActiveUsers
 		FROM 
-			s_platform_daily AS a JOIN s_platform_history AS b 
+			s_channel_daily AS a JOIN s_channel_history AS b
 			ON a.clientType = b.clientType 
 			AND a.gameId = b.gameId
 			AND a.channelId = b.channelId
@@ -200,7 +200,7 @@
 			b.payUsers AS totalPayUsers,
 			b.activeUsers AS totalActiveUsers
 		FROM 
-			s_zone_platform_daily AS a JOIN s_zone_platform_history AS b
+			s_zone_channel_daily AS a JOIN s_zone_channel_history AS b
 			ON a.clientType = b.clientType 
 			AND a.gameId = b.gameId
 			AND a.channelId = b.channelId
@@ -259,7 +259,7 @@
 		b.payUsers AS totalPayUsers,
 		b.activeUsers AS totalActiveUsers
 		FROM
-		b_channel AS c, s_platform_daily AS a JOIN s_platform_history AS b
+		b_channel AS c, s_channel_daily AS a JOIN s_channel_history AS b
 		ON a.clientType = b.clientType
 		AND a.gameId = b.gameId
 		AND a.channelId = b.channelId

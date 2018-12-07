@@ -31,7 +31,7 @@ public class BChannelAction extends Struts2Action {
     private BChannelService bChannelService;
 
     private BChannel bChannel;
-    private Page<BChannel> bPlatformPage = new Page<BChannel>(10);
+    private Page<BChannel> bChannelPage = new Page<BChannel>(10);
     private Integer keepSearchCondition;
     private Long id;
     private List<BChannel> bChannels;
@@ -44,10 +44,10 @@ public class BChannelAction extends Struts2Action {
         bChannels = bChannelService.getCurrentIdentityChannelList();
 
         bChannel = InitSearchCondition.initEntity(bChannel, keepSearchCondition, "bChannel");
-        bPlatformPage = InitSearchCondition.initPage(bPlatformPage, keepSearchCondition, "bChannel");
+        bChannelPage = InitSearchCondition.initPage(bChannelPage, keepSearchCondition, "bChannel");
 
         MapBean mb = search();
-        bPlatformPage = bChannelService.pagePlarform(bPlatformPage, mb);
+        bChannelPage = bChannelService.pagePlarform(bChannelPage, mb);
         return "list";
     }
 
@@ -82,7 +82,7 @@ public class BChannelAction extends Struts2Action {
                 mb.put("id", bChannel.getId());
             }
             if (bChannel.getChannelName() != null && "".equals(bChannel.getChannelName()) == false) {
-                mb.put("platformName", bChannel.getChannelName());
+                mb.put(MapBean.CHANNEL_NAME, bChannel.getChannelName());
             }
             if (bChannel.getCreateTime() != null) {
                 mb.put("createTime", bChannel.getCreateTime());
@@ -101,7 +101,7 @@ public class BChannelAction extends Struts2Action {
         for (BChannel channel : bChannels) {
             channelIds.add(channel.getId());
         }
-        mb.put("platformIds", channelIds);
+        mb.put(MapBean.CHANNEL_IDS, channelIds);
         return mb;
     }
 
@@ -149,10 +149,10 @@ public class BChannelAction extends Struts2Action {
         return "delete";
     }
 
-    public String platformNameIsExisted() {
+    public String channelNameIsExisted() {
         MapBean mb = search();
-        Long platformNameCount = bChannelService.getChannelCountByName(mb);
-        if (platformNameCount > 0) {
+        Long channelCount = bChannelService.getChannelCountByName(mb);
+        if (channelCount > 0) {
             try {
                 channelNameIsExisted = new ByteArrayInputStream("1".getBytes("UTF-8"));
             } catch (UnsupportedEncodingException e) {
@@ -184,28 +184,28 @@ public class BChannelAction extends Struts2Action {
         this.id = id;
     }
 
-    public BChannelService getBPlatformService() {
+    public BChannelService getBChannelService() {
         return bChannelService;
     }
 
-    public void setBPlatformService(BChannelService bChannelService) {
+    public void setBChannelService(BChannelService bChannelService) {
         this.bChannelService = bChannelService;
     }
 
-    public BChannel getBPlatform() {
+    public BChannel getBChannel() {
         return bChannel;
     }
 
-    public void setBPlatform(BChannel bChannel) {
+    public void setBChannel(BChannel bChannel) {
         this.bChannel = bChannel;
     }
 
-    public Page<BChannel> getBPlatformPage() {
-        return bPlatformPage;
+    public Page<BChannel> getBChannelPage() {
+        return bChannelPage;
     }
 
-    public void setBPlatformPage(Page<BChannel> bPlatformPage) {
-        this.bPlatformPage = bPlatformPage;
+    public void setBChannelPage(Page<BChannel> page) {
+        this.bChannelPage = page;
     }
 
     public Integer getKeepSearchCondition() {
@@ -216,7 +216,7 @@ public class BChannelAction extends Struts2Action {
         this.keepSearchCondition = keepSearchCondition;
     }
 
-    public List<BChannel> getBPlatforms() {
+    public List<BChannel> getBChannels() {
         return bChannels;
     }
 
@@ -228,12 +228,12 @@ public class BChannelAction extends Struts2Action {
         this.bChannel = bChannel;
     }
 
-    public Page<BChannel> getbPlatformPage() {
-        return bPlatformPage;
+    public Page<BChannel> getbChannelPage() {
+        return bChannelPage;
     }
 
-    public void setbPlatformPage(Page<BChannel> bPlatformPage) {
-        this.bPlatformPage = bPlatformPage;
+    public void setbChannelPage(Page<BChannel> bChannelPage) {
+        this.bChannelPage = bChannelPage;
     }
 
     public List<BChannel> getbChannels() {
@@ -252,8 +252,7 @@ public class BChannelAction extends Struts2Action {
         this.balanceList = balanceList;
     }
 
-
-    public void setBPlatforms(List<BChannel> bChannels) {
+    public void setBChannels(List<BChannel> bChannels) {
         this.bChannels = bChannels;
     }
 

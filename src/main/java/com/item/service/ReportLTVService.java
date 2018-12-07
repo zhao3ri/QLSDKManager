@@ -38,7 +38,7 @@ public class ReportLTVService {
 	public List<LTVGameChannel> list(MapBean mb){
 		if ("game".equals(mb.get("dimension"))) {
 //			return reportDailyDao.find("LTVGameChannel.listGame", mb);
-		}else if ("platform".equals(mb.get("dimension"))) {
+		}else if ("channel".equals(mb.get("dimension"))) {
 //			return reportDailyDao.find("LTVGameChannel.listPlatform", mb);
 		}else if ("zone".equals(mb.get("dimension"))) {
 //			return reportDailyDao.find("LTVGameChannel.listZone", mb);
@@ -63,7 +63,7 @@ public class ReportLTVService {
 		if (StringUtils.isBlank(channelIds) && StringUtils.isBlank(zoneIds)) {
 			mb.put("dimension", "game");
 		}else if (StringUtils.isBlank(zoneIds)) {
-			mb.put("dimension", "platform");
+			mb.put("dimension", "channel");
 		}else {
 			mb.put("dimension", "zone");
 		}
@@ -161,7 +161,7 @@ public class ReportLTVService {
 	public List<ReportHistoryDaily> listOperate(MapBean mb){
 		if ("game".equals(mb.get("dimension"))) {
 			return reportHistoryDailyDao.find("ReportHistoryDaily.listGame", mb);
-		}else if ("platform".equals(mb.get("dimension"))) {
+		}else if ("channel".equals(mb.get("dimension"))) {
 			return reportHistoryDailyDao.find("ReportHistoryDaily.listPlatform", mb);
 		}else if ("zone".equals(mb.get("dimension"))) {
 			return reportHistoryDailyDao.find("ReportHistoryDaily.listZone", mb);
@@ -201,7 +201,7 @@ public class ReportLTVService {
 //		if (StringUtils.isBlank(channelIds) && StringUtils.isBlank(compareChannelIds) && StringUtils.isBlank(zoneIds) && StringUtils.isBlank(compareZoneIds)) {
 //			mb.put("dimension", "game");
 //		}else if (StringUtils.isBlank(zoneIds) && StringUtils.isBlank(compareZoneIds)) {
-//			mb.put("dimension", "platform");
+//			mb.put("dimension", "channel");
 //		}else {
 //			mb.put("dimension", "zone");
 //		}
@@ -296,7 +296,7 @@ public class ReportLTVService {
 //				}
 //				result.put("data", data);
 //				result.put("type", 2);
-//				result.put("group", "platform");
+//				result.put("group", "channel");
 //
 //				mb.put("groupby", "statDate");
 //				result.put("optionJson", getOptionJson(list(mb), null, false, type));
@@ -363,7 +363,7 @@ public class ReportLTVService {
 		if (StringUtils.isBlank(channelIds) && StringUtils.isBlank(zoneIds)) {
 			mb.put("dimension", "game");
 		}else if (StringUtils.isBlank(zoneIds)) {
-			mb.put("dimension", "platform");
+			mb.put("dimension", "channel");
 		}else {
 			mb.put("dimension", "zone");
 		}

@@ -3,12 +3,12 @@
         "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="bChannelGame" extends="base" namespace="/bChannelGame">
-		<action name="bPlatformGame_*" method="{1}" class="com.item.web.action.BChannelGameAction">
-			<result name="list">/WEB-INF/content/bChannelGame/bPlatformGame_list.jsp</result>
-			<result name="delete" type="redirect">${ctx}/bChannelGame/bPlatformGame_list.shtml?keepSearchCondition=1</result>
-			<result name="save" type="redirect">${ctx}/bChannelGame/bPlatformGame_list.shtml?keepSearchCondition=1</result>
-			<result name="handle">/WEB-INF/content/bChannelGame/bPlatformGame_handle.jsp</result>
-			<result name="view">/WEB-INF/content/bChannelGame/bPlatformGame_view.jsp</result>
+		<action name="bChannelGame_*" method="{1}" class="com.item.web.action.BChannelGameAction">
+			<result name="list">/WEB-INF/content/bChannelGame/bChannelGame_list.jsp</result>
+			<result name="delete" type="redirect">${ctx}/bChannelGame/bChannelGame_list.shtml?keepSearchCondition=1</result>
+			<result name="save" type="redirect">${ctx}/bChannelGame/bChannelGame_list.shtml?keepSearchCondition=1</result>
+			<result name="handle">/WEB-INF/content/bChannelGame/bChannelGame_handle.jsp</result>
+			<result name="view">/WEB-INF/content/bChannelGame/bChannelGame_view.jsp</result>
 		</action>
 	</package>
 </struts>

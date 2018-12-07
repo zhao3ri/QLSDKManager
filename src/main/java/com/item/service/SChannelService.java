@@ -36,18 +36,18 @@ public class SChannelService {
     }
 
     public List<SChannel> getMaxDateDataApp(MapBean mb) {
-        return sChannelDao.find("SChannel.maxDateDataApp", mb);
+        return sChannelDao.find("SChannel.maxDateDataGame", mb);
     }
 
     public List<SChannel> getMaxDateDataPlatform(MapBean mb) {
-        return sChannelDao.find("SChannel.maxDateDataPlatform", mb);
+        return sChannelDao.find("SChannel.maxDateDataChannel", mb);
     }
 
     public List<SChannel> getLastDayAppData(MapBean mb) {
-        return sChannelDao.find("SChannel.getLastDayAppData", mb);
+        return sChannelDao.find("SChannel.getLastDayGameData", mb);
     }
 
     public List<SChannel> getLastDayPlatformData(MapBean mb) {
-        return sChannelDao.find("SChannel.getLastDayPlatformData", mb);
+        return sChannelDao.find("SChannel.getLastDayChannelData", mb);
     }
 }

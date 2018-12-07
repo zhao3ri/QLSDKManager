@@ -15,7 +15,7 @@
           <form name="selected" method="post" action="report_zone.shtml" id="mainForm">
           	  <ul class="nav nav-tabs " >
 				 <li id="summary"><a href="${ctx}/report/report_summary.shtml" role="tab">平台分析</a></li>
-				  <li id="platform"><a href="${ctx}/report/report_platform.shtml" role="tab">渠道分析</a></li>
+				  <li id="channel"><a href="${ctx}/report/report_channel.shtml" role="tab">渠道分析</a></li>
 				  <li id="zone"><a href="${ctx}/report/report_zone.shtml" role="tab">区服分析</a></li>
 				  <li style="float:right">
 					   <div class="form-group width_btn">
@@ -75,12 +75,12 @@
             			</tr>
           			</thead>
           			<tbody>
-          			<s:if test="sZoneChannels.size>0  ||  sZonePlatformMonthlies.size>0">
-	          			<s:if test="sZoneChannels.size>0  && sZonePlatformMonthlies.size==0">
+          			<s:if test="sZoneChannels.size>0  ||  sZoneChannelMonthlies.size>0">
+	          			<s:if test="sZoneChannels.size>0  && sZoneChannelMonthlies.size==0">
 	          				<s:set value="sZoneChannels" var="valueList"></s:set>
 	          			</s:if>
-	          			<s:if test="sZoneChannels.size==0  && sZonePlatformMonthlies.size>0">
-	          				<s:set value="sZonePlatformMonthlies" var="valueList"></s:set>
+	          			<s:if test="sZoneChannels.size==0  && sZoneChannelMonthlies.size>0">
+	          				<s:set value="sZoneChannelMonthlies" var="valueList"></s:set>
 	          			</s:if>
 	          			<s:set value="0" var="allRoledUser"></s:set>
 	          			<s:set value="0" var="allRegUser"></s:set>
@@ -182,12 +182,12 @@
             			</tr>
           			</thead>
           			<tbody>
-          			<s:if test="iterateZonePlatformsMap.size>0  ||  iterateZonePlatformsMonthlyMap.size>0">		
-	          			<s:if test="iterateZonePlatformsMap.size>0  &&  iterateZonePlatformsMonthlyMap.size==0">
-	          			        <s:set value="iterateZonePlatformsMap"  var="valueMap"></s:set>
+          			<s:if test="iterateZoneChannelMap.size>0  ||  iterateZoneChannelMonthlyMap.size>0">
+	          			<s:if test="iterateZoneChannelMap.size>0  &&  iterateZoneChannelMonthlyMap.size==0">
+	          			        <s:set value="iterateZoneChannelMap"  var="valueMap"></s:set>
 	          			</s:if>
-	          			<s:if test="iterateZonePlatformsMonthlyMap.size>0  &&  iterateZonePlatformsMap.size==0">
-	          			        <s:set value="iterateZonePlatformsMonthlyMap" var="valueMap"></s:set>
+	          			<s:if test="iterateZoneChannelMonthlyMap.size>0  &&  iterateZoneChannelMap.size==0">
+	          			        <s:set value="iterateZoneChannelMonthlyMap" var="valueMap"></s:set>
 	          			</s:if>	 
           			<s:iterator value="valueMap" var="item" >
 	          			<s:set value="0" var="allRoledUser"></s:set>
@@ -296,12 +296,12 @@
             			</tr>
           			</thead>
           			<tbody>
-		          		<s:if test="iterateZonePlatformsMap.size>0  ||  iterateZonePlatformsMonthlyMap.size>0">			
-		          			<s:if test="iterateZonePlatformsMap.size>0  &&  iterateZonePlatformsMonthlyMap.size==0">
-	          			        <s:set value="iterateZonePlatformsMap"  var="valueMap"></s:set>
+		          		<s:if test="iterateZoneChannelMap.size>0  ||  iterateZoneChannelMonthlyMap.size>0">
+		          			<s:if test="iterateZoneChannelMap.size>0  &&  iterateZoneChannelMonthlyMap.size==0">
+	          			        <s:set value="iterateZoneChannelMap"  var="valueMap"></s:set>
 		          			</s:if>
-		          			<s:if test="iterateZonePlatformsMonthlyMap.size>0  &&  iterateZonePlatformsMap.size==0">
-	          			        <s:set value="iterateZonePlatformsMonthlyMap" var="valueMap"></s:set>
+		          			<s:if test="iterateZoneChannelMonthlyMap.size>0  &&  iterateZoneChannelMap.size==0">
+	          			        <s:set value="iterateZoneChannelMonthlyMap" var="valueMap"></s:set>
 		          			</s:if>
 		          			<s:iterator value="valueMap" var="item" >
 			          			<s:set value="0" var="allRoledUser"></s:set>
