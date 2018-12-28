@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<script src="/js/echart/echarts.min.js"></script>
-<script src="/js/echart/shine.js"></script>
+<script src="${ctx}/js/echart/echarts.min.js"></script>
+<script src="${ctx}/js/echart/shine.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         if (<%=PropertyUtils.get("authority.control").equals("false") %>) {

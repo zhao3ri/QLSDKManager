@@ -164,9 +164,10 @@
         appendValidate();
         $("#inputForm").validate({
             rules: {
-                "BChannelGame.configParams": {required: true, maxlength: 3072},
+                // "BChannelGame.configParams": {required: true, maxlength: 3072},
                 "BChannelGame.channelId": {required: true},
-                "BChannelGame.gameId": {required: true}
+                "BChannelGame.gameId": {required: true},
+                "BChannelGame.discount": {required: true}
             }
         });
     });

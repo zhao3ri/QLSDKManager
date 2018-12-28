@@ -46,7 +46,7 @@
 </div>
 
 <%@ include file="/common/footer.jsp" %>
-<script type="text/javascript" src="${ctx }/scripts/cookie.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/cookie.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#loginForm").validate({
