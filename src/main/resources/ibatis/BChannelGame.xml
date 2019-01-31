@@ -50,7 +50,7 @@
     <select id="BChannelGame.page" resultClass="BChannelGame"
             parameterClass="mb">
         SELECT
-        bpg.id,bp.channelName,bg.gameName,bpg.configParams,bpg.createTime,bpg.gameId,bpg.channelId,bpg.discount
+        bpg.*,bp.channelName,bg.gameName
         FROM b_channel_game bpg
         JOIN b_channel bp ON bpg.channelId=bp.id
         JOIN b_game bg ON bpg.gameId=bg.id
@@ -120,6 +120,21 @@
             </isNotNull>
             <isNotNull prepend="," property="discount">
                 discount=#discount#
+            </isNotNull>
+            <isNotNull prepend="," property="appKey">
+                appKey=#appKey#
+            </isNotNull>
+            <isNotNull prepend="," property="secretKey">
+                secretKey=#secretKey#
+            </isNotNull>
+            <isNotNull prepend="," property="appID">
+                appID=#appID#
+            </isNotNull>
+            <isNotNull prepend="," property="privateKey">
+                privateKey=#privateKey#
+            </isNotNull>
+            <isNotNull prepend="," property="publicKey">
+                publicKey=#publicKey#
             </isNotNull>
         </dynamic>
         WHERE id=#id#

@@ -56,8 +56,6 @@ public class LogAnnotation {
                         entityLog.setOmkey(logModule.key());
                         entityLog.setOmname(logModule.name());
                         entityLogMap.put(clazz.getName(), entityLog);
-                        System.out.println("class == " + className);
-                        System.out.println("service == " + servicePath + "Service");
 
                         //遍历方法
                         Field[] fields = clazz.getDeclaredFields();
@@ -80,7 +78,6 @@ public class LogAnnotation {
                                         serviceClassName = servicePath.substring(0, servicePath.lastIndexOf(".") + 1) + logAttribute.rentity() + "Service";
                                     }
                                     attributeLog.setRserviceClass(Class.forName(serviceClassName));
-                                    System.out.println("className == " + serviceClassName);
                                     attributeLog.setRentity(logAttribute.rentity());
                                     attributeLog.setRname(logAttribute.rname());
                                 }

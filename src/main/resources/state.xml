@@ -13,16 +13,16 @@
 									
 	<!-- 订单状态 -->
 	<state name="orderStatus" state='[{"id":"0","name":"提交成功","color":"info","isshow":"true"},
-									{"id":"1","name":"提交失败","color":"danger","isshow":"true"},
-									{"id":"2","name":"支付成功","color":"success","isshow":"true"},
-									{"id":"3","name":"支付失败","color":"danger","isshow":"true"}]' />
+									{"id":"11","name":"提交失败","color":"danger","isshow":"true"},
+									{"id":"12","name":"支付成功","color":"success","isshow":"true"},
+									{"id":"13","name":"支付失败","color":"danger","isshow":"true"}]' />
 									
 	<!-- 订单通知状态 -->
 	<state name="orderNotifyStatus" state='[{"id":"0","name":"未通知","color":"info","isshow":"true"},
-									{"id":"1","name":"等待通知","color":"success","isshow":"true"},
-									{"id":"2","name":"通知成功","color":"success","isshow":"true"},
-									{"id":"3","name":"通知失败","color":"danger","isshow":"true"},
-									{"id":"4","name":"等待重发","color":"warning","isshow":"true"}]' />
+									{"id":"21","name":"等待通知","color":"success","isshow":"true"},
+									{"id":"22","name":"通知成功","color":"success","isshow":"true"},
+									{"id":"23","name":"通知失败","color":"danger","isshow":"true"},
+									{"id":"24","name":"等待重发","color":"warning","isshow":"true"}]' />
 									
 	<!-- 客户端类型 -->
 	<state name="clientType" state='[{"id":"2","name":"IOS","color":"info","isshow":"true"},
